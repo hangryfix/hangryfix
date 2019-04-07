@@ -106,9 +106,8 @@ class YourFoods extends React.Component {
           </Card.Group>
         </Tab.Pane> },
     ];
-    const TabExampleBasic = () => <Tab panes={panes} />;
     return (
-        TabExampleBasic()
+        <Tab panes={panes} />
     );
   }
 }
