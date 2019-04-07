@@ -1,9 +1,10 @@
 import React from 'react';
+import { Container, Header, List, Grid } from 'semantic-ui-react';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class Footer extends React.Component {
   render() {
-    const divStyle = { paddingTop: '15px' };
+    const headerStyle = { color: 'white'};
     return (
         <footer className='footer'>
           <Container>
@@ -52,10 +53,10 @@ class Footer extends React.Component {
                 <Grid.Column>
                   <Header as='h3' content='The hangryFIX Team' textAlign='center' style={headerStyle}/>
                   <hr/>
-                  <List>
-                    <List.Item inverted>Christina Chen</List.Item>
-                    <List.Item inverted>James Hutchison</List.Item>
-                    <List.Item inverted>Katrina Johnson Turner</List.Item>
+                  <List inverted>
+                    <List.Item>Christina Chen</List.Item>
+                    <List.Item>James Hutchison</List.Item>
+                    <List.Item>Katrina Johnson Turner</List.Item>
                     <List.Item>
                       <List.Icon name='copyright'/>
                       <List.Content>Copyright 2019</List.Content>
