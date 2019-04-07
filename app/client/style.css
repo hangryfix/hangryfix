@@ -13,3 +13,9 @@ h4 {
 .menu .item {
   color: white !important;
 }
+
+.footer {
+  background-color: #045605;
+  color: white;
+}
+
