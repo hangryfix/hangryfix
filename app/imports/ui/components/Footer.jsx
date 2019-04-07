@@ -1,10 +1,9 @@
 import React from 'react';
-import { Grid, Header, List, Container } from 'semantic-ui-react';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class Footer extends React.Component {
   render() {
-    const headerStyle = { color: 'white' };
+    const divStyle = { paddingTop: '15px' };
     return (
         <footer className='footer'>
           <Container>
