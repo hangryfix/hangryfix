@@ -22,7 +22,7 @@ h4 {
 .add-food {
   border: 1px solid black;
   padding: 20px;
-  margin: 0 0 20px 0;
+  margin: 0 0 25px 0;
   color: black;
 }
 
@@ -31,6 +31,6 @@ h4 {
   border-radius: 5px;
   height: 160px;
   margin: 0 0 10px 0;
-  padding: 20px;
+  padding: 10px;
 }
 
