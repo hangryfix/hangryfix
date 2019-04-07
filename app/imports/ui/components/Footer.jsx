@@ -53,10 +53,10 @@ class Footer extends React.Component {
                 <Grid.Column>
                   <Header as='h3' content='The hangryFIX Team' textAlign='center' style={headerStyle}/>
                   <hr/>
-                  <List inverted>
-                    <List.Item>Christina Chen</List.Item>
-                    <List.Item>James Hutchison</List.Item>
-                    <List.Item>Katrina Johnson Turner</List.Item>
+                  <List>
+                    <List.Item inverted>Christina Chen</List.Item>
+                    <List.Item inverted>James Hutchison</List.Item>
+                    <List.Item inverted>Katrina Johnson Turner</List.Item>
                     <List.Item>
                       <List.Icon name='copyright'/>
                       <List.Content>Copyright 2019</List.Content>
