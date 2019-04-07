@@ -34,3 +34,43 @@ h4 {
   padding: 10px;
 }
 
+.search-sidebar {
+  padding: 20px;
+  background-color: #f6f6f6;
+  height: 100%;
+}
+
+.two-options-toggle {
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.two-options-toggle > div {
+  width: calc(50% - 4px);
+  display: inline-block;
+  text-align: center;
+  padding: 6px 0 6px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.two-options-toggle > div:hover {
+  background-color: #5BBB5B;
+  border-color: #5BBB5B;
+  color: white;
+}
+
+.two-options-toggle-left {
+  border-radius: 5px 0 0 5px;
+  border-width: 2px 1px 2px 2px;
+  background-color: #045604;
+  color: white;
+  border-color: #045604;
+}
+
+.two-options-toggle-right {
+  border-radius: 0 5px 5px 0;
+  border-width: 2px 2px 2px 1px;
+  background-color: white;
+}
