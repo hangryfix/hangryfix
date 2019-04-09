@@ -8,11 +8,10 @@ class Landing extends React.Component {
   render() {
     const searchStyle = {
       width: '80%',
-      color: '#045604'
-    }
+      color: '#045604',
+    };
     return (
-        <div class="landingMid">
-          <Container>
+        <div className="landingMid">
             <Grid columns={2} verticalAlign='middle'>
               <Grid.Column>
                 <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>
@@ -28,13 +27,12 @@ class Landing extends React.Component {
                     style={searchStyle}/>
               </Grid.Column>
             </Grid>
-          </Container>
-          <Container>
-            <Header as='h3'>Recent Reviews</Header>
+          <Container style={{ paddingTop: '20px' }}>
+            <Header as='h2' class='color-primary-3'>Recent Reviews</Header>
               <Card.Group>
                 <Card centered>
                   <Card.Content>
-                    <Image floated='left' style={{width: '40%'}}
+                    <Image floated='left' style={{ width: '40%' }}
                            src='https://i.ibb.co/r2Cp0TK/froyo.jpg' />
                     <Card.Header>Froyo</Card.Header>
                     <Card.Meta>from Tutti Frutti</Card.Meta>
@@ -52,7 +50,7 @@ class Landing extends React.Component {
                 </Card>
                 <Card centered>
                   <Card.Content>
-                    <Image floated='left' style={{width: '40%'}}
+                    <Image floated='left' style={{ width: '40%' }}
                            src='https://i.ibb.co/8cJFSLv/kalua-nachos.jpg' />
                     <Card.Header>Kalua Pig Nachos</Card.Header>
                     <Card.Meta>from Bay View Bar & Bistro</Card.Meta>
@@ -71,7 +69,7 @@ class Landing extends React.Component {
                 </Card>
                 <Card centered>
                   <Card.Content>
-                    <Image floated='left' style={{width: '40%'}}
+                    <Image floated='left' style={{ width: '40%' }}
                            src='https://i.ibb.co/n05BzTg/okonomiyaki.jpg' />
                     <Card.Header>Okonomiyaki</Card.Header>
                     <Card.Meta>from Waikiki Yokocho</Card.Meta>
@@ -88,14 +86,15 @@ class Landing extends React.Component {
                   </Card.Content>
                 </Card>
               </Card.Group>
-            <Segment>
-            <Header>About Us</Header>
-            Are you hangry? Craving a particular type of food or specific food item, but dont know
+            <div className='aboutUs'>
+            <Header inverted>About Us</Header>
+            <p style={{color: 'white'}}>
+              Are you hangry? Craving a particular type of food or specific food item, but dont know
             where to get it? HangryFix is the app for you! Search by food genre or food name to find
             the best, cheapest, or closest places to get that food to cure your hangriness. Create a
             free account now to start saving your favorite foods and leaving reviews to help others cure
-            their hangriness.
-            </Segment>
+              their hangriness.</p>
+            </div>
           </Container>
         </div>
     );
