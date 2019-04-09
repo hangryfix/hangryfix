@@ -40,7 +40,7 @@ class NavBar extends React.Component {
                     <Dropdown style={{ color: 'white' }} text="Login" icon="user">
                       <Dropdown.Menu>
                         <Dropdown.Item icon="user" text="Sign In" as={ NavLink } exact to="/signin"/>
-                        <Dropdown.Item icon="add user" text="Register" as={NavLink} exact to="/register"/>
+                        <Dropdown.Item icon="add user" text="Register" as={NavLink} exact to="/signup"/>
                       </Dropdown.Menu>
                     </Dropdown>
                   </Menu.Item>

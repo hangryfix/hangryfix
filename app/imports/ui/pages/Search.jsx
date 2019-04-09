@@ -4,6 +4,7 @@ import SearchSidebar from '../components/SearchSidebar';
 
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
+  const
   render() {
     return (
         <Grid>
