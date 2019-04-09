@@ -4,6 +4,11 @@
 .color-primary-3 { color: #045604 }
 .color-primary-4 { color: #091D09 }
 
+.tagDropdown {
+  color: #091D09 !important;
+}
+
+/*Landing Page*/
 .landingMid {
   background-color: #DEF9DE;
   margin-top: 0px;
@@ -16,19 +21,17 @@
   margin-right: 0;
   margin-left: 0;
 }
+
+/*Register Page*/
+.backgroundDef {
+  background-color: #338D33;
+}
+
 .navBar {
   background-color: #045604 !important;
 }
 
 h4 {
-  color: white !important;
-}
-
-.dropdown {
-  color: white !important;
-}
-
-.menu .item {
   color: white !important;
 }
 
