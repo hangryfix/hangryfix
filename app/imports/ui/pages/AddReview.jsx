@@ -1,16 +1,6 @@
 import React from 'react';
-import { Container, Form, Button, TextArea, Header, Grid, Select, Rating } from 'semantic-ui-react';
+import { Container, Form, Button, TextArea, Header, Grid, Rating } from 'semantic-ui-react';
 import { Bert } from 'meteor/themeteorchef:bert';
-
-const restaurantOptions = [
-  { key: '1', text: 'Da Spot', value: 'daspot' },
-  { key: '2', text: 'Dominos', value: 'dominos' },
-];
-
-const typeOptions = [
-  { key: '1', text: 'Chicken', value: 'chicken' },
-  { key: '2', text: 'Sandwich', value: 'Sandwich' },
-];
 
 /** Renders the Page for adding a document. */
 class AddReview extends React.Component {
