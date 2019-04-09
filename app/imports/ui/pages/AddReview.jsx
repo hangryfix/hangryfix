@@ -20,6 +20,7 @@ class AddReview extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   render() {
+
     return (
         <Container className='add-food'>
           <Header as='h1' content='Write A Review' textAlign='center'/>

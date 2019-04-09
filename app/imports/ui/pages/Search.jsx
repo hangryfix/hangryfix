@@ -5,6 +5,7 @@ import SearchSidebar from '../components/SearchSidebar';
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   render() {
+    const searchStyle = { padding: '20px 0 0 0' };
     return (
         <Grid>
           <Grid.Row>
@@ -12,7 +13,7 @@ class Landing extends React.Component {
               <SearchSidebar/>
             </Grid.Column>
             <Grid.Column width={12}>
-              <Header as='h3' textAlign='left' content='Popular Food Choices'/>
+              <Header as='h3' textAlign='left' content='Popular Food Choices' style={searchStyle}/>
               <Grid columns='equal'>
                 <Grid.Column>
                   <Header as='h3' textAlign='center' content='Chicken'/>
