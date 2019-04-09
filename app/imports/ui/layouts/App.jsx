@@ -8,8 +8,12 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
+import YourFoods from '../pages/YourFoods';
+import YourReviews from '../pages/YourReviews';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
+import Search from '../pages/Search';
+import AddFood from '../pages/AddFood';
+import AddReview from '../pages/AddReview';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -27,8 +31,12 @@ class App extends React.Component {
               <Route exact path="/" component={Landing}/>
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
+              <ProtectedRoute path="/yourfoods" component={YourFoods}/>
+              <ProtectedRoute path="/yourreviews" component={YourReviews}/>
               <ProtectedRoute path="/list" component={ListStuff}/>
-              <ProtectedRoute path="/add" component={AddStuff}/>
+              <ProtectedRoute path="/addFood" component={AddFood}/>
+              <ProtectedRoute path="/addReview" component={AddReview}/>
+              <ProtectedRoute path="/search" component={Search}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
