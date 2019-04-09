@@ -1,9 +1,5 @@
 import React from 'react';
 import { Header, Container, Grid, Image, Input, Segment, Card, Feed } from 'semantic-ui-react';
-import MainImage from '../../../doc/lb-lava-bowl.jpg';
-import FroyoImage from '../../../doc/froyo.jpg';
-import NachosImage from '../../../doc/kalua-nachos.jpg';
-import OkonoImage from '../../../doc/okonomiyaki.jpg';
 // import Food from '/imports/ui/components/Food';
 // import Foods from '../../api/food/food'
 
@@ -15,11 +11,11 @@ class Landing extends React.Component {
       color: '#045604'
     }
     return (
-        <div>
+        <div class="landingMid">
           <Container>
             <Grid columns={2} verticalAlign='middle'>
               <Grid.Column>
-                <Image class='medium' src={MainImage}/>
+                <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>
               </Grid.Column>
               <Grid.Column>
                 <Input
@@ -34,13 +30,14 @@ class Landing extends React.Component {
             </Grid>
           </Container>
           <Container>
-            <Segment>
             <Header as='h3'>Recent Reviews</Header>
               <Card.Group>
                 <Card centered>
                   <Card.Content>
-                    <Image floated='left' size='small' src={FroyoImage} />
-                    <Card.Header>Froyo from Tutti Frutti</Card.Header>
+                    <Image floated='left' style={{width: '40%'}}
+                           src='https://i.ibb.co/r2Cp0TK/froyo.jpg' />
+                    <Card.Header>Froyo</Card.Header>
+                    <Card.Meta>from Tutti Frutti</Card.Meta>
                     <Card.Meta>700 Keeaumoku St #102, Honolulu HI 96814</Card.Meta>
                     <Card.Description>
                       Hours: M-Su 10am-10pm
@@ -55,8 +52,10 @@ class Landing extends React.Component {
                 </Card>
                 <Card centered>
                   <Card.Content>
-                    <Image floated='left' size='small' src={NachosImage} />
-                    <Card.Header>Kalua Pig Nachos from Bay View Bar & Bistro</Card.Header>
+                    <Image floated='left' style={{width: '40%'}}
+                           src='https://i.ibb.co/8cJFSLv/kalua-nachos.jpg' />
+                    <Card.Header>Kalua Pig Nachos</Card.Header>
+                    <Card.Meta>from Bay View Bar & Bistro</Card.Meta>
                     <Card.Meta>45-285 Kaneohe Bay Dr, Kaneohe HI 96744</Card.Meta>
                     <Card.Description>
                       Hours: M-Su 11am-7pm
@@ -70,8 +69,25 @@ class Landing extends React.Component {
                     </Feed>
                   </Card.Content>
                 </Card>
+                <Card centered>
+                  <Card.Content>
+                    <Image floated='left' style={{width: '40%'}}
+                           src='https://i.ibb.co/n05BzTg/okonomiyaki.jpg' />
+                    <Card.Header>Okonomiyaki</Card.Header>
+                    <Card.Meta>from Waikiki Yokocho</Card.Meta>
+                    <Card.Meta>2250 Kalakaua Ave, Honolulu HI 96815</Card.Meta>
+                    <Card.Description>
+                      Hours: M-Su 11am-12am
+                    </Card.Description>
+                  </Card.Content>
+                  <Card.Content extra>
+                    <Feed>
+                      <Header as='h4'>Review from kturner44</Header>
+                      <p>A little pricey, but some of the best Okonomiyaki you can find on the island.</p>
+                    </Feed>
+                  </Card.Content>
+                </Card>
               </Card.Group>
-            </Segment>
             <Segment>
             <Header>About Us</Header>
             Are you hangry? Craving a particular type of food or specific food item, but dont know
