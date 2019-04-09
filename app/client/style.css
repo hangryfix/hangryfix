@@ -23,6 +23,7 @@
   margin-left: 0;
 }
 
+
 /*Register Page*/
 .backgroundDef {
   background-color: #338D33;
@@ -30,6 +31,7 @@
 
 .navBar {
   background-color: #045604 !important;
+
 }
 
 
@@ -42,9 +44,11 @@
 .add-food {
   border: 1px solid black;
   padding: 20px;
-  margin: 0 0 25px 0;
+  margin: 30px 0 50px 0;
   color: black;
 }
+
+
 
 .upload-image {
   border: 1px solid black;
@@ -94,3 +98,8 @@
   border-width: 2px 2px 2px 1px;
   background-color: white;
 }
+
+.black {
+  color: BLACK;
+}
+
