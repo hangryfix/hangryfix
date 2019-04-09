@@ -87,13 +87,20 @@ class Landing extends React.Component {
                 </Card>
               </Card.Group>
             <div className='aboutUs'>
-            <Header inverted>About Us</Header>
-            <p style={{color: 'white'}}>
+              <Grid columns={2} verticalAlign='middle'>
+                <Grid.Column>
+            <Header>About Us</Header>
+            <p>
               Are you hangry? Craving a particular type of food or specific food item, but dont know
             where to get it? HangryFix is the app for you! Search by food genre or food name to find
             the best, cheapest, or closest places to get that food to cure your hangriness. Create a
             free account now to start saving your favorite foods and leaving reviews to help others cure
               their hangriness.</p>
+                </Grid.Column>
+                <Grid.Column>
+                  <Image src="http://c3.thejournal.ie/media/2013/09/eating-chips-390x285.jpg"/>
+                </Grid.Column>
+              </Grid>
             </div>
           </Container>
         </div>
