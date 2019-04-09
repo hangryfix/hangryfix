@@ -4,31 +4,39 @@
 .color-primary-3 { color: #045604 }
 .color-primary-4 { color: #091D09 }
 
+.tagDropdown {
+  color: #091D09 !important;
+}
+
+/*Landing Page*/
 .landingMid {
-  background-color: #DEF9DE;
-  margin-top: 0px;
+  z-index: -1;
+  position: relative;
+  background-color: white;
+  margin-top: -50px;
   padding-bottom: 50px;
 }
 .aboutUs {
-  background-color: #338D33;
   padding: 20px 50px 20px 50px;
   margin-top: 20px;
   margin-right: 0;
   margin-left: 0;
 }
+
+
+/*Register Page*/
+.backgroundDef {
+  background-color: #338D33;
+}
+
 .navBar {
   background-color: #045604 !important;
+
 }
 
-h4 {
-  color: white;
-}
-
-.menu .item {
-  color: white !important;
-}
 
 .footer {
+  position: relative;
   background-color: #045604;
   color: white;
 }

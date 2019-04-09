@@ -1,7 +1,7 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "firstName": "Admin", "lastName": "Jo", "username": "adminJo", "email": "admin@foo.com", "password": "changeme", "tags": "pizza, tacos", "role": "admin" },
+    { "firstName": "John", "lastName": "Doe", "username": "JohnDoe", "email": "john@foo.com", "password": "changeme", "tags": "pizza, tacos" }
   ],
 
   "defaultData": [
@@ -9,5 +9,11 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ]
+  ],
+  "tags": [
+  { "key": "pizza", "text": "pizza", "value": "pizza" },
+  { "key": "poke", "text": "poke", "value": "poke" },
+  { "key": "tacos", "text": "tacos", "value": "tacos" },
+  { "key": "chinese", "text": "chinese", "value": "chinese" }
+]
 }
