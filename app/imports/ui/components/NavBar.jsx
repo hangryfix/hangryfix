@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Header, Dropdown, Container } from 'semantic-ui-react';
+import { Menu, Header, Dropdown, Container, Input } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
+import { Grid } from 'semantic-ui-react/dist/commonjs/collections/Grid';
 
 class NavBar extends React.Component {
   render() {
+    const searchStyle = {
+      width: '80%',
+      color: '#045604',
+    };
     return (
         <div className="navBar">
           <Menu borderless className="navBar">
@@ -26,6 +31,16 @@ class NavBar extends React.Component {
                     </Menu.Item>,
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/yourFoods" key="yourFoods">
                       Your Foods
+                    </Menu.Item>,
+                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search">
+                      <Input
+                          class='color-primary-0'
+                          action={{ color: 'green', content: 'Search' }}
+                          actionPosition='right'
+                          icon='search'
+                          iconPosition='left'
+                          placeholder='Hangry??? What are you craving?'
+                          style={searchStyle}/>
                     </Menu.Item>,
                   ]
               ) : ''
