@@ -1,0 +1,105 @@
+.color-primary-0 { color: #338D33 }	/* Main Primary color */
+.color-primary-1 { color: #DEF9DE }
+.color-primary-2 { color: #5BBB5B }
+.color-primary-3 { color: #045604 }
+.color-primary-4 { color: #091D09 }
+
+.tagDropdown {
+  color: #091D09 !important;
+}
+
+/*Landing Page*/
+.landingMid {
+  z-index: -1;
+  position: relative;
+  background-color: white;
+  margin-top: -50px;
+  padding-bottom: 50px;
+}
+.aboutUs {
+  padding: 20px 50px 20px 50px;
+  margin-top: 20px;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+
+/*Register Page*/
+.backgroundDef {
+  background-color: #338D33;
+}
+
+.navBar {
+  background-color: #045604 !important;
+
+}
+
+
+.footer {
+  position: relative;
+  background-color: #045604;
+  color: white;
+}
+
+.add-food {
+  border: 1px solid black;
+  padding: 20px;
+  margin: 30px 0 50px 0;
+  color: black;
+}
+
+
+
+.upload-image {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 160px;
+  margin: 0 0 10px 0;
+  padding: 10px;
+}
+
+.search-sidebar {
+  padding: 20px;
+  background-color: #f6f6f6;
+  height: 100%;
+}
+
+.two-options-toggle {
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.two-options-toggle > div {
+  width: calc(50% - 4px);
+  display: inline-block;
+  text-align: center;
+  padding: 6px 0 6px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.two-options-toggle > div:hover {
+  background-color: #5BBB5B;
+  border-color: #5BBB5B;
+  color: white;
+}
+
+.two-options-toggle-left {
+  border-radius: 5px 0 0 5px;
+  border-width: 2px 1px 2px 2px;
+  background-color: #045604;
+  color: white;
+  border-color: #045604;
+}
+
+.two-options-toggle-right {
+  border-radius: 0 5px 5px 0;
+  border-width: 2px 2px 2px 1px;
+  background-color: white;
+}
+
+.black {
+  color: BLACK;
+}
+
