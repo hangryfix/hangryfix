@@ -13,6 +13,7 @@ import YourReviews from '../pages/YourReviews';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import Search from '../pages/Search';
 import AddFood from '../pages/AddFood';
+import AddReview from '../pages/AddReview';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -34,6 +35,7 @@ class App extends React.Component {
               <ProtectedRoute path="/yourreviews" component={YourReviews}/>
               <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/addFood" component={AddFood}/>
+              <ProtectedRoute path="/addReview" component={AddReview}/>
               <ProtectedRoute path="/search" component={Search}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
