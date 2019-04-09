@@ -13,7 +13,7 @@ class NavBar extends React.Component {
           <Menu borderless className="navBar">
             <Container>
             <Menu.Item as={ NavLink } activeClassName="" exact to="/">
-              <Header as='h2' inverted>[THE LOGO]</Header>
+              <Header as='h2' inverted>hangryFIX</Header>
             </Menu.Item>
               { this.props.currentUser ? (
                   [
