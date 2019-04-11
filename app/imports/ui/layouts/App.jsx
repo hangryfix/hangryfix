@@ -8,9 +8,8 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import YourFoods from '../pages/YourFoods';
-import YourReviews from '../pages/YourReviews';
-import ListFoodAdmin from '../pages/ListFoodAdmin';
+import YourAccount from '../pages/YourAccount';
+import ListStuffAdmin from '../pages/ListStuffAdmin';
 import Search from '../pages/Search';
 import AddFood from '../pages/AddFood';
 import AddReview from '../pages/AddReview';
@@ -31,8 +30,6 @@ class App extends React.Component {
               <Route exact path="/" component={Landing}/>
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
-              <ProtectedRoute path="/yourfoods" component={YourFoods}/>
-              <ProtectedRoute path="/yourreviews" component={YourReviews}/>
               <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/addFood" component={AddFood}/>
               <ProtectedRoute path="/addReview" component={AddReview}/>
@@ -40,6 +37,7 @@ class App extends React.Component {
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <AdminProtectedRoute path="/admin" component={ListFoodAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
+              <ProtectedRoute path="/youraccount" component={YourAccount}/>
               <Route component={NotFound}/>
             </Switch>
             <Footer/>

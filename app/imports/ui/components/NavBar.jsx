@@ -5,7 +5,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Header, Dropdown, Container, Input } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
-import { Grid } from 'semantic-ui-react/dist/commonjs/collections/Grid';
 
 class NavBar extends React.Component {
   render() {
@@ -25,12 +24,6 @@ class NavBar extends React.Component {
                     <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/addFood"
                                key="addFood">
                       Add Food
-                    </Menu.Item>,
-                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/yourReviews" key="yourReviews">
-                      Your Reviews
-                    </Menu.Item>,
-                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/yourFoods" key="yourFoods">
-                      Your Foods
                     </Menu.Item>,
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search">
                       <Input
@@ -63,6 +56,7 @@ class NavBar extends React.Component {
                   <Menu.Item>
                     <Dropdown direction="left" text={this.props.currentUser} icon="user">
                       <Dropdown.Menu>
+                        <Dropdown.Item icon="user" text="Your Account" as={NavLink} exact to="/youraccount"/>
                         <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
                       </Dropdown.Menu>
                     </Dropdown>
