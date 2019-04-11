@@ -5,7 +5,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Header, Dropdown, Container, Input } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
-import { Grid } from 'semantic-ui-react/dist/commonjs/collections/Grid';
 
 class NavBar extends React.Component {
   render() {
