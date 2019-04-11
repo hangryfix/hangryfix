@@ -31,7 +31,10 @@
 
 .navBar {
   background-color: #045604 !important;
+}
 
+.navBar .item {
+  color: #FFFFFF !important;
 }
 
 
