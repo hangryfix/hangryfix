@@ -5,10 +5,9 @@ import { Foods } from '/imports/api/food/food';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react/dist/commonjs/collections/Menu';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-class ListFoodAdmin extends React.Component {
+class ListUsersAdmin extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
@@ -19,7 +18,7 @@ class ListFoodAdmin extends React.Component {
   renderPage() {
     return (
         <div style={{padding: '20px'}} className="backgroundDef">
-          <Header textAlign='center' inverted as='h1'>Admin Food List</Header>
+          <Header textAlign='center' inverted as='h1'>Admin User List</Header>
           <Divider/>
           <Grid style={{marginBottom: '50px'}}>
             <Grid.Column width={3}>
@@ -236,7 +235,7 @@ class ListFoodAdmin extends React.Component {
 }
 
 /** Require an array of Stuff documents in the props. */
-ListFoodAdmin.propTypes = {
+ListUsersAdmin.propTypes = {
   foods: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -249,4 +248,4 @@ export default withTracker(() => {
     foods: Foods.find({}).fetch(),
     ready: subscription.ready(),
   };
-})(ListFoodAdmin);
+})(ListUsersAdmin);

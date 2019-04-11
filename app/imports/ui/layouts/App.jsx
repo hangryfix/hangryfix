@@ -10,6 +10,7 @@ import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import YourAccount from '../pages/YourAccount';
 import ListFoodAdmin from '../pages/ListFoodAdmin';
+import ListUsersAdmin from '../pages/ListUsersAdmin';
 import Search from '../pages/Search';
 import AddFood from '../pages/AddFood';
 import AddReview from '../pages/AddReview';
@@ -35,7 +36,8 @@ class App extends React.Component {
               <ProtectedRoute path="/addReview" component={AddReview}/>
               <Route path="/search" component={Search}/>
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
-              <AdminProtectedRoute path="/admin" component={ListFoodAdmin}/>
+              <AdminProtectedRoute path="/adminFood" component={ListFoodAdmin}/>
+              <AdminProtectedRoute path="/adminUsers" component={ListUsersAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <ProtectedRoute path="/youraccount" component={YourAccount}/>
               <Route component={NotFound}/>
