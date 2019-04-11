@@ -26,12 +26,6 @@ class NavBar extends React.Component {
                                key="addFood">
                       Add Food
                     </Menu.Item>,
-                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/yourReviews" key="yourReviews">
-                      Your Reviews
-                    </Menu.Item>,
-                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/yourFoods" key="yourFoods">
-                      Your Foods
-                    </Menu.Item>,
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search">
                       <Input
                           class='color-primary-0'
@@ -63,6 +57,7 @@ class NavBar extends React.Component {
                   <Menu.Item>
                     <Dropdown direction="left" text={this.props.currentUser} icon="user">
                       <Dropdown.Menu>
+                        <Dropdown.Item icon="user" text="Your Account" as={NavLink} exact to="/youraccount"/>
                         <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
                       </Dropdown.Menu>
                     </Dropdown>

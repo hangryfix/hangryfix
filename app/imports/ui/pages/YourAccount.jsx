@@ -1,12 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Tab, Card, Image, Loader, Feed, Header } from 'semantic-ui-react';
-import SearchSidebar from '/../components/SearchSidebar';
+import { Tab, Card, Image, Loader, Feed, Header, Grid } from 'semantic-ui-react';
 import { Stuffs } from '/imports/api/stuff/stuff';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import SearchSidebar from '../components/SearchSidebar';
 
-class YourFoods extends React.Component {
+
+class YourAccount extends React.Component {
 
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
@@ -74,7 +75,7 @@ class YourFoods extends React.Component {
             </Card>
           </Card.Group>
         </Tab.Pane> },
-      { menuItem: 'Your Additions', render: () => <Tab.Pane attached={false}>
+      { menuItem: 'Your Foods', render: () => <Tab.Pane attached={false}>
           <Card.Group>
             <Card centered>
               <Card.Content>
@@ -119,13 +120,20 @@ class YourFoods extends React.Component {
 
     return (
         <div className='search-sidebar'>
-          <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          <Grid>
+            <Grid.Column width={4}>
+              <SearchSidebar/>
+            </Grid.Column>
+            <Grid.Column width={12}>
+              <Tab panes={panes} />
+            </Grid.Column>
+          </Grid>
         </div>
     );
   }
 }
 
-YourFoods.propTypes = {
+YourAccount.propTypes = {
   stuffs: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
@@ -137,4 +145,4 @@ export default withTracker(() => {
     stuffs: Stuffs.find({}).fetch(),
     ready: subscription.ready(),
   };
-})(YourFoods);
+})(YourAccount);
