@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Container, Grid, Image, Input, Segment, Card, Feed } from 'semantic-ui-react';
+import { Header, Container, Grid, Image, Input, Card, Feed } from 'semantic-ui-react';
 // import Food from '/imports/ui/components/Food';
 // import Foods from '../../api/food/food'
 

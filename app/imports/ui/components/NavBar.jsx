@@ -16,11 +16,11 @@ class NavBar extends React.Component {
         <div className="navBar">
           <Menu borderless className="navBar">
             <Container>
-            <Menu.Item as={ NavLink } activeClassName="" exact to="/">
-              <Header as='h2' inverted>hangryFIX</Header>
-            </Menu.Item>
               { this.props.currentUser ? (
                   [
+                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/youraccount" key="youraccount">
+                      <Header as='h2' inverted>hangryFIX</Header>
+                    </Menu.Item>,
                     <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/addFood"
                                key="addFood">
                       Add Food
@@ -44,14 +44,19 @@ class NavBar extends React.Component {
                 ) : ''
               }
               { this.props.currentUser === '' ? (
-                  <Menu.Item position="right">
-                    <Dropdown style={{ color: 'white' }} text="Login" icon="user">
-                      <Dropdown.Menu>
-                        <Dropdown.Item icon="user" text="Sign In" as={ NavLink } exact to="/signin"/>
-                        <Dropdown.Item icon="add user" text="Register" as={NavLink} exact to="/signup"/>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Menu.Item>
+                  [
+                    <Menu.Item as={ NavLink } exact to="/landing" key="landing">
+                      <Header as='h2' inverted>hangryFIX</Header>
+                    </Menu.Item>,
+                    <Menu.Item position="right" key="unloggedUser">
+                      <Dropdown style={{ color: 'white' }} text="Login" icon="user">
+                        <Dropdown.Menu>
+                          <Dropdown.Item icon="user" text="Sign In" as={ NavLink } exact to="/signin"/>
+                          <Dropdown.Item icon="add user" text="Register" as={NavLink} exact to="/signup"/>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Menu.Item>,
+                  ]
               ) : (
                   <Menu.Item>
                     <Dropdown direction="left" text={this.props.currentUser} icon="user">
