@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import YourAccount from '../pages/YourAccount';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import ListFoodAdmin from '../pages/ListFoodAdmin';
 import Search from '../pages/Search';
 import AddFood from '../pages/AddFood';
 import AddReview from '../pages/AddReview';
