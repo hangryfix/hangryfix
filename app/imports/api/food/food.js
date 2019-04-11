@@ -17,7 +17,7 @@ const FoodSchema = new SimpleSchema({
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
-Stuffs.attachSchema(FoodSchema);
+Foods.attachSchema(FoodSchema);
 
 /** Make the collection and schema available to other code. */
 export { Foods, FoodSchema };
