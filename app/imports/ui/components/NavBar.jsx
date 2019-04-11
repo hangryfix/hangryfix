@@ -45,7 +45,7 @@ class NavBar extends React.Component {
               }
               { this.props.currentUser === '' ? (
                   [
-                    <Menu.Item as={ NavLink } exact to="/landing" key="landing">
+                    <Menu.Item as={ NavLink } exact to="/" key="landing">
                       <Header as='h2' inverted>hangryFIX</Header>
                     </Menu.Item>,
                     <Menu.Item position="right" key="unloggedUser">
