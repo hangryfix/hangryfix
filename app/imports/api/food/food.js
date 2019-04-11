@@ -11,7 +11,7 @@ const FoodSchema = new SimpleSchema({
   restaurant: String,
   hours: String,
   price: Number,
-  image: Image,
+  image: String,
   rating: Number,
   user: String,
 }, { tracker: Tracker });
