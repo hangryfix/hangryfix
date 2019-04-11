@@ -16,7 +16,7 @@ class YourAccount extends React.Component {
   renderPage() {
 
     const panes = [
-      { menuItem: 'Favorites', render: () => <Tab.Pane fluid attached={false}>
+      { menuItem: 'Your Foods', render: () => <Tab.Pane fluid>
           <Card.Group>
             <Card centered>
               <Card.Content>
@@ -75,7 +75,7 @@ class YourAccount extends React.Component {
             </Card>
           </Card.Group>
         </Tab.Pane> },
-      { menuItem: 'Your Foods', render: () => <Tab.Pane attached={false}>
+      { menuItem: 'Favorites', render: () => <Tab.Pane>
           <Card.Group>
             <Card centered>
               <Card.Content>
