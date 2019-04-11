@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Tab, Card, Image, Loader, Feed, Header } from 'semantic-ui-react';
-import SearchSidebar from '/../components/SearchSidebar';
 import { Stuffs } from '/imports/api/stuff/stuff';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
