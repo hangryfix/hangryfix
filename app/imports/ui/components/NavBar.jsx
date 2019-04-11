@@ -15,15 +15,11 @@ class NavBar extends React.Component {
     return (
         <div className="navBar">
           <Menu borderless className="navBar">
-            <Container>
+            <Container fluid>
               { this.props.currentUser ? (
                   [
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/youraccount" key="youraccount">
                       <Header as='h2' inverted>hangryFIX</Header>
-                    </Menu.Item>,
-                    <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/addFood"
-                               key="addFood">
-                      Add Food
                     </Menu.Item>,
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search">
                       <Input
@@ -34,6 +30,10 @@ class NavBar extends React.Component {
                           iconPosition='left'
                           placeholder='Hangry??? What are you craving?'
                           style={searchStyle}/>
+                    </Menu.Item>,
+                    <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/addFood"
+                               key="addFood">
+                      Add Food
                     </Menu.Item>,
                   ]
               ) : ''
