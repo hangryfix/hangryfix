@@ -6,7 +6,7 @@ import { Tracker } from 'meteor/tracker';
 const Foods = new Mongo.Collection('Foods');
 
 /** Create a schema to constrain the structure of documents associated with this collection. */
-const FoodSchema = new SimpleSchema({
+const FoodsSchema = new SimpleSchema({
   name: String,
   restaurant: String,
   hours: String,
@@ -17,7 +17,7 @@ const FoodSchema = new SimpleSchema({
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
-Foods.attachSchema(FoodSchema);
+Foods.attachSchema(FoodsSchema);
 
 /** Make the collection and schema available to other code. */
-export { Foods, FoodSchema };
+export { Foods, FoodsSchema };
