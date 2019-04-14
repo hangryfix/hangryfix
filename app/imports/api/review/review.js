@@ -8,6 +8,7 @@ const Reviews = new Mongo.Collection('Reviews');
 /** Create a schema to constrain the structure of documents associated with this collection. */
 const ReviewSchema = new SimpleSchema({
   review: String,
+  rating: Number,
   user: String,
 }, { tracker: Tracker });
 
