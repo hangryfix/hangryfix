@@ -18,7 +18,7 @@ class Food extends React.Component {
             <Card.Description>
               Address: {this.props.food.address}
               Hours: {this.props.food.hours}
-              Price: {this.props.food.price}
+              Cost: {this.props.food.cost}
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
