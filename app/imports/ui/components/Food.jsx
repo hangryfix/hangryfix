@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, Feed, Rating, Image } from 'semantic-ui-react';
+import { Card, Rating, Image, Feed } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import Review from './Review';
 
 class Food extends React.Component {
   render() {
@@ -31,6 +32,7 @@ class Food extends React.Component {
 }
 Food.propTypes = {
   food: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default withRouter(Food);
