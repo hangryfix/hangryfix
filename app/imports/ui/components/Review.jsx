@@ -1,6 +1,8 @@
 import React from 'react';
-import { Header, Feed } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
+import { Header, Feed, Button, Link } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
@@ -14,6 +16,12 @@ class Review extends React.Component {
               {this.props.review.review}
             </Feed.Summary>
           </Feed.Content>
+          { this.props.currentUser ? (
+              <Feed.Extra>
+                <Button fluid onClick={<Link to={''}/>}>Edit Review</Button>
+              </Feed.Extra>
+          ) : ''
+          }
         </Feed.Event>
     );
   }
@@ -21,6 +29,11 @@ class Review extends React.Component {
 
 Review.propTypes = {
   review: PropTypes.object.isRequired,
+  currentUser: PropTypes.string,
 };
 
-export default withRouter(Review);
+const ReviewContainer = withTracker(() => ({
+  currentUser: Meteor.user() ? Meteor.user().username : '',
+}))(Review);
+
+export default withRouter(ReviewContainer);
