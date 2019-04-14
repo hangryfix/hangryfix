@@ -20,7 +20,7 @@ class Food extends React.Component {
             <Card.Header>{this.props.food.name}</Card.Header>
             <Card.Meta>
               {this.props.food.restaurant}
-              <Rating icon='heart' defaultRating={this.props.food.averageRating} maxRating={5} size='huge' disabled />
+              <Rating icon='heart' defaultRating={} maxRating={5} size='huge' disabled />
             </Card.Meta>
             <Card.Description>
               Address: {this.props.food.address}
@@ -39,6 +39,7 @@ class Food extends React.Component {
 }
 Food.propTypes = {
   food: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
   currentUser: PropTypes.string,
 };
 
