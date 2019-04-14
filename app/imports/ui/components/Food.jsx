@@ -1,12 +1,20 @@
 import React from 'react';
-import { Card, Feed, Rating, Image } from 'semantic-ui-react';
+import { Card, Feed, Rating, Image, Button, Link } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 
 class Food extends React.Component {
   render() {
     return (
         <Card>
+          { this.props.currentUser ? (
+              <Card.Content extra>
+                <Button fluid onClick={<Link to={''}/>}>Write a Review</Button>
+              </Card.Content>
+          ) : ''
+          }
           <Card.Content>
             <Image floated='left' style={{ width: '40%' }} src={this.props.food.image} />
             <Card.Header>{this.props.food.name}</Card.Header>
@@ -22,7 +30,7 @@ class Food extends React.Component {
           </Card.Content>
           <Card.Content extra>
             <Feed>
-              {this.props.reviews.map((review, index) => <Review key={index} review={review} />)}
+              {/* review component */}
             </Feed>
           </Card.Content>
         </Card>
@@ -31,6 +39,11 @@ class Food extends React.Component {
 }
 Food.propTypes = {
   food: PropTypes.object.isRequired,
+  currentUser: PropTypes.string,
 };
 
-export default withRouter(Food);
+const FoodContainer = withTracker(() => ({
+  currentUser: Meteor.user() ? Meteor.user().username : '',
+}))(Food);
+
+export default withRouter(FoodContainer);
