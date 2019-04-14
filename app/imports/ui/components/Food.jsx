@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'underscore';
+import Review from './Review';
 
 class Food extends React.Component {
   render() {
@@ -36,7 +37,7 @@ class Food extends React.Component {
           </Card.Content>
           <Card.Content extra>
             <Feed>
-              {/* review component */}
+              {this.props.reviews.map((review, index) => <Review key={index} review={review} />)}
             </Feed>
           </Card.Content>
         </Card>
