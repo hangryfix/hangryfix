@@ -4,9 +4,15 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import { _ } from 'underscore';
 
 class Food extends React.Component {
   render() {
+
+    const averageRating =
+        Math.round(_.reduce(this.props.food.reviews, function (memo, review) { return memo + review.rating; })
+            / this.props.food.reviews.length);
+
     return (
         <Card>
           { this.props.currentUser ? (
@@ -20,7 +26,7 @@ class Food extends React.Component {
             <Card.Header>{this.props.food.name}</Card.Header>
             <Card.Meta>
               {this.props.food.restaurant}
-              <Rating icon='heart' defaultRating={''} maxRating={5} size='huge' disabled />
+              <Rating icon='heart' defaultRating={averageRating} maxRating={5} size='huge' disabled />
             </Card.Meta>
             <Card.Description>
               Address: {this.props.food.address}
