@@ -24,11 +24,14 @@ class NavBar extends React.Component {
     };
 
     let styleName = '';
+    let rightStyle = '';
 
     if (location.pathname === '/') {
       styleName = 'navBarLanding';
+      rightStyle = 'rightLanding';
     } else {
       styleName = 'navBar';
+      rightStyle = 'rightNormal';
     }
 
     return (
@@ -65,11 +68,21 @@ class NavBar extends React.Component {
               }
               { this.props.currentUser === '' ? (
                   [
-                    <Menu.Item as={ NavLink } exact to="/" key="landing">
-                      <Header as='h2' inverted>hangryFIX</Header>
+                    <Menu.Item
+                        as={ NavLink }
+                        className="navTitle"
+                        exact to="/"
+                        key="landing"
+                    >
+                      <Header
+                          as='h2'
+                          inverted
+                      >
+                        hangryFIX
+                      </Header>
                     </Menu.Item>,
                     <Menu.Item position="right" key="unloggedUser">
-                      <Dropdown style={{color: 'black', padding: '5px'}} text="Login" icon="user">
+                      <Dropdown className={ rightStyle } text="Login" icon="user">
                         <Dropdown.Menu>
                           <Dropdown.Item icon="user" text="Sign In" as={ NavLink } exact to="/signin"/>
                           <Dropdown.Item icon="add user" text="Register" as={NavLink} exact to="/signup"/>
