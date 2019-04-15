@@ -10,8 +10,9 @@ class Landing extends React.Component {
       width: '80%',
       color: '#045604',
     };
+
     return (
-        <div className="landingMid">
+        <div className="landingMid" id='landing-page-id'>
             <Grid columns={2} verticalAlign='middle'>
               <Grid.Column>
                 <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>

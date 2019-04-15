@@ -7,14 +7,34 @@ import { Menu, Header, Dropdown, Container, Input } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 class NavBar extends React.Component {
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
+
+
   render() {
+
+    const { location } = this.props;
     const searchStyle = {
       width: '80%',
       color: '#045604',
     };
+
+    let styleName = '';
+
+    if (location.pathname === '/') {
+      styleName = 'navBarLanding';
+    } else {
+      styleName = 'navBar';
+    }
+
     return (
-        <div className="navBar">
-          <Menu borderless className="navBar">
+
+        <div className={ styleName }>
+          <Menu borderless>
             <Container fluid>
               { this.props.currentUser ? (
                   [
@@ -49,7 +69,7 @@ class NavBar extends React.Component {
                       <Header as='h2' inverted>hangryFIX</Header>
                     </Menu.Item>,
                     <Menu.Item position="right" key="unloggedUser">
-                      <Dropdown style={{ color: 'white', paddingRight: '50px' }} text="Login" icon="user">
+                      <Dropdown style={{color: 'black', padding: '5px'}} text="Login" icon="user">
                         <Dropdown.Menu>
                           <Dropdown.Item icon="user" text="Sign In" as={ NavLink } exact to="/signin"/>
                           <Dropdown.Item icon="add user" text="Register" as={NavLink} exact to="/signup"/>
