@@ -10,9 +10,9 @@ const FoodsSchema = new SimpleSchema({
   name: String,
   restaurant: String,
   hours: String,
-  cost: Number,
+  price: Number,
   image: String,
-  address: String,
+  rating: Number,
   user: String,
 }, { tracker: Tracker });
 

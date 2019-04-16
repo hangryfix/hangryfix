@@ -1,22 +1,27 @@
 import React from 'react';
-import { Container, Form, Button, TextArea, Header, Grid, Select } from 'semantic-ui-react';
+import { Restaurants } from '/imports/api/restaurant/restaurant';
+import { Container, Form, Button, TextArea, Header, Grid, Select, Loader } from 'semantic-ui-react';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 
+
+/*
 const restaurantOptions = [
-  { key: '1', text: 'Da Spot', value: 'daspot' },
-  { key: '2', text: 'Dominos', value: 'dominos' },
-];
-
-const typeOptions = [
   { key: '1', text: 'Chicken', value: 'chicken' },
   { key: '2', text: 'Sandwich', value: 'Sandwich' },
-];
+];*/
 
 /** Renders the Page for adding a document. */
 class AddFood extends React.Component {
-  state = {}
 
-  handleChange = (e, { value }) => this.setState({ value })
+  /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+    this.insertCallback = this.insertCallback.bind(this);
+    this.formRef = null;
+  }
 
   /** Notify the user of the results of the submit. If successful, clear the form. */
   insertCallback(error) {
@@ -27,9 +32,27 @@ class AddFood extends React.Component {
       this.formRef.reset();
     }
   }
+   handleClick() {
+    alert('File Upload not currently supported.');
+   }
 
-  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+  /** On submit, insert the data. */
+  submit(data) {
+    const { name, quantity, condition } = data;
+    Foods.insert({ name, quantity, condition }, this.insertCallback);
+  }
+
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+  renderPage() {
+
+    let restaurantOptions = this.props.restaurants.map((restaurant) => {
+      return {key:restaurant.id, text: restaurant.name, value: restaurant.name};
+    });
+
     return (
         <Container className='add-food'>
           <Header as='h1' content='Add A Food' textAlign='center'/>
@@ -43,9 +66,10 @@ class AddFood extends React.Component {
                     icon="upload"
                     label={{
                       basic: true,
-                      content: 'Upload Image',
+                      content: 'Upload Image'
                     }}
                     labelPosition="right"
+                    onClick = {this.handleClick}
                 />
               </Grid.Column>
               <Grid.Column width={13}>
@@ -54,10 +78,18 @@ class AddFood extends React.Component {
                       fluid label='Food Name'
                       placeholder='Food Name'/>
                   <Form.Group widths='equal'>
-                    <Form.Field control={Select} label='Food Category' options={typeOptions}
-                                placeholder='Select a Category'/>
-                    <Form.Field control={Select} label='Restaurant' options={restaurantOptions}
-                                placeholder='Choose a Restaurant'/>
+                    <Form.Field
+                        control={Select}
+                        label='Food Category'
+                        options={restaurantOptions}
+                        placeholder='Select a Category'
+                    />
+                    <Form.Field
+                        control={Select}
+                        label='Restaurant'
+                        options={restaurantOptions}
+                        placeholder='Choose a Restaurant'
+                    />
                     <Form.Input
                         fluid label='Cost'
                         placeholder='Cost'/>
@@ -89,4 +121,18 @@ class AddFood extends React.Component {
   }
 }
 
-export default AddFood;
+/** Require an array of Stuff documents in the props. */
+AddFood.propTypes = {
+  restaurants: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(() => {
+  // Get access to Stuff documents.
+  const subscription = Meteor.subscribe('Restaurant');
+  return {
+    restaurants: Restaurants.find({}).fetch(),
+    ready: subscription.ready(),
+  };
+})(AddFood);
