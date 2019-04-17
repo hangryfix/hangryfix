@@ -7,14 +7,37 @@ import { Menu, Header, Dropdown, Container, Input } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 class NavBar extends React.Component {
+
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+  };
+
+
   render() {
+
+    const { location } = this.props;
     const searchStyle = {
       width: '80%',
       color: '#045604',
     };
+
+    let styleName = '';
+    let rightStyle = '';
+
+    if (location.pathname === '/') {
+      styleName = 'navBarLanding';
+      rightStyle = 'rightLanding';
+    } else {
+      styleName = 'navBar';
+      rightStyle = 'rightNormal';
+    }
+
     return (
-        <div className="navBar">
-          <Menu borderless className="navBar">
+
+        <div className={ styleName }>
+          <Menu borderless>
             <Container fluid>
               { this.props.currentUser ? (
                   [
@@ -45,11 +68,21 @@ class NavBar extends React.Component {
               }
               { this.props.currentUser === '' ? (
                   [
-                    <Menu.Item as={ NavLink } exact to="/" key="landing">
-                      <Header as='h2' inverted>hangryFIX</Header>
+                    <Menu.Item
+                        as={ NavLink }
+                        className="navTitle"
+                        exact to="/"
+                        key="landing"
+                    >
+                      <Header
+                          as='h2'
+                          inverted
+                      >
+                        hangryFIX
+                      </Header>
                     </Menu.Item>,
                     <Menu.Item position="right" key="unloggedUser">
-                      <Dropdown style={{ color: 'white', paddingRight: '50px' }} text="Login" icon="user">
+                      <Dropdown className={ rightStyle } text="Login" icon="user">
                         <Dropdown.Menu>
                           <Dropdown.Item icon="user" text="Sign In" as={ NavLink } exact to="/signin"/>
                           <Dropdown.Item icon="add user" text="Register" as={NavLink} exact to="/signup"/>

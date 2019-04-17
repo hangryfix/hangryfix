@@ -13,7 +13,7 @@
   z-index: -1;
   position: relative;
   background-color: white;
-  margin-top: -50px;
+  margin-top: -100px;
   padding-bottom: 50px;
 }
 .aboutUs {
@@ -30,21 +30,56 @@
   padding-bottom: 30px;
 }
 
+/* Navigation Bar */
 .navBar {
-  background-color: #045604 !important;
+  background-color: #045604;
 }
+a.item.navTitle.active {
+  background: none !important;
+}
+
+.navBarLanding {
+  background-color: rgba(255, 255,255, 0);
+  color: black;
+}
+
+.rightLanding {
+  color: BLACK;
+  padding: 5px;
+}
+
+.rightNormal {
+  color: WHITE;
+  padding: 5px;
+}
+.div.ui.fluid.container {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+div.ui.borderless.menu {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  box-shadow: none;
+}
+.navBarLanding .item {
+  color: BLACK;
+}
+
 
 .navBar .item {
-  color: #FFFFFF !important;
+  color: #FFFFFF;
 }
 
-
+/* FOOTER STYLES */
 .footer {
   position: relative;
   background-color: #045604;
   color: white;
 }
 
+/* ADD ELEMENT STYLES */
 .add-food {
   border: 1px solid black;
   padding: 20px;
@@ -60,6 +95,7 @@
   padding: 10px;
 }
 
+/* SEARCH STYLES */
 .search-sidebar {
   padding: 20px;
   background-color: #f6f6f6;
