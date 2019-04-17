@@ -14,6 +14,7 @@ class Review extends React.Component {
             <Feed.Summary>
               <Header as="h4">Review from {this.props.review.user}</Header>
               <Rating icon='heart' defaultRating={this.props.review.rating} maxRating={5} size='huge' disabled/>
+              /* in AddFood: try access defaultRating field from Rating component and pass that number to the rating property*/
               {this.props.review.review}
             </Feed.Summary>
           </Feed.Content>
