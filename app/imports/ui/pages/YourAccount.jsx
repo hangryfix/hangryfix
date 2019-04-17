@@ -17,7 +17,7 @@ class YourAccount extends React.Component {
   renderPage() {
 
     const panes = [
-      { menuItem: 'Your Foods', render: () => <Tab.Pane fluid>
+      { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
           <Card.Group>
             {this.props.foods.map((food, index) => <Food key={index} food={food} />)}
           </Card.Group>
