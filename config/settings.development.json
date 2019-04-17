@@ -96,46 +96,47 @@
     {
       "name": "Panda Express",
       "address": "2560 McCarthy mall, Honolulu, HI 96822",
-      "hours": [{
-        "monday": {
-          "open": 900,
-          "close": 1700
-        },
-        "tuesday": {
-          "open": 900,
-          "close": 1700
-        },
-        "wednesday": {
-          "open": 900,
-          "close": 1700
-        },
-        "thursday": {
-          "open": 900,
-          "close": 1700
-        },
-        "friday": {
-          "open": 900,
-          "close": 1700
-        },
-        "saturday": {
-          "open": 2500,
-          "close": 2500
-        },
-        "sunday": {
-          "open": 2500,
-          "close": 2500
-        }
-      }]
+      "hours": [
+        "11:30",
+        "9:00",
+        "11:30",
+        "9:00",
+        "10:00",
+        "8:00",
+        "10:00",
+        "8:00",
+        "11:30",
+        "9:00",
+        "10:00",
+        "8:00",
+        "10:00",
+        "8:00"
+        ]
     },
-    {
-      "name": "Da Spot Health Food & Juices",
-      "address": "2469 S King St, Honolulu, HI 96826",
-      "hours": [1, 2, 3, 4]
-    },
+        {
+          "name": "Da Spot Health Food & Juices",
+          "address": "2469 S King St, Honolulu, HI 96826",
+          "hours": [
+            "11:30",
+            "9:00",
+            "11:30",
+            "9:00",
+            "10:00",
+            "8:00",
+            "10:00",
+            "8:00",
+            "11:30",
+            "9:00",
+            "10:00",
+            "8:00",
+            "10:00",
+            "8:00"
+          ]
+        },
     {
       "name": "Add A New Restaurant",
       "address": "2469 S King St, Honolulu, HI 96826",
-      "hours": [4, 4, 3, 2]
+      "hours": []
     }
   ],
 

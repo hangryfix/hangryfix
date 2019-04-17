@@ -10,7 +10,7 @@ const RestaurantSchema = new SimpleSchema({
   name: String,
   address: String,
   hours: Array,
-  'hours.$': Number,
+  'hours.$': String
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
