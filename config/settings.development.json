@@ -73,6 +73,25 @@
       "user": "admin@foo.com"
     }
   ],
+
+  "defaultTags": [
+    {
+      "name": "Chinese",
+      "type": "cuisine"
+    },
+    {
+      "name": "Italian",
+      "type": "cuisine"
+    },
+    {
+      "name": "Fast Food",
+      "type": "cuisine"
+    },
+    {
+      "name": "Local",
+      "type": "cuisine"
+    }
+  ],
   "defaultRestaurants": [
     {
       "name": "Panda Express",
@@ -111,70 +130,12 @@
     {
       "name": "Da Spot Health Food & Juices",
       "address": "2469 S King St, Honolulu, HI 96826",
-      "hours": [{
-        "monday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "tuesday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "wednesday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "thursday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "friday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "saturday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "sunday": {
-          "open": 1100,
-          "close": 2130
-        }
-      }]
+      "hours": [1, 2, 3, 4]
     },
     {
       "name": "Add A New Restaurant",
       "address": "2469 S King St, Honolulu, HI 96826",
-      "hours": [{
-        "monday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "tuesday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "wednesday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "thursday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "friday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "saturday": {
-          "open": 1100,
-          "close": 2130
-        },
-        "sunday": {
-          "open": 1100,
-          "close": 2130
-        }
-      }]
+      "hours": [4, 4, 3, 2]
     }
   ],
 
