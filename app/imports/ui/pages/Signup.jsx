@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 
@@ -10,7 +10,7 @@ export default class Signup extends React.Component {
   /** Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { firstName: '', lastName: '', username: '', email: '', password: '', tags: '', error: '' };
+    this.state = { firstName: '', lastName: '', username: '', email: '', password: '', tags: '', error: '', redirectToHome: false };
     // Ensure that 'this' is bound to this component in these two functions.
     // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,13 +29,20 @@ export default class Signup extends React.Component {
       if (err) {
         this.setState({ error: err.reason });
       } else {
-        // browserHistory.push('/login');
+        this.setState({ error: '', redirectToHome: true });
+        // browserHistory.push('/youraccount');
       }
     });
+
   }
 
   /** Display the signup form. */
   render() {
+    const { from } = this.props.location.state || { from: { pathname: '/youraccount' } };
+    // if correct authentication, redirect to page instead of login screen
+    if (this.state.redirectToHome) {
+      return <Redirect to={from}/>;
+    }
     const tags = [
       {
         key: 'pizza',
@@ -120,7 +127,7 @@ export default class Signup extends React.Component {
                                name="tags"
                                options={tags}
                                placeholder='Get started with food tags!'
-                               type="object"
+                               type="array"
                                onChange={this.handleChange}/>
                   <Form.Button content="Submit"/>
                 </Segment>

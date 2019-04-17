@@ -6,7 +6,7 @@
       "username": "adminJo",
       "email": "admin@foo.com",
       "password": "changeme",
-      "tags": "pizza, tacos",
+      "tags": ["pizza", "tacos"],
       "role": "admin"
     },
     {
@@ -15,7 +15,7 @@
       "username": "JohnDoe",
       "email": "john@foo.com",
       "password": "changeme",
-      "tags": "pizza, tacos"
+      "tags": ["pizza", "poke"]
     }
   ],
   "defaultData": [
