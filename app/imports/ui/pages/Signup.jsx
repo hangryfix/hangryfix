@@ -24,8 +24,8 @@ export default class Signup extends React.Component {
 
   /** Handle Signup submission using Meteor's account mechanism. */
   handleSubmit() {
-    const { firstName, lastName, username, email, password, tags } = this.state;
-    Accounts.createUser({ firstName, lastName, username, email, password, tags }, (err) => {
+    const { firstName, lastName, username, email, password } = this.state;
+    Accounts.createUser({ username, email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
@@ -33,7 +33,7 @@ export default class Signup extends React.Component {
         // browserHistory.push('/youraccount');
       }
     });
-
+    UserInfo.insert({ firstName, lastName, username, email, tags }, this.insertCallback);
   }
 
   /** Display the signup form. */
