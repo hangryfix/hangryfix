@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
+import { UserInfo } from '../../api/user-info/user-info';
 
 /* eslint-disable no-console */
 
@@ -14,6 +15,9 @@ function createUser(firstName, lastName, username, email, password, tags, role) 
     password: password,
     tags: tags,
   });
+
+  UserInfo.insert(firstName, lastName, username, email, tags, userID)
+
   if (role === 'admin') {
     Roles.addUsersToRoles(userID, 'admin');
   }
