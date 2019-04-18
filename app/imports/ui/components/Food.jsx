@@ -16,7 +16,7 @@ class Food extends React.Component {
 
     return (
         <Card>
-          { this.props.currentUser ? (
+          { this.props.user ? (
               <Card.Content extra>
                 <Button fluid onClick={<Link to={''}/>}>Write a Review</Button>
               </Card.Content>
@@ -33,7 +33,6 @@ class Food extends React.Component {
               }
             </Card.Meta>
             <Card.Description>
-              Address: {this.props.food.address}
               Hours: {this.props.food.hours}
               Price: {this.props.food.price}
             </Card.Description>
@@ -50,11 +49,11 @@ class Food extends React.Component {
 Food.propTypes = {
   food: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
-  currentUser: PropTypes.string,
+  user: PropTypes.string,
 };
 
 const FoodContainer = withTracker(() => ({
-  currentUser: Meteor.user() ? Meteor.user().username : '',
+  user: Meteor.user() ? Meteor.user().username : '',
 }))(Food);
 
-export default withRouter(FoodContainer);
+export default withRouter(FoodContainer, Food);

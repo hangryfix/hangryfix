@@ -1,7 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Tab, Card, Loader, Grid } from 'semantic-ui-react';
-import { Stuffs } from '/imports/api/stuff/stuff';
+import { Foods } from '/imports/api/food/food';
+import { Reviews } from '/imports/api/review/review';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SearchSidebar from '../components/SearchSidebar';
@@ -11,12 +12,18 @@ import Food from '../components/Food';
 class YourAccount extends React.Component {
 
   render() {
+    console.log(Meteor.username);
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
 
     const panes = [
+      { menuItem: 'Your Foods', render: () => <Tab.Pane fluid>
+          <Card.Group>
+            {this.props.foods.map((food, index) => <Food key={index} food={food} reviews={this.props.reviews} />)}
+          </Card.Group>
+        </Tab.Pane> },
       { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
           <Card.Group>
             {this.props.foods.map((food, index) => <Food key={index} food={food} />)}
@@ -45,14 +52,16 @@ class YourAccount extends React.Component {
 
 YourAccount.propTypes = {
   foods: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 export default withTracker(() => {
-  // Get access to Stuff documents.
-  const subscription = Meteor.subscribe('Food');
+  const subscription = Meteor.subscribe('Foods');
+  const subscription2 = Meteor.subscribe('Reviews');
   return {
-    foods: Stuffs.find({}).fetch(),
-    ready: subscription.ready(),
+    foods: Foods.find({}).fetch(),
+    reviews: Reviews.find({}).fetch(),
+    ready: subscription.ready() && subscription2.ready(),
   };
 })(YourAccount);
