@@ -12,7 +12,6 @@ const FoodsSchema = new SimpleSchema({
   hours: String,
   price: Number,
   image: String,
-  rating: Number,
   user: String,
 }, { tracker: Tracker });
 

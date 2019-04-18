@@ -17,7 +17,7 @@ class YourAccount extends React.Component {
   renderPage() {
 
     const panes = [
-      { menuItem: 'Your Foods', render: () => <Tab.Pane fluid>
+      { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
           <Card.Group>
             {this.props.foods.map((food, index) => <Food key={index} food={food} />)}
           </Card.Group>
@@ -29,7 +29,7 @@ class YourAccount extends React.Component {
     ];
 
     return (
-        <div className='search-sidebar'>
+        <div className='search-sidebar' style={{ backgroundColor: '#338D33', minHeight: '600px' }}>
           <Grid>
             <Grid.Column width={4}>
               <SearchSidebar/>

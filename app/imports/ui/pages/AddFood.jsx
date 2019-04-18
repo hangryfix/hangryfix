@@ -6,12 +6,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 
 
-/*
-const restaurantOptions = [
-  { key: '1', text: 'Chicken', value: 'chicken' },
-  { key: '2', text: 'Sandwich', value: 'Sandwich' },
-];*/
-
 /** Renders the Page for adding a document. */
 class AddFood extends React.Component {
 
