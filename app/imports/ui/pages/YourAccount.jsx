@@ -29,7 +29,7 @@ class YourAccount extends React.Component {
     ];
 
     return (
-        <div className='search-sidebar'>
+        <div className='search-sidebar' style={{ backgroundColor: '#338D33', minHeight: '600px' }}>
           <Grid>
             <Grid.Column width={4}>
               <SearchSidebar/>

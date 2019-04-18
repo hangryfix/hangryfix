@@ -25,7 +25,7 @@ class App extends React.Component {
   render() {
     return (
         <Router>
-          <div>
+          <div className="entire-page">
             <NavBar/>
             <Switch>
               <Route exact path="/" component={Landing}/>
