@@ -1,10 +1,11 @@
 import React from 'react';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
+import { Foods } from '/imports/api/food/food';
+import { Tags } from '/imports/api/tag/tag';
 import { Container, Form, Button, TextArea, Header, Grid, Select, Loader } from 'semantic-ui-react';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-
 
 /** Renders the Page for adding a document. */
 class AddFood extends React.Component {
@@ -26,9 +27,10 @@ class AddFood extends React.Component {
       this.formRef.reset();
     }
   }
-   handleClick() {
+
+  handleClick() {
     alert('File Upload not currently supported.');
-   }
+  }
 
   /** On submit, insert the data. */
   submit(data) {
@@ -40,11 +42,16 @@ class AddFood extends React.Component {
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
+
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
 
     let restaurantOptions = this.props.restaurants.map((restaurant) => {
-      return {key:restaurant.id, text: restaurant.name, value: restaurant.name};
+      return { key: restaurant.id, text: restaurant.name, value: restaurant.name };
+    });
+
+    let tagOptions = this.props.tags.map((tag) => {
+      return { key: tag.id, text: tag.name, value: tag.name };
     });
 
     return (
@@ -63,36 +70,52 @@ class AddFood extends React.Component {
                       content: 'Upload Image'
                     }}
                     labelPosition="right"
-                    onClick = {this.handleClick}
+                    onClick={this.handleClick}
                 />
               </Grid.Column>
               <Grid.Column width={13}>
                 <Form>
-                  <Form.Input
-                      fluid label='Food Name'
-                      placeholder='Food Name'/>
                   <Form.Group widths='equal'>
-                    <Form.Field
-                        control={Select}
-                        label='Food Category'
-                        options={restaurantOptions}
-                        placeholder='Select a Category'
+                    <Form.Input
+                        fluid label='Food Name'
+                        placeholder='Food Name'
+                        name='name'
                     />
                     <Form.Field
                         control={Select}
                         label='Restaurant'
                         options={restaurantOptions}
                         placeholder='Choose a Restaurant'
+                        name='restaurant'
+                    />
+                  </Form.Group>
+                  <Form.Group widths='equal'>
+                    <Form.Field
+                        control={Select}
+                        label='Tags'
+                        options={tagOptions}
+                        placeholder='Select Tags'
+                        name='tags'
+                    />
+                    <Form.Field
+                        control={Select}
+                        label='Restaurant'
+                        options={restaurantOptions}
+                        placeholder='Choose a Restaurant'
+                        name='restaurant'
                     />
                     <Form.Input
                         fluid label='Cost'
-                        placeholder='Cost'/>
+                        placeholder='Cost'
+                        name='cost'
+                    />
                   </Form.Group>
                   <Form.Field
                       id='form-textarea-control-opinion'
                       control={TextArea}
                       label='Description'
                       placeholder='Description'
+                      name='description'
                   />
                   <Form.Group>
                     <Form.Field
@@ -118,6 +141,7 @@ class AddFood extends React.Component {
 /** Require an array of Stuff documents in the props. */
 AddFood.propTypes = {
   restaurants: PropTypes.array.isRequired,
+  tags: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -127,6 +151,7 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe('Restaurant');
   return {
     restaurants: Restaurants.find({}).fetch(),
+    tags: Tags.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(AddFood);

@@ -44,15 +44,18 @@
       "condition": "excellent"
     }
   ],
+
+
   "defaultFood": [
     {
       "name": "Froyo",
       "restaurant": "Tutti Frutti",
-      "hours": "M-Su 10am-10pm",
       "price": 5,
       "image": "https://i.ibb.co/r2Cp0TK/froyo.jpg",
-      "rating": 4,
-      "user": "john@foo.com"
+      "owner": "john@foo.com",
+      "category": "Test Category",
+      "description": "So good.",
+      "tags": ["test tag", "test tag"]
     },
     {
       "name": "Kalua Pig Nachos",
@@ -60,8 +63,10 @@
       "hours": "M-Su 11am-7pm",
       "price": 13,
       "image": "https://i.ibb.co/8cJFSLv/kalua-nachos.jpg",
-      "rating": 5,
-      "user": "john@foo.com"
+      "owner": "john@foo.com",
+      "category": "Test Category",
+      "description": "So good.",
+      "tags": ["test tag", "test tag"]
     },
     {
       "name": "Okonomiyaki",
@@ -69,8 +74,10 @@
       "hours": "M-Su 11am-12am",
       "price": 17,
       "image": "https://i.ibb.co/n05BzTg/okonomiyaki.jpg",
-      "rating": 5,
-      "user": "admin@foo.com"
+      "owner": "john@foo.com",
+      "category": "Test Category",
+      "description": "So good.",
+      "tags": ["test tag", "test tag"]
     }
   ],
 
