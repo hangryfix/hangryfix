@@ -4,7 +4,7 @@ import { Foods } from '../../api/food/food.js';
 
 /** Initialize the database with a default data document. */
 function addData(data) {
-  console.log(`  Adding: ${data.name} (${data.user})`);
+  console.log(`  Adding: ${data.name}`);
   Foods.insert(data);
 }
 
@@ -18,11 +18,7 @@ if (Foods.find().count() === 0) {
 
 /** This subscription publishes only the documents associated with the logged in user */
 Meteor.publish('Food', function publish() {
-  if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Foods.find({ owner: username });
-  }
-  return this.ready();
+    return Foods.find();
 });
 
 /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
