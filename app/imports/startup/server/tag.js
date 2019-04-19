@@ -5,7 +5,7 @@ import { Tagss } from '../../api/tag/tag.js';
 /** Initialize the database with a default data document. */
 function addData(data) {
   console.log(`  Adding: ${data.name}`);
-  Foods.insert(data);
+  Tags.insert(data);
 }
 
 /** Initialize the collection if empty. */
