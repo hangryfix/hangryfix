@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Feed, Rating, Image, Button } from 'semantic-ui-react';
+import { Card, Rating, Image, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -14,13 +14,15 @@ class Food extends React.Component {
 
     if (this.props.reviews) {
       averageRating =
-          Math.round(_.reduce(this.props.food.reviews, function (memo, review) { return memo + review.rating; })
-              / this.props.food.reviews.length);
+          Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }))
+              / (this.props.reviews.length + 1));
     }
+
+    console.log(this.props.reviews);
 
     return (
         <Card>
-          { this.props.user ? (
+          { this.props.currentUser ? (
               <Button as={ NavLink } activeClassName="active" exact to="/addReview" key="addReview">
                 Write a Review
               </Button>
@@ -31,11 +33,9 @@ class Food extends React.Component {
             <Card.Header>
               {this.props.food.name}
               {this.props.reviews ? (
-                  <Rating icon="heart" defaultRating={averageRating} maxRating={5}/>
+                  <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
-                  <Feed>
-                    No ratings yet.
-                  </Feed>
+                  'No ratings yet.'
               )
               }
             </Card.Header>
@@ -51,23 +51,22 @@ class Food extends React.Component {
             <Card.Description>
             </Card.Description>
           </Card.Content>
-          <Card.Content extra>
-            {this.props.reviews ? (
-                <Feed>
-                  {this.props.reviews.map((review, index) => <Review
-                      key={index}
-                      review={review}
-                      foodId={this.props.food._id}
-                      user={this.props.food.user}
-                  />)}
-                </Feed>
-            ) : (
-                <Feed>
-                  No reviews yet.
-                </Feed>
-            )
-            }
-          </Card.Content>
+          {this.props.reviews ? (
+              <Card.Content>
+                {this.props.reviews.map((review, index) => <Review
+                    key={index}
+                    review={review}
+                    foodId={this.props.food._id}
+                    user={this.props.food.user}
+                    createdAt={new Date()}
+                />)}
+              </Card.Content>
+          ) : (
+              <Card.Content>
+                No reviews yet.
+              </Card.Content>
+          )
+          }
         </Card>
     );
   }
@@ -75,11 +74,11 @@ class Food extends React.Component {
 Food.propTypes = {
   food: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
-  user: PropTypes.string,
+  currentUser: PropTypes.string,
 };
 
 const FoodContainer = withTracker(() => ({
-  user: Meteor.user() ? Meteor.user().username : '',
+  currentUser: Meteor.user() ? Meteor.user().username : '',
 }))(Food);
 
 export default withRouter(FoodContainer);

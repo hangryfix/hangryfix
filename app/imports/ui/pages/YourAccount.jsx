@@ -21,7 +21,7 @@ class YourAccount extends React.Component {
             {this.props.foods.map((food, index) => <Food
                 key={index}
                 food={food}
-                review={this.props.reviews.filter(review => (review.foodId === food._id))}
+                reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
             />)}
           </Card.Group>
         </Tab.Pane> },
@@ -30,7 +30,7 @@ class YourAccount extends React.Component {
             {this.props.foods.map((food, index) => <Food
                 key={index}
                 food={food}
-                review={this.props.reviews.filter(review => (review.foodId === food._id))}
+                reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
             />)}          </Card.Group>
         </Tab.Pane> },
       { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
@@ -38,7 +38,7 @@ class YourAccount extends React.Component {
             {this.props.foods.map((food, index) => <Food
                 key={index}
                 food={food}
-                review={this.props.reviews.filter(review => (review.foodId === food._id))}
+                reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
             />)}
           </Card.Group>
         </Tab.Pane> },
