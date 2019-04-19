@@ -4,15 +4,15 @@ import { UserInfo } from '../../api/user-info/user-info';
 
 /** Initialize the database with a default data document. */
 function addData(data) {
-  console.log(`  Adding: ${data.name} (${data.owner})`);
+  console.log(`  Adding: ${data.firstName} (${data.username})`);
   UserInfo.insert(data);
 }
 
 /** Initialize the collection if empty. */
 if (UserInfo.find().count() === 0) {
   if (Meteor.settings.defaultAccounts) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.map(data => addData(data));
+    console.log('Creating default user info.');
+    Meteor.settings.defaultAccounts.map(data => addData(data));
   }
 }
 

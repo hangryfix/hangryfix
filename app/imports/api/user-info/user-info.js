@@ -11,7 +11,8 @@ const UsersSchema = new SimpleSchema({
   lastName: String,
   username: String,
   email: String,
-  tags: Array
+  tags: Array,
+  'tags.$': String
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

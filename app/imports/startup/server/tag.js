@@ -11,7 +11,7 @@ function addData(data) {
 /** Initialize the collection if empty. */
 if (Tags.find().count() === 0) {
   if (Meteor.settings.defaultTags) {
-    console.log('Creating default food.');
+    console.log('Creating default tags.');
     Meteor.settings.defaultTags.map(data => addData(data));
   }
 }

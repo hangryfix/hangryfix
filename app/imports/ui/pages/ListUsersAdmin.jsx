@@ -2,6 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Table, Header, Loader, Image, Search, Dropdown, Rating, Grid, Segment, List, Divider, Button } from 'semantic-ui-react';
 import { Foods } from '/imports/api/food/food';
+import { UserInfo } from '../../api/user-info/user-info';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
