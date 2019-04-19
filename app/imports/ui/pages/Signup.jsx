@@ -2,11 +2,14 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
+import { Tags } from '../../api/tag/tag';
+import { withTracker } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
 
 /**
  * Signup component is similar to signin component, but we attempt to create a new user instead.
  */
-export default class Signup extends React.Component {
+class Signup extends React.Component {
   /** Initialize state fields. */
   constructor(props) {
     super(props);
@@ -43,33 +46,10 @@ export default class Signup extends React.Component {
     if (this.state.redirectToHome) {
       return <Redirect to={from}/>;
     }
-    const tags = [
-      {
-        key: 'pizza',
-        text: 'pizza',
-        value: 'pizza',
-      },
-      {
-        key: 'poke',
-        text: 'poke',
-        value: 'poke',
-      },
-      {
-        key: 'chinese',
-        text: 'chinese',
-        value: 'chinese',
-      },
-      {
-        key: 'nachos',
-        text: 'nachos',
-        value: 'nachos',
-      },
-      {
-        key: 'tacos',
-        text: 'tacos',
-        value: 'tacos',
-      },
-    ];
+    let tagOptions = this.props.tag.map((tag) => {
+      return {key: tag.id, text: tag.name, value: tag.name};
+    });
+
     return (
         <div className='backgroundDef'>
         <Container className='register'>
@@ -125,7 +105,7 @@ export default class Signup extends React.Component {
                                className='tagDropdown'
                                label='Favorite Foods'
                                name="tags"
-                               options={tags}
+                               options={tagOptions}
                                placeholder='Get started with food tags!'
                                type="array"
                                onChange={this.handleChange}/>
@@ -151,3 +131,18 @@ export default class Signup extends React.Component {
     );
   }
 }
+
+/** Require an array of Tags documents in the props. */
+Signup.propTypes = {
+  tag: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
+};
+
+export default withTracker(() => {
+  // Get access to Tags documents.
+  const subscription = Meteor.subscribe('Tags');
+  return {
+    tag: Tags.find({}).fetch(),
+    ready: subscription.ready(),
+  };
+})(Signup);

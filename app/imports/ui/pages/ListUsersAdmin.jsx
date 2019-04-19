@@ -124,10 +124,12 @@ ListUsersAdmin.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to Food and User documents.
   const subscription = Meteor.subscribe('FoodAdmin');
+  const subscription2 = Meteor.subscribe('UserAdmin');
   return {
     foods: Foods.find({}).fetch(),
-    ready: subscription.ready(),
+    user: UserInfo.find({}).fetch(),
+    ready: (subscription.ready() && subscription2.ready()),
   };
 })(ListUsersAdmin);

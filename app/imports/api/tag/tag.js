@@ -12,7 +12,7 @@ const TagSchema = new SimpleSchema({
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
-Foods.attachSchema(TagSchema);
+Tags.attachSchema(TagSchema);
 
 /** Make the collection and schema available to other code. */
 export { Tags, TagSchema };
