@@ -2,6 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Table, Header, Loader, Image, Search, Dropdown, Rating, Grid, Segment, List, Divider, Button } from 'semantic-ui-react';
 import { Foods } from '/imports/api/food/food';
+import { UserInfo } from '../../api/user-info/user-info';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
@@ -124,10 +125,12 @@ ListUsersAdmin.propTypes = {
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
-  // Get access to Stuff documents.
+  // Get access to Food and User documents.
   const subscription = Meteor.subscribe('FoodAdmin');
+  const subscription2 = Meteor.subscribe('UserAdmin');
   return {
     foods: Foods.find({}).fetch(),
-    ready: subscription.ready(),
+    user: UserInfo.find({}).fetch(),
+    ready: (subscription.ready() && subscription2.ready()),
   };
 })(ListUsersAdmin);

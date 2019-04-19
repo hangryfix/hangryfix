@@ -6,7 +6,7 @@
       "username": "adminJo",
       "email": "admin@foo.com",
       "password": "changeme",
-      "tags": "pizza, tacos",
+      "tags": ["pizza", "tacos"],
       "role": "admin"
     },
     {
@@ -15,33 +15,7 @@
       "username": "JohnDoe",
       "email": "john@foo.com",
       "password": "changeme",
-      "tags": "pizza, tacos"
-    }
-  ],
-  "defaultData": [
-    {
-      "name": "Basket",
-      "quantity": 3,
-      "owner": "john@foo.com",
-      "condition": "excellent"
-    },
-    {
-      "name": "Bicycle",
-      "quantity": 2,
-      "owner": "john@foo.com",
-      "condition": "poor"
-    },
-    {
-      "name": "Banana",
-      "quantity": 2,
-      "owner": "admin@foo.com",
-      "condition": "good"
-    },
-    {
-      "name": "Boogie Board",
-      "quantity": 2,
-      "owner": "admin@foo.com",
-      "condition": "excellent"
+      "tags": ["pizza", "poke"]
     }
   ],
   "defaultFood": [
