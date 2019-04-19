@@ -17,7 +17,7 @@ class YourAccount extends React.Component {
   renderPage() {
     const panes = [
       { menuItem: 'Your Foods', render: () => <Tab.Pane fluid>
-          <Card.Group>
+          <Card.Group itemsPerRow={2}>
             {this.props.foods.map((food, index) => <Food
                 key={index}
                 food={food}
@@ -26,15 +26,10 @@ class YourAccount extends React.Component {
           </Card.Group>
         </Tab.Pane> },
       { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
-          <Card.Group>
-            {this.props.foods.map((food, index) => <Food
-                key={index}
-                food={food}
-                reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
-            />)}          </Card.Group>
+
         </Tab.Pane> },
       { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
-          <Card.Group>
+          <Card.Group itemsPerRow={2}>
             {this.props.foods.map((food, index) => <Food
                 key={index}
                 food={food}
@@ -45,7 +40,7 @@ class YourAccount extends React.Component {
     ];
 
     return (
-        <div className='search-sidebar' style={{ backgroundColor: '#338D33', minHeight: '600px' }}>
+        <div className='search-sidebar' style={{ backgroundColor: '#338D33', minHeight: '600px', paddingBottom: '60px' }}>
           <Grid>
             <Grid.Column width={4}>
               <SearchSidebar/>

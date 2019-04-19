@@ -14,11 +14,9 @@ class Food extends React.Component {
 
     if (this.props.reviews) {
       averageRating =
-          Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }))
+          Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
               / (this.props.reviews.length + 1));
     }
-
-    console.log(this.props.reviews);
 
     return (
         <Card>
@@ -32,13 +30,15 @@ class Food extends React.Component {
             <Image floated='left' style={{ width: '50%' }} src={this.props.food.image} />
             <Card.Header>
               {this.props.food.name}
-              {this.props.reviews ? (
+            </Card.Header>
+            <Card.Meta>
+              {this.props.reviews.filter(review => (review.foodId === this.props.food._id)) ? (
                   <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
                   'No ratings yet.'
               )
               }
-            </Card.Header>
+            </Card.Meta>
             <Card.Meta>
               {this.props.food.restaurant}
             </Card.Meta>
@@ -51,14 +51,11 @@ class Food extends React.Component {
             <Card.Description>
             </Card.Description>
           </Card.Content>
-          {this.props.reviews ? (
+          {this.props.reviews.filter(review => (review.foodId === this.props.food._id)) ? (
               <Card.Content>
                 {this.props.reviews.map((review, index) => <Review
                     key={index}
                     review={review}
-                    foodId={this.props.food._id}
-                    user={this.props.food.user}
-                    createdAt={new Date()}
                 />)}
               </Card.Content>
           ) : (
@@ -73,8 +70,8 @@ class Food extends React.Component {
 }
 Food.propTypes = {
   food: PropTypes.object.isRequired,
-  reviews: PropTypes.array.isRequired,
   currentUser: PropTypes.string,
+  reviews: PropTypes.array.isRequired,
 };
 
 const FoodContainer = withTracker(() => ({
