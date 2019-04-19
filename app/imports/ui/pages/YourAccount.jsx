@@ -8,29 +8,38 @@ import PropTypes from 'prop-types';
 import SearchSidebar from '../components/SearchSidebar';
 import Food from '../components/Food';
 
-
 class YourAccount extends React.Component {
 
   render() {
-    console.log(Meteor.username);
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
-
     const panes = [
       { menuItem: 'Your Foods', render: () => <Tab.Pane fluid>
           <Card.Group>
-            {this.props.foods.map((food, index) => <Food key={index} food={food} reviews={this.props.reviews} />)}
+            {this.props.foods.map((food, index) => <Food
+                key={index}
+                food={food}
+                review={this.props.reviews.filter(review => (review.foodId === food._id))}
+            />)}
           </Card.Group>
         </Tab.Pane> },
       { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
           <Card.Group>
-            {this.props.foods.map((food, index) => <Food key={index} food={food} />)}
-          </Card.Group>
+            {this.props.foods.map((food, index) => <Food
+                key={index}
+                food={food}
+                review={this.props.reviews.filter(review => (review.foodId === food._id))}
+            />)}          </Card.Group>
         </Tab.Pane> },
       { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
           <Card.Group>
+            {this.props.foods.map((food, index) => <Food
+                key={index}
+                food={food}
+                review={this.props.reviews.filter(review => (review.foodId === food._id))}
+            />)}
           </Card.Group>
         </Tab.Pane> },
     ];

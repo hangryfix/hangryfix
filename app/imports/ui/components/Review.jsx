@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Header, Feed, Button, Link, Rating } from 'semantic-ui-react';
+import { Header, Feed, Button, Rating } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
@@ -12,14 +11,14 @@ class Review extends React.Component {
           <Feed.Content>
             <Feed.Date content={this.props.review.createdAt.toLocaleDateString('en-US')} />
             <Feed.Summary>
-              <Header as="h4">Review from {this.props.review.user}</Header>
+              <Header as="h4">{this.props.review.user}</Header>
               <Rating icon='heart' defaultRating={this.props.review.rating} maxRating={5} size='huge' disabled/>
-              /* in AddFood: try access defaultRating field from Rating component and pass that number to the rating property*/
+              {this.props.review.review}
             </Feed.Summary>
           </Feed.Content>
-          { this.props.user ? (
+          { this.props.review.user === Meteor.user().username ? (
               <Feed.Extra>
-                <Button fluid onClick={<Link to={''}/>}>Edit Review</Button>
+                <Button>Edit Review</Button>
               </Feed.Extra>
           ) : ''
           }
@@ -30,11 +29,6 @@ class Review extends React.Component {
 
 Review.propTypes = {
   review: PropTypes.object.isRequired,
-  user: PropTypes.string,
 };
 
-const ReviewContainer = withTracker(() => ({
-  user: Meteor.user() ? Meteor.user().username : '',
-}))(Review);
-
-export default withRouter(ReviewContainer, Review);
+export default withRouter(Review);

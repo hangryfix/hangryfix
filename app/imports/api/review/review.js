@@ -10,6 +10,7 @@ const ReviewSchema = new SimpleSchema({
   review: String,
   rating: Number,
   user: String,
+  foodId: String,
   createdAt: Date,
 }, { tracker: Tracker });
 

@@ -20,7 +20,7 @@ if (Foods.find().count() === 0) {
 Meteor.publish('Foods', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return Foods.find({ owner: username });
+    return Foods.find({ user: username });
   }
   return this.ready();
 });

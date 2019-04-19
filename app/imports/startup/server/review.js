@@ -5,7 +5,7 @@ import { Reviews } from '../../api/review/review.js';
 Meteor.publish('Reviews', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return Reviews.find({ owner: username });
+    return Reviews.find({ user: username });
   }
   return this.ready();
 });
