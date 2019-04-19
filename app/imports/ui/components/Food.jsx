@@ -12,6 +12,12 @@ class Food extends React.Component {
 
     let averageRating = '';
 
+    if (this.props.reviews) {
+      averageRating =
+          Math.round(_.reduce(this.props.food.reviews, function (memo, review) { return memo + review.rating; })
+              / this.props.food.reviews.length);
+    }
+
     return (
         <Card>
           { this.props.user ? (
@@ -22,7 +28,17 @@ class Food extends React.Component {
           }
           <Card.Content>
             <Image floated='left' style={{ width: '50%' }} src={this.props.food.image} />
-            <Card.Header>{this.props.food.name}</Card.Header>
+            <Card.Header>
+              {this.props.food.name}
+              {this.props.reviews ? (
+                  <Rating icon="heart" defaultRating={averageRating} maxRating={5}/>
+              ) : (
+                  <Feed>
+                    No ratings yet.
+                  </Feed>
+              )
+              }
+            </Card.Header>
             <Card.Meta>
               {this.props.food.restaurant}
             </Card.Meta>
@@ -36,14 +52,21 @@ class Food extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
-            <Feed>
-              {this.props.reviews.map((review, index) => <Review
-                  key={index}
-                  review={review}
-                  foodId={this.props.food._id}
-                  user={this.props.food.user}
-              />)}
-            </Feed>
+            {this.props.reviews ? (
+                <Feed>
+                  {this.props.reviews.map((review, index) => <Review
+                      key={index}
+                      review={review}
+                      foodId={this.props.food._id}
+                      user={this.props.food.user}
+                  />)}
+                </Feed>
+            ) : (
+                <Feed>
+                  No reviews yet.
+                </Feed>
+            )
+            }
           </Card.Content>
         </Card>
     );
