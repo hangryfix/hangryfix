@@ -16,11 +16,9 @@ if (Foods.find().count() === 0) {
   }
 }
 
-/** This subscription publishes only the documents associated with the logged in user */
 Meteor.publish('Foods', function publish() {
   if (this.userId) {
-    const username = Meteor.users.findOne(this.userId).username;
-    return Foods.find({ user: username });
+    return Foods.find();
   }
   return this.ready();
 });
