@@ -13,6 +13,7 @@ const FoodsSchema = new SimpleSchema({
   price: Number,
   image: String,
   owner: String,
+  timestamp: Date,
   description: String,
   tags: Array,
   'tags.$': String

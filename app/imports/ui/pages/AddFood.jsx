@@ -1,11 +1,12 @@
 import React from 'react';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
-import { Foods } from '/imports/api/food/food';
+import { Foods, FoodSchema } from '/imports/api/food/food';
 import { Tags } from '/imports/api/tag/tag';
 import { Container, Form, Button, TextArea, Header, Grid, Select, Loader } from 'semantic-ui-react';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 
 /** Renders the Page for adding a document. */
 class AddFood extends React.Component {
@@ -13,7 +14,10 @@ class AddFood extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
+    this.state = { image: '', name: '', restaurant: '', category: '', tags: [], price: 0, description: '' };
     this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeDropdown = this.handleChangeDropdown.bind(this);
     this.insertCallback = this.insertCallback.bind(this);
     this.formRef = null;
   }
@@ -28,19 +32,44 @@ class AddFood extends React.Component {
     }
   }
 
+  handleChange(event, type) {
+    let s = {};
+    s[type] = event.target.value;
+    this.setState(s);
+  }
+
+  handleChangeDropdown(e, { value, name }) {
+    let s = {};
+    s[name] = value;
+    console.log(value + ' ' + name);
+    this.setState(s);
+  }
+
   handleClick() {
     alert('File Upload not currently supported.');
   }
 
   /** On submit, insert the data. */
-  submit(data) {
-    const { name, quantity, condition } = data;
-    Foods.insert({ name, quantity, condition }, this.insertCallback);
+  submit() {
+    console.log(this.state);
+    Foods.insert({
+      image: 'IMAGE NOT SUPPORTED',
+      name: this.state.name,
+      restaurant: this.state.restaurant,
+      tags: this.state.tags,
+      timestamp: Date(),
+      price: this.state.price,
+      category: this.state.category,
+      description: this.state.description,
+      owner: 'OWNER NOT SUPPORTED',
+    }, this.insertCallback);
+
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+    return (this.props.restaurantsReady && this.props.tagsReady && this.props.categoriesReady) ? this.renderPage() :
+        <Loader active>Getting data</Loader>;
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
@@ -50,8 +79,14 @@ class AddFood extends React.Component {
       return { key: restaurant.id, text: restaurant.name, value: restaurant.name };
     });
 
-    let tagOptions = this.props.tags.map((tag) => {
+    let tags = _.where(this.props.tags, { type: 'ingredient' });
+    let tagOptions = tags.map((tag) => {
       return { key: tag.id, text: tag.name, value: tag.name };
+    });
+
+    let categories = _.where(this.props.tags, { type: 'cuisine' });
+    let categoryOptions = categories.map((category) => {
+      return { key: category.id, text: category.name, value: category.name };
     });
 
     return (
@@ -74,12 +109,15 @@ class AddFood extends React.Component {
                 />
               </Grid.Column>
               <Grid.Column width={13}>
-                <Form>
+                <Form onSubmit={this.submit}>
                   <Form.Group widths='equal'>
                     <Form.Input
                         fluid label='Food Name'
                         placeholder='Food Name'
                         name='name'
+                        onChange={(event) => {
+                          this.handleChange(event, "name")
+                        }}
                     />
                     <Form.Field
                         control={Select}
@@ -87,27 +125,39 @@ class AddFood extends React.Component {
                         options={restaurantOptions}
                         placeholder='Choose a Restaurant'
                         name='restaurant'
+                        onChange={this.handleChangeDropdown}
                     />
                   </Form.Group>
                   <Form.Group widths='equal'>
                     <Form.Field
                         control={Select}
-                        label='Tags'
-                        options={tagOptions}
-                        placeholder='Select Tags'
-                        name='tags'
+                        label='Category'
+                        options={categoryOptions}
+                        placeholder='Choose a Category...'
+                        name='category'
+                        search='true'
+                        onChange={ this.handleChangeDropdown }
                     />
-                    <Form.Field
-                        control={Select}
-                        label='Restaurant'
-                        options={restaurantOptions}
-                        placeholder='Choose a Restaurant'
-                        name='restaurant'
-                    />
+                    <Form.Field>
+                      <Form.Field
+                          control={Select}
+                          label='Tags'
+                          options={tagOptions}
+                          placeholder='Select Tags...'
+                          name='tags'
+                          multiple='true'
+                          search='true'
+                          onChange={ this.handleChangeDropdown }
+                      />
+                    </Form.Field>
+
                     <Form.Input
-                        fluid label='Cost'
-                        placeholder='Cost'
-                        name='cost'
+                        fluid label='Price'
+                        placeholder='Price'
+                        name='price'
+                        onChange={(event) => {
+                          this.handleChange(event, "price")
+                        }}
                     />
                   </Form.Group>
                   <Form.Field
@@ -116,6 +166,9 @@ class AddFood extends React.Component {
                       label='Description'
                       placeholder='Description'
                       name='description'
+                      onChange={(event) => {
+                        this.handleChange(event, "description")
+                      }}
                   />
                   <Form.Group>
                     <Form.Field
@@ -142,16 +195,26 @@ class AddFood extends React.Component {
 AddFood.propTypes = {
   restaurants: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
-  ready: PropTypes.bool.isRequired,
+  categories: PropTypes.array.isRequired,
+  restaurantsReady: PropTypes.bool.isRequired,
+  tagsReady: PropTypes.bool.isRequired,
+  categoriesReady: PropTypes.bool.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
+
   // Get access to Stuff documents.
-  const subscription = Meteor.subscribe('Restaurant');
+  const restaurantSubscription = Meteor.subscribe('Restaurant');
+  const tagSubscription = Meteor.subscribe('Tag');
+  const categorySubscription = Meteor.subscribe('Category');
+
   return {
     restaurants: Restaurants.find({}).fetch(),
     tags: Tags.find({}).fetch(),
-    ready: subscription.ready(),
+    categories: Tags.find({}).fetch(),
+    restaurantsReady: restaurantSubscription.ready(),
+    tagsReady: tagSubscription.ready(),
+    categoriesReady: categorySubscription.ready(),
   };
 })(AddFood);
