@@ -15,7 +15,7 @@ const FoodsSchema = new SimpleSchema({
   owner: String,
   description: String,
   tags: Array,
-  'tags.$': String
+  'tags.$': String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
