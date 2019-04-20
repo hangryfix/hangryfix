@@ -32,7 +32,7 @@ class Food extends React.Component {
               {this.props.food.name}
             </Card.Header>
             <Card.Meta style={{ paddingBottom: '30px' }}>
-              {this.props.reviews ? (
+              {this.props.reviews.length > 0 ? (
                   <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
                   'No ratings yet.'
@@ -55,19 +55,17 @@ class Food extends React.Component {
               {this.props.food.description}
             </Card.Description>
           </Card.Content>
-          {this.props.reviews ? (
-              <Card.Content>
-                {this.props.reviews.map((review, index) => <Review
-                    key={index}
-                    review={review}
-                />)}
-              </Card.Content>
-          ) : (
-              <Card.Content>
-                No reviews yet.
-              </Card.Content>
-          )
-          }
+          <Card.Content>
+            <Card.Header style={{ fontSize: '18px' }}>
+              {this.props.reviews.length} Reviews and Ratings
+            </Card.Header>
+          </Card.Content>
+          <Card.Content>
+            {this.props.reviews.map((review, index) => <Review
+                key={index}
+                review={review}
+            />)}
+          </Card.Content>
         </Card>
     );
   }
