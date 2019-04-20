@@ -20,7 +20,7 @@ if (UserInfo.find().count() === 0) {
 Meteor.publish('UserInfo', function publish() {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return UserInfo.find({ owner: username });
+    return UserInfo.find({ username: username });
   }
   return this.ready();
 });

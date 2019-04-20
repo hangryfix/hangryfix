@@ -18,8 +18,6 @@ class Food extends React.Component {
               / (this.props.reviews.length));
     }
 
-    console.log(this.props.food.tags[0].name);
-
     return (
         <Card>
           { this.props.currentUser ? (
