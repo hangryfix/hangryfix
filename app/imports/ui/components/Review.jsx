@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Card, Button, Rating } from 'semantic-ui-react';
+import { Card, Button, Rating, Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
@@ -9,8 +9,14 @@ class Review extends React.Component {
     return (
         <Card fluid>
           <Card.Content>
-            <Card.Header>{this.props.review.user}</Card.Header>
-            <Card.Meta><Rating icon='heart' defaultRating={this.props.review.rating} maxRating={5} size='medium' disabled/></Card.Meta>
+            <Card.Header style={{ fontSize: '16px' }}>
+              <Rating icon='heart' defaultRating={this.props.review.rating} maxRating={5} size='medium' disabled style={{ marginRight: '5px' }}/>
+              {this.props.review.title}
+            </Card.Header>
+            <Card.Meta>
+              <Icon name="user" style={{ marginRight: '5px' }} />
+              {this.props.review.user} says . . .
+            </Card.Meta>
             <Card.Description>{this.props.review.review}</Card.Description>
           </Card.Content>
           <Card.Content extra textAlign="right">
