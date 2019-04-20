@@ -17,7 +17,7 @@ if (Foods.find().count() === 0) {
 }
 
 /** This subscription publishes only the documents associated with the logged in user */
-Meteor.publish('Food', function publish() {
+Meteor.publish('Foods', function publish() {
     return Foods.find();
 });
 
