@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -56,15 +56,25 @@ class Food extends React.Component {
             </Card.Description>
           </Card.Content>
           <Card.Content>
-            <Card.Header style={{ fontSize: '18px' }}>
-              {this.props.reviews.length} Reviews and Ratings
-            </Card.Header>
-          </Card.Content>
-          <Card.Content>
-            {this.props.reviews.map((review, index) => <Review
-                key={index}
-                review={review}
-            />)}
+            {this.props.reviews.length > 0 ? (
+                <Button fluid>
+                  <Dropdown scrolling fluid
+                            icon={''}
+                            text={`Show ${this.props.reviews.length} ratings and reviews`}
+                            style={{ fontSize: '18px', textAlign: 'center' }}
+                  >
+                    <Dropdown.Menu>
+                      {this.props.reviews.map((review, index) => <Review
+                          key={index}
+                          review={review}
+                      />)}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Button>
+            ) : (
+                <Card.Header style={{ fontSize: '18px' }}>No reviews yet.</Card.Header>
+            )
+            }
           </Card.Content>
         </Card>
     );
