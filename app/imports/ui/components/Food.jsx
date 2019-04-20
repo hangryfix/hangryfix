@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Dropdown } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Dropdown, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -18,7 +18,7 @@ class Food extends React.Component {
               / (this.props.reviews.length));
     }
 
-    console.log(averageRating);
+    console.log(this.props.food.tags[0].name);
 
     return (
         <Card>
@@ -56,6 +56,11 @@ class Food extends React.Component {
             <Card.Description>
               {this.props.food.description}
             </Card.Description>
+          </Card.Content>
+          <Card.Content>
+            {this.props.food.tags.map((tag, index) => <Label tag
+                                                             style={{ backgroundColor: '#338D33', color: 'white' }}
+                                                             key={index}>{tag.name}</Label>)}
           </Card.Content>
           <Card.Content>
             {this.props.reviews.length > 0 ? (

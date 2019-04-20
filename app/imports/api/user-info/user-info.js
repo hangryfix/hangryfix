@@ -12,7 +12,7 @@ const UsersSchema = new SimpleSchema({
   username: String,
   email: String,
   tags: Array,
-  'tags.$': String
+  'tags.$': String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
