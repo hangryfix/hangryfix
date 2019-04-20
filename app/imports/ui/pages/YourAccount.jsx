@@ -54,11 +54,6 @@ class YourAccount extends React.Component {
             {filteredFoods()}
           </Card.Group>
         </Tab.Pane> },
-      { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
-          <Card.Group itemsPerRow={2}>
-            {}
-          </Card.Group>
-        </Tab.Pane> },
     ];
 
     return (

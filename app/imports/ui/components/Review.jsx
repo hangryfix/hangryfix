@@ -15,10 +15,10 @@ class Review extends React.Component {
               {this.props.review.title}
             </Card.Header>
             <Card.Meta>
-              <Icon name="user" style={{ marginRight: '5px' }} />
+              <Icon name="user" style={{ marginRight: '5px', marginTop: '5px' }} />
               {this.props.review.user} says . . .
             </Card.Meta>
-            <Card.Description>{this.props.review.review}</Card.Description>
+            <Card.Description style={{ marginTop: '12px' }}>{this.props.review.review}</Card.Description>
           </Card.Content>
           <Card.Content extra textAlign="right">
             Last updated: {this.props.review.createdAt}
