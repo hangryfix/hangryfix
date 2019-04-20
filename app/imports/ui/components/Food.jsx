@@ -15,8 +15,10 @@ class Food extends React.Component {
     if (this.props.reviews) {
       averageRating =
           Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
-              / (this.props.reviews.length + 1));
+              / (this.props.reviews.length));
     }
+
+    console.log(averageRating);
 
     return (
         <Card>
