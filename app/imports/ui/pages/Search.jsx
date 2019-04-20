@@ -7,7 +7,7 @@ class Landing extends React.Component {
   render() {
     const searchStyle = { padding: '20px 0 0 0' };
     return (
-        <Grid>
+        <Grid style={{ paddingBottom: '30px' }}>
           <Grid.Row>
             <Grid.Column width={4}>
               <SearchSidebar/>
