@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Card, Button, Rating, Icon } from 'semantic-ui-react';
+import { Card, Button, Rating, Icon, Dropdown } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
   render() {
     return (
+        <Dropdown.Item>
         <Card fluid>
           <Card.Content>
             <Card.Header style={{ fontSize: '16px' }}>
@@ -20,13 +21,14 @@ class Review extends React.Component {
             <Card.Description>{this.props.review.review}</Card.Description>
           </Card.Content>
           <Card.Content extra textAlign="right">
-            Last Updated: {this.props.review.createdAt}
+            Last updated: {this.props.review.createdAt}
           </Card.Content>
           { this.props.review.user === Meteor.user().username ? (
               <Button>Edit Review</Button>
           ) : ''
           }
         </Card>
+        </Dropdown.Item>
     );
   }
 }

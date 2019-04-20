@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -15,8 +15,10 @@ class Food extends React.Component {
     if (this.props.reviews) {
       averageRating =
           Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
-              / (this.props.reviews.length + 1));
+              / (this.props.reviews.length));
     }
+
+    console.log(averageRating);
 
     return (
         <Card>
@@ -32,7 +34,7 @@ class Food extends React.Component {
               {this.props.food.name}
             </Card.Header>
             <Card.Meta style={{ paddingBottom: '30px' }}>
-              {this.props.reviews ? (
+              {this.props.reviews.length > 0 ? (
                   <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
                   'No ratings yet.'
@@ -55,19 +57,27 @@ class Food extends React.Component {
               {this.props.food.description}
             </Card.Description>
           </Card.Content>
-          {this.props.reviews ? (
-              <Card.Content>
-                {this.props.reviews.map((review, index) => <Review
-                    key={index}
-                    review={review}
-                />)}
-              </Card.Content>
-          ) : (
-              <Card.Content>
-                No reviews yet.
-              </Card.Content>
-          )
-          }
+          <Card.Content>
+            {this.props.reviews.length > 0 ? (
+                <Button fluid>
+                  <Dropdown scrolling fluid
+                            icon={''}
+                            text={`Show ${this.props.reviews.length} ratings and reviews`}
+                            style={{ fontSize: '18px', textAlign: 'center' }}
+                  >
+                    <Dropdown.Menu>
+                      {this.props.reviews.map((review, index) => <Review
+                          key={index}
+                          review={review}
+                      />)}
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Button>
+            ) : (
+                <Card.Header style={{ fontSize: '18px' }}>No reviews yet.</Card.Header>
+            )
+            }
+          </Card.Content>
         </Card>
     );
   }
