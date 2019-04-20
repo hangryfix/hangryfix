@@ -17,7 +17,11 @@ if (Tags.find().count() === 0) {
 }
 
 /** This subscription publishes only the documents associated with the logged in user */
-Meteor.publish('Tags', function publish() {
-    return Tags.find();
+Meteor.publish('Tag', function publish() {
+    return Tags.find({ type: 'ingredient' });
 });
 
+/** This subscription publishes only the documents associated with the logged in user */
+Meteor.publish('Category', function publish() {
+  return Tags.find({ type: 'cuisine' });
+});

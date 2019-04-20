@@ -21,38 +21,7 @@
 
 
   "defaultFood": [
-    {
-      "name": "Froyo",
-      "restaurant": "Tutti Frutti",
-      "price": 5,
-      "image": "https://i.ibb.co/r2Cp0TK/froyo.jpg",
-      "owner": "john@foo.com",
-      "category": "Test Category",
-      "description": "So good.",
-      "tags": ["test tag", "test tag"]
-    },
-    {
-      "name": "Kalua Pig Nachos",
-      "restaurant": "Bay View Bar and Bistro",
-      "hours": "M-Su 11am-7pm",
-      "price": 13,
-      "image": "https://i.ibb.co/8cJFSLv/kalua-nachos.jpg",
-      "owner": "john@foo.com",
-      "category": "Test Category",
-      "description": "So good.",
-      "tags": ["test tag", "test tag"]
-    },
-    {
-      "name": "Okonomiyaki",
-      "restaurant": "Waikiki Yokocho",
-      "hours": "M-Su 11am-12am",
-      "price": 17,
-      "image": "https://i.ibb.co/n05BzTg/okonomiyaki.jpg",
-      "owner": "john@foo.com",
-      "category": "Test Category",
-      "description": "So good.",
-      "tags": ["test tag", "test tag"]
-    }
+
   ],
 
   "defaultReviews": [
@@ -109,6 +78,22 @@
     {
       "name": "Local",
       "type": "cuisine"
+    },
+    {
+      "name": "Chicken",
+      "type": "ingredient"
+    },
+    {
+      "name": "Rice",
+      "type": "ingredient"
+    },
+    {
+      "name": "Shrimp",
+      "type": "ingredient"
+    },
+    {
+      "name": "Beef",
+      "type": "ingredient"
     }
   ],
   "defaultRestaurants": [
