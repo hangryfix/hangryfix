@@ -60,7 +60,9 @@ class Food extends React.Component {
           <Card.Content>
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
-                                                             key={index}>{tag.name}</Label>)}
+                                                             key={index}>
+              {tag.name}
+            </Label>)}
           </Card.Content>
           <Card.Content>
             {this.props.reviews.length > 0 ? (
