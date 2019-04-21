@@ -135,7 +135,7 @@ class AddFood extends React.Component {
                         options={categoryOptions}
                         placeholder='Choose a Category...'
                         name='category'
-                        search='true'
+                        search={ true }
                         onChange={ this.handleChangeDropdown }
                     />
                     <Form.Field>
@@ -145,8 +145,8 @@ class AddFood extends React.Component {
                           options={tagOptions}
                           placeholder='Select Tags...'
                           name='tags'
-                          multiple='true'
-                          search='true'
+                          multiple={ true }
+                          search={ true }
                           onChange={ this.handleChangeDropdown }
                       />
                     </Form.Field>

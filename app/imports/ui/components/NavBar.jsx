@@ -46,7 +46,7 @@ class NavBar extends React.Component {
                     </Menu.Item>,
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search">
                       <Input
-                          class='color-primary-0'
+                          className='color-primary-0'
                           action={{ color: 'green', content: 'Search' }}
                           actionPosition='right'
                           icon='search'
