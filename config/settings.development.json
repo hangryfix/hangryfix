@@ -99,51 +99,45 @@
   "defaultRestaurants": [
     {
       "name": "Panda Express",
-      "address": "2560 McCarthy mall, Honolulu, HI 96822",
+      "address": "2560 McCarthy mall, Honolulu HI, 96822",
       "hours": [
-        "11:30",
-        "9:00",
-        "11:30",
-        "9:00",
-        "10:00",
-        "8:00",
-        "10:00",
-        "8:00",
-        "11:30",
-        "9:00",
-        "10:00",
-        "8:00",
-        "10:00",
-        "8:00"
-        ]
+        "11:30 am",
+        "9:00 pm",
+        "11:30 am",
+        "9:00 pm",
+        "10:00 am",
+        "8:00 pm",
+        "10:00 am",
+        "8:00 pm",
+        "11:30 am",
+        "9:00 pm",
+        "10:00 am",
+        "8:00 pm",
+        "10:00 am",
+        "8:00 pm"
+      ]
     },
-        {
-          "name": "Da Spot Health Food & Juices",
-          "address": "2469 S King St, Honolulu, HI 96826",
-          "hours": [
-            "11:30",
-            "9:00",
-            "11:30",
-            "9:00",
-            "10:00",
-            "8:00",
-            "10:00",
-            "8:00",
-            "11:30",
-            "9:00",
-            "10:00",
-            "8:00",
-            "10:00",
-            "8:00"
-          ]
-        },
     {
-      "name": "Add A New Restaurant",
-      "address": "2469 S King St, Honolulu, HI 96826",
-      "hours": []
+      "name": "Da Spot Health Food & Juices",
+      "address": "2469 S King St, Honolulu HI, 96826",
+      "hours": [
+        "11:30 am",
+        "9:00 pm",
+        "11:30 am",
+        "9:00 pm",
+        "10:00 am",
+        "8:00 pm",
+        "10:00 am",
+        "8:00 pm",
+        "11:30 am",
+        "9:00 pm",
+        "10:00 am",
+        "8:00 pm",
+        "10:00 am",
+        "8:00 pm"
+      ]
     }
   ],
-
   "tags": [
     {
       "key": "pizza",

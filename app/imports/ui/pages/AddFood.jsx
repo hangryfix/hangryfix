@@ -2,11 +2,12 @@ import React from 'react';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { Foods, FoodSchema } from '/imports/api/food/food';
 import { Tags } from '/imports/api/tag/tag';
-import { Container, Form, Button, TextArea, Header, Grid, Select, Loader } from 'semantic-ui-react';
+import { Container, Form, Button, TextArea, Header, Grid, Select, Loader, Popup } from 'semantic-ui-react';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
+import AddRestaurantForm from '../components/AddRestaurantForm';
 
 /** Renders the Page for adding a document. */
 class AddFood extends React.Component {
@@ -19,7 +20,6 @@ class AddFood extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDropdown = this.handleChangeDropdown.bind(this);
     this.insertCallback = this.insertCallback.bind(this);
-    this.formRef = null;
   }
 
   /** Notify the user of the results of the submit. If successful, clear the form. */
@@ -41,7 +41,6 @@ class AddFood extends React.Component {
   handleChangeDropdown(e, { value, name }) {
     let s = {};
     s[name] = value;
-    console.log(value + ' ' + name);
     this.setState(s);
   }
 
@@ -51,7 +50,6 @@ class AddFood extends React.Component {
 
   /** On submit, insert the data. */
   submit() {
-    console.log(this.state);
     Foods.insert({
       image: 'IMAGE NOT SUPPORTED',
       name: this.state.name,
@@ -109,10 +107,11 @@ class AddFood extends React.Component {
                 />
               </Grid.Column>
               <Grid.Column width={13}>
-                <Form onSubmit={this.submit}>
+                <Form>
                   <Form.Group widths='equal'>
                     <Form.Input
-                        fluid label='Food Name'
+                        fluid
+                        label='Food Name'
                         placeholder='Food Name'
                         name='name'
                         onChange={(event) => {
@@ -127,6 +126,16 @@ class AddFood extends React.Component {
                         name='restaurant'
                         onChange={this.handleChangeDropdown}
                     />
+                    <Form.Field>
+                      <Popup
+                        trigger={<Button color='green' icon='flask' content='Add A Restaurant'/>}
+                        content={ <AddRestaurantForm/> }
+                        position='bottom right'
+                        label='Your Restaurant Missing'
+                        on='click'
+                        style={{margin: '10px 0 0 0 '}}
+                    />
+                    </Form.Field>
                   </Form.Group>
                   <Form.Group widths='equal'>
                     <Form.Field
@@ -135,8 +144,8 @@ class AddFood extends React.Component {
                         options={categoryOptions}
                         placeholder='Choose a Category...'
                         name='category'
-                        search={ true }
-                        onChange={ this.handleChangeDropdown }
+                        search={true}
+                        onChange={this.handleChangeDropdown}
                     />
                     <Form.Field>
                       <Form.Field
@@ -145,14 +154,15 @@ class AddFood extends React.Component {
                           options={tagOptions}
                           placeholder='Select Tags...'
                           name='tags'
-                          multiple={ true }
-                          search={ true }
-                          onChange={ this.handleChangeDropdown }
+                          multiple={true}
+                          search={true}
+                          onChange={this.handleChangeDropdown}
                       />
                     </Form.Field>
 
                     <Form.Input
-                        fluid label='Price'
+                        fluid
+                        label='Price'
                         placeholder='Price'
                         name='price'
                         onChange={(event) => {
@@ -175,6 +185,7 @@ class AddFood extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Submit'
+                        onClick={ this.submit }
                     />
                     <Form.Field
                         id='form-button-control-public'
