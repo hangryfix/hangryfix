@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Card, Button, Rating, Icon, Dropdown } from 'semantic-ui-react';
+import { Card, Button, Rating, Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
   render() {
     return (
-        <Dropdown.Item>
         <Card fluid>
           <Card.Content>
             <Card.Header style={{ fontSize: '16px' }}>
@@ -28,7 +27,6 @@ class Review extends React.Component {
           ) : ''
           }
         </Card>
-        </Dropdown.Item>
     );
   }
 }
