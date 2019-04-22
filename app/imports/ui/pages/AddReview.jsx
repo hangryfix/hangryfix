@@ -1,12 +1,43 @@
 import React from 'react';
-import { Container, Form, Button, TextArea, Header, Grid, Rating } from 'semantic-ui-react';
+import { Container, Form, Button, TextArea, Header, Grid, Rating, Loader } from 'semantic-ui-react';
+import { Foods, FoodSchema } from '/imports/api/food/food';
 import { Bert } from 'meteor/themeteorchef:bert';
+import PropTypes from 'prop-types';
+import { withTracker, NavLink } from 'meteor/react-meteor-data';
 
 /** Renders the Page for adding a document. */
 class AddReview extends React.Component {
-  state = {}
 
-  handleChange = (e, { value }) => this.setState({ value })
+
+  /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
+  constructor(props) {
+    super(props);
+    this.state = { review: '', rating: -1 };
+    this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeRating = this.handleChangeRating.bind(this);
+    this.insertCallback = this.insertCallback.bind(this);
+  }
+
+  handleChange(event, type) {
+    let s = {};
+    s[type] = event.target.value;
+    this.setState(s);
+  }
+
+  handleChangeRating(e, { rating }) {
+    let s = {};
+    s['rating'] = rating;
+    this.setState(s);
+  }
+
+  submit() {
+    Foods.insert({
+      review: this.state.review,
+      rating: this.state.rating,
+      createdAt: Date(),
+    }, this.insertCallback);
+  }
 
   /** Notify the user of the results of the submit. If successful, clear the form. */
   insertCallback(error) {
@@ -18,8 +49,19 @@ class AddReview extends React.Component {
     }
   }
 
-  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
+    return (this.props.foodsReady) ? this.renderPage() :
+        <Loader active>Getting data</Loader>;
+  }
+
+  /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
+  renderPage() {
+    let stringURL = this.props.location.pathname;
+    let URLarray = stringURL.split('/:');
+    let id = URLarray[1];
+    let foodObj = this.props.foods.filter(food => (food._id === id));
+    foodObj = foodObj[0];
 
     return (
         <Container className='add-food'>
@@ -45,15 +87,21 @@ class AddReview extends React.Component {
                     <Grid.Row>
                       <Grid.Column width={5}>
                         <Header as='h3' content='Item Name'/>
-                        <p>Bacon Cheeseburger</p>
+                        <p>{ foodObj.name }</p>
                       </Grid.Column>
                       <Grid.Column width={5}>
                         <Header as='h3' content='Restaurant Name'/>
-                        <p>Mc Donald&rsquo;s</p>
+                        <p>{ foodObj.restaurant }</p>
                       </Grid.Column>
                       <Grid.Column width={6} textAlign='center'>
                         <Header as='h3' content='Add A Rating' textAlign='center'/>
-                        <Rating icon='heart' defaultRating={1} maxRating={5} size='huge'/>
+                        <Rating icon='heart'
+                                defaultRating={1}
+                                maxRating={5}
+                                size='huge'
+                                name='rating'
+                                onRate={this.handleChangeRating}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
@@ -62,12 +110,16 @@ class AddReview extends React.Component {
                       control={TextArea}
                       label='Review'
                       placeholder='Type your review...'
+                      onChange={(event) => {
+                        this.handleChange(event, "review")
+                      }}
                   />
                   <Form.Group>
                     <Form.Field
                         id='form-button-control-public'
                         control={Button}
                         content='Submit'
+                        onClick={this.submit}
                     />
                     <Form.Field
                         id='form-button-control-public'
@@ -84,4 +136,23 @@ class AddReview extends React.Component {
   }
 }
 
-export default AddReview;
+AddReview.propTypes = {
+  foods: PropTypes.array.isRequired,
+  foodsReady: PropTypes.bool.isRequired,
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  currentUser: PropTypes.string,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(() => {
+
+  // Get access to Stuff documents.
+  const foodSubscription = Meteor.subscribe('Foods');
+
+  return {
+    foods: Foods.find({}).fetch(),
+    foodsReady: foodSubscription.ready(),
+  };
+})(AddReview);

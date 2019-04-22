@@ -18,10 +18,12 @@ class Food extends React.Component {
               / (this.props.reviews.length));
     }
 
+    const path = `/addReview/:${this.props.food._id}`;
+
     return (
         <Card>
           { this.props.currentUser ? (
-              <Button as={ NavLink } activeClassName="active" exact to="/addReview" key="addReview">
+              <Button as={ NavLink } activeClassName="active" exact to={path} key="addReview">
                 Write a Review
               </Button>
           ) : (
