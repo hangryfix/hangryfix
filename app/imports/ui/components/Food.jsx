@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Dropdown, Label } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Modal, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -24,8 +24,16 @@ class Food extends React.Component {
               <Button as={ NavLink } activeClassName="active" exact to="/addReview" key="addReview">
                 Write a Review
               </Button>
-          ) : ''
-          }
+          ) : (
+              <Modal trigger={<Button>Write a Review</Button>}>
+                <Modal.Header>Sign In or Register</Modal.Header>
+                <Modal.Content>
+                  <Modal.Description>
+                    Please sign in to your account or register for an account before leaving a review.
+                  </Modal.Description>
+                </Modal.Content>
+              </Modal>
+          )}
           <Card.Content>
             <Image floated='left' style={{ width: '40%' }} src={this.props.food.image} />
             <Card.Header style={{ fontSize: '30px' }}>
@@ -64,20 +72,59 @@ class Food extends React.Component {
           </Card.Content>
           <Card.Content>
             {this.props.reviews.length > 0 ? (
-                <Button fluid>
-                  <Dropdown scrolling fluid
-                            icon={''}
-                            text={`Show ${this.props.reviews.length} ratings and reviews`}
-                            style={{ fontSize: '18px', textAlign: 'center' }}
-                  >
-                    <Dropdown.Menu>
-                      {this.props.reviews.map((review, index) => <Review
-                          key={index}
-                          review={review}
-                      />)}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </Button>
+                <Modal size='small' trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
+                  <Modal.Header>
+                    <Card fluid>
+                      <Card.Content>
+                        <Image floated='left' style={{ width: '30%' }} src={this.props.food.image} />
+                        <Card.Header style={{ fontSize: '30px' }}>
+                          {this.props.food.name}
+                        </Card.Header>
+                        <Card.Meta style={{ paddingBottom: '30px' }}>
+                          {this.props.reviews.length > 0 ? (
+                              <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
+                          ) : (
+                              'No ratings yet.'
+                          )
+                          }
+                        </Card.Meta>
+                        <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
+                          <Icon name="map marker alternate" style={{ marginRight: '5px' }}/>
+                          {this.props.food.restaurant}
+                        </Card.Meta>
+                        <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
+                          <Icon name="clock" style={{ marginRight: '5px' }} />
+                          {this.props.food.hours}
+                        </Card.Meta>
+                        <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
+                          <Icon name="dollar sign" />
+                          <Rating size="large"
+                                  icon="star"
+                                  defaultRating={this.props.food.price}
+                                  maxRating={5}
+                                  disabled/>
+                        </Card.Meta>
+                        <Card.Description>
+                          {this.props.food.description}
+                        </Card.Description>
+                      </Card.Content>
+                      <Card.Content>
+                        {this.props.food.tags.map((tag, index) => <
+                          Label tag
+                                style={{ backgroundColor: '#338D33', color: 'white' }}
+                                key={index}>
+                          {tag.name}
+                        </Label>)}
+                      </Card.Content>
+                    </Card>
+                  </Modal.Header>
+                  <Modal.Content scrolling>
+                    {this.props.reviews.map((review, index) => <Review
+                        key={index}
+                        review={review}
+                    />)}
+                  </Modal.Content>
+                </Modal>
             ) : (
                 <Card.Header style={{ fontSize: '18px' }}>No reviews yet.</Card.Header>
             )
