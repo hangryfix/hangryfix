@@ -15,7 +15,7 @@ class FoodRow extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick = () => Food.remove(this.props.contact._id, this.deleteCallback)
+  onClick = () => Foods.remove(this.props.food._id, this.deleteCallback)
 
   /** Notify the user of the results of the delete. */
   deleteCallback(error) {
