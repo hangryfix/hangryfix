@@ -63,7 +63,7 @@ class Landing2 extends React.Component {
               Our Mission here at hangryFIX is to help end hangriness one college student at a time.
               Are you hangry? Craving a particular type of food or specific food item, but dont know
             where to get it? HangryFIX is the app for you! Search by food genre or food name to find
-            the best, cheapest, or closest places to get that food to cure your hangriness NOW.</p>
+            the best, cheapest, or closest place to get that food to cure your hangriness NOW.</p>
                 </Grid.Column>
                 <Grid.Column>
                   <Image src="http://c3.thejournal.ie/media/2013/09/eating-chips-390x285.jpg"/>
@@ -77,8 +77,9 @@ class Landing2 extends React.Component {
                   <Grid.Column>
                     <Header as='h2' style={{color: '#045604'}}>Member Perks</Header>
                     <p>
-                      Help contribute to the cause by creating an account with us! As a member you will be able to add
-                      new foods, review foods, and look back at your past reviews so you can always find the name of
+                      Help contribute to the cause by creating an account with us! As a member you can help others with
+                      their hangry problems by adding new foods and reviewing foods. You can also look back at your
+                      past reviews so you can always find the name of
                       that one place you got that really good poke from that one time.  And of course, member accounts
                       are FREE.  So what are you waiting for?  Sign up to end hangriness now!
                     </p>
