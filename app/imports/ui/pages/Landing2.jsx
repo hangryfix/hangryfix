@@ -41,7 +41,7 @@ class Landing2 extends React.Component {
             </Grid>
           <Container style={{ paddingTop: '20px' }}>
             <Header as='h2' class='color-primary-3'>Recent Reviews</Header>
-            <Card.Group itemsPerRow={3}>
+            <Card.Group itemsPerRow={4}>
               {this.props.foods.map((food, index) => <Food
                   key={index}
                   food={food}
