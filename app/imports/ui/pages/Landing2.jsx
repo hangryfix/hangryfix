@@ -4,9 +4,11 @@ import { Header, Container, Grid, Image, Input, Card, Feed, Loader } from 'seman
 import Food from '../components/Food';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { withRouter, Link } from 'react-router-dom';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { _ } from 'underscore';
+import { Menu } from 'semantic-ui-react/dist/commonjs/collections/Menu';
 
 /** A component to render the landing page. */
 class Landing2 extends React.Component {
@@ -31,7 +33,7 @@ class Landing2 extends React.Component {
                 <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>
               </Grid.Column>
               <Grid.Column>
-                <Input
+                <Input as={ Link } activeClassName="active" exact to="/search" key="youraccount"
                     class='color-primary-0'
                     action={{ color: 'green', content: 'Search' }}
                     actionPosition='right'
