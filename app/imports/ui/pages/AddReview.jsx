@@ -1,9 +1,11 @@
 import React from 'react';
 import { Container, Form, Button, TextArea, Header, Grid, Rating, Loader } from 'semantic-ui-react';
-import { Foods, FoodSchema } from '/imports/api/food/food';
+import { Reviews, ReviewSchema } from '/imports/api/review/review';
+import { Foods } from '/imports/api/food/food';
 import { Bert } from 'meteor/themeteorchef:bert';
 import PropTypes from 'prop-types';
 import { withTracker, NavLink } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 
 /** Renders the Page for adding a document. */
 class AddReview extends React.Component {
@@ -31,11 +33,13 @@ class AddReview extends React.Component {
     this.setState(s);
   }
 
-  submit() {
-    Foods.insert({
+  submit(username, id) {
+    Reviews.insert({
       review: this.state.review,
       rating: this.state.rating,
+      foodId: id,
       createdAt: Date(),
+      user: username,
     }, this.insertCallback);
   }
 
@@ -119,7 +123,9 @@ class AddReview extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Submit'
-                        onClick={this.submit}
+                        onClick={ () => {
+                          this.submit(this.props.currentUser, id)
+                        } }
                     />
                     <Form.Field
                         id='form-button-control-public'
@@ -154,5 +160,6 @@ export default withTracker(() => {
   return {
     foods: Foods.find({}).fetch(),
     foodsReady: foodSubscription.ready(),
+    currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(AddReview);

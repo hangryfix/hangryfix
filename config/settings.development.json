@@ -20,47 +20,9 @@
   ],
 
 
-  "defaultFood": [
+  "defaultFood": [],
 
-  ],
-
-  "defaultReviews": [
-    {
-      "review": "Great variety of toppings and flavors!",
-      "rating": 5,
-      "user": "JohnDoe",
-      "foodId": "eGrehPg3tB3JhdP3N",
-      "createdAt": "4/18/2019"
-    },
-    {
-      "review": "Great!",
-      "rating": 3,
-      "user": "adminJo",
-      "foodId": "eGrehPg3tB3JhdP3N",
-      "createdAt": "4/18/2019"
-    },
-    {
-      "review": "Awesome!",
-      "rating": 4,
-      "user": "adminJo",
-      "foodId": "8cSo9JZjpotcigpBe",
-      "createdAt": "4/18/2019"
-    },
-    {
-      "review": "Awesome!",
-      "rating": 5,
-      "user": "adminJo",
-      "foodId": "fY3Rwg6LGrPhazaQJ",
-      "createdAt": "4/18/2019"
-    },
-    {
-      "review": "Best Okonomiyaki I ever ate!",
-      "rating": 5,
-      "user": "JohnDoe",
-      "foodId": "fY3Rwg6LGrPhazaQJ",
-      "createdAt": "4/18/2019"
-    }
-  ],
+  "defaultReviews": [],
 
   "defaultTags": [
     {

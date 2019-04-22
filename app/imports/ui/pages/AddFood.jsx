@@ -49,7 +49,7 @@ class AddFood extends React.Component {
   }
 
   /** On submit, insert the data. */
-  submit() {
+  submit(username) {
     Foods.insert({
       image: 'IMAGE NOT SUPPORTED',
       name: this.state.name,
@@ -59,7 +59,7 @@ class AddFood extends React.Component {
       price: this.state.price,
       category: this.state.category,
       description: this.state.description,
-      owner: 'OWNER NOT SUPPORTED',
+      owner: username,
     }, this.insertCallback);
 
   }
@@ -185,7 +185,9 @@ class AddFood extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Submit'
-                        onClick={ this.submit }
+                        onClick={ () => {
+                          this.submit(this.props.currentUser)
+                        } }
                     />
                     <Form.Field
                         id='form-button-control-public'
@@ -210,6 +212,7 @@ AddFood.propTypes = {
   restaurantsReady: PropTypes.bool.isRequired,
   tagsReady: PropTypes.bool.isRequired,
   categoriesReady: PropTypes.bool.isRequired,
+  currentUser: PropTypes.string,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -227,5 +230,6 @@ export default withTracker(() => {
     restaurantsReady: restaurantSubscription.ready(),
     tagsReady: tagSubscription.ready(),
     categoriesReady: categorySubscription.ready(),
+    currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(AddFood);
