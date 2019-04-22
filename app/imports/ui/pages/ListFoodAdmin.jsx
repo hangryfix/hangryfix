@@ -47,6 +47,8 @@ class ListFoodAdmin extends React.Component {
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
+
+              {/*Food Table*/}
               <Table celled>
                 <Table.Header>
                   <Table.Row>
