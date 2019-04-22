@@ -1,15 +1,24 @@
 import React from 'react';
-import { Header, Container, Grid, Image, Input, Card, Feed } from 'semantic-ui-react';
-import Food from './YourAccount';
+import { Meteor } from 'meteor/meteor';
+import { Header, Container, Grid, Image, Input, Card, Feed, Loader } from 'semantic-ui-react';
+import Food from '../components/Food';
 import PropTypes from 'prop-types';
-// import Food from '/imports/ui/components/Food';
-// import Foods from '../../api/food/food'
+import { withTracker } from 'meteor/react-meteor-data';
+import { Foods } from '/imports/api/food/food';
+import { Reviews } from '/imports/api/review/review';
+import { _ } from 'underscore';
 
 /** A component to render the landing page. */
 class Landing2 extends React.Component {
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  renderPage() {
+
     const searchStyle = {
       width: '80%',
+      height: '75px',
       color: '#045604',
     };
 
@@ -32,9 +41,16 @@ class Landing2 extends React.Component {
             </Grid>
           <Container style={{ paddingTop: '20px' }}>
             <Header as='h2' class='color-primary-3'>Recent Reviews</Header>
-            <Card.Group>
-              {this.props.foods.map((food, index) => <Food key={index} food={food} />)}
+            <Card.Group itemsPerRow={3}>
+              {this.props.foods.map((food, index) => <Food
+                  key={index}
+                  food={food}
+                  reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
+              />)}
             </Card.Group>
+            {/*<Card.Group>*/}
+              {/*{this.props.foods.map((food, index) => <Food key={index} food={food} />)}*/}
+            {/*</Card.Group>*/}
             <div className='aboutUs'>
               <Grid columns={2} verticalAlign='middle'>
                <Grid.Row>
@@ -71,16 +87,20 @@ class Landing2 extends React.Component {
     );
   }
 }
+
 Landing2.propTypes = {
   foods: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
 export default withTracker(() => {
-  // Get access to Food documents.
-  const subscription = Meteor.subscribe('Food');
+  // Get access to Food & Review documents.
+  const subscription = Meteor.subscribe('Foods');
+  const subscription2 = Meteor.subscribe('Reviews');
   return {
-    foods: Stuffs.find({}).fetch(),
-    ready: subscription.ready(),
+    foods: Foods.find({}).fetch(),
+    reviews: Reviews.find({}).fetch(),
+    ready: subscription.ready() && subscription2.ready(),
   };
 })(Landing2);
