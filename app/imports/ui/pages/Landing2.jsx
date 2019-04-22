@@ -18,13 +18,15 @@ class Landing2 extends React.Component {
 
     const searchStyle = {
       width: '80%',
-      height: '75px',
+      height: '50px',
       color: '#045604',
     };
 
     return (
         <div className="landingMid" id='landing-page-id'>
-            <Grid columns={2} verticalAlign='middle'>
+
+          {/*Main Image/Search Bar  */}
+          <Grid columns={2} verticalAlign='middle'>
               <Grid.Column>
                 <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>
               </Grid.Column>
@@ -39,6 +41,8 @@ class Landing2 extends React.Component {
                     style={searchStyle}/>
               </Grid.Column>
             </Grid>
+
+          {/*Recent Reviews*/}
           <Container style={{ paddingTop: '20px' }}>
             <Header as='h2' class='color-primary-3'>Recent Reviews</Header>
             <Card.Group itemsPerRow={4}>
@@ -48,14 +52,13 @@ class Landing2 extends React.Component {
                   reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
               />)}
             </Card.Group>
-            {/*<Card.Group>*/}
-              {/*{this.props.foods.map((food, index) => <Food key={index} food={food} />)}*/}
-            {/*</Card.Group>*/}
+
+            {/*About Us Section*/}
             <div className='aboutUs'>
               <Grid columns={2} verticalAlign='middle'>
                <Grid.Row>
                 <Grid.Column>
-            <Header>Our Mission</Header>
+            <Header as='h2' style={{color: '#045604'}}>Our Mission</Header>
             <p>
               Our Mission here at hangryFIX is to help end hangriness one college student at a time.
               Are you hangry? Craving a particular type of food or specific food item, but dont know
@@ -68,10 +71,11 @@ class Landing2 extends React.Component {
                </Grid.Row>
                 <Grid.Row>
                   <Grid.Column>
-
+                    <Image style={{width: '70%'}}
+                        src="http://www.1worldglobalgifts.com/images/Paperweights/blue_green_crystal_globe_paperweight_sm.jpg" />
                   </Grid.Column>
                   <Grid.Column>
-                    <Header>Member Perks</Header>
+                    <Header as='h2' style={{color: '#045604'}}>Member Perks</Header>
                     <p>
                       Help contribute to the cause by creating an account with us! As a member you will be able to add
                       new foods, review foods, and look back at your past reviews so you can always find the name of
