@@ -20,7 +20,7 @@ class Review extends React.Component {
             <Card.Description style={{ marginTop: '12px' }}>{this.props.review.review}</Card.Description>
           </Card.Content>
           <Card.Content extra textAlign="right">
-            Last updated: {this.props.review.createdAt}
+            Last updated: {this.props.review.createdAt.toLocaleDateString('en-US')}
           </Card.Content>
           { this.props.review.user === Meteor.user().username ? (
               <Button>Edit Review</Button>
