@@ -3,24 +3,16 @@ import SimpleSchema from 'simpl-schema';
 import { Tracker } from 'meteor/tracker';
 
 /** Create a Meteor collection. */
-const Foods = new Mongo.Collection('Foods');
+const Tags = new Mongo.Collection('Tags');
 
 /** Create a schema to constrain the structure of documents associated with this collection. */
-const FoodsSchema = new SimpleSchema({
+const TagSchema = new SimpleSchema({
   name: String,
-  restaurant: String,
-  category: String,
-  price: Number,
-  image: String,
-  owner: String,
-  timestamp: Date,
-  description: String,
-  tags: Array,
-  'tags.$': String,
+  type: String,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */
-Foods.attachSchema(FoodsSchema);
+Tags.attachSchema(TagSchema);
 
 /** Make the collection and schema available to other code. */
-export { Foods, FoodsSchema };
+export { Tags, TagSchema };

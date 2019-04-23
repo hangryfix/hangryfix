@@ -10,6 +10,8 @@ const ReviewSchema = new SimpleSchema({
   review: String,
   rating: Number,
   user: String,
+  foodId: String,
+  createdAt: Date,
 }, { tracker: Tracker });
 
 /** Attach this schema to the collection. */

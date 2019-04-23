@@ -4,9 +4,11 @@
 .color-primary-3 { color: #045604 }
 .color-primary-4 { color: #091D09 }
 
+
 .tagDropdown {
   color: #091D09 !important;
 }
+
 
 /*Landing Page*/
 .landingMid {
@@ -28,7 +30,13 @@
 .backgroundDef {
   background-color: #338D33;
   padding-bottom: 30px;
+  min-height: 600px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  display: flex;
 }
+
 
 /* Navigation Bar */
 .navBar {
@@ -67,17 +75,46 @@ div.ui.borderless.menu {
   color: BLACK;
 }
 
-
 .navBar .item {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
+
+
+/* PUSHING FOOTER TO BOTTOM (includes .footer) */
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  position: relative;
+}
+
+.entire-page {
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 250px; /* height of footer */
+}
+
 
 /* FOOTER STYLES */
 .footer {
-  position: relative;
+  padding-top: 20px;
+  padding-bottom: 60px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background-color: #045604;
   color: white;
 }
+
 
 /* ADD ELEMENT STYLES */
 .add-food {
@@ -94,6 +131,7 @@ div.ui.borderless.menu {
   margin: 0 0 10px 0;
   padding: 10px;
 }
+
 
 /* SEARCH STYLES */
 .search-sidebar {
@@ -139,5 +177,10 @@ div.ui.borderless.menu {
 
 .black {
   color: BLACK;
+}
+
+/* Add Restaurant Form Style */
+.add-restaurant-form {
+  color: black;
 }
 

@@ -1,40 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
-import { Header, Feed, Button, Link, Rating } from 'semantic-ui-react';
+import { Card, Button, Rating, Icon } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
   render() {
     return (
-        <Feed.Event>
-          <Feed.Content>
-            <Feed.Date content={this.props.review.createdAt.toLocaleDateString('en-US')} />
-            <Feed.Summary>
-              <Header as="h4">Review from {this.props.review.user}</Header>
-              <Rating icon='heart' defaultRating={this.props.review.rating} maxRating={5} size='huge' disabled/>
-              {this.props.review.review}
-            </Feed.Summary>
-          </Feed.Content>
-          { this.props.currentUser ? (
-              <Feed.Extra>
-                <Button fluid onClick={<Link to={''}/>}>Edit Review</Button>
-              </Feed.Extra>
+        <Card fluid>
+          <Card.Content>
+            <Card.Header style={{ fontSize: '16px' }}>
+              <Rating icon='heart' defaultRating={this.props.review.rating} maxRating={5} size='medium' disabled style={{ marginRight: '5px' }}/>
+              {this.props.review.title}
+            </Card.Header>
+            <Card.Meta>
+              <Icon name="user" style={{ marginRight: '5px', marginTop: '5px' }} />
+              {this.props.review.user} says . . .
+            </Card.Meta>
+            <Card.Description style={{ marginTop: '12px' }}>{this.props.review.review}</Card.Description>
+          </Card.Content>
+          <Card.Content extra textAlign="right">
+            Last updated: {this.props.review.createdAt.toLocaleDateString('en-US')}
+          </Card.Content>
+          { this.props.review.user === Meteor.user().username ? (
+              <Button>Edit Review</Button>
           ) : ''
           }
-        </Feed.Event>
+        </Card>
     );
   }
 }
 
 Review.propTypes = {
   review: PropTypes.object.isRequired,
-  currentUser: PropTypes.string,
 };
 
-const ReviewContainer = withTracker(() => ({
-  currentUser: Meteor.user() ? Meteor.user().username : '',
-}))(Review);
-
-export default withRouter(ReviewContainer);
+export default withRouter(Review);

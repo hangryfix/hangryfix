@@ -33,22 +33,32 @@ class Footer extends React.Component {
                 <Grid.Column>
                   <Header as='h3' content='Restaurants' textAlign='center' style={headerStyle}/>
                   <hr/>
-                  <List inverted>
-                    <List.Item>Da Spot</List.Item>
-                    <List.Item>Dunkin&rsquo; Donuts</List.Item>
-                    <List.Item>Govinda&rsquo;s</List.Item>
-                    <List.Item>Holoholo Grill</List.Item>
-                    <List.Item>Hot Tacos</List.Item>
-                    <List.Item>Kamitoku Ramen</List.Item>
-                    <List.Item>L&L Hawaiian Barbecue</List.Item>
-                    <List.Item>Lasoon</List.Item>
-                    <List.Item>Le Crêpe Café</List.Item>
-                    <List.Item>Panda Express</List.Item>
-                    <List.Item>Peace Cafe</List.Item>
-                    <List.Item>Punchbowl</List.Item>
-                    <List.Item>Sistah Truck</List.Item>
-                    <List.Item>The Bean Counter</List.Item>
-                  </List>
+                  <Grid style={{ paddingTop: '7px' }}>
+                    <Grid.Row columns={2}>
+                      <Grid.Column>
+                        <List inverted>
+                          <List.Item><a href="https://daspot.net/">Da Spot</a></List.Item>
+                          <List.Item><a href="https://www.dunkindonuts.com/en">Dunkin&rsquo; Donuts</a></List.Item>
+                          <List.Item><a href="https://www.iskconhawaii.com/foodtruck">Govinda&rsquo;s</a></List.Item>
+                          <List.Item><a href="https://holohologrill.com/">Holoholo Grill</a></List.Item>
+                          <List.Item><a href="http://manoa.hawaii.edu/food/hotTacos.php">Hot Tacos</a></List.Item>
+                          <List.Item><a href="http://www.kamitokuramen.com/">Kamitoku Ramen</a></List.Item>
+                          <List.Item><a href="https://www.hawaiianbarbecue.com/">L&L Hawaiian Barbecue</a></List.Item>
+                        </List>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <List inverted>
+                          <List.Item><a href="http://lasoonhawaii.com/">Lasoon</a></List.Item>
+                          <List.Item><a href="https://www.lecrepecafe.com/">Le Crêpe Cafe</a></List.Item>
+                          <List.Item><a href="https://www.pandaexpress.com/">Panda Express</a></List.Item>
+                          <List.Item><a href="https://www.peacecafehawaii.com/">Peace Cafe</a></List.Item>
+                          <List.Item><a href="http://manoa.hawaii.edu/food/punchbowl.php">Punchbowl Cafe</a></List.Item>
+                          <List.Item><a href="http://manoa.hawaii.edu/food/sistahTruck.php">Sistah Truck</a></List.Item>
+                          <List.Item><a href="http://manoa.hawaii.edu/food/beanCounter.php">The Bean Counter</a></List.Item>
+                        </List>
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
                 </Grid.Column>
                 <Grid.Column>
                   <Header as='h3' content='The hangryFIX Team' textAlign='center' style={headerStyle}/>

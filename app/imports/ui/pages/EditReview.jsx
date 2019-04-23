@@ -8,7 +8,7 @@ import { withTracker, NavLink } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
 /** Renders the Page for adding a document. */
-class AddReview extends React.Component {
+class EditReview extends React.Component {
 
 
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
@@ -64,8 +64,9 @@ class AddReview extends React.Component {
     let stringURL = this.props.location.pathname;
     let URLarray = stringURL.split('/:');
     let id = URLarray[1];
-    let foodObj = this.props.foods.filter(food => (food._id === id));
-    foodObj = foodObj[0];
+    let reviewObj = this.props.reviews.filter(review => (review._id === id));
+    reviewObj = reviewObj[0];
+    const foodObj = this.props.reviews.filter(food => (food._id === reviewObj.foodId));
 
     return (
         <Container className='add-food'>
@@ -142,9 +143,11 @@ class AddReview extends React.Component {
   }
 }
 
-AddReview.propTypes = {
+EditReview.propTypes = {
   foods: PropTypes.array.isRequired,
   foodsReady: PropTypes.bool.isRequired,
+  reviews: PropTypes.array.isRequired,
+  reviewsReady: PropTypes.bool.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
@@ -156,10 +159,13 @@ export default withTracker(() => {
 
   // Get access to Stuff documents.
   const foodSubscription = Meteor.subscribe('Foods');
+  const reviewSubscription = Meteor.subscribe('Reviews');
 
   return {
     foods: Foods.find({}).fetch(),
     foodsReady: foodSubscription.ready(),
+    reviews: Reviews.find({}).fetch(),
+    reviewsReady: reviewSubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
-})(AddReview);
+})(EditReview);
