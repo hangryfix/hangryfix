@@ -1,5 +1,6 @@
 import React from 'react';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
+import { Keys } from '/imports/api/keys/keys';
 import { Foods, FoodSchema } from '/imports/api/food/food';
 import { Tags } from '/imports/api/tag/tag';
 import { Container, Form, Button, TextArea, Header, Grid, Select, Loader, Popup } from 'semantic-ui-react';
@@ -15,7 +16,7 @@ class AddFood extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { image: '', name: '', restaurant: '', category: '', tags: [], price: 0, description: '' };
+    this.state = { key: '', image: '', name: '', restaurant: '', category: '', tags: [], price: 0, description: '' };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDropdown = this.handleChangeDropdown.bind(this);
@@ -28,7 +29,8 @@ class AddFood extends React.Component {
       Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
     } else {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
-      this.formRef.reset();
+      let foodKey = this.props.keys[0].foods + 1;
+      Keys.update({ _id: this.props.keys[0]._id }, {$set:{foods:foodKey}});
     }
   }
 
@@ -49,8 +51,9 @@ class AddFood extends React.Component {
   }
 
   /** On submit, insert the data. */
-  submit(username) {
+  submit(username, foodKey) {
     Foods.insert({
+      key: foodKey,
       image: 'IMAGE NOT SUPPORTED',
       name: this.state.name,
       restaurant: this.state.restaurant,
@@ -61,12 +64,11 @@ class AddFood extends React.Component {
       description: this.state.description,
       owner: username,
     }, this.insertCallback);
-
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.restaurantsReady && this.props.tagsReady && this.props.categoriesReady) ? this.renderPage() :
+    return (this.props.restaurantsReady && this.props.tagsReady && this.props.categoriesReady && this.props.keysReady) ? this.renderPage() :
         <Loader active>Getting data</Loader>;
   }
 
@@ -186,7 +188,7 @@ class AddFood extends React.Component {
                         control={Button}
                         content='Submit'
                         onClick={ () => {
-                          this.submit(this.props.currentUser)
+                          this.submit(this.props.currentUser, this.props.keys[0].foods)
                         } }
                     />
                     <Form.Field
@@ -222,14 +224,17 @@ export default withTracker(() => {
   const restaurantSubscription = Meteor.subscribe('Restaurant');
   const tagSubscription = Meteor.subscribe('Tag');
   const categorySubscription = Meteor.subscribe('Category');
+  const keySubscription = Meteor.subscribe('Keys');
 
   return {
     restaurants: Restaurants.find({}).fetch(),
     tags: Tags.find({}).fetch(),
     categories: Tags.find({}).fetch(),
+    keys: Keys.find({}).fetch(),
     restaurantsReady: restaurantSubscription.ready(),
     tagsReady: tagSubscription.ready(),
     categoriesReady: categorySubscription.ready(),
+    keysReady: keySubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(AddFood);

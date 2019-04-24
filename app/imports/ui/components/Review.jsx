@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Card, Button, Rating, Icon } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
   render() {
+    const path = `/editReview/:${this.props.review._id}`;
     return (
         <Card fluid>
           <Card.Content>
@@ -23,7 +24,8 @@ class Review extends React.Component {
             Last updated: {this.props.review.createdAt.toLocaleDateString('en-US')}
           </Card.Content>
           { this.props.review.user === Meteor.user().username ? (
-              <Button>Edit Review</Button>
+              <Button
+                  as={ NavLink } activeClassName="active" exact to={path} key="addReview">Edit Review</Button>
           ) : ''
           }
         </Card>

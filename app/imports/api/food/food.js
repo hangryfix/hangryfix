@@ -7,6 +7,7 @@ const Foods = new Mongo.Collection('Foods');
 
 /** Create a schema to constrain the structure of documents associated with this collection. */
 const FoodsSchema = new SimpleSchema({
+  key: Number,
   name: String,
   restaurant: String,
   category: String,
@@ -16,6 +17,7 @@ const FoodsSchema = new SimpleSchema({
   timestamp: Date,
   description: String,
   tags: Array,
+  averageRating: Number,
   'tags.$': String,
 }, { tracker: Tracker });
 
