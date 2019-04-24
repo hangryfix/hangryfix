@@ -10,14 +10,6 @@ import Review from './Review';
 class Food extends React.Component {
   render() {
 
-    let averageRating = '';
-
-    if (this.props.reviews) {
-      averageRating =
-          Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
-              / (this.props.reviews.length));
-    }
-
     const path = `/addReview/:${this.props.food._id}`;
 
     const foodCard = () => {
@@ -27,14 +19,6 @@ class Food extends React.Component {
             <Card.Header style={{ fontSize: '30px' }}>
               {this.props.food.name}
             </Card.Header>
-            <Card.Meta style={{ paddingBottom: '30px' }}>
-              {this.props.reviews.length > 0 ? (
-                  <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
-              ) : (
-                  'No ratings yet.'
-              )
-              }
-            </Card.Meta>
             <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
               <Icon name="map marker alternate" style={{ marginRight: '5px' }}/>
               {this.props.food.restaurant}
