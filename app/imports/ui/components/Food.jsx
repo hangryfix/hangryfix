@@ -76,11 +76,26 @@ class Food extends React.Component {
           )}
           {foodCard()}
           <Card.Content>
-            {this.props.food.tags.map((tag, index) => <Label tag
-                                                             style={{ backgroundColor: '#338D33', color: 'white' }}
-                                                             key={index}>
-              {tag.name}
-            </Label>)}
+            {this.props.food.tags.map((tag, index) => {
+              let returnThis = '';
+              if ((typeof tag) === 'object') {
+                returnThis =
+                    <Label.Group tag>
+                      <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                        {tag.name}
+                      </Label>
+                      <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                        {tag.type}
+                      </Label>
+                    </Label.Group>;
+              } else {
+                returnThis =
+                    <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                      {tag}
+                    </Label>;
+              }
+              return returnThis;
+            })}
           </Card.Content>
           <Card.Content>
             {this.props.reviews.length > 0 ? (
@@ -89,11 +104,26 @@ class Food extends React.Component {
                     <Card fluid>
                       {foodCard()}
                       <Card.Content>
-                        {this.props.food.tags.map((tag, index) => <Label tag
-                                                                         style={{ backgroundColor: '#338D33', color: 'white' }}
-                                                                         key={index}>
-                          {tag.name}
-                        </Label>)}
+                        {this.props.food.tags.map((tag, index) => {
+                          let returnThis = '';
+                          if ((typeof tag) === 'object') {
+                            returnThis =
+                                <Label.Group tag>
+                                  <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                    {tag.name}
+                                  </Label>
+                                  <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                    {tag.type}
+                                  </Label>
+                                </Label.Group>;
+                          } else {
+                            returnThis =
+                                <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                  {tag}
+                                </Label>;
+                          }
+                          return returnThis;
+                        })}
                       </Card.Content>
                     </Card>
                   </Modal.Header>
