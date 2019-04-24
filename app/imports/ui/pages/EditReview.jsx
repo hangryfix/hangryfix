@@ -64,7 +64,7 @@ class EditReview extends React.Component {
 
     let stringURL = this.props.location.pathname;
     let URLarray = stringURL.split('/:');
-    let id = URLarray[1];
+    let id = parseInt(URLarray[1]);
     let reviewObj = this.props.reviews.filter(review => (review._id === id));
     console.log(reviewObj);
     const foodObj = this.props.reviews.filter(food => (food._id === reviewObj.foodId));
