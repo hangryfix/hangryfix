@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Form, Button, TextArea, Header, Grid, Rating, Loader } from 'semantic-ui-react';
 import { Reviews, ReviewSchema } from '/imports/api/review/review';
 import { Foods } from '/imports/api/food/food';
+import { Keys } from '/imports/api/keys/keys';
 import { Bert } from 'meteor/themeteorchef:bert';
 import PropTypes from 'prop-types';
 import { withTracker, NavLink } from 'meteor/react-meteor-data';
@@ -33,8 +34,9 @@ class AddReview extends React.Component {
     this.setState(s);
   }
 
-  submit(username, id) {
+  submit(username, id, reviewKey) {
     Reviews.insert({
+      key: reviewKey,
       review: this.state.review,
       rating: this.state.rating,
       foodId: id,
@@ -49,13 +51,14 @@ class AddReview extends React.Component {
       Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
     } else {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
-      this.formRef.reset();
+      let reviewKey = this.props.keys[0].reviews + 1;
+      Keys.update({ _id: this.props.keys[0]._id }, {$set:{reviews:reviewKey}});
     }
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.foodsReady) ? this.renderPage() :
+    return (this.props.foodsReady && this.props.keysReady) ? this.renderPage() :
         <Loader active>Getting data</Loader>;
   }
 
@@ -64,7 +67,9 @@ class AddReview extends React.Component {
     let stringURL = this.props.location.pathname;
     let URLarray = stringURL.split('/:');
     let id = URLarray[1];
-    let foodObj = this.props.foods.filter(food => (food._id === id));
+    id = parseInt(id);
+    let foodObj = this.props.foods.filter(food => (food.key === id));
+    console.log(foodObj);
     foodObj = foodObj[0];
 
     return (
@@ -124,7 +129,7 @@ class AddReview extends React.Component {
                         control={Button}
                         content='Submit'
                         onClick={ () => {
-                          this.submit(this.props.currentUser, id)
+                          this.submit(this.props.currentUser, id, this.props.keys[0].reviews)
                         } }
                     />
                     <Form.Field
@@ -156,10 +161,13 @@ export default withTracker(() => {
 
   // Get access to Stuff documents.
   const foodSubscription = Meteor.subscribe('Foods');
+  const keySubscription = Meteor.subscribe('Keys');
 
   return {
     foods: Foods.find({}).fetch(),
+    keys: Keys.find({}).fetch(),
     foodsReady: foodSubscription.ready(),
+    keysReady: keySubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(AddReview);

@@ -61,11 +61,12 @@ class EditReview extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
+
     let stringURL = this.props.location.pathname;
     let URLarray = stringURL.split('/:');
     let id = URLarray[1];
     let reviewObj = this.props.reviews.filter(review => (review._id === id));
-    reviewObj = reviewObj[0];
+    console.log(reviewObj);
     const foodObj = this.props.reviews.filter(food => (food._id === reviewObj.foodId));
 
     return (
@@ -115,6 +116,7 @@ class EditReview extends React.Component {
                       control={TextArea}
                       label='Review'
                       placeholder='Type your review...'
+                      value={reviewObj.review}
                       onChange={(event) => {
                         this.handleChange(event, "review")
                       }}

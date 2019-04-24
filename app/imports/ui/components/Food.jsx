@@ -18,7 +18,7 @@ class Food extends React.Component {
               / (this.props.reviews.length));
     }
 
-    const path = `/addReview/:${this.props.food._id}`;
+    const path = `/addReview/:${this.props.food.key}`;
 
     const foodCard = () => {
       return (
