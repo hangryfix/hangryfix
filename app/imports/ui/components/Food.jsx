@@ -8,16 +8,17 @@ import { _ } from 'underscore';
 import Review from './Review';
 
 class Food extends React.Component {
-
   render() {
 
+    let averageRating = '';
+
     if (this.props.reviews) {
-      this.props.food.averageRating =
+      averageRating =
           Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
               / (this.props.reviews.length));
     }
 
-    const path = `/addReview/:${this.props.food.key}`;
+    const path = `/addReview/:${this.props.food._id}`;
 
     const foodCard = () => {
       return (
@@ -28,11 +29,7 @@ class Food extends React.Component {
             </Card.Header>
             <Card.Meta style={{ paddingBottom: '30px' }}>
               {this.props.reviews.length > 0 ? (
-                  <Rating size="huge"
-                          icon="heart"
-                          defaultRating={this.props.food.averageRating}
-                          maxRating={5}
-                          disabled/>
+                  <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
                   'No ratings yet.'
               )
@@ -60,6 +57,7 @@ class Food extends React.Component {
       );
     };
 
+
     return (
         <Card>
           { this.props.currentUser ? (
@@ -81,7 +79,7 @@ class Food extends React.Component {
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
-              {tag}
+              {tag.name}
             </Label>)}
           </Card.Content>
           <Card.Content>
@@ -94,7 +92,7 @@ class Food extends React.Component {
                         {this.props.food.tags.map((tag, index) => <Label tag
                                                                          style={{ backgroundColor: '#338D33', color: 'white' }}
                                                                          key={index}>
-                          {tag}
+                          {tag.name}
                         </Label>)}
                       </Card.Content>
                     </Card>
@@ -119,7 +117,6 @@ Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
   reviews: PropTypes.array.isRequired,
-  location: PropTypes.object,
 };
 
 const FoodContainer = withTracker(() => ({
