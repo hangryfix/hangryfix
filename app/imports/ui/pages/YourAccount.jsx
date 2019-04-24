@@ -55,7 +55,7 @@ class YourAccount extends React.Component {
           filtering.map((food, index) => <Food
           key={index}
           food={food}
-          reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
+          reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
       />)
       );
     };
@@ -66,7 +66,7 @@ class YourAccount extends React.Component {
             {this.props.foods.map((food, index) => <Food
                 key={index}
                 food={food}
-                reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
+                reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
             />)}
           </Card.Group>
         </Tab.Pane> },
