@@ -17,6 +17,7 @@ const FoodsSchema = new SimpleSchema({
   timestamp: Date,
   description: String,
   tags: Array,
+  averageRating: Number,
   'tags.$': String,
 }, { tracker: Tracker });
 
