@@ -37,7 +37,7 @@ class FoodRow extends React.Component {
               / (this.props.reviews.length));
     }
 
-    const path = `/addReview/:${this.props.food._id}`;
+    const path = `/addReview/:${this.props.food.key}`;
 
     return (
         <Table.Row>
@@ -132,7 +132,7 @@ class FoodRow extends React.Component {
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
-              {tag.name}
+              {tag}
             </Label>)}
           </Table.Cell>
 

@@ -8,7 +8,6 @@ import { _ } from 'underscore';
 import Review from './Review';
 
 class Food extends React.Component {
-  render() {
 
     const path = `/addReview/:${this.props.food._id}`;
 
@@ -41,7 +40,6 @@ class Food extends React.Component {
       );
     };
 
-
     return (
         <Card>
           { this.props.currentUser ? (
@@ -63,7 +61,7 @@ class Food extends React.Component {
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
-              {tag.name}
+              {tag}
             </Label>)}
           </Card.Content>
           <Card.Content>
@@ -76,7 +74,7 @@ class Food extends React.Component {
                         {this.props.food.tags.map((tag, index) => <Label tag
                                                                          style={{ backgroundColor: '#338D33', color: 'white' }}
                                                                          key={index}>
-                          {tag.name}
+                          {tag}
                         </Label>)}
                       </Card.Content>
                     </Card>
@@ -101,6 +99,7 @@ Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
   reviews: PropTypes.array.isRequired,
+  location: PropTypes.object,
 };
 
 const FoodContainer = withTracker(() => ({

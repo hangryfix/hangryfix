@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Header, Dropdown, Container, Input } from 'semantic-ui-react';
+import { Menu, Dropdown, Container, Input, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 class NavBar extends React.Component {
@@ -11,7 +11,7 @@ class NavBar extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   };
 
 
@@ -42,7 +42,7 @@ class NavBar extends React.Component {
               { this.props.currentUser ? (
                   [
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/youraccount" key="youraccount">
-                      <Header as='h2' inverted>hangryFIX</Header>
+                      <Image style={{ width: '100px' }} src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png' />
                     </Menu.Item>,
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search">
                       <Input
@@ -74,12 +74,7 @@ class NavBar extends React.Component {
                         exact to="/"
                         key="landing"
                     >
-                      <Header
-                          as='h2'
-                          inverted
-                      >
-                        hangryFIX
-                      </Header>
+                      <Image style={{ width: '100px' }} src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png' />
                     </Menu.Item>,
                     <Menu.Item position="right" key="unloggedUser">
                       <Dropdown className={ rightStyle } text="Login" icon="user" direction="left">

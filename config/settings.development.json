@@ -19,8 +19,28 @@
     }
   ],
 
+  "defaultKeys": [
+    {
+      "restaurants": "100",
+      "reviews": "100",
+      "foods": "100"
+    }
+  ],
 
-  "defaultFood": [],
+  "defaultFood": [
+    {
+      "key": "1",
+      "name": "Pepperoni Pizza",
+      "restaurant": "Pizza Hut",
+      "category": "Pizza",
+      "price": "14.99",
+      "image": "IMAGE NOT SUPPORTED",
+      "owner": "JohnDoe",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "So Much Pepperoni its crazy",
+      "tags": ["Pizza", "Fast Food"]
+    }
+  ],
 
   "defaultReviews": [],
 
@@ -60,6 +80,7 @@
   ],
   "defaultRestaurants": [
     {
+      "key": "1",
       "name": "Panda Express",
       "address": "2560 McCarthy mall, Honolulu HI, 96822",
       "hours": [
@@ -80,6 +101,7 @@
       ]
     },
     {
+      "key": "2",
       "name": "Da Spot Health Food & Juices",
       "address": "2469 S King St, Honolulu HI, 96826",
       "hours": [
