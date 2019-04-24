@@ -81,7 +81,7 @@ class Food extends React.Component {
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
-              {tag.name}
+              {tag}
             </Label>)}
           </Card.Content>
           <Card.Content>
@@ -94,7 +94,7 @@ class Food extends React.Component {
                         {this.props.food.tags.map((tag, index) => <Label tag
                                                                          style={{ backgroundColor: '#338D33', color: 'white' }}
                                                                          key={index}>
-                          {tag.name}
+                          {tag}
                         </Label>)}
                       </Card.Content>
                     </Card>
