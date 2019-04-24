@@ -67,7 +67,7 @@ class ListFoodAdmin extends React.Component {
                     {this.props.foods.map((food, index) => <FoodRow
                         key={index}
                         food={food}
-                        reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
+                        reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                     />)}
                 </Table.Body>
               </Table>
