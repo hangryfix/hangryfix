@@ -25,7 +25,7 @@ class Review extends React.Component {
           </Card.Content>
           { this.props.review.user === Meteor.user().username ? (
               <Button
-                  as={ NavLink } activeClassName="active" exact to={path} key="addReview">Edit Review</Button>
+                  as={ NavLink } activeClassName="active" exact to={path} key="editReview">Edit Review</Button>
           ) : ''
           }
         </Card>
