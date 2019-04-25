@@ -7,6 +7,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import PropTypes from 'prop-types';
 import { withTracker, NavLink } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
+import { Redirect } from 'react-router-dom';
 
 /** Renders the Page for adding a document. */
 class AddReview extends React.Component {
@@ -15,7 +16,7 @@ class AddReview extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { image: '', review: '', rating: -1 };
+    this.state = { image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png', review: '', rating: -1, redirectToHome: false };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeRating = this.handleChangeRating.bind(this);
@@ -54,6 +55,9 @@ class AddReview extends React.Component {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
       let reviewKey = this.props.keys[0].reviews + 1;
       Keys.update({ _id: this.props.keys[0]._id }, {$set:{reviews:reviewKey}});
+      setTimeout(() => {
+        this.setState({ error: '', redirectToHome: true });
+      }, 500);
     }
   }
 
@@ -65,6 +69,11 @@ class AddReview extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
+    const { from } = this.props.location.state || { from: { pathname: '/youraccount' } };
+    // if correct authentication, redirect to page instead of login screen
+    if (this.state.redirectToHome) {
+      return <Redirect to={from}/>;
+    }
     let stringURL = this.props.location.pathname;
     let URLarray = stringURL.split('/:');
     let id = URLarray[1];

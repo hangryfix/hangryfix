@@ -16,7 +16,7 @@ class AddFood extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { key: '', image: '', name: '', restaurant: '', category: '', tags: [], price: 0, description: '' };
+    this.state = { key: '', image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png', name: '', restaurant: '', category: '', tags: [], price: 0, description: '' };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDropdown = this.handleChangeDropdown.bind(this);
