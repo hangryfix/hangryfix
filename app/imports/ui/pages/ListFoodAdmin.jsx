@@ -23,7 +23,7 @@ class ListFoodAdmin extends React.Component {
   renderPage() {
     return (
         <div style={{padding: '20px'}} className="backgroundDef">
-          <Header textAlign='center' inverted as='h1'>Admin Food List</Header>
+          {/*<Header textAlign='center' inverted as='h1'>Admin Food List</Header>*/}
           <Divider/>
           <Grid style={{marginBottom: '50px'}}>
             <Grid.Column width={3}>
@@ -67,7 +67,7 @@ class ListFoodAdmin extends React.Component {
                     {this.props.foods.map((food, index) => <FoodRow
                         key={index}
                         food={food}
-                        reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
+                        reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                     />)}
                 </Table.Body>
               </Table>
