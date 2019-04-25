@@ -6,7 +6,7 @@
       "username": "adminJo",
       "email": "admin@foo.com",
       "password": "changeme",
-      "tags": ["pizza", "tacos"],
+      "tags": ["Pizza", "Rice","Japanese"],
       "role": "admin"
     },
     {
@@ -15,7 +15,82 @@
       "username": "JohnDoe",
       "email": "john@foo.com",
       "password": "changeme",
+      "tags": ["Pizza", "Poke"]
+    },
+    {
+      "firstName": "Sally",
+      "lastName": "Mae",
+      "username": "SallyMae",
+      "email": "sally@foo.com",
+      "password": "changeme",
+      "tags": ["Fast Food", "Chicken"]
+    },
+    {
+      "firstName": "Nima",
+      "lastName": "Azjibari",
+      "username": "neemuh",
+      "email": "nima@foo.com",
+      "password": "changeme",
       "tags": ["pizza", "poke"]
+    },
+    {
+      "firstName": "Troy",
+      "lastName": "Wooton",
+      "username": "troyBoi",
+      "email": "troy@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Poke","Local","Chinese"]
+    },
+    {
+      "firstName": "Michael",
+      "lastName": "Omori",
+      "username": "chessRocks",
+      "email": "michael@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Japanese","Rice","Chinese","Salad"]
+    },
+    {
+      "firstName": "David",
+      "lastName": "Wang",
+      "username": "david",
+      "email": "david@foo.com",
+      "password": "changeme",
+      "tags": ["French Fries", "Pizza","Japanese"]
+    },
+    {
+      "firstName": "Katrina",
+      "lastName": "Turner",
+      "username": "GNB4lyfe",
+      "email": "katrina@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Poke","Local","Chinese","Ramen","Japanese","Rice"],
+      "role": "admin"
+    },
+    {
+      "firstName": "Christina",
+      "lastName": "Chen",
+      "username": "ChristinaChen",
+      "email": "christina@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza","Spam"],
+      "role": "admin"
+    },
+    {
+      "firstName": "James",
+      "lastName": "Hutchinson",
+      "username": "Jay",
+      "email": "james@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza","Tacos"],
+      "role": "admin"
+    },
+    {
+      "firstName": "Ross",
+      "lastName": "Turner",
+      "username": "tetrysRose",
+      "email": "ross@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Poke","Japanese","Spam","Tacos","Chinese"]
     }
   ],
 
@@ -62,6 +137,26 @@
       "type": "cuisine"
     },
     {
+      "name": "Pizza",
+      "type": "cuisine"
+    },
+    {
+      "name": "Japanese",
+      "type": "cuisine"
+    },
+    {
+      "name": "Mexican",
+      "type": "cuisine"
+    },
+    {
+      "name": "Tacos",
+      "type": "cuisine"
+    },
+    {
+      "name": "Salad",
+      "type": "cuisine"
+    },
+    {
       "name": "Chicken",
       "type": "ingredient"
     },
@@ -74,7 +169,31 @@
       "type": "ingredient"
     },
     {
+      "name": "Poke",
+      "type": "ingredient"
+    },
+    {
+      "name": "Spam",
+      "type": "ingredient"
+    },
+    {
+      "name": "Ramen",
+      "type": "ingredient"
+    },
+    {
+      "name": "Noodles",
+      "type": "ingredient"
+    },
+    {
+      "name": "Pork",
+      "type": "ingredient"
+    },
+    {
       "name": "Beef",
+      "type": "ingredient"
+    },
+    {
+      "name": "French Fries",
       "type": "ingredient"
     }
   ],
