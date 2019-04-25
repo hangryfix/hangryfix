@@ -31,7 +31,7 @@
       "username": "neemuh",
       "email": "nima@foo.com",
       "password": "changeme",
-      "tags": ["Pizza", "Poke","Dessert"]
+      "tags": ["Pizza","Poke","Dessert"]
     },
     {
       "firstName": "Troy",
@@ -110,10 +110,34 @@
       "category": "Pizza",
       "price": "14.99",
       "image": "https://passionatepennypincher.com/wp-content/uploads/2017/09/Pizza-Hut-Pizza.png",
+      "owner": "Jay",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "So Much Pepperoni its crazy",
+      "tags": ["Cheese", "Meat"]
+    },
+    {
+      "key": "2",
+      "name": "Froyo",
+      "restaurant": "Tutti Frutti",
+      "category": "Dessert",
+      "price": "5.50",
+      "image": "https://i.ibb.co/r2Cp0TK/froyo.jpg",
+      "owner": "GNB4lyfe",
+      "timestamp": "Wed Apr 24 2019 11:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "Everybody loves Froyo.",
+      "tags": ["Frozen Yogurt", "Sugar"]
+    },
+    {
+      "key": "3",
+      "name": "Kalua Pig Nachos",
+      "restaurant": "Bay View Bar & Bistro",
+      "category": "Local",
+      "price": "14.99",
+      "image": "https://i.ibb.co/8cJFSLv/kalua-nachos.jpg",
       "owner": "JohnDoe",
       "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
       "description": "So Much Pepperoni its crazy",
-      "tags": ["Pizza", "Fast Food"]
+      "tags": ["Pork", "Cheese"]
     }
   ],
 
@@ -206,6 +230,18 @@
     },
     {
       "name": "Manapua",
+      "type": "ingredient"
+    },
+    {
+      "name": "Cheese",
+      "type": "ingredient"
+    },
+    {
+      "name": "Meat",
+      "type": "ingredient"
+    },
+    {
+      "name": "Sugar",
       "type": "ingredient"
     }
   ],
