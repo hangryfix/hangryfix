@@ -7,6 +7,7 @@ import { UserInfo } from '/imports/api/user-info/user-info';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'underscore';
+import moment from 'moment';
 import Food from '../components/Food';
 
 
@@ -19,6 +20,52 @@ class YourAccount extends React.Component {
   }
 
   state = { checked: false }
+
+  currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
+
+  constructor(props) {
+    super(props);
+    this.state.panes = [
+      { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
+          <Card.Group itemsPerRow={2}>
+            {this.props.foods.map((food, index) => <Food
+                key={index}
+                food={food}
+                reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
+            />)}
+          </Card.Group>
+        </Tab.Pane> },
+      { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+          <Card.Group itemsPerRow={2}>
+            {this.taggedFoods()}
+          </Card.Group>
+        </Tab.Pane> },
+    ];
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+
+  taggedFoods = () => {
+    const taggedFoodsArray = [];
+    console.log('hi');
+    console.log(moment('11:30 am'));
+    if (this.currentUserInfo.tags) {
+      for (let i = 0; i < this.props.foods.length; i++) {
+        for (let j = 0; j < this.currentUserInfo.tags.length; j++) {
+          if (_.where(this.props.foods[i].tags, this.currentUserInfo.tags[j]).length > 0) {
+            taggedFoodsArray.push(this.props.foods[i]);
+          }
+        }
+      }
+    }
+    return (
+        taggedFoodsArray.map((food, index) => <Food
+            key={index}
+            food={food}
+            reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
+        />)
+    );
+  };
 
   toggle = () => {
     this.setState({ checked: !this.state.checked });
@@ -34,49 +81,40 @@ class YourAccount extends React.Component {
     this.filters.price = rating;
   }
 
+  handleClick = () => {
+    console.log('handleClickworks');
+    const filtered = [];
+    if (this.filters.openRestaurants === false) {
+      { /* FALSE MEANS THE TOGGLE IS ON */
+      }
+      const restaurantTimes = [];
+
+      _.map(this.props.foods, function (food) {
+        const spliced = food.restaurant.split(':');
+        const timeObject = { time: '', meridiem: '' };
+        timeObject.time = parseInt(`${spliced[0]}${spliced[1]}`, 10);
+        timeObject.meridiem = spliced[2];
+      });
+    }
+
+    this.state.panes = [
+      {
+        menuItem: 'Favorite Reviews', render: () => <Tab.Pane fluid>
+        </Tab.Pane>
+      },
+    ];
+
+    this.forceUpdate();
+  }
+
+
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   renderPage() {
-
-    const currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
-
-    const filteredFoods = () => {
-      const filtering = [];
-      for (let i = 0; i < this.props.foods.length; i++) {
-        for (let j = 0; j < currentUserInfo[1].tags.length; j++) {
-          if (_.where(this.props.foods[i].tags, currentUserInfo[1].tags[j]).length > 0) {
-            filtering.push(this.props.foods[i]);
-          }
-        }
-      }
-      return (
-          filtering.map((food, index) => <Food
-          key={index}
-          food={food}
-          reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
-      />)
-      );
-    };
-
-    const panes = [
-      { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
-          <Card.Group itemsPerRow={2}>
-            {this.props.foods.map((food, index) => <Food
-                key={index}
-                food={food}
-                reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
-            />)}
-          </Card.Group>
-        </Tab.Pane> },
-      { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
-          <Card.Group itemsPerRow={2}>
-            {filteredFoods()}
-          </Card.Group>
-        </Tab.Pane> },
-    ];
-
+    console.log('renderworks')
+    console.log(this.state.panes);
     return (
         <div className='search-sidebar' style={{ backgroundColor: '#338D33', minHeight: '600px', paddingBottom: '60px' }}>
           <Grid>
@@ -110,12 +148,12 @@ class YourAccount extends React.Component {
                       size='massive'
                       onRate={this.starRating}
                   />
-                  <Button onClick={''} fluid style={{ backgroundColor: '#21BA45', color: 'white' }}>Go</Button>
+                  <Button onClick={this.handleClick} fluid style={{ backgroundColor: '#21BA45', color: 'white' }}>Go</Button>
                 </Container>
               </div>
             </Grid.Column>
             <Grid.Column width={12}>
-              <Tab panes={panes} />
+              <Tab panes={this.state.panes} />
             </Grid.Column>
           </Grid>
         </div>
