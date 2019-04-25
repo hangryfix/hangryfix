@@ -6,7 +6,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 class Review extends React.Component {
   render() {
-    const path = `/editReview/:${this.props.review._id}`;
+    const path = `/editReview/:${this.props.review.key}`;
     return (
         <Card fluid>
           <Card.Content>

@@ -9,6 +9,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import AddRestaurantForm from '../components/AddRestaurantForm';
+import { Redirect } from 'react-router-dom';
 
 /** Renders the Page for adding a document. */
 class AddFood extends React.Component {
@@ -16,7 +17,7 @@ class AddFood extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { key: '', image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png', name: '', restaurant: '', category: '', tags: [], price: 0, description: '' };
+    this.state = { key: '', image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png', name: '', restaurant: '', category: '', tags: [], price: 0, description: '', redirectToHome: false };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDropdown = this.handleChangeDropdown.bind(this);
@@ -31,6 +32,9 @@ class AddFood extends React.Component {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
       let foodKey = this.props.keys[0].foods + 1;
       Keys.update({ _id: this.props.keys[0]._id }, { $set: { foods: foodKey } });
+      setTimeout(() => {
+        this.setState({ error: '', redirectToHome: true });
+      }, 100);
     }
   }
 
@@ -74,6 +78,11 @@ class AddFood extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
+    const { from } = this.props.location.state || { from: { pathname: '/youraccount' } };
+    // if correct authentication, redirect to page instead of login screen
+    if (this.state.redirectToHome) {
+      return <Redirect to={from}/>;
+    }
 
     let restaurantOptions = this.props.restaurants.map((restaurant) => {
       return { key: restaurant.id, text: restaurant.name, value: restaurant.name };
