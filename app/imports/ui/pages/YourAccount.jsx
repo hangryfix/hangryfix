@@ -19,30 +19,14 @@ class YourAccount extends React.Component {
     openRestaurants: '',
   }
 
-  state = { checked: false }
+  state = { checked: false, panes: [
+      {
+        menuItem: 'Favorite Reviews', render: () => <Tab.Pane fluid>
+        </Tab.Pane>
+      },
+    ]}
 
   currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
-
-  constructor(props) {
-    super(props);
-    this.state.panes = [
-      { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
-          <Card.Group itemsPerRow={2}>
-            {this.props.foods.map((food, index) => <Food
-                key={index}
-                food={food}
-                reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
-            />)}
-          </Card.Group>
-        </Tab.Pane> },
-      { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
-          <Card.Group itemsPerRow={2}>
-            {this.taggedFoods()}
-          </Card.Group>
-        </Tab.Pane> },
-    ];
-    this.handleClick = this.handleClick.bind(this);
-  }
 
 
   taggedFoods = () => {
@@ -97,14 +81,13 @@ class YourAccount extends React.Component {
       });
     }
 
-    this.state.panes = [
-      {
-        menuItem: 'Favorite Reviews', render: () => <Tab.Pane fluid>
-        </Tab.Pane>
-      },
-    ];
-
-    this.forceUpdate();
+        this.setState({panes: [
+            {
+              menuItem: 'Favorite Reviews', render: () => <Tab.Pane fluid>
+              </Tab.Pane>
+            },
+          ]});
+        this.render();
   }
 
 
