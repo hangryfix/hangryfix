@@ -19,20 +19,31 @@ class YourAccount extends React.Component {
     openRestaurants: '',
   }
 
-  state = { checked: false, panes: [
-      {
-        menuItem: 'Favorite Reviews', render: () => <Tab.Pane fluid>
-        </Tab.Pane>
-      },
-    ]}
+  state =
+      { checked:
+            false,
+        panes:
+            [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
+                <Card.Group itemsPerRow={2}>
+                  {this.props.foods.map((food, index) => <Food
+                      key={index}
+                      food={food}
+                      reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
+                  />)}
+                </Card.Group>
+              </Tab.Pane> },
+              { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+                <Card.Group itemsPerRow={2}>
+                  {this.taggedFoods()}
+                </Card.Group>
+              </Tab.Pane> }],
+    }
 
   currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
 
 
   taggedFoods = () => {
     const taggedFoodsArray = [];
-    console.log('hi');
-    console.log(moment('11:30 am'));
     if (this.currentUserInfo.tags) {
       for (let i = 0; i < this.props.foods.length; i++) {
         for (let j = 0; j < this.currentUserInfo.tags.length; j++) {
@@ -66,11 +77,9 @@ class YourAccount extends React.Component {
   }
 
   handleClick = () => {
-    console.log('handleClickworks');
     const filtered = [];
     if (this.filters.openRestaurants === false) {
-      { /* FALSE MEANS THE TOGGLE IS ON */
-      }
+      { /* FALSE MEANS THE TOGGLE IS ON */ }
       const restaurantTimes = [];
 
       _.map(this.props.foods, function (food) {
@@ -80,14 +89,12 @@ class YourAccount extends React.Component {
         timeObject.meridiem = spliced[2];
       });
     }
-
-        this.setState({panes: [
-            {
-              menuItem: 'Favorite Reviews', render: () => <Tab.Pane fluid>
-              </Tab.Pane>
-            },
-          ]});
-        this.render();
+    this.setState({
+      checked: this.state.checked,
+      panes:
+          [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>still working on filter...</Tab.Pane> },
+            { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>still working on filter...</Tab.Pane> }] });
+    this.render();
   }
 
 
@@ -96,8 +103,6 @@ class YourAccount extends React.Component {
   }
 
   renderPage() {
-    console.log('renderworks')
-    console.log(this.state.panes);
     return (
         <div className='search-sidebar' style={{ backgroundColor: '#338D33', minHeight: '600px', paddingBottom: '60px' }}>
           <Grid>
