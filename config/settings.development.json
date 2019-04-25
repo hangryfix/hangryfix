@@ -6,7 +6,7 @@
       "username": "adminJo",
       "email": "admin@foo.com",
       "password": "changeme",
-      "tags": ["pizza", "tacos"],
+      "tags": ["Pizza", "Rice","Japanese"],
       "role": "admin"
     },
     {
@@ -15,7 +15,82 @@
       "username": "JohnDoe",
       "email": "john@foo.com",
       "password": "changeme",
-      "tags": ["pizza", "poke"]
+      "tags": ["Pizza", "Poke"]
+    },
+    {
+      "firstName": "Sally",
+      "lastName": "Mae",
+      "username": "SallyMae",
+      "email": "sally@foo.com",
+      "password": "changeme",
+      "tags": ["Fast Food", "Chicken"]
+    },
+    {
+      "firstName": "Nima",
+      "lastName": "Azjibari",
+      "username": "neemuh",
+      "email": "nima@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza","Poke","Dessert"]
+    },
+    {
+      "firstName": "Troy",
+      "lastName": "Wooton",
+      "username": "troyBoi",
+      "email": "troy@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Poke","Local","Chinese"]
+    },
+    {
+      "firstName": "Michael",
+      "lastName": "Omori",
+      "username": "chessRocks",
+      "email": "michael@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Japanese","Rice","Chinese","Salad"]
+    },
+    {
+      "firstName": "David",
+      "lastName": "Wang",
+      "username": "david",
+      "email": "david@foo.com",
+      "password": "changeme",
+      "tags": ["French Fries", "Pizza","Japanese"]
+    },
+    {
+      "firstName": "Katrina",
+      "lastName": "Turner",
+      "username": "GNB4lyfe",
+      "email": "katrina@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Poke","Local","Chinese","Ramen","Japanese","Rice"],
+      "role": "admin"
+    },
+    {
+      "firstName": "Christina",
+      "lastName": "Chen",
+      "username": "ChristinaChen",
+      "email": "christina@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza","Spam"],
+      "role": "admin"
+    },
+    {
+      "firstName": "James",
+      "lastName": "Hutchinson",
+      "username": "Jay",
+      "email": "james@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza","Tacos"],
+      "role": "admin"
+    },
+    {
+      "firstName": "Ross",
+      "lastName": "Turner",
+      "username": "tetrysRose",
+      "email": "ross@foo.com",
+      "password": "changeme",
+      "tags": ["Pizza", "Poke","Japanese","Spam","Tacos","Chinese","Manapua"]
     }
   ],
 
@@ -34,11 +109,35 @@
       "restaurant": "Pizza Hut",
       "category": "Pizza",
       "price": "14.99",
-      "image": "IMAGE NOT SUPPORTED",
+      "image": "https://passionatepennypincher.com/wp-content/uploads/2017/09/Pizza-Hut-Pizza.png",
+      "owner": "Jay",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "So Much Pepperoni its crazy",
+      "tags": ["Cheese", "Meat"]
+    },
+    {
+      "key": "2",
+      "name": "Froyo",
+      "restaurant": "Tutti Frutti",
+      "category": "Dessert",
+      "price": "5.50",
+      "image": "https://i.ibb.co/r2Cp0TK/froyo.jpg",
+      "owner": "GNB4lyfe",
+      "timestamp": "Wed Apr 24 2019 11:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "Everybody loves Froyo.",
+      "tags": ["Frozen Yogurt", "Sugar"]
+    },
+    {
+      "key": "3",
+      "name": "Kalua Pig Nachos",
+      "restaurant": "Bay View Bar & Bistro",
+      "category": "Local",
+      "price": "14.99",
+      "image": "https://i.ibb.co/8cJFSLv/kalua-nachos.jpg",
       "owner": "JohnDoe",
       "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
       "description": "So Much Pepperoni its crazy",
-      "tags": ["Pizza", "Fast Food"]
+      "tags": ["Pork", "Cheese"]
     }
   ],
 
@@ -62,6 +161,30 @@
       "type": "cuisine"
     },
     {
+      "name": "Pizza",
+      "type": "cuisine"
+    },
+    {
+      "name": "Japanese",
+      "type": "cuisine"
+    },
+    {
+      "name": "Mexican",
+      "type": "cuisine"
+    },
+    {
+      "name": "Tacos",
+      "type": "cuisine"
+    },
+    {
+      "name": "Salad",
+      "type": "cuisine"
+    },
+    {
+      "name": "Dessert",
+      "type": "cuisine"
+    },
+    {
       "name": "Chicken",
       "type": "ingredient"
     },
@@ -74,7 +197,51 @@
       "type": "ingredient"
     },
     {
+      "name": "Poke",
+      "type": "ingredient"
+    },
+    {
+      "name": "Spam",
+      "type": "ingredient"
+    },
+    {
+      "name": "Ramen",
+      "type": "ingredient"
+    },
+    {
+      "name": "Noodles",
+      "type": "ingredient"
+    },
+    {
+      "name": "Pork",
+      "type": "ingredient"
+    },
+    {
       "name": "Beef",
+      "type": "ingredient"
+    },
+    {
+      "name": "French Fries",
+      "type": "ingredient"
+    },
+    {
+      "name": "Frozen Yogurt",
+      "type": "ingredient"
+    },
+    {
+      "name": "Manapua",
+      "type": "ingredient"
+    },
+    {
+      "name": "Cheese",
+      "type": "ingredient"
+    },
+    {
+      "name": "Meat",
+      "type": "ingredient"
+    },
+    {
+      "name": "Sugar",
       "type": "ingredient"
     }
   ],
@@ -120,28 +287,174 @@
         "10:00 am",
         "8:00 pm"
       ]
-    }
-  ],
-  "tags": [
-    {
-      "key": "pizza",
-      "text": "pizza",
-      "value": "pizza"
     },
     {
-      "key": "poke",
-      "text": "poke",
-      "value": "poke"
+      "key": "3",
+      "name": "Pizza Hut",
+      "address": "2320 King St, Honolulu, HI, 96826",
+      "hours": [
+        "10:00 am",
+        "11:00 pm",
+        "10:00 am",
+        "11:00 pm",
+        "10:00 am",
+        "11:00 pm",
+        "10:00 am",
+        "11:00 pm",
+        "10:00 am",
+        "12:00 am",
+        "10:00 am",
+        "12:00 am",
+        "10:00 am",
+        "11:00 pm"
+      ]
     },
     {
-      "key": "tacos",
-      "text": "tacos",
-      "value": "tacos"
+      "key": "4",
+      "name": "L&L Hawaiian Barbecue",
+      "address": "2919 Kapiolani Blvd #103, Honolulu, HI 96826",
+      "hours": [
+        "10:00 am",
+        "9:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm"
+      ]
     },
     {
-      "key": "chinese",
-      "text": "chinese",
-      "value": "chinese"
+      "key": "5",
+      "name": "Sumo Ramen & Curry",
+      "address": "2919 Kapiolani Blvd #104, Honolulu, HI 96826",
+      "hours": [
+        "10:30 am",
+        "9:00 pm",
+        "10:30 am",
+        "10:00 pm",
+        "10:30 am",
+        "10:00 pm",
+        "10:30 am",
+        "10:00 pm",
+        "10:30 am",
+        "10:00 pm",
+        "10:30 am",
+        "10:00 pm",
+        "10:30 am",
+        "10:00 pm"
+      ]
+    },
+    {
+      "key": "6",
+      "name": "Taco Bell",
+      "address": "1960 Kapiolani Blvd, Honolulu, HI 96826",
+      "hours": [
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am",
+        "12:00 am"
+      ]
+    },
+    {
+      "key": "7",
+      "name": "Foodland",
+      "address": "2939 Harding Ave, Honolulu, HI 96816",
+      "hours": [
+        "5:00 am",
+        "1:00 am",
+        "5:00 am",
+        "1:00 am",
+        "5:00 am",
+        "1:00 am",
+        "5:00 am",
+        "1:00 am",
+        "5:00 am",
+        "1:00 am",
+        "5:00 am",
+        "1:00 am",
+        "5:00 am",
+        "1:00 am"
+      ]
+    },
+    {
+      "key": "8",
+      "name": "Chun Wah Kam Noodle Factory",
+      "address": "537 Pensacola St, Honolulu, HI 96814",
+      "hours": [
+        "7:30 am",
+        "7:00 pm",
+        "7:30 am",
+        "7:00 pm",
+        "7:30 am",
+        "7:00 pm",
+        "7:30 am",
+        "7:00 pm",
+        "7:30 am",
+        "7:00 pm",
+        "7:30 am",
+        "7:00 pm",
+        "7:30 am",
+        "7:00 pm"
+      ]
+    },
+    {
+      "key": "9",
+      "name": "Bay View Bar & Bistro",
+      "address": "45-285 Kaneohe Bay Dr, Kaneohe, HI 96744",
+      "hours": [
+        "11:00 am",
+        "7:00 pm",
+        "11:00 am",
+        "7:00 pm",
+        "11:00 am",
+        "7:00 pm",
+        "11:00 am",
+        "7:00 pm",
+        "11:00 am",
+        "7:00 pm",
+        "11:00 am",
+        "7:00 pm",
+        "11:00 am",
+        "7:00 pm"
+      ]
+    },
+    {
+      "key": "10",
+      "name": "Tutti Frutti",
+      "address": "2700 Keeaumoku St #102, Honolulu HI 96814",
+      "hours": [
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm",
+        "10:00 am",
+        "10:00 pm"
+      ]
     }
   ]
 }
