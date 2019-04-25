@@ -8,11 +8,12 @@ import { _ } from 'underscore';
 import Review from './Review';
 
 class Food extends React.Component {
-
   render() {
 
+    let averageRating = '';
+
     if (this.props.reviews) {
-      this.props.food.averageRating =
+      averageRating =
           Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
               / (this.props.reviews.length));
     }
@@ -28,11 +29,7 @@ class Food extends React.Component {
             </Card.Header>
             <Card.Meta style={{ paddingBottom: '30px' }}>
               {this.props.reviews.length > 0 ? (
-                  <Rating size="huge"
-                          icon="heart"
-                          defaultRating={this.props.food.averageRating}
-                          maxRating={5}
-                          disabled/>
+                  <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
                   'No ratings yet.'
               )
@@ -60,6 +57,7 @@ class Food extends React.Component {
       );
     };
 
+
     return (
         <Card>
           { this.props.currentUser ? (
@@ -78,11 +76,26 @@ class Food extends React.Component {
           )}
           {foodCard()}
           <Card.Content>
-            {this.props.food.tags.map((tag, index) => <Label tag
-                                                             style={{ backgroundColor: '#338D33', color: 'white' }}
-                                                             key={index}>
-              {tag}
-            </Label>)}
+            {this.props.food.tags.map((tag, index) => {
+              let returnThis = '';
+              if ((typeof tag) === 'object') {
+                returnThis =
+                    <Label.Group tag>
+                      <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                        {tag.name}
+                      </Label>
+                      <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                        {tag.type}
+                      </Label>
+                    </Label.Group>;
+              } else {
+                returnThis =
+                    <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                      {tag}
+                    </Label>;
+              }
+              return returnThis;
+            })}
           </Card.Content>
           <Card.Content>
             {this.props.reviews.length > 0 ? (
@@ -91,11 +104,26 @@ class Food extends React.Component {
                     <Card fluid>
                       {foodCard()}
                       <Card.Content>
-                        {this.props.food.tags.map((tag, index) => <Label tag
-                                                                         style={{ backgroundColor: '#338D33', color: 'white' }}
-                                                                         key={index}>
-                          {tag}
-                        </Label>)}
+                        {this.props.food.tags.map((tag, index) => {
+                          let returnThis = '';
+                          if ((typeof tag) === 'object') {
+                            returnThis =
+                                <Label.Group tag>
+                                  <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                    {tag.name}
+                                  </Label>
+                                  <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                    {tag.type}
+                                  </Label>
+                                </Label.Group>;
+                          } else {
+                            returnThis =
+                                <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                  {tag}
+                                </Label>;
+                          }
+                          return returnThis;
+                        })}
                       </Card.Content>
                     </Card>
                   </Modal.Header>
@@ -119,7 +147,6 @@ Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
   reviews: PropTypes.array.isRequired,
-  location: PropTypes.object,
 };
 
 const FoodContainer = withTracker(() => ({
