@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Form, Button, TextArea, Header, Grid, Rating, Loader } from 'semantic-ui-react';
+import { Container, Form, Button, TextArea, Header, Grid, Rating, Loader, Popup, Input, Image } from 'semantic-ui-react';
 import { Reviews, ReviewSchema } from '/imports/api/review/review';
 import { Foods } from '/imports/api/food/food';
 import { Keys } from '/imports/api/keys/keys';
@@ -15,7 +15,7 @@ class AddReview extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { review: '', rating: -1 };
+    this.state = { image: '', review: '', rating: -1 };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeRating = this.handleChangeRating.bind(this);
@@ -36,6 +36,7 @@ class AddReview extends React.Component {
 
   submit(username, id, reviewKey) {
     Reviews.insert({
+      image: this.state.image,
       key: reviewKey,
       review: this.state.review,
       rating: this.state.rating,
@@ -79,16 +80,32 @@ class AddReview extends React.Component {
             <Grid.Row>
               <Grid.Column width={3} textAlign='center'>
                 <Container className='upload-image'>
-                  <p>Add Image</p>
+                  <Image src={this.state.image} fluid/>
                 </Container>
-                <Button
-                    icon="upload"
-                    label={{
-                      basic: true,
-                      content: 'Upload Image',
-                    }}
-                    labelPosition="right"
+                <Popup
+                    trigger={
+                      <Button
+                          icon="upload"
+                          label={{
+                            basic: true,
+                            content: 'Upload Image'
+                          }}
+                          labelPosition="right"
+                      />
+                    }
+                    content={
+                      <div>
+                        <Input
+                            placeholder='Enter Url...'
+                            onChange={(event) => {
+                              this.handleChange(event, "image")
+                            }}
+                        />
+                      </div>
+                    }
+                    on='click'
                 />
+
               </Grid.Column>
               <Grid.Column width={13}>
                 <Form>
