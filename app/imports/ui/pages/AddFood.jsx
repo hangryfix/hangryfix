@@ -3,7 +3,7 @@ import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { Keys } from '/imports/api/keys/keys';
 import { Foods, FoodSchema } from '/imports/api/food/food';
 import { Tags } from '/imports/api/tag/tag';
-import { Container, Form, Button, TextArea, Header, Grid, Select, Loader, Popup } from 'semantic-ui-react';
+import { Container, Form, Button, TextArea, Header, Grid, Select, Loader, Popup, Input, Image } from 'semantic-ui-react';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -30,7 +30,7 @@ class AddFood extends React.Component {
     } else {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
       let foodKey = this.props.keys[0].foods + 1;
-      Keys.update({ _id: this.props.keys[0]._id }, {$set:{foods:foodKey}});
+      Keys.update({ _id: this.props.keys[0]._id }, { $set: { foods: foodKey } });
     }
   }
 
@@ -54,7 +54,7 @@ class AddFood extends React.Component {
   submit(username, foodKey) {
     Foods.insert({
       key: foodKey,
-      image: 'IMAGE NOT SUPPORTED',
+      image: this.state.image,
       name: this.state.name,
       restaurant: this.state.restaurant,
       tags: this.state.tags,
@@ -96,17 +96,32 @@ class AddFood extends React.Component {
             <Grid.Row>
               <Grid.Column width={3} textAlign='center'>
                 <Container className='upload-image'>
-                  <p>Add Image</p>
+                  <Image src={this.state.image} fluid/>
                 </Container>
-                <Button
-                    icon="upload"
-                    label={{
-                      basic: true,
-                      content: 'Upload Image'
-                    }}
-                    labelPosition="right"
-                    onClick={this.handleClick}
+                <Popup
+                    trigger={
+                      <Button
+                          icon="upload"
+                          label={{
+                            basic: true,
+                            content: 'Upload Image'
+                          }}
+                          labelPosition="right"
+                      />
+                    }
+                    content={
+                      <div>
+                        <Input
+                            placeholder='Enter Url...'
+                            onChange={(event) => {
+                              this.handleChange(event, "image")
+                            }}
+                        />
+                      </div>
+                    }
+                    on='click'
                 />
+
               </Grid.Column>
               <Grid.Column width={13}>
                 <Form>
@@ -130,13 +145,13 @@ class AddFood extends React.Component {
                     />
                     <Form.Field>
                       <Popup
-                        trigger={<Button color='green' icon='flask' content='Add A Restaurant'/>}
-                        content={ <AddRestaurantForm/> }
-                        position='bottom right'
-                        label='Your Restaurant Missing'
-                        on='click'
-                        style={{margin: '10px 0 0 0 '}}
-                    />
+                          trigger={<Button color='green' icon='flask' content='Add A Restaurant'/>}
+                          content={<AddRestaurantForm/>}
+                          position='bottom right'
+                          label='Your Restaurant Missing'
+                          on='click'
+                          style={{ margin: '10px 0 0 0 ' }}
+                      />
                     </Form.Field>
                   </Form.Group>
                   <Form.Group widths='equal'>
@@ -187,9 +202,9 @@ class AddFood extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Submit'
-                        onClick={ () => {
+                        onClick={() => {
                           this.submit(this.props.currentUser, this.props.keys[0].foods)
-                        } }
+                        }}
                     />
                     <Form.Field
                         id='form-button-control-public'
