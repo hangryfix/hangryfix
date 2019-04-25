@@ -20,7 +20,7 @@ class Footer extends React.Component {
                     </List.Item>
                     <List.Item>
                       <List.Icon name='instagram'/>
-                      <List.Content>Instagram</List.Content>
+                      <List.Content><a href="https://www.instagram.com/hangryfix_the_app/">Instagram</a></List.Content>
                     </List.Item>
                     <List.Item>
                       <List.Icon name='mail'/>
