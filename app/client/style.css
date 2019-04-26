@@ -12,10 +12,9 @@
 
 /*Landing Page*/
 .landingMid {
-  z-index: 1;
   position: relative;
   background-color: white;
-  margin-top: -100px;
+  margin-top: -120px;
   padding-bottom: 50px;
 }
 .aboutUs {
@@ -41,7 +40,7 @@
 /* Navigation Bar */
 .navBar {
   background-color: #045604;
-  z-index: 3;
+
 }
 a.item.navTitle.active {
   background: none !important;
@@ -50,6 +49,8 @@ a.item.navTitle.active {
 .navBarLanding {
   background-color: rgba(255, 255,255, 0);
   color: black;
+  z-index: 3;
+  position: relative;
 }
 
 .rightLanding {
