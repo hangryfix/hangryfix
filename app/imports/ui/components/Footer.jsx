@@ -15,10 +15,6 @@ class Footer extends React.Component {
                   <hr/>
                   <List inverted>
                     <List.Item>
-                      <List.Icon name='facebook'/>
-                      <List.Content>Facebook</List.Content>
-                    </List.Item>
-                    <List.Item>
                       <List.Icon name='instagram'/>
                       <List.Content><a href="https://www.instagram.com/hangryfix_the_app/">Instagram</a></List.Content>
                     </List.Item>

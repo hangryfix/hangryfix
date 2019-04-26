@@ -47,6 +47,7 @@ a.item.navTitle.active {
 }
 
 .navBarLanding {
+  z-index: 2;
   background-color: rgba(255, 255,255, 0);
   color: black;
   z-index: 3;
@@ -108,6 +109,7 @@ html, body {
 
 /* FOOTER STYLES */
 .footer {
+  z-index: 3;
   padding-top: 20px;
   padding-bottom: 60px;
   position: absolute;
@@ -185,4 +187,3 @@ html, body {
 .add-restaurant-form {
   color: black;
 }
-
