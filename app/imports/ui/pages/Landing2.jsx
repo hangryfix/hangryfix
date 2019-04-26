@@ -1,14 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header, Container, Grid, Image, Input, Card, Feed, Loader } from 'semantic-ui-react';
+import { Header, Container, Grid, Image, Input, Card, Feed, Loader, Menu, List } from 'semantic-ui-react';
 import Food from '../components/Food';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Link, NavLink } from 'react-router-dom';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { _ } from 'underscore';
-import { Menu } from 'semantic-ui-react/dist/commonjs/collections/Menu';
 
 /** A component to render the landing page. */
 class Landing2 extends React.Component {
@@ -18,31 +17,84 @@ class Landing2 extends React.Component {
 
   renderPage() {
 
-    const searchStyle = {
-      width: '80%',
-      height: '50px',
+    const iconMenu = {
       color: '#045604',
     };
 
     return (
         <div className="landingMid" id='landing-page-id'>
-
           {/*Main Image/Search Bar  */}
           <Grid columns={2} verticalAlign='middle'>
-              <Grid.Column>
-                <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>
-              </Grid.Column>
-              <Grid.Column>
-                <Input as={ Link } activeClassName="active" exact to="/search" key="youraccount"
-                    class='color-primary-0'
-                    action={{ color: 'green', content: 'Search' }}
-                    actionPosition='right'
-                    icon='search'
-                    iconPosition='left'
-                    placeholder='Hangry??? What are you craving?'
-                    style={searchStyle}/>
-              </Grid.Column>
-            </Grid>
+            <Grid.Column>
+              <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>
+            </Grid.Column>
+            <Grid.Column>
+              <Header as='h2' textAlign='center' style={iconMenu} content='What are you hangry for?'/>
+              <Grid.Row>
+                <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
+                <Menu borderless fluid widths={3}>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search1">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Chinese'/>
+                  </Menu.Item>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search2">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Dessert'/>
+                  </Menu.Item>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search3">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Fast Food'/>
+                  </Menu.Item>
+                </Menu>
+                </Container>
+              </Grid.Row>
+              <Grid.Row>
+                <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
+                <Menu borderless fluid widths={3}>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search4">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Italian'/>
+                  </Menu.Item>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search5">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Japanese'/>
+                  </Menu.Item>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search6">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Local'/>
+                  </Menu.Item>
+                </Menu>
+                </Container>
+              </Grid.Row>
+              <Grid.Row>
+                <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
+                <Menu borderless fluid widths={3}>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search7">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Pizza'/>
+                  </Menu.Item>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search8">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Mexican'/>
+                  </Menu.Item>
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search9">
+                    <Image rounded style={{ width: '100px' }}
+                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                    <Header as='h4' style={iconMenu} content='Tacos'/>
+                  </Menu.Item>
+                </Menu>
+                </Container>
+              </Grid.Row>
+            </Grid.Column>
+          </Grid>
 
           {/*Recent Reviews*/}
           <Container style={{ paddingTop: '20px' }}>
@@ -58,32 +110,32 @@ class Landing2 extends React.Component {
             {/*About Us Section*/}
             <div className='aboutUs'>
               <Grid columns={2} verticalAlign='middle'>
-               <Grid.Row>
-                <Grid.Column>
-            <Header as='h2' style={{color: '#045604'}}>Our Mission</Header>
-            <p>
-              Our Mission here at hangryFIX is to help end hangriness one college student at a time.
-              Are you hangry? Craving a particular type of food or specific food item, but dont know
-            where to get it? HangryFIX is the app for you! Search by food genre or food name to find
-            the best, cheapest, or closest place to get that food to cure your hangriness NOW.</p>
-                </Grid.Column>
-                <Grid.Column>
-                  <Image src="http://c3.thejournal.ie/media/2013/09/eating-chips-390x285.jpg"/>
-                </Grid.Column>
-               </Grid.Row>
                 <Grid.Row>
                   <Grid.Column>
-                    <Image style={{width: '70%'}}
-                        src="http://www.1worldglobalgifts.com/images/Paperweights/blue_green_crystal_globe_paperweight_sm.jpg" />
+                    <Header as='h2' style={{ color: '#045604' }}>Our Mission</Header>
+                    <p>
+                      Our Mission here at hangryFIX is to help end hangriness one college student at a time.
+                      Are you hangry? Craving a particular type of food or specific food item, but dont know
+                      where to get it? HangryFIX is the app for you! Search by food genre or food name to find
+                      the best, cheapest, or closest place to get that food to cure your hangriness NOW.</p>
                   </Grid.Column>
                   <Grid.Column>
-                    <Header as='h2' style={{color: '#045604'}}>Member Perks</Header>
+                    <Image src="http://c3.thejournal.ie/media/2013/09/eating-chips-390x285.jpg"/>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>
+                    <Image style={{ width: '70%' }}
+                           src="http://www.1worldglobalgifts.com/images/Paperweights/blue_green_crystal_globe_paperweight_sm.jpg"/>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Header as='h2' style={{ color: '#045604' }}>Member Perks</Header>
                     <p>
                       Help contribute to the cause by creating an account with us! As a member you can help others with
                       their hangry problems by adding new foods and reviewing foods. You can also look back at your
                       past reviews so you can always find the name of
-                      that one place you got that really good poke from that one time.  And of course, member accounts
-                      are FREE.  So what are you waiting for?  Sign up to end hangriness now!
+                      that one place you got that really good poke from that one time. And of course, member accounts
+                      are FREE. So what are you waiting for? Sign up to end hangriness now!
                     </p>
                   </Grid.Column>
                 </Grid.Row>

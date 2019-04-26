@@ -1,20 +1,35 @@
 import React from 'react';
-import { Container, Form, Button, TextArea, Header, Grid, Rating, Loader } from 'semantic-ui-react';
+import {
+  Container,
+  Form,
+  Button,
+  TextArea,
+  Header,
+  Grid,
+  Rating,
+  Loader,
+  Image,
+  Popup,
+  Input
+} from 'semantic-ui-react';
 import { Reviews, ReviewSchema } from '/imports/api/review/review';
 import { Foods } from '/imports/api/food/food';
 import { Bert } from 'meteor/themeteorchef:bert';
 import PropTypes from 'prop-types';
 import { withTracker, NavLink } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
+import { Redirect } from 'react-router-dom';
 
 /** Renders the Page for adding a document. */
 class EditReview extends React.Component {
 
-
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { review: '', rating: -1 };
+    this.state = {
+      image: '', review: '', rating: -1, redirectToHome: false, imageChanged: false, reviewChanged: false,
+      ratingChanged: false
+    };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeRating = this.handleChangeRating.bind(this);
@@ -24,23 +39,36 @@ class EditReview extends React.Component {
   handleChange(event, type) {
     let s = {};
     s[type] = event.target.value;
+
+    if (type === 'image') {
+      s['imageChanged'] = true;
+    }
+    if (type === 'review') {
+      s['reviewChanged'] = true;
+    }
     this.setState(s);
   }
 
   handleChangeRating(e, { rating }) {
     let s = {};
     s['rating'] = rating;
+      s['ratingChanged'] = true;
+
     this.setState(s);
   }
 
-  submit(username, id) {
-    Reviews.insert({
-      review: this.state.review,
-      rating: this.state.rating,
-      foodId: id,
-      createdAt: Date(),
-      user: username,
-    }, this.insertCallback);
+  submit(username, id, reviewKey, review, rating, image) {
+
+    console.log(id + " " + review + " " + rating );
+    let docId = id;
+    Reviews.update(
+        { _id: docId },
+        {$set: {
+            image: image,
+            rating: rating,
+            review: review,
+          }
+        }, this.insertCallback);
   }
 
   /** Notify the user of the results of the submit. If successful, clear the form. */
@@ -49,7 +77,9 @@ class EditReview extends React.Component {
       Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
     } else {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
-      this.formRef.reset();
+      setTimeout(() => {
+        this.setState({ error: '', redirectToHome: true });
+      }, 100);
     }
   }
 
@@ -61,30 +91,52 @@ class EditReview extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
-
+    const { from } = this.props.location.state || { from: { pathname: '/youraccount' } };
+    // if correct authentication, redirect to page instead of login screen
+    if (this.state.redirectToHome) {
+      return <Redirect to={from}/>;
+    }
     let stringURL = this.props.location.pathname;
     let URLarray = stringURL.split('/:');
     let id = parseInt(URLarray[1]);
-    let reviewObj = this.props.reviews.filter(review => (review._id === id));
-    console.log(reviewObj);
-    const foodObj = this.props.reviews.filter(food => (food._id === reviewObj.foodId));
+    let reviewObjArray = this.props.reviews.filter(review => (review.key === id));
+    let reviewObj = reviewObjArray[0];
+    let foodId = reviewObj.foodId;
+    let foodIdInt = parseInt(foodId);
+    const foodObjArray = this.props.foods.filter(food => (food.key === foodIdInt));
+    const foodObj = foodObjArray[0];
 
     return (
         <Container className='add-food'>
-          <Header as='h1' content='Write A Review' textAlign='center'/>
+          <Header as='h1' content='Edit Your Review' textAlign='center'/>
           <Grid celled='internally'>
             <Grid.Row>
               <Grid.Column width={3} textAlign='center'>
                 <Container className='upload-image'>
-                  <p>Add Image</p>
+                  <Image src={(this.state.imageChanged ? this.state.image : reviewObj.image)} fluid/>
                 </Container>
-                <Button
-                    icon="upload"
-                    label={{
-                      basic: true,
-                      content: 'Upload Image',
-                    }}
-                    labelPosition="right"
+                <Popup
+                    trigger={
+                      <Button
+                          icon="upload"
+                          label={{
+                            basic: true,
+                            content: 'Upload Image'
+                          }}
+                          labelPosition="right"
+                      />
+                    }
+                    content={
+                      <div>
+                        <Input
+                            placeholder='Enter Url...'
+                            onChange={(event) => {
+                              this.handleChange(event, "image")
+                            }}
+                        />
+                      </div>
+                    }
+                    on='click'
                 />
               </Grid.Column>
               <Grid.Column width={13}>
@@ -93,16 +145,16 @@ class EditReview extends React.Component {
                     <Grid.Row>
                       <Grid.Column width={5}>
                         <Header as='h3' content='Item Name'/>
-                        <p>{ foodObj.name }</p>
+                        <p>{foodObj.name}</p>
                       </Grid.Column>
                       <Grid.Column width={5}>
                         <Header as='h3' content='Restaurant Name'/>
-                        <p>{ foodObj.restaurant }</p>
+                        <p>{foodObj.restaurant}</p>
                       </Grid.Column>
                       <Grid.Column width={6} textAlign='center'>
                         <Header as='h3' content='Add A Rating' textAlign='center'/>
                         <Rating icon='heart'
-                                defaultRating={1}
+                                defaultRating={reviewObj.rating}
                                 maxRating={5}
                                 size='huge'
                                 name='rating'
@@ -116,7 +168,7 @@ class EditReview extends React.Component {
                       control={TextArea}
                       label='Review'
                       placeholder='Type your review...'
-                      value={reviewObj.review}
+                      defaultValue={reviewObj.review}
                       onChange={(event) => {
                         this.handleChange(event, "review")
                       }}
@@ -126,9 +178,12 @@ class EditReview extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Submit'
-                        onClick={ () => {
-                          this.submit(this.props.currentUser, id)
-                        } }
+                        onClick={() => {
+                          let review = this.state.reviewChanged ? this.state.review : reviewObj.review;
+                          let rating = this.state.ratingChanged ? this.state.rating : reviewObj.rating;
+                          let image = this.state.imageChanged ? this.state.image : reviewObj.image;
+                          this.submit(this.props.currentUser,  reviewObj._id, foodId, review, rating, image)
+                        }}
                     />
                     <Form.Field
                         id='form-button-control-public'

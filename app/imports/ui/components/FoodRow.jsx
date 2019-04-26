@@ -13,6 +13,7 @@ class FoodRow extends React.Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
+    this.getDefaultRating = this.getDefaultRating.bind(this);
   }
 
   onClick = () => Foods.remove(this.props.food._id, this.deleteCallback)
@@ -24,6 +25,22 @@ class FoodRow extends React.Component {
     } else {
       Bert.alert({ type: 'success', message: 'Food Deleted' });
     }
+  }
+
+  getDefaultRating(price) {
+      let stars = 0
+      if (price < 4 ) {
+        stars = 1;
+      } else if (price >= 4 && price  < 8 ) {
+        stars = 2;
+      } else if (price >= 8 && price  < 12 ) {
+        stars = 3;
+      } else if (price >= 12 && price  < 16 ) {
+        stars = 4;
+      } else  {
+        stars = 5;
+      }
+      return stars;
   }
 
 
@@ -56,7 +73,7 @@ class FoodRow extends React.Component {
             <Icon name="clock" style={{ marginRight: '5px' }} />
             {this.props.food.hours}
             <Icon name="dollar sign" />
-            <Rating size="large" icon="star" defaultRating={this.props.food.price} maxRating={5} disabled/>
+            <Rating size="large" icon="star" defaultRating={ this.getDefaultRating(this.props.food.price) } maxRating={5} disabled/>
           </Table.Cell>
 
           {/*Col 3: Reviews*/}
@@ -139,7 +156,6 @@ class FoodRow extends React.Component {
           {/*Col 5: options*/}
           <Table.Cell>
             <Button.Group>
-              <Button>Edit</Button>
               <Button content='Delete' onClick={this.onClick}/>
             </Button.Group>
           </Table.Cell>

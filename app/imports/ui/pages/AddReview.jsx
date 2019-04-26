@@ -57,7 +57,7 @@ class AddReview extends React.Component {
       Keys.update({ _id: this.props.keys[0]._id }, {$set:{reviews:reviewKey}});
       setTimeout(() => {
         this.setState({ error: '', redirectToHome: true });
-      }, 500);
+      }, 100);
     }
   }
 
