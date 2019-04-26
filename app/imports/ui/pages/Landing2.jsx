@@ -18,7 +18,7 @@ class Landing2 extends React.Component {
   renderPage() {
 
     const iconMenu = {
-      color: '#091D09 ',
+      color: '#045604',
     };
 
     return (
