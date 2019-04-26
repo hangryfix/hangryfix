@@ -139,7 +139,6 @@ class FoodRow extends React.Component {
           {/*Col 5: options*/}
           <Table.Cell>
             <Button.Group>
-              <Button>Edit</Button>
               <Button content='Delete' onClick={this.onClick}/>
             </Button.Group>
           </Table.Cell>

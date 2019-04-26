@@ -12,7 +12,7 @@
 
 /*Landing Page*/
 .landingMid {
-  z-index: -1;
+  z-index: 1;
   position: relative;
   background-color: white;
   margin-top: -100px;
@@ -47,6 +47,7 @@ a.item.navTitle.active {
 }
 
 .navBarLanding {
+  z-index: 2;
   background-color: rgba(255, 255,255, 0);
   color: black;
 }
@@ -106,6 +107,7 @@ html, body {
 
 /* FOOTER STYLES */
 .footer {
+  z-index: 3;
   padding-top: 20px;
   padding-bottom: 60px;
   position: absolute;
