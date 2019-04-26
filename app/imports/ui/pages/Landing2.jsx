@@ -35,17 +35,17 @@ class Landing2 extends React.Component {
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search1">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Chinese'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search2">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Dessert'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search3">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Fast Food'/>
                   </Menu.Item>
                 </Menu>
@@ -56,17 +56,17 @@ class Landing2 extends React.Component {
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search4">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Italian'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search5">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Japanese'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search6">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Local'/>
                   </Menu.Item>
                 </Menu>
@@ -77,17 +77,17 @@ class Landing2 extends React.Component {
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search7">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Pizza'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search8">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Mexican'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search9">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png'/>
+                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Tacos'/>
                   </Menu.Item>
                 </Menu>
