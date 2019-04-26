@@ -12,7 +12,7 @@
 
 /*Landing Page*/
 .landingMid {
-  z-index: -1;
+  z-index: 1;
   position: relative;
   background-color: white;
   margin-top: -100px;
@@ -41,6 +41,7 @@
 /* Navigation Bar */
 .navBar {
   background-color: #045604;
+  z-index: 2;
 }
 a.item.navTitle.active {
   background: none !important;
