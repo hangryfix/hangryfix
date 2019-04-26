@@ -41,7 +41,7 @@
 /* Navigation Bar */
 .navBar {
   background-color: #045604;
-  z-index: 2;
+  z-index: 3;
 }
 a.item.navTitle.active {
   background: none !important;
