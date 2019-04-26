@@ -8,6 +8,29 @@ import { _ } from 'underscore';
 import Review from './Review';
 
 class Food extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.getDefaultRating = this.getDefaultRating.bind(this);
+  }
+
+
+  getDefaultRating(price) {
+    let stars = 0
+    if (price < 4 ) {
+      stars = 1;
+    } else if (price >= 4 && price  < 8 ) {
+      stars = 2;
+    } else if (price >= 8 && price  < 12 ) {
+      stars = 3;
+    } else if (price >= 12 && price  < 16 ) {
+      stars = 4;
+    } else  {
+      stars = 5;
+    }
+    return stars;
+  }
+
   render() {
 
     let averageRating = '';
@@ -45,7 +68,7 @@ class Food extends React.Component {
             </Card.Meta>
             <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
               <Icon name="dollar sign" />
-              <Rating size="large" icon="star" defaultRating={this.props.food.price} maxRating={5} disabled/>
+              <Rating size="large" icon="star" defaultRating={this.getDefaultRating(this.props.food.price)} maxRating={5} disabled/>
             </Card.Meta>
             <Card.Description>
               {this.props.food.description}
