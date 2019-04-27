@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Modal, Label, Divider, Grid, Segment, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -8,6 +8,10 @@ import { _ } from 'underscore';
 import Review from './Review';
 
 class Food extends React.Component {
+
+  static propTypes = {
+    location: PropTypes.object.isRequired,
+  };
 
   constructor(props) {
     super(props);
@@ -32,7 +36,7 @@ class Food extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.restaurant);
     let averageRating = '';
 
     if (this.props.reviews) {
@@ -43,11 +47,16 @@ class Food extends React.Component {
 
     const path = `/addReview/:${this.props.food.key}`;
 
-    const foodCard = () => {
+    const { location } = this.props;
+
+    const landingCard = () => {
+      const imageStyle = { maxWidth: '100%', maxHeight: '100%', width: '120px', height: '120px' };
+      const viewHere = <a>Click here</a>;
+
       return (
           <Card.Content>
-            <Image floated='left' style={{ width: '40%' }} src={this.props.food.image} />
-            <Card.Header style={{ fontSize: '30px' }}>
+            <Image floated='left' style={imageStyle} src={this.props.food.image} />
+            <Card.Header style={{ fontSize: '30px', paddingBottom: '5px' }}>
               {this.props.food.name}
             </Card.Header>
             <Card.Meta style={{ paddingBottom: '30px' }}>
@@ -58,22 +67,90 @@ class Food extends React.Component {
               )
               }
             </Card.Meta>
-            <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
-              <Icon name="map marker alternate" style={{ marginRight: '5px' }}/>
-              {this.props.food.restaurant}
-            </Card.Meta>
-            <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
-              <Icon name="clock" style={{ marginRight: '5px' }} />
-              {this.props.food.hours}
-            </Card.Meta>
-            <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
-              <Icon name="dollar sign" />
-              <Rating size="large" icon="star" defaultRating={this.getDefaultRating(this.props.food.price)} maxRating={5} disabled/>
-            </Card.Meta>
+            <Card.Description>
+              <Card.Description style={{ padding: '2px', paddingRight: '10px' }}>
+                <Icon name="map marker alternate" style={{ paddingRight: '5px' }}/>
+                {this.props.food.restaurant}
+              </Card.Description>
+              <Card.Description style={{ padding: '2px' }}>
+                <Icon name="clock" style={{ marginRight: '5px' }} />
+                <Dropdown text={viewHere}>
+                  <Dropdown.Menu>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Card.Description>
+              <Card.Description style={{ padding: '2px' }}>
+                <Icon name="dollar sign" />
+                <Rating size="large"
+                        icon="star"
+                        defaultRating={this.getDefaultRating(this.props.food.price)}
+                        maxRating={5}
+                        disabled/>
+              </Card.Description>
+            </Card.Description>
+            <Divider horizontal><Icon name="info circle" /></Divider>
             <Card.Description>
               {this.props.food.description}
             </Card.Description>
-            <Card.Meta textAlign="right">
+            <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
+              Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
+            </Card.Meta>
+          </Card.Content>
+      );
+    };
+
+    const yourAccountCard = () => {
+      const imageStyle = { maxWidth: '100%', maxHeight: '100%', width: '160px', height: '160px' };
+      const viewHere = <a>Click here</a>;
+
+      return (
+          <Card.Content>
+            <Image floated='left' style={imageStyle} src={this.props.food.image} />
+            <Card.Header style={{ fontSize: '30px', paddingBottom: '10px' }}>
+              {this.props.food.name}
+            </Card.Header>
+            <Card.Meta style={{ paddingBottom: '30px' }}>
+              {this.props.reviews.length > 0 ? (
+                  <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
+              ) : (
+                  'No ratings yet.'
+              )
+              }
+            </Card.Meta>
+            <Card.Description>
+              <Segment basic style={{ paddingTop: '10px', paddingBottom: '20px' }}>
+                <Grid columns={2} stackable>
+                  <Grid.Column>
+                      <Grid.Row style={{ padding: '2px', paddingRight: '10px' }}>
+                        <Icon name="map marker alternate" style={{ paddingRight: '5px' }}/>
+                        {this.props.food.restaurant}
+                      </Grid.Row>
+                      <Grid.Row style={{ padding: '2px' }}>
+                        <Icon name="clock" style={{ marginRight: '5px' }} />
+                        <Dropdown text={viewHere}>
+                          <Dropdown.Menu>
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </Grid.Row>
+                      <Grid.Row style={{ padding: '2px' }}>
+                        <Icon name="dollar sign" />
+                        <Rating size="large"
+                                icon="star"
+                                defaultRating={this.getDefaultRating(this.props.food.price)}
+                                maxRating={5}
+                                disabled/>
+                      </Grid.Row>
+                  </Grid.Column>
+                  <Grid.Column verticalAlign="middle" textAlign="center">
+                    <Card.Description>
+                      {this.props.food.description}
+                    </Card.Description>
+                  </Grid.Column>
+                </Grid>
+                <Divider vertical><Icon name="info circle" /></Divider>
+              </Segment>
+            </Card.Description>
+            <Card.Meta textAlign="right" style={{ paddingTop: '20px' }}>
               Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
             </Card.Meta>
           </Card.Content>
@@ -88,7 +165,11 @@ class Food extends React.Component {
                 Write a Review
               </Button>
           ) : (
-              <Modal trigger={<Button>Write a Review</Button>}>
+              <Modal trigger={
+                <Button as={ NavLink } activeClassName="active" exact to={path} key="addReview">
+                  Write a Review
+                </Button>
+              }>
                 <Modal.Header>Sign In or Register</Modal.Header>
                 <Modal.Content>
                   <Modal.Description>
@@ -97,7 +178,12 @@ class Food extends React.Component {
                 </Modal.Content>
               </Modal>
           )}
-          {foodCard()}
+          {location.pathname === '/' ? (
+              landingCard()
+          ) : (
+              yourAccountCard()
+          )
+          }
           <Card.Content>
             {this.props.food.tags.map((tag, index) => {
               let returnThis = '';
@@ -125,7 +211,7 @@ class Food extends React.Component {
                 <Modal size='small' trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
                   <Modal.Header>
                     <Card fluid>
-                      {foodCard()}
+                      {yourAccountCard()}
                       <Card.Content>
                         {this.props.food.tags.map((tag, index) => {
                           let returnThis = '';
@@ -156,6 +242,17 @@ class Food extends React.Component {
                         review={review}
                     />)}
                   </Modal.Content>
+                  <Modal.Actions>
+                    <Button
+                        style={{ backgroundColor: '#338D33', color: 'white' }}
+                        as={ NavLink }
+                        activeClassName="active"
+                        exact to={path}
+                        key="addReview">
+                      Write a Review
+                      <Icon inverted name="right chevron" />
+                    </Button>
+                  </Modal.Actions>
                 </Modal>
             ) : (
                 <Card.Header style={{ fontSize: '18px' }}>No reviews yet.</Card.Header>
@@ -169,6 +266,7 @@ class Food extends React.Component {
 Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
+  restaurant: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
 };
 
