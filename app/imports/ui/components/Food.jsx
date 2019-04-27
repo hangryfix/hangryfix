@@ -126,24 +126,14 @@ class Food extends React.Component {
 
     return (
         <Card>
-          { this.props.currentUser ? (
-              <Button as={ NavLink } activeClassName="active" exact to={path} key="addReview">
-                Write a Review
-              </Button>
-          ) : (
-              <Modal trigger={
-                <Button as={ NavLink } activeClassName="active" exact to={path} key="addReview">
-                  Write a Review
-                </Button>
-              }>
-                <Modal.Header>Sign In or Register</Modal.Header>
-                <Modal.Content>
-                  <Modal.Description>
-                    Please sign in to your account or register for an account before leaving a review.
-                  </Modal.Description>
-                </Modal.Content>
-              </Modal>
-          )}
+          <Button
+              style={{ backgroundColor: '#338D33', color: 'white' }}
+              as={ NavLink }
+              activeClassName="active"
+              exact to={path}
+              key="addReview">
+            Write a Review
+          </Button>
           {foodCard(imageStyleNotReviews, nameSizeNotReviews)}
           <Card.Content>
             {this.props.food.tags.map((tag, index) => {
