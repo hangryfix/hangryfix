@@ -36,7 +36,7 @@ class Food extends React.Component {
   }
 
   render() {
-    console.log(this.props.restaurant);
+    console.log(this.props.reviews);
     let averageRating = '';
 
     if (this.props.reviews) {
@@ -76,6 +76,33 @@ class Food extends React.Component {
                 <Icon name="clock" style={{ marginRight: '5px' }} />
                 <Dropdown text={viewHere}>
                   <Dropdown.Menu>
+                    {this.props.food.restaurant.hours ?
+                        (
+                            <div>
+                              <Dropdown.Item
+                                  text={`Mon: ${this.props.food.restaurant.hours[0]} - ${this.props.food.restaurant.hours[1]}`}
+                              />
+                              <Dropdown.Item
+                                  text={`Tues: ${this.props.food.restaurant.hours[2]} - ${this.props.food.restaurant.hours[3]}`}
+                              />
+                              <Dropdown.Item
+                                  text={`Wed: ${this.props.food.restaurant.hours[4]} - ${this.props.food.restaurant.hours[5]}`}
+                              />
+                              <Dropdown.Item
+                                  text={`Thurs: ${this.props.food.restaurant.hours[6]} - ${this.props.food.restaurant.hours[7]}`}
+                              />
+                              <Dropdown.Item
+                                  text={`Fri: ${this.props.food.restaurant.hours[8]} - ${this.props.food.restaurant.hours[9]}`}
+                              />
+                              <Dropdown.Item
+                                  text={`Sat: ${this.props.food.restaurant.hours[10]} - ${this.props.food.restaurant.hours[11]}`}
+                              />
+                              <Dropdown.Item
+                                  text={`Sun: ${this.props.food.restaurant.hours[12]} - ${this.props.food.restaurant.hours[13]}`}
+                              />
+                            </div>
+                        ) : ''
+                    }
                   </Dropdown.Menu>
                 </Dropdown>
               </Card.Description>
@@ -129,6 +156,33 @@ class Food extends React.Component {
                         <Icon name="clock" style={{ marginRight: '5px' }} />
                         <Dropdown text={viewHere}>
                           <Dropdown.Menu>
+                            {this.props.food.restaurant.hours ?
+                                (
+                                    <div>
+                                      <Dropdown.Item
+                                          text={`Mon: ${this.props.food.restaurant.hours[0]} - ${this.props.food.restaurant.hours[1]}`}
+                                      />
+                                      <Dropdown.Item
+                                          text={`Tues: ${this.props.food.restaurant.hours[2]} - ${this.props.food.restaurant.hours[3]}`}
+                                      />
+                                      <Dropdown.Item
+                                          text={`Wed: ${this.props.food.restaurant.hours[4]} - ${this.props.food.restaurant.hours[5]}`}
+                                      />
+                                      <Dropdown.Item
+                                          text={`Thurs: ${this.props.food.restaurant.hours[6]} - ${this.props.food.restaurant.hours[7]}`}
+                                      />
+                                      <Dropdown.Item
+                                          text={`Fri: ${this.props.food.restaurant.hours[8]} - ${this.props.food.restaurant.hours[9]}`}
+                                      />
+                                      <Dropdown.Item
+                                          text={`Sat: ${this.props.food.restaurant.hours[10]} - ${this.props.food.restaurant.hours[11]}`}
+                                      />
+                                      <Dropdown.Item
+                                          text={`Sun: ${this.props.food.restaurant.hours[12]} - ${this.props.food.restaurant.hours[13]}`}
+                                      />
+                                    </div>
+                                ) : ''
+                            }
                           </Dropdown.Menu>
                         </Dropdown>
                       </Grid.Row>
@@ -266,7 +320,6 @@ class Food extends React.Component {
 Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
-  restaurant: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
 };
 
