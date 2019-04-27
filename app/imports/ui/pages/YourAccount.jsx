@@ -24,7 +24,7 @@ class YourAccount extends React.Component {
             false,
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
-                <Card.Group itemsPerRow={2}>
+                <Card.Group itemsPerRow={3}>
                   {this.props.foods.map((food, index) => <Food
                       key={index}
                       food={food}
@@ -33,7 +33,7 @@ class YourAccount extends React.Component {
                 </Card.Group>
               </Tab.Pane> },
               { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
-                <Card.Group itemsPerRow={2}>
+                <Card.Group itemsPerRow={3}>
                   {this.taggedFoods()}
                 </Card.Group>
               </Tab.Pane> }],
