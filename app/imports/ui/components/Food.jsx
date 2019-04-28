@@ -66,7 +66,7 @@ class Food extends React.Component {
             </Card.Meta>
             <Card.Description>
               <Card.Description style={{ padding: '2px', paddingRight: '10px' }}>
-                <Icon name="map marker alternate" style={{ paddingRight: '5px' }}/>
+                <Icon name="map marker alternate" />
                 {this.props.food.restaurant}
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
@@ -209,7 +209,7 @@ class Food extends React.Component {
                   </Modal.Actions>
                 </Modal>
             ) : (
-                <Card.Header style={{ fontSize: '18px' }}>No reviews yet.</Card.Header>
+                <Card.Header>No reviews yet.</Card.Header>
             )
             }
           </Card.Content>
