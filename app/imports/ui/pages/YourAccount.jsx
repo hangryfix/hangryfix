@@ -76,17 +76,9 @@ class YourAccount extends React.Component {
   }
 
   handleClick = () => {
-    const filtered = [];
     if (this.filters.openRestaurants === false) {
       { /* FALSE MEANS THE TOGGLE IS ON */ }
-      const restaurantTimes = [];
-
-      _.map(this.props.foods, function (food) {
-        const spliced = food.restaurant.split(':');
-        const timeObject = { time: '', meridiem: '' };
-        timeObject.time = parseInt(`${spliced[0]}${spliced[1]}`, 10);
-        timeObject.meridiem = spliced[2];
-      });
+      
     }
     this.setState({
       checked: this.state.checked,
