@@ -61,8 +61,6 @@ class Food extends React.Component {
         this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant)).map(restaurant => (address.push(restaurant.address)));
       }
 
-      console.log(address);
-
       return (
           <Card.Content>
             <Image floated='left' style={imageStyle} src={this.props.food.image} />
