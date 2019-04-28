@@ -32,7 +32,6 @@ class Food extends React.Component {
   }
 
   render() {
-    console.log(this.props.reviews);
     let averageRating = '';
 
     if (this.props.reviews) {
@@ -127,7 +126,6 @@ class Food extends React.Component {
     return (
         <Card>
           <Button
-              style={{ backgroundColor: '#338D33', color: 'white' }}
               as={ NavLink }
               activeClassName="active"
               exact to={path}
@@ -159,8 +157,12 @@ class Food extends React.Component {
           </Card.Content>
           <Card.Content>
             {this.props.reviews.length > 0 ? (
-                <Modal size='tiny' trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
-                  <Modal.Content>
+                <Modal
+                    dimmer="blurring"
+                    size='tiny'
+                    trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
+                  <Modal.Content
+                  >
                     <Card fluid>
                       {foodCard(imageStyleReviews, nameSizeReviews)}
                       <Card.Content>
@@ -187,8 +189,8 @@ class Food extends React.Component {
                       </Card.Content>
                     </Card>
                   </Modal.Content>
-                  <Divider horizontal />
-                  <Modal.Content scrolling>
+                  <Modal.Content scrolling
+                  >
                     {this.props.reviews.map((review, index) => <Review
                         key={index}
                         review={review}

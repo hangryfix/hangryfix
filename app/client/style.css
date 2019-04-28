@@ -198,7 +198,3 @@ html, body {
   color: black;
 }
 
-
-.dimmed.dimmable > .ui.modals.dimmer.visible {
-  display: flex !important;
-}

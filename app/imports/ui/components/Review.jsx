@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import { Card, Button, Rating, Icon, Image, Modal } from 'semantic-ui-react';
+import { Card, Button, Rating, Icon, Image, Modal, Divider } from 'semantic-ui-react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Reviews } from '/imports/api/review/review';
@@ -10,10 +10,12 @@ class Review extends React.Component {
 
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
-  handleClick() {
+  state = { showModal: false };
+
+  handleDeleteClick() {
     Reviews.remove(this.props.review._id, this.deleteCallback);
   }
 
@@ -35,7 +37,7 @@ class Review extends React.Component {
                   icon='heart'
                   defaultRating={this.props.review.rating}
                   maxRating={5}
-                  size='medium'
+                  size='large'
                   disabled
                   style={{ marginRight: '5px' }}/>
               {this.props.review.title}
@@ -44,6 +46,7 @@ class Review extends React.Component {
               <Icon name="user" style={{ marginRight: '5px', marginTop: '5px' }} />
               {this.props.review.user} says . . .
             </Card.Meta>
+            <Divider />
             <Card.Description style={{ marginTop: '12px' }}>{this.props.review.review}</Card.Description>
             <Image
                 floated="right"
@@ -53,7 +56,7 @@ class Review extends React.Component {
           <Card.Content extra textAlign="right">
             Last updated: {this.props.review.createdAt.toLocaleDateString('en-US')}
           </Card.Content>
-          { this.props.review.user === Meteor.user().username ? (
+          { Meteor.user() && this.props.review.user === Meteor.user().username ? (
               <Button.Group>
                 <Button
                     as={ NavLink }
@@ -62,12 +65,15 @@ class Review extends React.Component {
                     key="editReview">
                   <Icon name="edit" /> Edit
                 </Button>
-                <Modal size="tiny" trigger={<Button><Icon name="trash" /> Delete</Button>}>
+                <Modal
+                    open={this.state.showModal}
+                    size="tiny"
+                    trigger={<Button onClick={() => this.setState({ showModal: true })}><Icon name="trash" /> Delete</Button>}>
                   <Modal.Header>Delete Review</Modal.Header>
                   <Modal.Content>Are you sure you want to delete this review?</Modal.Content>
                   <Modal.Actions>
-                    <Button compact><Icon name="remove" /> No</Button>
-                    <Button compact onClick={this.handleClick}>
+                    <Button compact onClick={() => this.setState({ showModal: false })}><Icon name="remove" /> No</Button>
+                    <Button compact onClick={this.handleDeleteClick}>
                       <Icon name="checkmark" /> Yes
                     </Button>
                   </Modal.Actions>

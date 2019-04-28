@@ -103,7 +103,7 @@ class Landing2 extends React.Component {
               {this.props.foods.map((food, index) => <Food
                   key={index}
                   food={food}
-                  reviews={this.props.reviews.filter(review => (review.foodId === food._id))}
+                  reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
               />)}
             </Card.Group>
 
