@@ -34,20 +34,20 @@ class YourAccount extends React.Component {
               </Tab.Pane> },
               { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {this.taggedFoods()}
+                  {this.taggedFoods(this.props.foods)}
                 </Card.Group>
               </Tab.Pane> }],
     }
 
   currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
 
-  taggedFoods = () => {
+  taggedFoods = (foods) => {
     const taggedFoodsArray = [];
     if (this.currentUserInfo.tags) {
-      for (let i = 0; i < this.props.foods.length; i++) {
+      for (let i = 0; i < foods.length; i++) {
         for (let j = 0; j < this.currentUserInfo.tags.length; j++) {
-          if (_.where(this.props.foods[i].tags, this.currentUserInfo.tags[j]).length > 0) {
-            taggedFoodsArray.push(this.props.foods[i]);
+          if (_.where(foods[i].tags, this.currentUserInfo.tags[j]).length > 0) {
+            taggedFoodsArray.push(foods[i]);
           }
         }
       }
@@ -76,24 +76,75 @@ class YourAccount extends React.Component {
   }
 
   handleClick = () => {
-    const filtered = [];
-    if (this.filters.openRestaurants === false) {
-      { /* FALSE MEANS THE TOGGLE IS ON */ }
-      const restaurantTimes = [];
+    let priceFiltered = '';
+    let averageRating = '';
+    let ratingFiltered = '';
+    const consolidated = '';
+    let filtersUsed = 0;
+    const filtered = '';
 
-      _.map(this.props.foods, function (food) {
-        const spliced = food.restaurant.split(':');
-        const timeObject = { time: '', meridiem: '' };
-        timeObject.time = parseInt(`${spliced[0]}${spliced[1]}`, 10);
-        timeObject.meridiem = spliced[2];
+    if (this.filters.price !== '') {
+      priceFiltered = this.props.foods.filter(food => (food.price >= this.filters.price));
+      if (priceFiltered !== '') {
+        priceFiltered.map(food => (consolidated.push(food)));
+        filtersUsed++;
+      }
+    }
+
+    if (this.filters.rating !== '') {
+      if (this.props.reviews) {
+        averageRating =
+            Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
+                / (this.props.reviews.length));
+        ratingFiltered = this.props.foods.filter(food => (food.rating >= averageRating));
+      }
+      if (ratingFiltered !== '') {
+        ratingFiltered.map(food => (consolidated.push(food)));
+        filtersUsed++;
+      }
+    }
+
+    if (this.filters.openRestaurants === false) {
+      /* FALSE MEANS THE TOGGLE IS ON */
+
+    }
+
+    if (consolidated !== '') {
+      _.map(consolidated, function (outerFood) {
+        let duplicates = 0;
+        _.map(consolidated, function (innerFood) {
+          if (innerFood === outerFood) {
+            duplicates++;
+          }
+        });
+        if (duplicates - 1 === filtersUsed) {
+          filtered.push(outerFood);
+        }
       });
     }
-    this.setState({
-      checked: this.state.checked,
-      panes:
-          [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>still working on filter...</Tab.Pane> },
-            { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>still working on filter...</Tab.Pane> }] });
-    this.render();
+
+    if (filtered !== '') {
+      this.setState({
+        checked: this.state.checked,
+        panes:
+            [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
+                <Card.Group itemsPerRow={3}>
+                  {filtered.map((food, index) => <Food
+                      key={index}
+                      food={food}
+                      reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+                  />)}
+                </Card.Group>
+              </Tab.Pane> },
+              { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
+                  <Card.Group itemsPerRow={3}>
+                    {this.taggedFoods(filtered)}
+                  </Card.Group>
+                </Tab.Pane> }] });
+
+      this.render();
+    }
+
   }
 
 
