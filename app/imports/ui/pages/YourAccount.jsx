@@ -41,7 +41,6 @@ class YourAccount extends React.Component {
 
   currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
 
-
   taggedFoods = () => {
     const taggedFoodsArray = [];
     if (this.currentUserInfo.tags) {

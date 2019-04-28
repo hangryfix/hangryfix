@@ -198,3 +198,7 @@ html, body {
   color: black;
 }
 
+.restaurantAddress .icon {
+  font-size: 9px !important;
+  padding-left: 8px !important;
+}

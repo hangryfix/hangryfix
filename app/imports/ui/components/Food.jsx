@@ -1,11 +1,13 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Divider, Grid, Segment, Dropdown } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Modal, Label, Divider, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor';
+import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import { _ } from 'underscore';
 import Review from './Review';
+import { Restaurants } from '/imports/api/restaurant/restaurant';
+
 
 class Food extends React.Component {
 
@@ -13,7 +15,6 @@ class Food extends React.Component {
     super(props);
     this.getDefaultRating = this.getDefaultRating.bind(this);
   }
-
 
   getDefaultRating(price) {
     let stars = 0
@@ -48,7 +49,19 @@ class Food extends React.Component {
     const nameSizeNotReviews = { fontSize: '25px' };
 
     const foodCard = (imageStyle, nameSize) => {
-      const viewHere = <a>Click here</a>;
+      const viewHere = <a>Show hours</a>;
+      let hours = [];
+      let address = [];
+
+      if (this.props.restaurants) {
+        this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant))
+            .map(restaurant => (restaurant.hours
+                .map(hour => (hours.push(hour)))
+            ));
+        this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant)).map(restaurant => (address.push(restaurant.address)));
+      }
+
+      console.log(address);
 
       return (
           <Card.Content>
@@ -67,40 +80,38 @@ class Food extends React.Component {
             <Card.Description>
               <Card.Description style={{ padding: '2px', paddingRight: '10px' }}>
                 <Icon name="map marker alternate" />
-                {this.props.food.restaurant}
+                <Dropdown compact pointing="left" className="restaurantAddress" text={this.props.food.restaurant} icon="question">
+                  <Dropdown.Menu><Dropdown.Header>{address[0]}</Dropdown.Header></Dropdown.Menu>
+                </Dropdown>
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
                 <Icon name="clock" style={{ marginRight: '5px' }} />
-                <Dropdown text={viewHere}>
-                  <Dropdown.Menu>
-                    {this.props.food.restaurant.hours ?
-                        (
-                            <div>
-                              <Dropdown.Item
-                                  text={`Mon: ${this.props.food.restaurant.hours[0]} - ${this.props.food.restaurant.hours[1]}`}
-                              />
-                              <Dropdown.Item
-                                  text={`Tues: ${this.props.food.restaurant.hours[2]} - ${this.props.food.restaurant.hours[3]}`}
-                              />
-                              <Dropdown.Item
-                                  text={`Wed: ${this.props.food.restaurant.hours[4]} - ${this.props.food.restaurant.hours[5]}`}
-                              />
-                              <Dropdown.Item
-                                  text={`Thurs: ${this.props.food.restaurant.hours[6]} - ${this.props.food.restaurant.hours[7]}`}
-                              />
-                              <Dropdown.Item
-                                  text={`Fri: ${this.props.food.restaurant.hours[8]} - ${this.props.food.restaurant.hours[9]}`}
-                              />
-                              <Dropdown.Item
-                                  text={`Sat: ${this.props.food.restaurant.hours[10]} - ${this.props.food.restaurant.hours[11]}`}
-                              />
-                              <Dropdown.Item
-                                  text={`Sun: ${this.props.food.restaurant.hours[12]} - ${this.props.food.restaurant.hours[13]}`}
-                              />
-                            </div>
-                        ) : ''
+                <Dropdown text={viewHere} pointing="left">
+                  {this.props.restaurants ?
+                      (
+                        <Dropdown.Menu>
+                          <Dropdown.Header>{`Mon: ${hours[0]} - ${hours[1]}`}</Dropdown.Header>
+                          <Dropdown.Divider/>
+                          <Dropdown.Header>{`Tues: ${hours[2]} - ${hours[3]}`}</Dropdown.Header>
+                          <Dropdown.Divider/>
+                          <Dropdown.Header>{`Wed: ${hours[4]} - ${hours[5]}`}</Dropdown.Header>
+                          <Dropdown.Divider/>
+                          <Dropdown.Header>{`Thu: ${hours[6]} - ${hours[7]}`}</Dropdown.Header>
+                          <Dropdown.Divider/>
+                          <Dropdown.Header>{`Fri: ${hours[8]} - ${hours[9]}`}</Dropdown.Header>
+                          <Dropdown.Divider/>
+                          <Dropdown.Header>{`Sat: ${hours[10]} - ${hours[11]}`}</Dropdown.Header>
+                          <Dropdown.Divider/>
+                          <Dropdown.Header>{`Sun: ${hours[12]} - ${hours[13]}`}</Dropdown.Header>
+                        </Dropdown.Menu>
+                      ) : (
+                          <Dropdown.Menu>
+                            <Dropdown.Item>
+                              Hours not available.
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                      )
                     }
-                  </Dropdown.Menu>
                 </Dropdown>
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
@@ -122,6 +133,7 @@ class Food extends React.Component {
           </Card.Content>
       );
     };
+
 
     return (
         <Card>
@@ -221,10 +233,14 @@ Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
   reviews: PropTypes.array.isRequired,
+  restaurants: PropTypes.array.isRequired,
 };
 
-const FoodContainer = withTracker(() => ({
-  currentUser: Meteor.user() ? Meteor.user().username : '',
-}))(Food);
-
-export default withRouter(FoodContainer);
+export default withTracker(() => {
+  const subscription = Meteor.subscribe('Restaurants');
+  return {
+    currentUser: Meteor.user() ? Meteor.user().username : '',
+    restaurants: Restaurants.find({}).fetch(),
+    ready: subscription.ready(),
+  };
+})(Food);
