@@ -35,12 +35,12 @@ class Landing2 extends React.Component {
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search1">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                           src='https://i.ibb.co/K5ZJ6XB/hangryfix-logo-green-dark2.png'/>
                     <Header as='h4' style={iconMenu} content='Chinese'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search2">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                           src='https://i.ibb.co/WsnfD4j/hangryfix-logo-green-dark.png'/>
                     <Header as='h4' style={iconMenu} content='Dessert'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search3">
@@ -56,7 +56,7 @@ class Landing2 extends React.Component {
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search4">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                           src='https://i.ibb.co/WsnfD4j/hangryfix-logo-green-dark.png'/>
                     <Header as='h4' style={iconMenu} content='Italian'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search5">
@@ -66,7 +66,7 @@ class Landing2 extends React.Component {
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search6">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                           src='https://i.ibb.co/hsbkrKT/hangryfix-logo-green2.png'/>
                     <Header as='h4' style={iconMenu} content='Local'/>
                   </Menu.Item>
                 </Menu>
@@ -82,12 +82,12 @@ class Landing2 extends React.Component {
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search8">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                           src='https://i.ibb.co/hsbkrKT/hangryfix-logo-green2.png'/>
                     <Header as='h4' style={iconMenu} content='Mexican'/>
                   </Menu.Item>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search9">
                     <Image rounded style={{ width: '100px' }}
-                           src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                           src='https://i.ibb.co/4tzvGFK/hangryfix-logo-green3.png'/>
                     <Header as='h4' style={iconMenu} content='Tacos'/>
                   </Menu.Item>
                 </Menu>
