@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -7,7 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'underscore';
 import Review from './Review';
 import { Foods } from '/imports/api/food/food';
-
+import { Restaurants } from '/imports/api/restaurant/restaurant';
 
 class FoodRow extends React.Component {
   constructor(props) {
@@ -44,6 +44,7 @@ class FoodRow extends React.Component {
   }
 
 
+
   render() {
 
     let averageRating = '';
@@ -56,10 +57,21 @@ class FoodRow extends React.Component {
 
     const path = `/addReview/:${this.props.food.key}`;
 
+
+
+    const restHours = () => {
+      let hours = [];
+      this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant))
+        .map(restaurant => (restaurant.hours.map(hour => (hours.push(hour)))
+        ))
+    }
+
+
+
     return (
         <Table.Row>
           {/*Col 1: Image/Name*/}
-          <Table.Cell>
+          <Table.Cell style={{ width: '30%' }}>
             <Image floated='left' style={{ width: '40%' }} src={this.props.food.image} />
             <Header as='h3' textAlign='left'>
               {this.props.food.name}
@@ -67,17 +79,40 @@ class FoodRow extends React.Component {
           </Table.Cell>
 
             {/*Col 2: Info*/}
-          <Table.Cell>
+          <Table.Cell style={{ width: '20%' }}>
             <Icon name="map marker alternate" style={{ marginRight: '5px' }}/>
             {this.props.food.restaurant}
-            <Icon name="clock" style={{ marginRight: '5px' }} />
-            {this.props.food.hours}
-            <Icon name="dollar sign" />
-            <Rating size="large" icon="star" defaultRating={ this.getDefaultRating(this.props.food.price) } maxRating={5} disabled/>
+            {/*<div name="hours">*/}
+              {/*<Icon name="clock" style={{ marginRight: '5px' }} />*/}
+              {/*<Dropdown text={<a>Show hours</a>} pointing="left">*/}
+                {/*{restHours()}*/}
+                        {/*<Dropdown.Menu>*/}
+                          {/*<Dropdown.Header>{`Mon: ${hours[0]} - ${hours[1]}`}</Dropdown.Header>*/}
+                          {/*<Dropdown.Divider/>*/}
+                          {/*<Dropdown.Header>{`Tues: ${hours[2]} - ${hours[3]}`}</Dropdown.Header>*/}
+                          {/*<Dropdown.Divider/>*/}
+                          {/*<Dropdown.Header>{`Wed: ${hours[4]} - ${hours[5]}`}</Dropdown.Header>*/}
+                          {/*<Dropdown.Divider/>*/}
+                          {/*<Dropdown.Header>{`Thu: ${hours[6]} - ${hours[7]}`}</Dropdown.Header>*/}
+                          {/*<Dropdown.Divider/>*/}
+                          {/*<Dropdown.Header>{`Fri: ${hours[8]} - ${hours[9]}`}</Dropdown.Header>*/}
+                          {/*<Dropdown.Divider/>*/}
+                          {/*<Dropdown.Header>{`Sat: ${hours[10]} - ${hours[11]}`}</Dropdown.Header>*/}
+                          {/*<Dropdown.Divider/>*/}
+                          {/*<Dropdown.Header>{`Sun: ${hours[12]} - ${hours[13]}`}</Dropdown.Header>*/}
+                        {/*</Dropdown.Menu>*/}
+              {/*</Dropdown>*/}
+            {/*</div>*/}
+            <div name="price"><Icon name="dollar sign" />
+            <Rating size="large"
+                    icon="star"
+                    defaultRating={this.getDefaultRating(this.props.food.price)}
+                    maxRating={5}
+                    disabled/></div>
           </Table.Cell>
 
           {/*Col 3: Reviews*/}
-            <Table.Cell style={{ paddingBottom: '30px' }}>
+            <Table.Cell style={{ paddingBottom: '30px', width: '20%'}}>
               {this.props.reviews.length > 0 ? (
                   <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
@@ -145,7 +180,7 @@ class FoodRow extends React.Component {
             </Table.Cell>
 
           {/*Col 4: tags*/}
-          <Table.Cell>
+          <Table.Cell style={{ width: '20%' }}>
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
@@ -168,10 +203,12 @@ FoodRow.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
   reviews: PropTypes.array.isRequired,
+  restaurants: PropTypes.array.isRequired,
 };
 
 const FoodRows = withTracker(() => ({
   currentUser: Meteor.user() ? Meteor.user().username : '',
+  restaurants: Restaurants.find({}).fetch(),
 }))(FoodRow);
 
 export default withRouter(FoodRows);

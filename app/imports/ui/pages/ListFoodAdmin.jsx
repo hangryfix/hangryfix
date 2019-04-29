@@ -37,19 +37,9 @@ class ListFoodAdmin extends React.Component {
               </Segment>
             </Grid.Column>
             <Grid.Column width={13}>
-              <Grid container>
-                <Grid.Row>
-                  <Grid.Column width={4}>
-                    <Search fluid placeholder='Search...' />
-                  </Grid.Column>
-                  <Grid.Column width={8}>
-                    <Header as='h2' inverted textAlign='center' content='Search Results for Chicken'/>
-                  </Grid.Column>
-                  <Grid.Column width={4}>
-                    <Dropdown placeholder='Sort' search selection />
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
+              <Grid.Row>
+                <Header textAlign='center' inverted as='h1' content='Food'/>
+              </Grid.Row>
 
               {/*Food Table*/}
               <Table celled>
