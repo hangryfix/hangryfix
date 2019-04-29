@@ -33,10 +33,9 @@ class Food extends React.Component {
   }
 
   render() {
-    let averageRating = '';
 
     if (this.props.reviews) {
-      averageRating =
+      this.props.food.averageRating =
           Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
               / (this.props.reviews.length));
     }
@@ -69,7 +68,7 @@ class Food extends React.Component {
             </Card.Header>
             <Card.Meta style={{ paddingBottom: '30px', paddingTop: '5px' }}>
               {this.props.reviews.length > 0 ? (
-                  <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
+                  <Rating size="huge" icon="heart" defaultRating={this.props.food.averageRating} maxRating={5} disabled/>
               ) : (
                   'No ratings yet.'
               )

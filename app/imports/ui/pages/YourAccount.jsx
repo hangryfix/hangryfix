@@ -13,14 +13,17 @@ import Food from '../components/Food';
 
 class YourAccount extends React.Component {
 
+
   filters = {
     rating: '',
     price: '',
     openRestaurants: '',
+    noRatings: '',
   }
 
+
   state =
-      { checked:
+      { restaurantChecked:
             false,
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
@@ -37,7 +40,9 @@ class YourAccount extends React.Component {
                   {this.taggedFoods(this.props.foods)}
                 </Card.Group>
               </Tab.Pane> }],
-    }
+        ratingChecked:
+            false,
+    };
 
   currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
 
@@ -61,11 +66,19 @@ class YourAccount extends React.Component {
     );
   };
 
-  toggle = () => {
-    this.setState({ checked: !this.state.checked });
-    this.filters.openRestaurants = this.state.checked;
+
+  toggleRestaurant = () => {
+    this.setState({ restaurantChecked: !this.state.restaurantChecked });
+    this.filters.openRestaurants = this.state.restaurantChecked;
     // IF CHECKED, THEN EQUALS FALSE
   }
+
+  toggleRating = () => {
+    this.setState({ ratingChecked: !this.state.ratingChecked });
+    this.filters.noRating = this.state.ratingChecked;
+    // IF CHECKED, THEN EQUALS FALSE
+  }
+
 
   heartRating = (e, { rating }) => {
     this.filters.rating = rating;
@@ -75,16 +88,31 @@ class YourAccount extends React.Component {
     this.filters.price = rating;
   }
 
+
   handleClick = () => {
     let priceFiltered = '';
-    let averageRating = '';
+    const priceConversion = (price) => {
+      let stars = 0;
+      if (price < 4) {
+        stars = 1;
+      } else if (price >= 4 && price < 8) {
+        stars = 2;
+      } else if (price >= 8 && price < 12) {
+        stars = 3;
+      } else if (price >= 12 && price < 16) {
+        stars = 4;
+      } else {
+        stars = 5;
+      }
+      return stars;
+    };
     let ratingFiltered = '';
-    const consolidated = '';
+    const consolidated = [];
     let filtersUsed = 0;
-    const filtered = '';
+    const filtered = [];
 
     if (this.filters.price !== '') {
-      priceFiltered = this.props.foods.filter(food => (food.price >= this.filters.price));
+      priceFiltered = this.props.foods.filter(food => (priceConversion(food.price) <= this.filters.price));
       if (priceFiltered !== '') {
         priceFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
@@ -92,16 +120,15 @@ class YourAccount extends React.Component {
     }
 
     if (this.filters.rating !== '') {
-      if (this.props.reviews) {
-        averageRating =
-            Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
-                / (this.props.reviews.length));
-        ratingFiltered = this.props.foods.filter(food => (food.rating >= averageRating));
-      }
+      ratingFiltered = this.props.foods.filter(food => (food.averageRating ? (food.averageRating >= this.filters.rating) : ''));
       if (ratingFiltered !== '') {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
+    }
+
+    if (this.filters.noRatings) {
+
     }
 
     if (this.filters.openRestaurants === false) {
@@ -123,6 +150,7 @@ class YourAccount extends React.Component {
       });
     }
 
+    { /*
     if (filtered !== '') {
       this.setState({
         checked: this.state.checked,
@@ -142,8 +170,10 @@ class YourAccount extends React.Component {
                   </Card.Group>
                 </Tab.Pane> }] });
 
-      this.render();
+       this.render();
     }
+
+    */}
 
   }
 
@@ -152,9 +182,12 @@ class YourAccount extends React.Component {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
+
   renderPage() {
     return (
-        <div className='search-sidebar' style={{ backgroundColor: '#338D33', minHeight: '600px', paddingBottom: '60px' }}>
+        <div
+            className='search-sidebar'
+            style={{ backgroundColor: '#338D33', minHeight: '600px', paddingBottom: '60px' }}>
           <Grid>
             <Grid.Column width={4}>
               <div className='search-sidebar'>
@@ -169,8 +202,8 @@ class YourAccount extends React.Component {
                       toggle
                       label='Search Open Restaurants Only'
                       style={{ paddingTop: '10px' }}
-                      onChange={this.toggle}
-                      checked={this.state.checked}
+                      onChange={this.toggleRestaurant}
+                      checked={this.state.restaurantChecked}
                   />
                   <Header as='h3' content='Rating'/>
                   <Rating
@@ -179,6 +212,13 @@ class YourAccount extends React.Component {
                       size='massive'
                       onRate={this.heartRating}
                   />
+                  <Radio
+                    toggle
+                    label='Include Foods with No Ratings'
+                    style={{ paddingTop: '10px' }}
+                    onChange={this.toggleRating}
+                    checked={this.state.ratingChecked}
+                  />
                   <Header as='h3' content='Price'/>
                   <Rating
                       icon='star'
@@ -186,7 +226,11 @@ class YourAccount extends React.Component {
                       size='massive'
                       onRate={this.starRating}
                   />
-                  <Button onClick={this.handleClick} fluid style={{ backgroundColor: '#21BA45', color: 'white' }}>Go</Button>
+                  <Button
+                      onClick={this.handleClick}
+                      fluid style={{ backgroundColor: '#21BA45', color: 'white' }}>
+                    Go
+                  </Button>
                 </Container>
               </div>
             </Grid.Column>
@@ -199,6 +243,7 @@ class YourAccount extends React.Component {
   }
 }
 
+
 YourAccount.propTypes = {
   foods: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
@@ -206,6 +251,7 @@ YourAccount.propTypes = {
   userInfo: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
+
 
 export default withTracker(() => {
   const subscription = Meteor.subscribe('Foods');
