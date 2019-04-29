@@ -41,7 +41,7 @@ class UserRow extends React.Component {
     return (
         <Table.Row>
           {/*Col 1: User*/}
-          <Table.Cell>
+          <Table.Cell style={{ width: '25%' }}>
             <Header as='h3' textAlign='left'>
               {this.props.userInfo.firstName} {this.props.userInfo.lastName}
             </Header>
@@ -54,7 +54,7 @@ class UserRow extends React.Component {
           </Table.Cell>
 
           {/*Col 2: Reviews*/}
-            <Table.Cell style={{ paddingBottom: '30px' }}>
+            <Table.Cell style={{ paddingBottom: '30px', width: '30%' }}>
               {this.props.reviews.length > 0 ? (
                   <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
@@ -86,7 +86,7 @@ class UserRow extends React.Component {
             </Table.Cell>
 
           {/*Col 3: tags*/}
-          <Table.Cell>
+          <Table.Cell style={{ width: '30%' }}>
             {this.props.userInfo.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
