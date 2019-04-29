@@ -18,10 +18,6 @@ class NavBar extends React.Component {
   render() {
 
     const { location } = this.props;
-    const searchStyle = {
-      width: '80%',
-      color: '#045604',
-    };
 
     let styleName = '';
     let rightStyle = '';
@@ -44,19 +40,13 @@ class NavBar extends React.Component {
                     <Menu.Item as={ NavLink } activeClassName="active" exact to="/youraccount" key="youraccount">
                       <Image style={{ width: '100px' }} src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png' />
                     </Menu.Item>,
-                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search">
-                      <Input
-                          className='color-primary-0'
-                          action={{ color: 'green', content: 'Search' }}
-                          actionPosition='right'
-                          icon='search'
-                          iconPosition='left'
-                          placeholder='Hangry??? What are you craving?'
-                          style={searchStyle}/>
-                    </Menu.Item>,
                     <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/addFood"
                                key="addFood">
                       Add Food
+                    </Menu.Item>,
+                    <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/search/:All"
+                               key="search">
+                      Search
                     </Menu.Item>,
                   ]
               ) : ''
@@ -75,6 +65,10 @@ class NavBar extends React.Component {
                         key="landing"
                     >
                       <Image style={{ width: '100px' }} src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png' />
+                    </Menu.Item>,
+                    <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/search/:All"
+                               key="search">
+                      Search
                     </Menu.Item>,
                     <Menu.Item position="right" key="unloggedUser">
                       <Dropdown pointing="top right" className={ rightStyle } text="Login" icon="user" direction="left">

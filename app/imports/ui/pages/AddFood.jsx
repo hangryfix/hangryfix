@@ -72,7 +72,7 @@ class AddFood extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.restaurantsReady && this.props.tagsReady && this.props.categoriesReady && this.props.keysReady) ? this.renderPage() :
+    return (this.props.ready) ? this.renderPage() :
         <Loader active>Getting data</Loader>;
   }
 
@@ -235,9 +235,7 @@ AddFood.propTypes = {
   restaurants: PropTypes.array.isRequired,
   tags: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
-  restaurantsReady: PropTypes.bool.isRequired,
-  tagsReady: PropTypes.bool.isRequired,
-  categoriesReady: PropTypes.bool.isRequired,
+  keys: PropTypes.array.isRequired,
   currentUser: PropTypes.string,
 };
 
@@ -255,10 +253,7 @@ export default withTracker(() => {
     tags: Tags.find({}).fetch(),
     categories: Tags.find({}).fetch(),
     keys: Keys.find({}).fetch(),
-    restaurantsReady: restaurantSubscription.ready(),
-    tagsReady: tagSubscription.ready(),
-    categoriesReady: categorySubscription.ready(),
-    keysReady: keySubscription.ready(),
+    ready: tagSubscription.ready() && categorySubscription.ready() && keySubscription.ready() && restaurantSubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(AddFood);

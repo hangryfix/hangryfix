@@ -138,6 +138,42 @@
       "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
       "description": "So ONO.",
       "tags": ["Pork", "Cheese"]
+    },
+    {
+      "key": "4",
+      "name": "Spam Pizza",
+      "restaurant": "Pizza Hut",
+      "category": "Pizza",
+      "price": "12.99",
+      "image": "https://passionatepennypincher.com/wp-content/uploads/2017/09/Pizza-Hut-Pizza.png",
+      "owner": "Jay",
+      "timestamp": "Mon Apr 23 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "This one is good, but not as good as the pepperoni pizza.",
+      "tags": ["Cheese", "Meat"]
+    },
+    {
+      "key": "5",
+      "name": "Orange Chicken",
+      "restaurant": "Panda Express",
+      "category": "Chinese",
+      "price": "9.50",
+      "image": "https://i.ibb.co/r2Cp0TK/froyo.jpg",
+      "owner": "GNB4lyfe",
+      "timestamp": "Wed Apr 26 2019 11:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "Classic, what more you need to know?",
+      "tags": ["Chicken"]
+    },
+    {
+      "key": "6",
+      "name": "Curry Chicken Manapua",
+      "restaurant": "L&L Hawaiian Barbecue",
+      "category": "Local",
+      "price": "14.99",
+      "image": "https://i.ibb.co/8cJFSLv/kalua-nachos.jpg",
+      "owner": "JohnDoe",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "So ONO.",
+      "tags": ["Pork", "Cheese"]
     }
   ],
 
