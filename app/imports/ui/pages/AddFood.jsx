@@ -72,8 +72,7 @@ class AddFood extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.ready) ? this.renderPage() :
-        <Loader active>Getting data</Loader>;
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
@@ -236,6 +235,7 @@ AddFood.propTypes = {
   tags: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   keys: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
   currentUser: PropTypes.string,
 };
 
@@ -243,7 +243,7 @@ AddFood.propTypes = {
 export default withTracker(() => {
 
   // Get access to Stuff documents.
-  const restaurantSubscription = Meteor.subscribe('Restaurant');
+  const restaurantSubscription = Meteor.subscribe('Restaurants');
   const tagSubscription = Meteor.subscribe('Tag');
   const categorySubscription = Meteor.subscribe('Category');
   const keySubscription = Meteor.subscribe('Keys');
