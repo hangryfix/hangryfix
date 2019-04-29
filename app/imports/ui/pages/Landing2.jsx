@@ -33,17 +33,17 @@ class Landing2 extends React.Component {
               <Grid.Row>
                 <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
                 <Menu borderless fluid widths={3}>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search1">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Chinese" key="search1">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/K5ZJ6XB/hangryfix-logo-green-dark2.png'/>
                     <Header as='h4' style={iconMenu} content='Chinese'/>
                   </Menu.Item>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search2">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Dessert" key="search2">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/WsnfD4j/hangryfix-logo-green-dark.png'/>
                     <Header as='h4' style={iconMenu} content='Dessert'/>
                   </Menu.Item>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search3">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Fast Food" key="search3">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Fast Food'/>
@@ -54,17 +54,17 @@ class Landing2 extends React.Component {
               <Grid.Row>
                 <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
                 <Menu borderless fluid widths={3}>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search4">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Italian" key="search4">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/WsnfD4j/hangryfix-logo-green-dark.png'/>
                     <Header as='h4' style={iconMenu} content='Italian'/>
                   </Menu.Item>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search5">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Japanese" key="search5">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Japanese'/>
                   </Menu.Item>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search6">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Local" key="search6">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/hsbkrKT/hangryfix-logo-green2.png'/>
                     <Header as='h4' style={iconMenu} content='Local'/>
@@ -75,17 +75,17 @@ class Landing2 extends React.Component {
               <Grid.Row>
                 <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
                 <Menu borderless fluid widths={3}>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search7">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Pizza" key="search7">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
                     <Header as='h4' style={iconMenu} content='Pizza'/>
                   </Menu.Item>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search8">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Mexican" key="search8">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/hsbkrKT/hangryfix-logo-green2.png'/>
                     <Header as='h4' style={iconMenu} content='Mexican'/>
                   </Menu.Item>
-                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search" key="search9">
+                  <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Tacos" key="search9">
                     <Image rounded style={{ width: '100px' }}
                            src='https://i.ibb.co/4tzvGFK/hangryfix-logo-green3.png'/>
                     <Header as='h4' style={iconMenu} content='Tacos'/>

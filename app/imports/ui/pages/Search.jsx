@@ -1,9 +1,15 @@
 import React from 'react';
-import { Grid, Search, Table, Header, Rating, Image, Dropdown } from 'semantic-ui-react';
+import { Grid, Table, Header, Rating, Image, Dropdown } from 'semantic-ui-react';
 import SearchSidebar from '../components/SearchSidebar';
+import PropTypes from 'prop-types';
+import { Reviews } from '/imports/api/review/review';
+import { Foods } from '/imports/api/food/food';
+import { Meteor } from 'meteor/meteor';
+import { withTracker, NavLink } from 'meteor/react-meteor-data';
+import FoodRowSearchPage from '../components/FoodRowSearchPage';
 
 /** A simple static component to render some text for the landing page. */
-class Landing extends React.Component {
+class Search extends React.Component {
   render() {
     const searchStyle = { padding: '20px 0 0 0' };
     return (
@@ -67,10 +73,6 @@ class Landing extends React.Component {
               <Grid>
                 <Grid.Row>
                   <Grid.Column width={4}>
-                    <Search
-                        fluid
-                        placeholder='Search...'
-                    />
                   </Grid.Column>
                   <Grid.Column width={8}>
                     <Header as='h2' textAlign='center' content='Search Results for Chicken'/>
@@ -80,65 +82,13 @@ class Landing extends React.Component {
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
-              <Table singleLine>
-                <Table.Body>
-                  <Table.Row>
-                    <Table.Cell>
-                      <Image
-                          src='https://cdn.cpnscdn.com/static.coupons.com/ext/kitchme/images/recipes/600x400/chicken-katsu_18841.jpg'
-                          size='small'/>
-                    </Table.Cell>
-                    <Table.Cell singleLine>
-                      <Header as='h3' textAlign='center' content='Chicken Katsu'/>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Rating icon='heart' defaultRating={3} maxRating={5} size='large'/>
-                    </Table.Cell>
-                    <Table.Cell textAlign='right'>
-                      <Header as='h3' textAlign='center' content='L&L Hawaiian'/>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Header as='h3' textAlign='center' content='Price: $8.99'/>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      <Image
-                          src='https://food.fnr.sndimg.com/content/dam/images/food/fullset/2009/2/1/0/AI0207-1_Shoyu-Chicken_s4x3.jpg.rend.hgtvcom.826.620.suffix/1432472001346.jpeg'
-                          size='small'/>
-                    </Table.Cell>
-                    <Table.Cell singleLine>
-                      <Header as='h3' textAlign='center' content='Shoyu Chicken'/>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Rating icon='heart' defaultRating={5} maxRating={5} size='large'/>
-                    </Table.Cell>
-                    <Table.Cell textAlign='right'>
-                      <Header as='h3' textAlign='center' content='Holoholo Grill'/>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Header as='h3' textAlign='center' content='Price: $10.00'/>
-                    </Table.Cell>
-                  </Table.Row>
-                  <Table.Row>
-                    <Table.Cell>
-                      <Image
-                          src='https://www.eatthis.com/wp-content/uploads/2018/10/panda-express-teriyaki-chicken-500x366.jpg'
-                          size='small'/>
-                    </Table.Cell>
-                    <Table.Cell singleLine>
-                      <Header as='h3' textAlign='center' content='Teriyaki Chicken'/>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Rating icon='heart' defaultRating={5} maxRating={5} size='large'/>
-                    </Table.Cell>
-                    <Table.Cell textAlign='right'>
-                      <Header as='h3' textAlign='center' content='Panda Express'/>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Header as='h3' textAlign='center' content='Price: $7.99'/>
-                    </Table.Cell>
-                  </Table.Row>
+              <Table style={{width: '100%'}}>
+                <Table.Body style={{width: '100%'}}>
+                  {this.props.foods.map((food, index) => <FoodRowSearchPage
+                      key={index}
+                      food={food}
+                      reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
+                  />)}
                 </Table.Body>
               </Table>
             </Grid.Column>
@@ -148,4 +98,29 @@ class Landing extends React.Component {
   }
 }
 
-export default Landing;
+Search.propTypes = {
+  foods: PropTypes.array.isRequired,
+  foodsReady: PropTypes.bool.isRequired,
+  reviews: PropTypes.array.isRequired,
+  reviewsReady: PropTypes.bool.isRequired,
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  currentUser: PropTypes.string,
+};
+
+/** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
+export default withTracker(() => {
+
+  // Get access to Stuff documents.
+  const foodSubscription = Meteor.subscribe('Foods');
+  const reviewSubscription = Meteor.subscribe('Reviews');
+
+  return {
+    foods: Foods.find({}).fetch(),
+    foodsReady: foodSubscription.ready(),
+    reviews: Reviews.find({}).fetch(),
+    reviewsReady: reviewSubscription.ready(),
+    currentUser: Meteor.user() ? Meteor.user().username : '',
+  };
+})(Search);
