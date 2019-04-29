@@ -49,15 +49,16 @@ class Food extends React.Component {
 
     const foodCard = (imageStyle, nameSize) => {
       const viewHere = <a>Show hours</a>;
-      let hours = [];
-      let address = [];
+      const hours = [];
+      const address = [];
 
       if (this.props.restaurants) {
         this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant))
             .map(restaurant => (restaurant.hours
                 .map(hour => (hours.push(hour)))
             ));
-        this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant)).map(restaurant => (address.push(restaurant.address)));
+        this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant))
+            .map(restaurant => (address.push(restaurant.address)));
       }
 
       return (
@@ -68,7 +69,12 @@ class Food extends React.Component {
             </Card.Header>
             <Card.Meta style={{ paddingBottom: '30px', paddingTop: '5px' }}>
               {this.props.reviews.length > 0 ? (
-                  <Rating size="huge" icon="heart" defaultRating={this.props.food.averageRating} maxRating={5} disabled/>
+                  <Rating
+                      size="huge"
+                      icon="heart"
+                      defaultRating={this.props.food.averageRating}
+                      maxRating={5}
+                      disabled/>
               ) : (
                   'No ratings yet.'
               )
@@ -77,7 +83,12 @@ class Food extends React.Component {
             <Card.Description>
               <Card.Description style={{ padding: '2px', paddingRight: '10px' }}>
                 <Icon name="map marker alternate" />
-                <Dropdown compact pointing="left" className="restaurantAddress" text={this.props.food.restaurant} icon="question">
+                <Dropdown
+                    compact
+                    pointing="left"
+                    className="restaurantAddress"
+                    text={this.props.food.restaurant}
+                    icon="question">
                   <Dropdown.Menu><Dropdown.Header>{address[0]}</Dropdown.Header></Dropdown.Menu>
                 </Dropdown>
               </Card.Description>

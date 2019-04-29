@@ -4,6 +4,7 @@ import { Tab, Card, Loader, Grid, Header, Container, Button, Radio, Rating } fro
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { UserInfo } from '/imports/api/user-info/user-info';
+import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'underscore';
@@ -75,7 +76,7 @@ class YourAccount extends React.Component {
 
   toggleRating = () => {
     this.setState({ ratingChecked: !this.state.ratingChecked });
-    this.filters.noRating = this.state.ratingChecked;
+    this.filters.noRatings = this.state.ratingChecked;
     // IF CHECKED, THEN EQUALS FALSE
   }
 
@@ -120,20 +121,28 @@ class YourAccount extends React.Component {
     }
 
     if (this.filters.rating !== '') {
-      ratingFiltered = this.props.foods.filter(food => (food.averageRating ? (food.averageRating >= this.filters.rating) : ''));
+      ratingFiltered = this.props.foods
+          .filter(food => (food.averageRating ? (food.averageRating >= this.filters.rating) : ''));
       if (ratingFiltered !== '') {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
     }
 
-    if (this.filters.noRatings) {
-
+    if (this.filters.noRatings === false) {
+      this.props.foods.map(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
     }
 
     if (this.filters.openRestaurants === false) {
       /* FALSE MEANS THE TOGGLE IS ON */
-
+      const hours = [];
+      this.props.foods.map(food => (
+          this.props.restaurants.filter(restaurant => (restaurant.name === food.restaurant))
+              .map(restaurant => (
+                  console.log(restaurant.hours[new Date().getDay()])
+              ))
+      ));
+      console.log(hours);
     }
 
     if (consolidated !== '') {
@@ -249,6 +258,7 @@ YourAccount.propTypes = {
   reviews: PropTypes.array.isRequired,
   currentUser: PropTypes.string,
   userInfo: PropTypes.array.isRequired,
+  restaurants: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -257,11 +267,13 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe('Foods');
   const subscription2 = Meteor.subscribe('Reviews');
   const subscription3 = Meteor.subscribe('UserInfo');
+  const subscription4 = Meteor.subscribe('Restaurants');
   return {
     currentUser: Meteor.user() ? Meteor.user().username : '',
     foods: Foods.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
     userInfo: UserInfo.find({}).fetch(),
-    ready: subscription.ready() && subscription2.ready() && subscription3.ready(),
+    restaurants: Restaurants.find({}).fetch(),
+    ready: subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready(),
   };
 })(YourAccount);
