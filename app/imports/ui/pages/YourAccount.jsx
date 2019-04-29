@@ -8,7 +8,6 @@ import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'underscore';
-import moment from 'moment';
 import Food from '../components/Food';
 
 
@@ -108,6 +107,7 @@ class YourAccount extends React.Component {
       return stars;
     };
     let ratingFiltered = '';
+    const restaurantFiltered = [];
     const consolidated = [];
     let filtersUsed = 0;
     const filtered = [];
@@ -135,15 +135,50 @@ class YourAccount extends React.Component {
 
     if (this.filters.openRestaurants === false) {
       /* FALSE MEANS THE TOGGLE IS ON */
-      const hours = [];
-      this.props.foods.map(food => (
-          this.props.restaurants.filter(restaurant => (restaurant.name === food.restaurant))
-              .map(restaurant => (
-                  console.log(restaurant.hours[new Date().getDay()])
-              ))
-      ));
-      console.log(hours);
+      let restaurant = '';
+      let openHour = '';
+      let closeHour = '';
+      let sameMeridiem = false;
+      for (let i = 0; i < this.props.foods.length; i++) {
+        for (let j = 0; j < this.props.restaurants.length; j++) {
+          if (this.props.foods[i].restaurant === this.props.restaurants[j].name) {
+            restaurant = this.props.restaurants[j];
+            break;
+          }
+        }
+        const stringTimeToInt = (stringTime) => {
+          let intTime = '';
+          intTime = stringTime.slice(0, stringTime.indexOf(' '));
+          const splitIntTime = intTime.split(':');
+          intTime = parseInt(splitIntTime.join(''), 10);
+          return intTime;
+        };
+        openHour = restaurant.hours[new Date().getDay()];
+        closeHour = restaurant.hours[new Date().getDay() + 1];
+        if ((closeHour.includes('pm') && openHour.includes('pm'))
+            || (closeHour.includes('am') && openHour.includes('am'))) {
+          sameMeridiem = true;
+        }
+        if (openHour.includes('pm')) {
+          openHour = 1200 + stringTimeToInt(openHour);
+        } else {
+          openHour = stringTimeToInt(openHour);
+        }
+        if (closeHour.includes('pm')) {
+          closeHour = 1200 + stringTimeToInt(closeHour);
+        } else {
+          closeHour = stringTimeToInt(closeHour);
+        }
+        const nowHour = (new Date().getHours()) * 100 + new Date().getMinutes();
+        if ((openHour <= nowHour && closeHour > nowHour)
+            || (openHour <= nowHour && sameMeridiem === true)
+            || (openHour - closeHour === 0)) {
+          restaurantFiltered.push(restaurant);
+        }
+      }
     }
+
+    console.log(restaurantFiltered);
 
     if (consolidated !== '') {
       _.map(consolidated, function (outerFood) {
