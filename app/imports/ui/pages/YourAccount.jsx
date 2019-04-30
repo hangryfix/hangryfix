@@ -112,7 +112,8 @@ class YourAccount extends React.Component {
     const filtered = [];
 
     if (this.filters.price !== '') {
-      this.props.foods.map(food => (priceConversion(food.price) <= this.filters.price ? (priceFiltered.push(food)) : ''));
+      this.props.foods
+          .map(food => (priceConversion(food.price) <= this.filters.price ? (priceFiltered.push(food)) : ''));
       if (priceFiltered !== '') {
         priceFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
@@ -180,33 +181,34 @@ class YourAccount extends React.Component {
       }
     }
 
-    console.log(consolidated);
-
     for (let i = 0; i < consolidated.length; i++) {
       let duplicates = 1;
       for (let j = 0; j < consolidated.length; j++) {
         if (filtersUsed === 1) {
           filtered.push(consolidated[j]);
-          consolidated.splice(j, j + 1);
+          consolidated.splice(j, 1);
+          j--;
         } else if (consolidated[i] === consolidated[j] && i !== j) {
           duplicates++;
           if (duplicates === filtersUsed) {
             filtered.push(consolidated[j]);
           }
-          consolidated.splice(j, j + 1);
+          consolidated.splice(j, 1);
+          j--;
         }
       }
-      consolidated.splice(i, i + 1);
+      if (filtersUsed > 1) {
+        consolidated.splice(i, 1);
+        i--;
+      }
     }
 
-    console.log(filtered);
-
-    if (filtered !== '') {
+    if (priceFiltered !== '') {
       this.setState({
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {filtered.map((food, index) => <Food
+                  {priceFiltered.map((food, index) => <Food
                       key={index}
                       food={food}
                       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
@@ -215,7 +217,7 @@ class YourAccount extends React.Component {
               </Tab.Pane> },
               { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                   <Card.Group itemsPerRow={3}>
-                    {this.taggedFoods(filtered)}
+                    {this.taggedFoods(priceFiltered)}
                   </Card.Group>
                 </Tab.Pane> }] });
 
