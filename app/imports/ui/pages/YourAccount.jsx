@@ -106,7 +106,7 @@ class YourAccount extends React.Component {
     };
     const priceFiltered = [];
     let ratingFiltered = '';
-    const restaurantFiltered = [];
+    let restaurantFiltered = '';
     const consolidated = [];
     let filtersUsed = 0;
     const filtered = [];
@@ -171,7 +171,7 @@ class YourAccount extends React.Component {
         if ((openHour <= nowHour && closeHour > nowHour)
             || (openHour <= nowHour && sameMeridiem === true)
             || (openHour - closeHour === 0)) {
-          restaurantFiltered.push(restaurant);
+          restaurantFiltered = this.props.foods.filter(food => (restaurant.name === food.restaurant));
         }
       }
       if (restaurantFiltered !== '') {
@@ -180,16 +180,33 @@ class YourAccount extends React.Component {
       }
     }
 
+    console.log(consolidated);
 
-    console.log(restaurantFiltered);
-    console.log(ratingFiltered);
+    for (let i = 0; i < consolidated.length; i++) {
+      let duplicates = 1;
+      for (let j = 0; j < consolidated.length; j++) {
+        if (filtersUsed === 1) {
+          filtered.push(consolidated[j]);
+          consolidated.splice(j, j + 1);
+        } else if (consolidated[i] === consolidated[j] && i !== j) {
+          duplicates++;
+          if (duplicates === filtersUsed) {
+            filtered.push(consolidated[j]);
+          }
+          consolidated.splice(j, j + 1);
+        }
+      }
+      consolidated.splice(i, i + 1);
+    }
 
-    if (restaurantFiltered !== '') {
+    console.log(filtered);
+
+    if (filtered !== '') {
       this.setState({
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {restaurantFiltered.map((food, index) => <Food
+                  {filtered.map((food, index) => <Food
                       key={index}
                       food={food}
                       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
@@ -198,11 +215,11 @@ class YourAccount extends React.Component {
               </Tab.Pane> },
               { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                   <Card.Group itemsPerRow={3}>
-                    {this.taggedFoods(restaurantFiltered)}
+                    {this.taggedFoods(filtered)}
                   </Card.Group>
                 </Tab.Pane> }] });
 
-       this.render();
+      this.render();
     }
 
   }
