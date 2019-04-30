@@ -13,7 +13,6 @@ import Food from '../components/Food';
 
 class YourAccount extends React.Component {
 
-
   filters = {
     rating: '',
     price: '',
@@ -24,6 +23,8 @@ class YourAccount extends React.Component {
 
   state =
       { restaurantChecked:
+            false,
+        ratingChecked:
             false,
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
@@ -40,8 +41,6 @@ class YourAccount extends React.Component {
                   {this.taggedFoods(this.props.foods)}
                 </Card.Group>
               </Tab.Pane> }],
-        ratingChecked:
-            false,
     };
 
   currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
@@ -70,13 +69,12 @@ class YourAccount extends React.Component {
   toggleRestaurant = () => {
     this.setState({ restaurantChecked: !this.state.restaurantChecked });
     this.filters.openRestaurants = this.state.restaurantChecked;
-    // IF CHECKED, THEN EQUALS FALSE
   }
+
 
   toggleRating = () => {
     this.setState({ ratingChecked: !this.state.ratingChecked });
     this.filters.noRatings = this.state.ratingChecked;
-    // IF CHECKED, THEN EQUALS FALSE
   }
 
 
@@ -84,13 +82,13 @@ class YourAccount extends React.Component {
     this.filters.rating = rating;
   }
 
+
   starRating = (e, { rating }) => {
     this.filters.price = rating;
   }
 
 
   handleClick = () => {
-    let priceFiltered = '';
     const priceConversion = (price) => {
       let stars = 0;
       if (price < 4) {
@@ -106,6 +104,7 @@ class YourAccount extends React.Component {
       }
       return stars;
     };
+    const priceFiltered = [];
     let ratingFiltered = '';
     const restaurantFiltered = [];
     const consolidated = [];
@@ -113,28 +112,27 @@ class YourAccount extends React.Component {
     const filtered = [];
 
     if (this.filters.price !== '') {
-      priceFiltered = this.props.foods.filter(food => (priceConversion(food.price) <= this.filters.price));
+      this.props.foods.map(food => (priceConversion(food.price) <= this.filters.price ? (priceFiltered.push(food)) : ''));
       if (priceFiltered !== '') {
         priceFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
     }
 
-    if (this.filters.rating !== '') {
+    if (this.filters.noRatings === false || this.filters.rating !== '') {
       ratingFiltered = this.props.foods
           .filter(food => (food.averageRating ? (food.averageRating >= this.filters.rating) : ''));
+      if (this.filters.noRatings === false) {
+        this.props.foods
+            .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
+      }
       if (ratingFiltered !== '') {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
     }
 
-    if (this.filters.noRatings === false) {
-      this.props.foods.map(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
-    }
-
     if (this.filters.openRestaurants === false) {
-      /* FALSE MEANS THE TOGGLE IS ON */
       let restaurant = '';
       let openHour = '';
       let closeHour = '';
@@ -153,8 +151,8 @@ class YourAccount extends React.Component {
           intTime = parseInt(splitIntTime.join(''), 10);
           return intTime;
         };
-        openHour = restaurant.hours[new Date().getDay()];
-        closeHour = restaurant.hours[new Date().getDay() + 1];
+        openHour = restaurant.hours[(new Date().getDay() * 2) - 2];
+        closeHour = restaurant.hours[((new Date().getDay() * 2) + 1) - 2];
         if ((closeHour.includes('pm') && openHour.includes('pm'))
             || (closeHour.includes('am') && openHour.includes('am'))) {
           sameMeridiem = true;
@@ -176,32 +174,22 @@ class YourAccount extends React.Component {
           restaurantFiltered.push(restaurant);
         }
       }
+      if (restaurantFiltered !== '') {
+        restaurantFiltered.map(food => (consolidated.push(food)));
+        filtersUsed++;
+      }
     }
+
 
     console.log(restaurantFiltered);
+    console.log(ratingFiltered);
 
-    if (consolidated !== '') {
-      _.map(consolidated, function (outerFood) {
-        let duplicates = 0;
-        _.map(consolidated, function (innerFood) {
-          if (innerFood === outerFood) {
-            duplicates++;
-          }
-        });
-        if (duplicates - 1 === filtersUsed) {
-          filtered.push(outerFood);
-        }
-      });
-    }
-
-    { /*
-    if (filtered !== '') {
+    if (restaurantFiltered !== '') {
       this.setState({
-        checked: this.state.checked,
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {filtered.map((food, index) => <Food
+                  {restaurantFiltered.map((food, index) => <Food
                       key={index}
                       food={food}
                       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
@@ -210,14 +198,12 @@ class YourAccount extends React.Component {
               </Tab.Pane> },
               { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                   <Card.Group itemsPerRow={3}>
-                    {this.taggedFoods(filtered)}
+                    {this.taggedFoods(restaurantFiltered)}
                   </Card.Group>
                 </Tab.Pane> }] });
 
        this.render();
     }
-
-    */}
 
   }
 
