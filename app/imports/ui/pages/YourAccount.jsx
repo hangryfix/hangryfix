@@ -119,13 +119,22 @@ class YourAccount extends React.Component {
       }
     }
 
-    if (this.filters.noRatings === false || this.filters.rating !== '') {
+    if (this.filters.rating !== '') {
       ratingFiltered = this.props.foods
           .filter(food => (food.averageRating ? (food.averageRating >= this.filters.rating) : ''));
       if (this.filters.noRatings === false) {
         this.props.foods
             .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
       }
+      if (ratingFiltered) {
+        ratingFiltered.map(food => (consolidated.push(food)));
+        filtersUsed++;
+      }
+    }
+
+    if (this.filters.noRatings === false) {
+      this.props.foods
+          .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
       if (ratingFiltered) {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
@@ -157,6 +166,8 @@ class YourAccount extends React.Component {
         if ((closeHour.includes('pm') && openHour.includes('pm'))
             || (closeHour.includes('am') && openHour.includes('am'))) {
           sameMeridiem = true;
+        } else {
+          sameMeridiem = false;
         }
         if (openHour.includes('pm')) {
           openHour = 1200 + stringTimeToInt(openHour);
@@ -179,6 +190,9 @@ class YourAccount extends React.Component {
           }
         }
       }
+      console.log(openHour);
+      console.log(closeHour);
+      console.log(nowHour);
       if (restaurantFiltered.length > 0) {
         restaurantFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
