@@ -8,16 +8,7 @@ class SearchSidebar extends React.Component {
     return (
         <div className='search-sidebar'>
           <Header as='h2' content='Filters'/>
-          <Header as='h3' content='Search For'/>
           <Container>
-            <div className='two-options-toggle'>
-              <div className='two-options-toggle-left'>
-                Foods
-              </div>
-              <div className='two-options-toggle-right'>
-                Reviews
-              </div>
-            </div>
             <Radio
                 toggle label='Search Open Restaurants Only'
                 style={spacing}

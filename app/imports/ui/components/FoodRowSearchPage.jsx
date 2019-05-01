@@ -45,8 +45,6 @@ class FoodRowSearchPage extends React.Component {
         reviewArray.push(review);
       }
     });
-
-    console.log(reviewArray);
     return reviewArray;
   }
 
@@ -102,8 +100,7 @@ class FoodRowSearchPage extends React.Component {
               {this.props.food.hours}
             </div>
             <Icon name="dollar sign"/>
-            <Rating size="large" icon="star" defaultRating={this.getDefaultRating(this.props.food.price)} maxRating={5}
-                    disabled/>
+            {this.props.food.price}
           </Table.Cell>
 
           {/*Col 3: Reviews*/}
@@ -141,11 +138,7 @@ class FoodRowSearchPage extends React.Component {
                         </Card.Meta>
                         <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
                           <Icon name="dollar sign"/>
-                          <Rating size="large"
-                                  icon="star"
-                                  defaultRating={this.props.food.price}
-                                  maxRating={5}
-                                  disabled/>
+                          {this.props.food.price}
                         </Card.Meta>
                         <Card.Description>
                           {this.props.food.description}
