@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Table, Header, Image, Dropdown, Item, Container, Radio, Rating } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Reviews } from '/imports/api/review/review';
+import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { Foods } from '/imports/api/food/food';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -13,7 +14,7 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { refreshPage: false, rating: 0 };
+    this.state = { refreshPage: false, rating: 0, onlyOpen: false };
     this.getSearchResults = this.getSearchResults.bind(this);
     this.handleChangeRating = this.handleChangeRating.bind(this);
     this.getAverageRating = this.getAverageRating.bind(this);
@@ -23,12 +24,101 @@ class Search extends React.Component {
   }
 
   isOpen(food) {
+    let d = new Date();
+    let restaurantName = food.restaurant;
+    let restaurant = null;
+    this.props.restaurants.map(rest => {
+      if (rest.name === restaurantName) {
+        restaurant = rest;
+      }
+    });
+
+    let open = 0;
+    let close = 0;
+
+    switch (d.getDay()) {
+      case 1: // Monday
+        open = 0;
+        close = 1;
+        break;
+      case 2: // Tuesday
+        open = 2;
+        close = 3;
+        break;
+      case 3: // Wednesday
+        open = 4;
+        close = 5;
+        break;
+      case 4: // Thursday
+        open = 6;
+        close = 7;
+        break;
+      case 5: // Friday
+        open = 8;
+        close = 9;
+        break;
+      case 6: // Saturday
+        open = 10;
+        close = 11;
+        break;
+      case 7: // Sunday
+        open = 12;
+        close = 13;
+        break;
+    }
+
+    let openTimeString = restaurant.hours[open];
+    let closeTimeString = restaurant.hours[close];
+    let nextOpenTimeString = restaurant.hours[(open + 2) % 14];
+
+    let openTokens = openTimeString.split(':');
+    let openHours = openTokens[0];
+    let openTokens2 = openTokens[1].split(' ');
+    let openMinutes = openTokens2[0];
+    let openAP = openTokens2[1];
+
+    let closeTokens = closeTimeString.split(':');
+    let closeHours = closeTokens[0];
+    let closeTokens2 = closeTokens[1].split(' ');
+    let closeMinutes = closeTokens2[0];
+    let closeAP = closeTokens2[1];
+
+    let timeString = '';
+
+    let isOpenNow = false;
+
+    let closeValue = 0;
+    let openValue = 0;
+
+    if (closeAP === 'pm') {
+      closeValue += parseInt(closeHours) + 12;
+    } else {
+      closeValue += parseInt(closeHours);
+    }
+
+    if (openAP === 'pm') {
+      openValue += parseInt(openHours) + 12;
+    } else {
+      openValue += parseInt(openHours);
+    }
+
+
+    if (closeValue > d.getHours()) {
+      if (openValue < d.getHours()) {
+        isOpenNow = true;
+      } else if (openValue === d.getHours() && openMinutes > d.getMinutes ) {
+        isOpenNow = true;
+      }
+    } else if (closeValue === d.getHours() && closeMinutes < d.getMinutes()) {
+      isOpenNow = true;
+    }
+
+    return isOpenNow;
 
   }
 
   getAverageRating(reviews) {
     let total = 0;
-
     for (let rev of reviews) {
       total += rev.rating;
     }
@@ -37,7 +127,6 @@ class Search extends React.Component {
   }
 
   getReviews(food) {
-    console.log(food);
     let reviewArray = [];
     this.props.reviews.map(review => {
       if (parseInt(review.foodId) === parseInt(food.key)) {
@@ -52,8 +141,14 @@ class Search extends React.Component {
     if (cuisine === 'All') {
       this.props.foods.map(food => {
         let avgRating = this.getAverageRating(this.getReviews(food));
-        if (avgRating >= this.state.rating ) {
-          results.push(food);
+        if (avgRating >= this.state.rating) {
+          if (!this.state.onlyOpen) {
+            results.push(food);
+          } else {
+            if (this.isOpen(food)) {
+              results.push(food);
+            }
+          }
         }
       });
     } else {
@@ -61,7 +156,13 @@ class Search extends React.Component {
         if (food.category === cuisine) {
           let avgRating = this.getAverageRating(this.getReviews(food));
           if (avgRating >= this.state.rating) {
-            results.push(food);
+            if (!this.state.onlyOpen) {
+              results.push(food);
+            } else {
+              if (this.isOpen(food)) {
+                results.push(food);
+              }
+            }
           }
         }
       });
@@ -77,7 +178,10 @@ class Search extends React.Component {
   }
 
   handleRadioChange(e, data) {
-    alert(data.checked);
+    let s = {};
+    s['onlyOpen'] = data.checked;
+    s['refreshPage'] = !this.state.refreshPage;
+    this.setState(s);
   }
 
   render() {
@@ -233,9 +337,8 @@ class Search extends React.Component {
 
 Search.propTypes = {
   foods: PropTypes.array.isRequired,
-  foodsReady: PropTypes.bool.isRequired,
   reviews: PropTypes.array.isRequired,
-  reviewsReady: PropTypes.bool.isRequired,
+  ready: PropTypes.bool.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
@@ -248,12 +351,13 @@ export default withTracker(() => {
   // Get access to Stuff documents.
   const foodSubscription = Meteor.subscribe('Foods');
   const reviewSubscription = Meteor.subscribe('Reviews');
+  const restaurantSubscription = Meteor.subscribe('Restaurants');
 
   return {
     foods: Foods.find({}).fetch(),
-    foodsReady: foodSubscription.ready(),
+    restaurants: Restaurants.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
-    reviewsReady: reviewSubscription.ready(),
+    ready: foodSubscription.ready() && reviewSubscription.ready() && restaurantSubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(Search);

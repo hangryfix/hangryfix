@@ -6,17 +6,125 @@ import { withTracker } from 'meteor/react-meteor-data';
 import Review from './Review';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
+import { Restaurants } from '/imports/api/restaurant/restaurant';
 
 class FoodRowSearchPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {closesAt: '', opensNext: '', isOpen: false};
     this.onClick = this.onClick.bind(this);
     this.getDefaultRating = this.getDefaultRating.bind(this);
     this.getAverageRating = this.getAverageRating.bind(this);
     this.getReviews = this.getReviews.bind(this);
+    this.isOpen = this.isOpen.bind(this);
   }
 
-  onClick = () => Foods.remove(this.props.food._id, this.deleteCallback)
+  onClick = () => Foods.remove(this.props.food._id, this.deleteCallback);
+
+  isOpen(food) {
+    let s = {};
+    let d = new Date();
+    let restaurantName = food.restaurant;
+    let restaurant = null;
+    this.props.restaurants.map(rest => {
+      if (rest.name === restaurantName) {
+        restaurant = rest;
+      }
+    });
+
+    let open = 0;
+    let close = 0;
+
+    switch (d.getDay()) {
+      case 1: // Monday
+        open = 0;
+        close = 1;
+        break;
+      case 2: // Tuesday
+        open = 2;
+        close = 3;
+        break;
+      case 3: // Wednesday
+        open = 4;
+        close = 5;
+        break;
+      case 4: // Thursday
+        open = 6;
+        close = 7;
+        break;
+      case 5: // Friday
+        open = 8;
+        close = 9;
+        break;
+      case 6: // Saturday
+        open = 10;
+        close = 11;
+        break;
+      case 7: // Sunday
+        open = 12;
+        close = 13;
+        break;
+    }
+
+    let openTimeString = restaurant.hours[open];
+    let closeTimeString = restaurant.hours[close];
+    let nextOpenTimeString = restaurant.hours[(open + 2) % 14];
+
+    let openTokens = openTimeString.split(':');
+    let openHours = openTokens[0];
+    let openTokens2 = openTokens[1].split(' ');
+    let openMinutes = openTokens2[0];
+    let openAP = openTokens2[1];
+
+    let closeTokens = closeTimeString.split(':');
+    let closeHours = closeTokens[0];
+    let closeTokens2 = closeTokens[1].split(' ');
+    let closeMinutes = closeTokens2[0];
+    let closeAP = closeTokens2[1];
+
+    let timeString = '';
+
+    let isOpenNow = false;
+
+    let closeValue = 0;
+    let openValue = 0;
+
+    if (closeAP === 'pm') {
+      closeValue += parseInt(closeHours) + 12;
+    } else {
+      closeValue += parseInt(closeHours);
+    }
+
+    if (openAP === 'pm') {
+      openValue += parseInt(openHours) + 12;
+    } else {
+      openValue += parseInt(openHours);
+    }
+
+
+    if (closeValue > d.getHours()) {
+      if (openValue < d.getHours()) {
+        isOpenNow = true;
+      } else if (openValue === d.getHours() && openMinutes > d.getMinutes ) {
+        isOpenNow = true;
+      } else {
+        timeString = openTimeString;
+      }
+    } else if (closeValue === d.getHours() && closeMinutes < d.getMinutes()) {
+      isOpenNow = true;
+    } else {
+      timeString = nextOpenTimeString;
+    }
+
+    if (isOpenNow) {
+      console.log('Open until ' + closeTimeString);
+      return 'Open until ' + closeTimeString;
+    } else {
+      console.log('Closed until ' + timeString);
+      return 'Closed until ' + timeString;
+    }
+
+  }
 
   /** Notify the user of the results of the delete. */
   deleteCallback(error) {
@@ -75,9 +183,9 @@ class FoodRowSearchPage extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
 
-
     let reviews = this.getReviews();
     const averageRating = this.getAverageRating(reviews);
+    const openString = this.isOpen(this.props.food);
 
     return (
         <Table.Row style={{ width: '100%' }}>
@@ -97,7 +205,7 @@ class FoodRowSearchPage extends React.Component {
             </div>
             <div style={{ width: '100%' }}>
               <Icon name="clock" style={{ marginRight: '5px' }}/>
-              {this.props.food.hours}
+              {openString}
             </div>
             <Icon name="dollar sign"/>
             {this.props.food.price}
@@ -134,7 +242,7 @@ class FoodRowSearchPage extends React.Component {
                         </Card.Meta>
                         <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
                           <Icon name="clock" style={{ marginRight: '5px' }}/>
-                          {this.props.food.hours}
+                          {openString}
                         </Card.Meta>
                         <Card.Meta style={{ fontSize: '16px', padding: '2px' }}>
                           <Icon name="dollar sign"/>
@@ -192,10 +300,12 @@ export default withTracker(() => {
   const subscription = Meteor.subscribe('FoodAdmin');
   const subscription2 = Meteor.subscribe('Foods');
   const subscription3 = Meteor.subscribe('Reviews');
+  const subscription4 = Meteor.subscribe('Restaurants');
 
   return {
     foods: Foods.find({}).fetch(),
     reviews: Reviews.find({}).fetch(),
-    ready: subscription.ready() && subscription2.ready() && subscription3.ready(),
+    restaurants: Restaurants.find({}).fetch(),
+    ready: subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready(),
   };
 })(FoodRowSearchPage);
