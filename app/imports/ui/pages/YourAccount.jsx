@@ -224,8 +224,25 @@ class YourAccount extends React.Component {
                     {this.taggedFoods(filtered)}
                   </Card.Group>
                 </Tab.Pane> }] });
-
       this.render();
+    } else {
+      this.setState({
+        panes:
+            [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
+                <Card.Group itemsPerRow={3}>
+                  {this.props.foods.map((food, index) => <Food
+                      key={index}
+                      food={food}
+                      reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+                  />)}
+                </Card.Group>
+              </Tab.Pane> },
+              { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+                  <Card.Group itemsPerRow={3}>
+                    {this.taggedFoods(this.props.foods)}
+                  </Card.Group>
+                </Tab.Pane> }],
+      });
     }
 
   }
@@ -245,8 +262,8 @@ class YourAccount extends React.Component {
             <Grid.Column width={4}>
               <div className='search-sidebar'>
                 <Header as='h2' content='Filters'/>
-                <Header as='h3' content='Restaurant'/>
                 <Container>
+                  <Header as='h3' content='Restaurant'/>
                   <Radio
                       toggle
                       label='Search Open Restaurants Only'
