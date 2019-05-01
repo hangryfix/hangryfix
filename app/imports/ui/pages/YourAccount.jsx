@@ -87,7 +87,6 @@ class YourAccount extends React.Component {
     this.filters.price = rating;
   }
 
-
   handleClick = () => {
     const priceConversion = (price) => {
       let stars = 0;
@@ -106,7 +105,7 @@ class YourAccount extends React.Component {
     };
     const priceFiltered = [];
     let ratingFiltered = '';
-    let restaurantFiltered = '';
+    const restaurantFiltered = [];
     const consolidated = [];
     let filtersUsed = 0;
     const filtered = [];
@@ -114,7 +113,7 @@ class YourAccount extends React.Component {
     if (this.filters.price !== '') {
       this.props.foods
           .map(food => (priceConversion(food.price) <= this.filters.price ? (priceFiltered.push(food)) : ''));
-      if (priceFiltered !== '') {
+      if (priceFiltered.length > 0) {
         priceFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
@@ -127,7 +126,7 @@ class YourAccount extends React.Component {
         this.props.foods
             .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
       }
-      if (ratingFiltered !== '') {
+      if (ratingFiltered) {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
@@ -137,6 +136,7 @@ class YourAccount extends React.Component {
       let restaurant = '';
       let openHour = '';
       let closeHour = '';
+      let nowHour = '';
       let sameMeridiem = false;
       for (let i = 0; i < this.props.foods.length; i++) {
         for (let j = 0; j < this.props.restaurants.length; j++) {
@@ -168,14 +168,18 @@ class YourAccount extends React.Component {
         } else {
           closeHour = stringTimeToInt(closeHour);
         }
-        const nowHour = (new Date().getHours()) * 100 + new Date().getMinutes();
+        nowHour = (new Date().getHours()) * 100 + new Date().getMinutes();
         if ((openHour <= nowHour && closeHour > nowHour)
             || (openHour <= nowHour && sameMeridiem === true)
             || (openHour - closeHour === 0)) {
-          restaurantFiltered = this.props.foods.filter(food => (restaurant.name === food.restaurant));
+          for (let k = 0; k < this.props.foods.length; k++) {
+            if (restaurant.name === this.props.foods[k].restaurant) {
+              restaurantFiltered.push(this.props.foods[k]);
+            }
+          }
         }
       }
-      if (restaurantFiltered !== '') {
+      if (restaurantFiltered.length > 0) {
         restaurantFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
@@ -203,21 +207,21 @@ class YourAccount extends React.Component {
       }
     }
 
-    if (priceFiltered !== '') {
+    if (filtered.length > 0) {
       this.setState({
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {priceFiltered.map((food, index) => <Food
+                  {filtered.map((food, index) => <Food
                       key={index}
                       food={food}
                       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                   />)}
                 </Card.Group>
               </Tab.Pane> },
-              { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
+              { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
                   <Card.Group itemsPerRow={3}>
-                    {this.taggedFoods(priceFiltered)}
+                    {this.taggedFoods(filtered)}
                   </Card.Group>
                 </Tab.Pane> }] });
 
@@ -241,12 +245,8 @@ class YourAccount extends React.Component {
             <Grid.Column width={4}>
               <div className='search-sidebar'>
                 <Header as='h2' content='Filters'/>
-                <Header as='h3' content='Search For'/>
+                <Header as='h3' content='Restaurant'/>
                 <Container>
-                  <Button.Group fluid style={{ paddingBottom: '10px' }}>
-                    <Button>Foods</Button>
-                    <Button>Reviews</Button>
-                  </Button.Group>
                   <Radio
                       toggle
                       label='Search Open Restaurants Only'
@@ -260,6 +260,7 @@ class YourAccount extends React.Component {
                       maxRating={5}
                       size='massive'
                       onRate={this.heartRating}
+                      clearable
                   />
                   <Radio
                     toggle
@@ -274,10 +275,11 @@ class YourAccount extends React.Component {
                       maxRating={5}
                       size='massive'
                       onRate={this.starRating}
+                      clearable
                   />
                   <Button
                       onClick={this.handleClick}
-                      fluid style={{ backgroundColor: '#21BA45', color: 'white' }}>
+                      fluid style={{ backgroundColor: '#21BA45', color: 'white', marginTop: '60px' }}>
                     Go
                   </Button>
                 </Container>
@@ -299,6 +301,7 @@ YourAccount.propTypes = {
   currentUser: PropTypes.string,
   userInfo: PropTypes.array.isRequired,
   restaurants: PropTypes.array.isRequired,
+  location: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
