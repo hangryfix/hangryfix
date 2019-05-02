@@ -94,10 +94,6 @@ class UserRow extends React.Component {
             </Label>)}
           </Table.Cell>
 
-          {/*Col 4: options*/}
-          <Table.Cell>
-              <Button content='Delete' onClick={this.onClick}/>
-          </Table.Cell>
         </Table.Row>
     );
   }
