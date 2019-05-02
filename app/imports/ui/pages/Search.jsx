@@ -14,14 +14,16 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { refreshPage: false, rating: 0, onlyOpen: false };
+    this.state = { refreshPage: false, rating: 0, price: 10000, onlyOpen: false };
     this.getSearchResults = this.getSearchResults.bind(this);
     this.handleChangeRating = this.handleChangeRating.bind(this);
     this.getAverageRating = this.getAverageRating.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.isOpen = this.isOpen.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
+    this.handleChangeRatingPrice = this.handleChangeRatingPrice.bind(this);
   }
+
 
   isOpen(food) {
     let d = new Date();
@@ -140,7 +142,7 @@ class Search extends React.Component {
     if (cuisine === 'All') {
       this.props.foods.map(food => {
         let avgRating = this.getAverageRating(this.getReviews(food));
-        if (avgRating >= this.state.rating) {
+        if (avgRating >= this.state.rating && food.price <= this.state.price) {
           if (!this.state.onlyOpen) {
             results.push(food);
           } else {
@@ -154,7 +156,7 @@ class Search extends React.Component {
       this.props.foods.map(food => {
         if (food.category === cuisine) {
           let avgRating = this.getAverageRating(this.getReviews(food));
-          if (avgRating >= this.state.rating) {
+          if (avgRating >= this.state.rating && food.price <= this.state.price) {
             if (!this.state.onlyOpen) {
               results.push(food);
             } else {
@@ -174,6 +176,13 @@ class Search extends React.Component {
   handleChangeRating(e, { rating }) {
     let s = {};
     s['rating'] = rating;
+    s['refreshPage'] = !this.state.refreshPage;
+    this.setState(s);
+  }
+
+  handleChangeRatingPrice(e, { rating }) {
+    let s = {};
+    s['price'] = rating * 4;
     s['refreshPage'] = !this.state.refreshPage;
     this.setState(s);
   }
@@ -216,13 +225,21 @@ class Search extends React.Component {
                       style={spacing}
                       onChange={this.handleRadioChange}
                   />
-                  <Header as='h3' content='Rating'/>
+                  <Header as='h3' content='Minimum Rating'/>
                   <Rating
                       icon='heart'
-                      defaultRating={1}
+                      defaultRating={0}
                       maxRating={5}
                       size='massive'
                       onRate={this.handleChangeRating}
+                  />
+                  <Header as='h3' content='Maximum Price Range'/>
+                  <Rating
+                      icon='star'
+                      defaultRating={0}
+                      maxRating={5}
+                      size='massive'
+                      onRate={this.handleChangeRatingPrice}
                   />
                 </Container>
               </div>

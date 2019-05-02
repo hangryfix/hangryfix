@@ -16,14 +16,14 @@ class SearchSidebar extends React.Component {
             <Header as='h3' content='Rating'/>
             <Rating
                 icon='heart'
-                defaultRating={1}
+                defaultRating={0}
                 maxRating={5}
                 size='massive'
             />
             <Header as='h3' content='Price'/>
             <Rating
                 icon='star'
-                defaultRating={1}
+                defaultRating={0}
                 maxRating={5}
                 size='massive'
             />

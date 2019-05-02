@@ -18,9 +18,41 @@ class FoodRowSearchPage extends React.Component {
     this.getReviews = this.getReviews.bind(this);
     this.isOpen = this.isOpen.bind(this);
     this.getHearts = this.getHearts.bind(this);
+    this.getStars = this.getStars.bind(this);
+    this.getDefaultRating = this.getDefaultRating.bind(this);
   }
 
   onClick = () => Foods.remove(this.props.food._id, this.deleteCallback);
+
+
+  getDefaultRating() {
+    let price = this.props.food.price;
+    let stars = 0;
+    if (price < 4 ) {
+      stars = 1;
+    } else if (price >= 4 && price  < 8 ) {
+      stars = 2;
+    } else if (price >= 8 && price  < 12 ) {
+      stars = 3;
+    } else if (price >= 12 && price  < 16 ) {
+      stars = 4;
+    } else  {
+      stars = 5;
+    }
+    return stars;
+  }
+
+  getStars(numFilled) {
+    let heartsArray = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < numFilled) {
+        heartsArray.push(1);
+      } else {
+        heartsArray.push(0);
+      }
+    }
+    return heartsArray;
+  }
 
 
   getHearts(numFilled) {
@@ -152,8 +184,6 @@ class FoodRowSearchPage extends React.Component {
     for (let rev of reviews) {
       total += rev.rating;
     }
-
-    console.log(Math.round(total / reviews.length));
     return Math.round(total / reviews.length);
   }
 
@@ -199,7 +229,7 @@ class FoodRowSearchPage extends React.Component {
     return (
         <Table.Row style={{ width: '100%' }}>
           {/*Col 1: Image/Name*/}
-          <Table.Cell style={{ width: '15%' }}>
+          <Table.Cell style={{ width: '20%' }}>
             <Header as='h3' textAlign='center' style={{ width: '100%' }}>
               {this.props.food.name}
             </Header>
@@ -218,6 +248,17 @@ class FoodRowSearchPage extends React.Component {
             </div>
             <Icon name="dollar sign"/>
             {this.props.food.price}
+            <div>
+              <p style={{ margin: '3px 0 0 0'}}>Price Range</p>
+            {this.getStars(this.getDefaultRating(this.props.food.price)).map(num => {
+              if (num === 1) {
+                return <Icon name='star' size='large'/>;
+              } else {
+                return <Icon name='star outline' size='large'/>
+              }
+            })
+            }
+            </div>
           </Table.Cell>
 
           {/*Col 3: Reviews*/}
@@ -294,7 +335,7 @@ class FoodRowSearchPage extends React.Component {
           </Table.Cell>
 
           {/*Col 4: tags*/}
-          <Table.Cell style={{ width: '20%' }}>
+          <Table.Cell style={{ width: '18%' }}>
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
