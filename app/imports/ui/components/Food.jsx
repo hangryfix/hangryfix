@@ -14,6 +14,19 @@ class Food extends React.Component {
   constructor(props) {
     super(props);
     this.getDefaultRating = this.getDefaultRating.bind(this);
+    this.getHearts = this.getHearts.bind(this);
+  }
+
+  getHearts(numFilled) {
+    let heartsArray = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < numFilled) {
+        heartsArray.push(1);
+      } else {
+        heartsArray.push(0);
+      }
+    }
+    return heartsArray;
   }
 
   getDefaultRating(price) {
@@ -67,20 +80,22 @@ class Food extends React.Component {
             <Card.Header style={nameSize}>
               {this.props.food.name}
             </Card.Header>
-            <Card.Meta style={{ paddingBottom: '30px', paddingTop: '5px' }}>
+
+            <Card.Description>
+              <Card.Description style={{ paddingBottom: '10px', paddingTop: '5px'}}>
               {this.props.reviews.length > 0 ? (
-                  <Rating
-                      size="huge"
-                      icon="heart"
-                      defaultRating={this.props.food.averageRating}
-                      maxRating={5}
-                      disabled/>
+                  this.getHearts(this.props.food.averageRating).map(num => {
+                    if (num === 1) {
+                      return <Icon name='heart' size='large'/>;
+                    } else {
+                      return <Icon name='heart outline' size='large'/>
+                    }
+                  })
               ) : (
                   'No ratings yet.'
               )
               }
-            </Card.Meta>
-            <Card.Description>
+            </Card.Description>
               <Card.Description style={{ padding: '2px', paddingRight: '10px' }}>
                 <Icon name="map marker alternate" />
                 <Dropdown
