@@ -60,9 +60,9 @@ class Footer extends React.Component {
                   <Header as='h3' content='The hangryFIX Team' textAlign='center' style={headerStyle}/>
                   <hr/>
                   <List inverted>
-                    <List.Item>Christina Chen</List.Item>
-                    <List.Item>James Hutchison</List.Item>
-                    <List.Item>Katrina Johnson Turner</List.Item>
+                    <List.Item><a href="https://christina-chen-cco2.github.io">Christina Chen</a></List.Item>
+                    <List.Item><a href="https://jhutch42.github.io">James Hutchison</></List.Item>
+                    <List.Item><a href="https://katrinaturner.github.io/">Katrina Johnson Turner</a></List.Item>
                     <List.Item>
                       <List.Icon name='copyright'/>
                       <List.Content>Copyright 2019</List.Content>
