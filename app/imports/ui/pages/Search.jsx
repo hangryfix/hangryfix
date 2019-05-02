@@ -266,9 +266,6 @@ class Search extends React.Component {
                       <Header as='h4' style={iconMenu} content='Japanese'/>
                     </Item>
                   </Grid.Column>
-                </Grid.Row>
-
-                <Grid.Row>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Local" key="search6">
                       <Image rounded style={{ width: '100px' }}
