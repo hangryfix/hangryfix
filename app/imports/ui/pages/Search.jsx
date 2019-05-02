@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Table, Header, Image, Dropdown, Item, Container, Radio, Rating } from 'semantic-ui-react';
+import { Grid, Table, Header, Image, Dropdown, Item, Container, Radio, Rating, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Reviews } from '/imports/api/review/review';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
@@ -83,8 +83,6 @@ class Search extends React.Component {
     let closeMinutes = closeTokens2[0];
     let closeAP = closeTokens2[1];
 
-    let timeString = '';
-
     let isOpenNow = false;
 
     let closeValue = 0;
@@ -137,6 +135,7 @@ class Search extends React.Component {
   }
 
   getSearchResults(cuisine) {
+    console.log(this.state.rating);
     let results = [];
     if (cuisine === 'All') {
       this.props.foods.map(food => {
@@ -167,6 +166,8 @@ class Search extends React.Component {
         }
       });
     }
+
+    console.log(results);
     return results;
   }
 
@@ -184,7 +185,13 @@ class Search extends React.Component {
     this.setState(s);
   }
 
+  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
+    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  }
+
+  /** Render the page once subscriptions have been received. */
+  renderPage() {
 
     let stringURL = this.props.location.pathname;
     let URLarray = stringURL.split(':');

@@ -7,22 +7,35 @@ import Review from './Review';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
+import { NavLink } from 'react-router-dom';
 
 class FoodRowSearchPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {closesAt: '', opensNext: '', isOpen: false};
+    this.state = { closesAt: '', opensNext: '', isOpen: false };
     this.onClick = this.onClick.bind(this);
-    this.getDefaultRating = this.getDefaultRating.bind(this);
-    this.getAverageRating = this.getAverageRating.bind(this);
+    this.getAverageRatingRow = this.getAverageRatingRow.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.isOpen = this.isOpen.bind(this);
+    this.getHearts = this.getHearts.bind(this);
   }
 
   onClick = () => Foods.remove(this.props.food._id, this.deleteCallback);
 
+
+  getHearts(numFilled) {
+    let heartsArray = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < numFilled) {
+        heartsArray.push(1);
+      } else {
+        heartsArray.push(0);
+      }
+    }
+    return heartsArray;
+  }
+
   isOpen(food) {
-    let s = {};
     let d = new Date();
     let restaurantName = food.restaurant;
     let restaurant = null;
@@ -101,26 +114,25 @@ class FoodRowSearchPage extends React.Component {
       openValue += parseInt(openHours);
     }
 
-
     if (closeValue > d.getHours()) {
       if (openValue < d.getHours()) {
         isOpenNow = true;
-      } else if (openValue === d.getHours() && openMinutes > d.getMinutes ) {
+      } else
+        if (openValue === d.getHours() && openMinutes > d.getMinutes) {
+          isOpenNow = true;
+        } else {
+          timeString = openTimeString;
+        }
+    } else
+      if (closeValue === d.getHours() && closeMinutes < d.getMinutes()) {
         isOpenNow = true;
       } else {
-        timeString = openTimeString;
+        timeString = nextOpenTimeString;
       }
-    } else if (closeValue === d.getHours() && closeMinutes < d.getMinutes()) {
-      isOpenNow = true;
-    } else {
-      timeString = nextOpenTimeString;
-    }
 
     if (isOpenNow) {
-      console.log('Open until ' + closeTimeString);
       return 'Open until ' + closeTimeString;
     } else {
-      console.log('Closed until ' + timeString);
       return 'Closed until ' + timeString;
     }
 
@@ -135,15 +147,14 @@ class FoodRowSearchPage extends React.Component {
     }
   }
 
-  getAverageRating(reviews) {
+  getAverageRatingRow(reviews) {
     let total = 0;
-
     for (let rev of reviews) {
       total += rev.rating;
     }
 
+    console.log(Math.round(total / reviews.length));
     return Math.round(total / reviews.length);
-
   }
 
   getReviews() {
@@ -182,15 +193,13 @@ class FoodRowSearchPage extends React.Component {
 
   /** Render the page once subscriptions have been received. */
   renderPage() {
-
-    let reviews = this.getReviews();
-    const averageRating = this.getAverageRating(reviews);
+    const path = `/addReview/:${this.props.food.key}`;
     const openString = this.isOpen(this.props.food);
 
     return (
         <Table.Row style={{ width: '100%' }}>
           {/*Col 1: Image/Name*/}
-          <Table.Cell style={{ width: '20%' }}>
+          <Table.Cell style={{ width: '15%' }}>
             <Header as='h3' textAlign='center' style={{ width: '100%' }}>
               {this.props.food.name}
             </Header>
@@ -213,14 +222,21 @@ class FoodRowSearchPage extends React.Component {
 
           {/*Col 3: Reviews*/}
           <Table.Cell style={{ paddingBottom: '20px', width: '20%' }}>
-            {this.props.reviews.length > 0 ? (
-                <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
+            {this.getReviews().length > 0 ? (
+                    this.getHearts(this.getAverageRatingRow(this.getReviews())).map(num => {
+                      if (num === 1) {
+                        return <Icon name='heart' size='large'/>;
+                      } else {
+                        return <Icon name='heart outline' size='large'/>
+                      }
+                    })
             ) : (
-                'No ratings yet.'
+            'No ratings yet.'
             )
             }
-            {reviews.length > 0 ? (
-                <Modal size='small' trigger={<Button fluid>Show {reviews.length} ratings and reviews</Button>}>
+            {this.getReviews().length > 0 ? (
+                <Modal size='small'
+                       trigger={<Button fluid>Show {this.getReviews().length} ratings and reviews</Button>}>
                   <Modal.Header>
                     <Card fluid>
                       <Card.Content>
@@ -229,8 +245,10 @@ class FoodRowSearchPage extends React.Component {
                           {this.props.food.name}
                         </Card.Header>
                         <Card.Meta style={{ paddingBottom: '30px' }}>
-                          {reviews.length > 0 ? (
-                              <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
+                          {this.getReviews().length > 0 ? (
+                              <Rating size="huge" icon="heart"
+                                      defaultRating={this.getAverageRatingRow(this.getReviews())} maxRating={5}
+                                      disabled/>
                           ) : (
                               'No ratings yet.'
                           )
@@ -263,7 +281,7 @@ class FoodRowSearchPage extends React.Component {
                     </Card>
                   </Modal.Header>
                   <Modal.Content scrolling>
-                    {reviews.map((review, index) => <Review
+                    {this.getReviews().map((review, index) => <Review
                         key={index}
                         review={review}
                     />)}
@@ -276,12 +294,21 @@ class FoodRowSearchPage extends React.Component {
           </Table.Cell>
 
           {/*Col 4: tags*/}
-          <Table.Cell style={{ width: '40%' }}>
+          <Table.Cell style={{ width: '20%' }}>
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
                                                              key={index}>
               {tag}
             </Label>)}
+          </Table.Cell>
+          <Table.Cell style={{ width: '20%' }}>
+            <Button
+                as={NavLink}
+                activeClassName="active"
+                exact to={path}
+                key="addReview">
+              Write a Review
+            </Button>
           </Table.Cell>
 
         </Table.Row>
