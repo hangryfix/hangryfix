@@ -45,7 +45,6 @@ class ListUsersAdmin extends React.Component {
                     <Table.HeaderCell>User</Table.HeaderCell>
                     <Table.HeaderCell>Reviews</Table.HeaderCell>
                     <Table.HeaderCell>Tags</Table.HeaderCell>
-                    <Table.HeaderCell>Options</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
 
