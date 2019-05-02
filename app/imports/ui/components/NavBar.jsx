@@ -44,7 +44,7 @@ class NavBar extends React.Component {
                                key="addFood">
                       Add Food
                     </Menu.Item>,
-                    <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/search/:All"
+                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:All"
                                key="search">
                       Search
                     </Menu.Item>,
@@ -66,11 +66,11 @@ class NavBar extends React.Component {
                     >
                       <Image style={{ width: '100px' }} src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png' />
                     </Menu.Item>,
-                    <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/search/:All"
+                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:All"
                                key="search">
                       Search
                     </Menu.Item>,
-                    <Menu.Item position="right" key="unloggedUser">
+                    <Menu.Item key="unloggedUser">
                       <Dropdown pointing="top right" className={ rightStyle } text="Login" icon="user" direction="left">
                         <Dropdown.Menu>
                           <Dropdown.Item icon="user" text="Sign In" as={ NavLink } exact to="/signin"/>
