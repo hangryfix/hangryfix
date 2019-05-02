@@ -21,6 +21,18 @@ class Landing2 extends React.Component {
       color: '#045604',
     };
 
+    const recentFoods = () => {
+      let sorted = _.sortBy(this.props.foods, this.props.foods.key);
+      let last3 = _.last(sorted, 3);
+
+      return (last3.map((food, index) => <Food
+      key={index}
+      food={food}
+      reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+    />))}
+
+
+
     return (
         <div className="landingMid" id='landing-page-id'>
           {/*Main Image/Search Bar  */}
@@ -96,15 +108,11 @@ class Landing2 extends React.Component {
             </Grid.Column>
           </Grid>
 
-          {/*Recent Reviews*/}
+          {/*Recent Foods*/}
           <Container style={{ paddingTop: '20px' }}>
-            <Header as='h2' class='color-primary-3'>Recent Reviews</Header>
+            <Header as='h2' class='color-primary-3'>Recently added Foods</Header>
             <Card.Group itemsPerRow={3}>
-              {this.props.foods.map((food, index) => <Food
-                  key={index}
-                  food={food}
-                  reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
-              />)}
+              {recentFoods()}
             </Card.Group>
 
             {/*About Us Section*/}
