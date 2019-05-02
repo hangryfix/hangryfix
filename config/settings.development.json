@@ -174,7 +174,19 @@
       "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
       "description": "So ONO.",
       "tags": ["Pork", "Cheese"]
-    }
+    },
+    {
+      "key": "7",
+      "name":"Honey Toast",
+      "restaurant":"Shokudo - Japanese Restaurant and Bar",
+      "category":"Dessert",
+      "price": "9",
+      "image":"http://tastyislandhawaii.com/images10/shokudo/shokudo_honey_toast3.jpg",
+      "owner": "troyBoi",
+      "timestamp": "Wed May 01 2019 12:30:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "To the plebeian, this is merely a hollow loaf of white bread whose innards have been packed into balls, toasted until brown, and liberally soaked in honey before being thrown back the toasted shell's center with several scoops of vanilla ice cream...But to the patrician, it's honey toast. Comes with numerous toppings that range to 2 to 4 dollars extra.",
+      "tags": ["Sugar"]
+      }
   ],
 
   "defaultReviews": [],
