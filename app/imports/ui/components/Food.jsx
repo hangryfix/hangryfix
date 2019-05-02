@@ -191,7 +191,7 @@ class Food extends React.Component {
                           if ((typeof tag) === 'object') {
                             returnThis =
                                 <Label.Group tag>
-                                  <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                  <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
                                     {tag.name}
                                   </Label>
                                   <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
