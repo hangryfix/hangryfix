@@ -140,7 +140,7 @@ Signup.propTypes = {
 
 export default withTracker(() => {
   // Get access to Tags documents.
-  const subscription = Meteor.subscribe('Tags');
+  const subscription = Meteor.subscribe('Tag');
   return {
     tags: Tags.find({}).fetch(),
     ready: subscription.ready(),

@@ -17,7 +17,7 @@ if (Tags.find().count() === 0) {
 }
 
 /** This subscription publishes only the documents associated with the logged in user */
-Meteor.publish('Tags', function publish() {
+Meteor.publish('Tag', function publish() {
     return Tags.find({ type: 'ingredient' });
 });
 
