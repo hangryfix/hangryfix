@@ -46,7 +46,7 @@ class Signup extends React.Component {
     if (this.state.redirectToHome) {
       return <Redirect to={from}/>;
     }
-    let tagOptions = this.props.tag.map((tag) => {
+    let tagOptions = this.props.tags.map((tag) => {
       return {key: tag.id, text: tag.name, value: tag.name};
     });
 
@@ -134,7 +134,7 @@ class Signup extends React.Component {
 
 /** Require an array of Tags documents in the props. */
 Signup.propTypes = {
-  tag: PropTypes.array.isRequired,
+  tags: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -142,7 +142,7 @@ export default withTracker(() => {
   // Get access to Tags documents.
   const subscription = Meteor.subscribe('Tags');
   return {
-    tag: Tags.find({}).fetch(),
+    tags: Tags.find({}).fetch(),
     ready: subscription.ready(),
   };
 })(Signup);
