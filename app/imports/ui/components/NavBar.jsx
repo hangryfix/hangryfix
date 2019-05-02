@@ -66,7 +66,7 @@ class NavBar extends React.Component {
                     >
                       <Image style={{ width: '100px' }} src='https://i.ibb.co/H2ZqvWc/hangryfix-logo-white.png' />
                     </Menu.Item>,
-                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:All"
+                    <Menu.Item position="right" as={ NavLink } activeClassName="active" exact to="/search/:All"
                                key="search">
                       Search
                     </Menu.Item>,
