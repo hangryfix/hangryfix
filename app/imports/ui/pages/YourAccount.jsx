@@ -52,7 +52,7 @@ class YourAccount extends React.Component {
       _.map(foods, function (food) {
         _.map(food.tags, function (foodTag) {
           _.map(currentUserInfo.tags, function (userTag) {
-            if (foodTag === userTag) {
+            if (foodTag === userTag && !_.contains(taggedFoodsArray, food)) {
               taggedFoodsArray.push(food);
             }
           });
