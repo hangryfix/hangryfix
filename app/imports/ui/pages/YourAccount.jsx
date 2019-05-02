@@ -43,18 +43,20 @@ class YourAccount extends React.Component {
               </Tab.Pane> }],
     };
 
-  currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser));
 
   taggedFoods = (foods) => {
     const taggedFoodsArray = [];
-    if (this.currentUserInfo.tags) {
-      for (let i = 0; i < foods.length; i++) {
-        for (let j = 0; j < this.currentUserInfo.tags.length; j++) {
-          if (_.where(foods[i].tags, this.currentUserInfo.tags[j]).length > 0) {
-            taggedFoodsArray.push(foods[i]);
-          }
-        }
-      }
+    const currentUserInfo = this.props.userInfo.filter(user => (user.username === this.props.currentUser))[0];
+    if (currentUserInfo.tags) {
+      _.map(foods, function (food) {
+        _.map(food.tags, function (foodTag) {
+          _.map(currentUserInfo.tags, function (userTag) {
+            if (foodTag === userTag) {
+              taggedFoodsArray.push(food);
+            }
+          });
+        });
+      });
     }
     return (
         taggedFoodsArray.map((food, index) => <Food
