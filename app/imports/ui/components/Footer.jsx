@@ -61,7 +61,7 @@ class Footer extends React.Component {
                   <hr/>
                   <List inverted>
                     <List.Item><a href="https://christina-chen-cco2.github.io">Christina Chen</a></List.Item>
-                    <List.Item><a href="https://jhutch42.github.io">James Hutchison</></List.Item>
+                    <List.Item><a href="https://jhutch42.github.io">James Hutchison</a></List.Item>
                     <List.Item><a href="https://katrinaturner.github.io/">Katrina Johnson Turner</a></List.Item>
                     <List.Item>
                       <List.Icon name='copyright'/>
