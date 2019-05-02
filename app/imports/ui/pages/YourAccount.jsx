@@ -193,9 +193,6 @@ class YourAccount extends React.Component {
           }
         }
       }
-      console.log(openHour);
-      console.log(closeHour);
-      console.log(nowHour);
       if (restaurantFiltered.length > 0) {
         restaurantFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
