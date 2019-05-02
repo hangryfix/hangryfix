@@ -166,7 +166,7 @@
     {
       "key": "6",
       "name": "Curry Chicken Manapua",
-      "restaurant": "L&L Hawaiian Barbecue",
+      "restaurant": "Chun Wah Kam Noodle Factory",
       "category": "Local",
       "price": "14.99",
       "image": "http://www.sushicheffoods.com/v/vspfiles/photos/759116339701-2.jpg",
@@ -189,7 +189,125 @@
       }
   ],
 
-  "defaultReviews": [],
+  "defaultReviews": [
+    {
+      "image": "https://freebiemom.com/wp-content/uploads/2017/09/ONE.png",
+      "key": 1,
+      "review": "I ate four slices and now my stomach hurts.",
+      "rating": 5,
+      "user": "Jay",
+      "foodId": "1",
+      "createdAt": "Mon Apr 29 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 2,
+      "review": "Its pretty good, but I like dairy queen better.",
+      "rating": 3,
+      "user": "Jay",
+      "foodId": "2",
+      "createdAt": "Mon Apr 29 2019 9:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/131902.jpg",
+      "key": 3,
+      "review": "I don't know who put that picture on the page of this food, but this is what it really looks like.",
+      "rating": 4,
+      "user": "Jay",
+      "foodId": "5",
+      "createdAt": "Mon Apr 29 2019 10:00:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://i1.wp.com/lyukum.net/wp-content/uploads/2017/02/DSC_6069.jpg?fit=600%2C401&ssl=1&w=640",
+      "key": 4,
+      "review": "Don't trust me, I'm a liar",
+      "rating": 4,
+      "user": "Jay",
+      "foodId": "6",
+      "createdAt": "Tues Apr 30 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://s3-media3.fl.yelpcdn.com/ephoto/A3gzxMvTIdRPYSa-7wdvUA/o.jpg",
+      "key": 5,
+      "review": "Soggy AF",
+      "rating": 2,
+      "user": "Jay",
+      "foodId": "3",
+      "createdAt": "Tues Apr 30 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 6,
+      "review": "My wife's son loves eating at Pizza Hut.",
+      "rating": 4,
+      "user": "neemuh",
+      "foodId": "1",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 7,
+      "review": "I'll never forgive them for removing the cinnamon topping. Still pretty good.",
+      "rating": 2,
+      "user": "SallyMae",
+      "foodId": "7",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 8,
+      "review": "This is the best thing I've tasted in my life. Ever. Forever. And Ever.",
+      "rating": 5,
+      "user": "tetrysRose",
+      "foodId": "6",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "http://images.summitmedia-digital.com/spotph/images/2017/01/06/spampizzamain.jpg",
+      "key": 9,
+      "review": "This is the real Hawaiian Pizza.",
+      "rating": 5,
+      "user": "neemuh",
+      "foodId": "4",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 1,
+      "review": "",
+      "rating": 5,
+      "user": "",
+      "foodId": "",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 1,
+      "review": "",
+      "rating": 5,
+      "user": "",
+      "foodId": "",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 1,
+      "review": "",
+      "rating": 5,
+      "user": "",
+      "foodId": "",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": 1,
+      "review": "",
+      "rating": 5,
+      "user": "",
+      "foodId": "",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    }
+  ],
 
   "defaultTags": [
     {
@@ -502,6 +620,27 @@
         "10:00 pm",
         "10:00 am",
         "10:00 pm"
+      ]
+    },
+    {
+      "key": "11",
+      "name": "Shokudo - Japanese Restaurant and Bar",
+      "address": "1585 Kapiolani Blvd. Ste 100, Honolulu, HI 96814",
+      "hours": [
+        "11:30 am",
+        "12:00 am",
+        "11:30 am",
+        "12:00 am",
+        "11:30 am",
+        "12:00 am",
+        "11:30 am",
+        "12:00 am",
+        "11:30 am",
+        "01:00 am",
+        "11:30 am",
+        "01:00 am",
+        "11:30 am",
+        "12:00 am"
       ]
     }
   ]
