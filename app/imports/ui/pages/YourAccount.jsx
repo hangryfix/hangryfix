@@ -57,6 +57,13 @@ class YourAccount extends React.Component {
             }
           });
         });
+        _.map(food.category, function (foodCategory) {
+          _.map(currentUserInfo.tags, function (userTag) {
+            if (foodCategory === userTag && !_.contains(taggedFoodsArray, food)) {
+              taggedFoodsArray.push(food);
+            }
+          });
+        });
       });
     }
     return (
