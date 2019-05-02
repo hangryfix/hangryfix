@@ -26,7 +26,6 @@ class AddRestaurantForm extends React.Component {
     this.state.hours.map(hours => {
       if (hours === '') {
         hoursComplete = false;
-        console.log("hours-empty");
       }
       let tokenizeHours = hours.split(':');
       if (!(parseInt(tokenizeHours[0]) > 0 && parseInt(tokenizeHours[0]) < 13)) {
@@ -167,6 +166,7 @@ class AddRestaurantForm extends React.Component {
     console.log(currentString);
     this.setState(s);
   }
+
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;

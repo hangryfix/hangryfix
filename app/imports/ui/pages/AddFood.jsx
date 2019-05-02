@@ -153,12 +153,12 @@ class AddFood extends React.Component {
                     />
                     <Form.Field>
                       <Popup
-                          trigger={<Button color='green' icon='flask' content='Add A Restaurant'/>}
+                          trigger={<Button fluid color='black' icon='food' style={{ marginTop: '24px'}} content='Add A Restaurant'/>}
                           content={<AddRestaurantForm/>}
                           position='bottom right'
                           label='Your Restaurant Missing'
                           on='click'
-                          style={{ margin: '10px 0 0 0 ' }}
+
                       />
                     </Form.Field>
                   </Form.Group>
@@ -218,6 +218,11 @@ class AddFood extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Cancel'
+                        onClick={() => {
+                          setTimeout(() => {
+                            this.setState({ error: '', redirectToHome: true });
+                          }, 100);
+                        }}
                     />
                   </Form.Group>
                 </Form>
