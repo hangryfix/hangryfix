@@ -29,7 +29,8 @@ class YourAccount extends React.Component {
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {this.props.foods.map((food, index) => <Food
+                  {_.last(_.sortBy(this.props.foods, this.props.foods.key), 12)
+                      .map((food, index) => <Food
                       key={index}
                       food={food}
                       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
