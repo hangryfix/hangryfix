@@ -23,9 +23,9 @@ class Landing2 extends React.Component {
 
     const recentFoods = () => {
       let sorted = _.sortBy(this.props.foods, this.props.foods.key);
-      let last4 = _.last(sorted, 4);
+      let last3 = _.last(sorted, 3);
 
-      return (last4.map((food, index) => <Food
+      return (last3.map((food, index) => <Food
       key={index}
       food={food}
       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
@@ -111,7 +111,7 @@ class Landing2 extends React.Component {
           {/*Recent Foods*/}
           <Container style={{ paddingTop: '20px' }}>
             <Header as='h2' class='color-primary-3'>Recently added Foods</Header>
-            <Card.Group itemsPerRow={4}>
+            <Card.Group itemsPerRow={3}>
               {recentFoods()}
             </Card.Group>
 
