@@ -67,6 +67,7 @@ class Footer extends React.Component {
                       <List.Icon name='copyright'/>
                       <List.Content>Copyright 2019</List.Content>
                     </List.Item>
+                    <List.Item>Logo by: infinitySphere, LLC.</List.Item>
                   </List>
                 </Grid.Column>
               </Grid.Row>
