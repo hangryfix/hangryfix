@@ -82,13 +82,13 @@ class Food extends React.Component {
             </Card.Header>
 
             <Card.Description>
-              <Card.Description style={{ paddingBottom: '10px', paddingTop: '5px'}}>
+              <Card.Description style={{ paddingBottom: '10px', paddingTop: '5px' }}>
               {this.props.reviews.length > 0 ? (
                   this.getHearts(this.props.food.averageRating).map(num => {
                     if (num === 1) {
                       return <Icon name='heart' size='large'/>;
                     } else {
-                      return <Icon name='heart outline' size='large'/>
+                      return <Icon name='heart outline' size='large'/>;
                     }
                   })
               ) : (
@@ -150,9 +150,11 @@ class Food extends React.Component {
             <Card.Description>
               {this.props.food.description}
             </Card.Description>
+            <div>
             <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
               Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
             </Card.Meta>
+            </div>
           </Card.Content>
       );
     };
