@@ -104,7 +104,7 @@ class Food extends React.Component {
               }
             </Card.Description>
               <Card.Description style={{ padding: '2px', paddingRight: '10px' }}>
-                <Icon name="map marker alternate" />
+                <Icon name="map marker alternate" color="black"/>
                 <Dropdown
                     compact
                     pointing="left"
@@ -115,8 +115,8 @@ class Food extends React.Component {
                 </Dropdown>
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
-                <Icon name="clock" style={{ marginRight: '5px' }} />
-                <Dropdown text={viewHere} pointing="left">
+                <Icon name="clock" style={{ marginRight: '5px' }} color="black" />
+                <Dropdown text={viewHere} pointing="left" className="restaurantHours">
                   {this.props.restaurants ?
                       (
                         <Dropdown.Menu>
@@ -145,7 +145,7 @@ class Food extends React.Component {
                 </Dropdown>
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
-                <Icon name="dollar sign" />
+                <Icon name="dollar sign" color="black" />
                 {this.getStars(this.props.food.price).map(num => {
                   if (num === 1) {
                     return <Icon name='star' />;
