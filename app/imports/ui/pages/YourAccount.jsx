@@ -142,6 +142,8 @@ class YourAccount extends React.Component {
       }
     }
 
+    console.log(ratingFiltered);
+
     if (this.filters.noRatings === false) {
       this.props.foods
           .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
@@ -245,8 +247,12 @@ class YourAccount extends React.Component {
                     {this.taggedFoods(filtered)}
                   </Card.Group>
                 </Tab.Pane> }] });
-      this.render();
-    } else {
+    } else if (
+        filtered.length === 0
+        && this.filters.rating === ''
+        && this.filters.price === ''
+        && this.filters.openRestaurants === ''
+        && this.filters.noRatings === '') {
       this.setState({
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
@@ -262,7 +268,13 @@ class YourAccount extends React.Component {
                   <Card.Group itemsPerRow={3}>
                     {this.taggedFoods(this.props.foods)}
                   </Card.Group>
-                </Tab.Pane> }],
+                </Tab.Pane> }] });
+    } else {
+      this.setState({
+        panes: [
+          { menuItem: 'Newest Foods', render: () => <Tab.Pane fluid /> },
+          { menuItem: 'Favorite Tags', render: () => <Tab.pane fluid /> },
+        ],
       });
     }
 
