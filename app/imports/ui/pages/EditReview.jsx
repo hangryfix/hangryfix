@@ -189,6 +189,11 @@ class EditReview extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Cancel'
+                        onClick={() => {
+                          setTimeout(() => {
+                            this.setState({ error: '', redirectToHome: true });
+                          }, 100);
+                        }}
                     />
                   </Form.Group>
                 </Form>
