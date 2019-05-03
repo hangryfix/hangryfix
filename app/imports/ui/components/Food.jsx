@@ -76,11 +76,10 @@ class Food extends React.Component {
 
       return (
           <Card.Content>
-            <Image floated='left' style={imageStyle} src={this.props.food.image} />
             <Card.Header style={nameSize}>
               {this.props.food.name}
             </Card.Header>
-
+            <Image style={imageStyle} src={this.props.food.image} />
             <Card.Description>
               <Card.Description style={{ paddingBottom: '10px', paddingTop: '5px'}}>
               {this.props.reviews.length > 0 ? (
