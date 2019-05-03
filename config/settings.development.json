@@ -186,7 +186,55 @@
       "timestamp": "Wed May 01 2019 12:30:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
       "description": "To the plebeian, this is merely a hollow loaf of white bread whose innards have been packed into balls, toasted until brown, and liberally soaked in honey before being thrown back the toasted shell's center with several scoops of vanilla ice cream...But to the patrician, it's honey toast. Comes with numerous toppings that range to 2 to 4 dollars extra.",
       "tags": ["Sugar"]
-      }
+      },
+    {
+      "key": "8",
+      "name": "Ginger Chicken Fried Rice",
+      "restaurant": "Chun Wah Kam Noodle Factory",
+      "category": "Local",
+      "price": "5.75",
+      "image": "https://static1.squarespace.com/static/59fd347312abd9f13b6552a5/5a261648085229703525b666/5a26174524a694db5ad4654f/1512456650123/gingerchixrice.jpg?format=500w",
+      "owner": "GNB4lyfe",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "Whoever created this recipe deserves an award.  Even if you don't like ginger chicken, you'll like this rice.  A la Carte prices start at $5.75 a pint, but they pack a LOT into that pint.  You can also get it as one of your starches in a plate lunch.",
+      "tags": ["Rice", "Chicken"]
+    },
+    {
+      "key": "9",
+      "name": "Mexican Pizza",
+      "restaurant": "Taco Bell",
+      "category": "Mexican",
+      "price": "3.49",
+      "image": "https://www.tacobell.com/images/22604_4._mexican_pizza_combo_269x269.jpg",
+      "owner": "GNB4lyfe",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "A delightful combination of taco and pizza.  If you're craving the zestiness of a taco, but also want a slice of pizza, this bad boy is for you.",
+      "tags": ["Beef", "Cheese", "Tacos"]
+    },
+    {
+      "key": "10",
+      "name": "Baklava",
+      "restaurant": "Da Spot Health Food & Juices",
+      "category": "Dessert",
+      "price": "1.50",
+      "image": "https://s3-media1.fl.yelpcdn.com/bphoto/w-B2Cwlk7UrgXtOg4Zb4xA/o.jpg",
+      "owner": "chessRocks",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "Decent size for the price.  This flaky sugary dessert will hit the spot at the end of a meal.",
+      "tags": ["Sugar"]
+    },
+    {
+      "key": "11",
+      "name": "Chicken Katsu Curry",
+      "restaurant": "L&L Hawaiian Barbecue",
+      "category": "Local",
+      "price": "8",
+      "image": "https://s3-media1.fl.yelpcdn.com/bphoto/2w5Aklab_D4ixOG0V9Wd-w/o.jpg",
+      "owner": "ChristinaChen",
+      "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "This classic L&L plate lunch will hit the spot every time.  Who doesn't want this glorious combination of chicken katsu slathered in curry, rice and mac salad?  You also get a lot of food for your money. The mini is definitely a full meal and a regular is practically 2 meals.",
+      "tags": ["Chicken", "Rice"]
+    }
   ],
 
   "defaultReviews": [
@@ -201,110 +249,119 @@
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 2,
+      "key": "2",
       "review": "Its pretty good, but I like dairy queen better.",
-      "rating": 3,
+      "rating": "3",
       "user": "Jay",
       "foodId": "2",
       "createdAt": "Mon Apr 29 2019 9:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/video-api/assets/131902.jpg",
-      "key": 3,
+      "key": "3",
       "review": "I don't know who put that picture on the page of this food, but this is what it really looks like.",
-      "rating": 4,
+      "rating": "4",
       "user": "Jay",
       "foodId": "5",
       "createdAt": "Mon Apr 29 2019 10:00:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://i1.wp.com/lyukum.net/wp-content/uploads/2017/02/DSC_6069.jpg?fit=600%2C401&ssl=1&w=640",
-      "key": 4,
+      "key": "4",
       "review": "Don't trust me, I'm a liar",
-      "rating": 4,
+      "rating": "4",
       "user": "Jay",
       "foodId": "6",
       "createdAt": "Tues Apr 30 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://s3-media3.fl.yelpcdn.com/ephoto/A3gzxMvTIdRPYSa-7wdvUA/o.jpg",
-      "key": 5,
+      "key": "5",
       "review": "Soggy AF",
-      "rating": 2,
+      "rating": "2",
       "user": "Jay",
       "foodId": "3",
       "createdAt": "Tues Apr 30 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 6,
+      "key": "6",
       "review": "My wife's son loves eating at Pizza Hut.",
-      "rating": 4,
+      "rating": "4",
       "user": "neemuh",
       "foodId": "1",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 7,
+      "key": "7",
       "review": "I'll never forgive them for removing the cinnamon topping. Still pretty good.",
-      "rating": 2,
+      "rating": "2",
       "user": "SallyMae",
       "foodId": "7",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 8,
+      "key": "8",
       "review": "This is the best thing I've tasted in my life. Ever. Forever. And Ever.",
-      "rating": 5,
+      "rating": "5",
       "user": "tetrysRose",
       "foodId": "6",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "http://images.summitmedia-digital.com/spotph/images/2017/01/06/spampizzamain.jpg",
-      "key": 9,
+      "key": "9",
       "review": "This is the real Hawaiian Pizza.",
-      "rating": 5,
+      "rating": "5",
       "user": "neemuh",
       "foodId": "4",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
-      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 1,
-      "review": "",
-      "rating": 5,
-      "user": "",
-      "foodId": "",
+      "image": "https://i296.photobucket.com/albums/mm189/woofboy111/Food/IMG_1376.jpg",
+      "key": "10",
+      "review": "Instagram vs. Real Life.  This is the pizza I got.  I don't think the workers like me very much.  Still tastes great tho!",
+      "rating": "4",
+      "user": "tetrysRose",
+      "foodId": "9",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 1,
-      "review": "",
-      "rating": 5,
-      "user": "",
-      "foodId": "",
+      "key": "11",
+      "review": "I don't even like Ginger Chicken, but this is one of my favorite things ever.",
+      "rating": "5",
+      "user": "troyBoi",
+      "foodId": "8",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 1,
-      "review": "",
-      "rating": 5,
-      "user": "",
-      "foodId": "",
+      "key": "12",
+      "review": "Too much rice.",
+      "rating": "2",
+      "user": "neemuh",
+      "foodId": "8",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": 1,
-      "review": "",
-      "rating": 5,
-      "user": "",
-      "foodId": "",
+      "key": "13",
+      "review": "This baklava is just okay.  I've had better, but it's not easy to find baklava here so can't complain too much.",
+      "rating": "3",
+      "user": "neemuh",
+      "foodId": "10",
+      "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
+      "key": "13",
+      "review": "So much food!  I got a regular and it was enough food for me for a whole day!",
+      "rating": "5",
+      "user": "ChristinaChen",
+      "foodId": "11",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
     }
   ],
