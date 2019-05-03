@@ -214,7 +214,7 @@ class Search extends React.Component {
     };
 
     return (
-        <Grid style={{ paddingBottom: '30px' }}>
+        <Grid style={{ padding: '0 20px 30px 0' }}>
           <Grid.Row>
             <Grid.Column width={4}>
               <div className='search-sidebar'>
@@ -250,71 +250,71 @@ class Search extends React.Component {
                 <Grid.Row>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:All" key="search1">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/K5ZJ6XB/hangryfix-logo-green-dark2.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://s3-media1.fl.yelpcdn.com/bphoto/gvO4mp1EDNb-6q75YNZoIQ/ls.jpg'/>
                       <Header as='h4' style={iconMenu} content='All Foods'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Dessert" key="search2">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/WsnfD4j/hangryfix-logo-green-dark.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://www.tasteofhome.com/wp-content/uploads/2017/10/Double-Chocolate-Espresso-Cheesecake_exps49582_THCA1917912A03_24_2bC_RMS-696x696.jpg'/>
                       <Header as='h4' style={iconMenu} content='Dessert'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Fast Food" key="search3">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJtdxBqNBichv5Kbg6tWmHZn9bSUGKoZw6iKk_mSWyS9sgu92O'/>
                       <Header as='h4' style={iconMenu} content='Fast Food'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Italian" key="search4">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/WsnfD4j/hangryfix-logo-green-dark.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='http://billsoffbroadway.net/wp-content/uploads/2018/11/Spaghetti-Square-2.jpg'/>
                       <Header as='h4' style={iconMenu} content='Italian'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Japanese" key="search5">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://s3-media1.fl.yelpcdn.com/bphoto/gaiFmlWmGBIc8v5oyJKDNg/348s.jpg'/>
                       <Header as='h4' style={iconMenu} content='Japanese'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Local" key="search6">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/hsbkrKT/hangryfix-logo-green2.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://i1.wp.com/www.tastyislandhawaii.com/images10/plates/plate_asahi_kalbi.jpg'/>
                       <Header as='h4' style={iconMenu} content='Local'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Pizza" key="search7">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/NZsznSL/hangryfix-logo-green.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://s3-media3.fl.yelpcdn.com/bphoto/hNcUIivw4ZszIeW-VDRbfQ/ls.jpg'/>
                       <Header as='h4' style={iconMenu} content='Pizza'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Mexican" key="search8">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/hsbkrKT/hangryfix-logo-green2.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://www.tasteofhome.com/wp-content/uploads/2018/01/Chicken-Tamales_EXPS_HC17_50905_C12_16_2b-1-696x696.jpg'/>
                       <Header as='h4' style={iconMenu} content='Mexican'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Tacos" key="search9">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/4tzvGFK/hangryfix-logo-green3.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://pinchofyum.com/wp-content/uploads/Chicken-Tinga-Tacos-1-2.jpg'/>
                       <Header as='h4' style={iconMenu} content='Tacos'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Chinese" key="search1">
-                      <Image rounded style={{ width: '100px' }}
-                             src='https://i.ibb.co/K5ZJ6XB/hangryfix-logo-green-dark2.png'/>
+                      <Image rounded style={{ width: '120px' }}
+                             src='https://247wallst.files.wordpress.com/2017/12/chinese-food-square.jpg?w=775&h=775'/>
                       <Header as='h4' style={iconMenu} content='Chinese'/>
                     </Item>
                   </Grid.Column>

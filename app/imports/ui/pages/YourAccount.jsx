@@ -29,7 +29,7 @@ class YourAccount extends React.Component {
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {_.last(_.sortBy(this.props.foods, this.props.foods.key), 12)
+                  {_.last(_.sortBy(this.props.foods, this.props.foods.key), 9)
                       .map((food, index) => <Food
                       key={index}
                       food={food}

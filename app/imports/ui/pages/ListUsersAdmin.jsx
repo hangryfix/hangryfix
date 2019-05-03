@@ -25,7 +25,8 @@ class ListUsersAdmin extends React.Component {
         <div style={{padding: '20px'}} className="backgroundDef">
           <Grid style={{marginBottom: '50px'}}>
             <Grid.Column width={3}>
-              <Segment>
+              <Grid.Row/>
+              <Segment fluid>
               <Header h2>View Table by</Header>
                 <List>
                   <List.Item as={ NavLink } activeClassName="active" exact to="/adminFood"
@@ -44,6 +45,7 @@ class ListUsersAdmin extends React.Component {
                   <Table.Row>
                     <Table.HeaderCell>User</Table.HeaderCell>
                     <Table.HeaderCell>Reviews</Table.HeaderCell>
+                    <Table.HeaderCell>Foods</Table.HeaderCell>
                     <Table.HeaderCell>Tags</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
@@ -55,6 +57,7 @@ class ListUsersAdmin extends React.Component {
                       userInfo={userInfo}
                       reviews={this.props.reviews.filter(review => (review.user == userInfo.username))}
                       foods={this.props.foods}
+                      userFoods={this.props.foods.filter(food => (food.owner == userInfo.username))}
                   />)}
                 </Table.Body>
               </Table>
