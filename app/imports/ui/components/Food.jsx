@@ -13,7 +13,7 @@ class Food extends React.Component {
 
   constructor(props) {
     super(props);
-    this.getDefaultRating = this.getDefaultRating.bind(this);
+    this.getStars = this.getStars.bind(this);
     this.getHearts = this.getHearts.bind(this);
   }
 
@@ -29,20 +29,28 @@ class Food extends React.Component {
     return heartsArray;
   }
 
-  getDefaultRating(price) {
-    let stars = 0
-    if (price < 4 ) {
+  getStars(price) {
+    let stars = 0;
+    const starsArray = [];
+    if (price < 4) {
       stars = 1;
-    } else if (price >= 4 && price  < 8 ) {
+    } else if (price >= 4 && price < 8) {
       stars = 2;
-    } else if (price >= 8 && price  < 12 ) {
+    } else if (price >= 8 && price < 12) {
       stars = 3;
-    } else if (price >= 12 && price  < 16 ) {
+    } else if (price >= 12 && price < 16) {
       stars = 4;
-    } else  {
+    } else {
       stars = 5;
     }
-    return stars;
+    for (let i = 0; i < 5; i++) {
+      if (i < stars) {
+        starsArray.push(1);
+      } else {
+        starsArray.push(0);
+      }
+    }
+    return starsArray;
   }
 
   render() {
@@ -56,7 +64,7 @@ class Food extends React.Component {
     const path = `/addReview/:${this.props.food.key}`;
 
     const imageStyleReviews = { maxWidth: '100%', maxHeight: '100%', width: '160px', height: '160px' };
-    const imageStyleNotReviews = { maxWidth: '100%', maxHeight: '100%', width: '120px', height: '120px' };
+    const imageStyleNotReviews = { maxWidth: '100%', maxHeight: '100%', width: '140px', height: '140px' };
     const nameSizeReviews = { fontSize: '30px' };
     const nameSizeNotReviews = { fontSize: '25px' };
 
@@ -138,11 +146,13 @@ class Food extends React.Component {
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
                 <Icon name="dollar sign" />
-                <Rating size="large"
-                        icon="star"
-                        defaultRating={this.getDefaultRating(this.props.food.price)}
-                        maxRating={5}
-                        disabled/>
+                {this.getStars(this.props.food.price).map(num => {
+                  if (num === 1) {
+                    return <Icon name='star' />;
+                  } else {
+                    return <Icon name='star outline' />;
+                  }
+                })}
               </Card.Description>
             </Card.Description>
             <Divider horizontal><Icon name="info circle" /></Divider>

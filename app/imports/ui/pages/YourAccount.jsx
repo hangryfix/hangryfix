@@ -230,6 +230,9 @@ class YourAccount extends React.Component {
       }
     }
 
+    console.log(consolidated);
+    console.log(filtered);
+
     if (filtered.length > 0) {
       this.setState({
         panes:
@@ -249,10 +252,10 @@ class YourAccount extends React.Component {
                 </Tab.Pane> }] });
     } else if (
         filtered.length === 0
-        && this.filters.rating === ''
-        && this.filters.price === ''
-        && this.filters.openRestaurants === ''
-        && this.filters.noRatings === '') {
+        && (this.filters.rating === '' || this.filters.rating === 0)
+        && (this.filters.price === '' || this.filters.price === 0)
+        && (this.filters.openRestaurants === '' || this.filters.openRestaurants)
+        && (this.filters.noRatings === '' || this.filters.noRatings)) {
       this.setState({
         panes:
             [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
