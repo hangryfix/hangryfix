@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Divider, Dropdown } from 'semantic-ui-react';
+import { Card, Image, Button, Icon, Modal, Label, Divider, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -63,9 +63,19 @@ class Food extends React.Component {
 
     const path = `/addReview/:${this.props.food.key}`;
 
-    const imageStyleReviews = { maxWidth: '100%', maxHeight: '100%', width: '160px', height: '160px' };
-    const imageStyleNotReviews = { maxWidth: '100%', maxHeight: '100%', width: '140px', height: '140px' };
-    const nameSizeReviews = { fontSize: '30px' };
+    const imageStyleReviews = {
+      maxWidth: '100%',
+      maxHeight: '100%',
+      width: '200px',
+      height: '200px',
+      padding: '10px 0 10px 0' };
+    const imageStyleNotReviews = {
+      maxWidth: '100%',
+      maxHeight: '100%',
+      width: '160px',
+      height: '160px',
+      padding: '10px 0 10px 0' };
+    const nameSizeReviews = { fontSize: '35px' };
     const nameSizeNotReviews = { fontSize: '25px' };
 
     const foodCard = (imageStyle, nameSize) => {
@@ -99,7 +109,7 @@ class Food extends React.Component {
                     }
                   })
               ) : (
-                  'No ratings yet.'
+                  <Card.Description style={{ color: 'darkgray' }}>No ratings yet.</Card.Description>
               )
               }
             </Card.Description>
@@ -200,6 +210,9 @@ class Food extends React.Component {
               }
               return returnThis;
             })}
+            {<Label tag style={{ backgroundColor: '#338D33', color: 'white' }}>
+              {this.props.food.category}
+            </Label>}
           </Card.Content>
           <Card.Content>
             {this.props.reviews.length > 0 ? (
@@ -232,6 +245,9 @@ class Food extends React.Component {
                           }
                           return returnThis;
                         })}
+                        {<Label tag style={{ backgroundColor: '#338D33', color: 'white' }}>
+                          {this.props.food.category}
+                        </Label>}
                       </Card.Content>
                     </Card>
                   </Modal.Content>
@@ -255,7 +271,7 @@ class Food extends React.Component {
                   </Modal.Actions>
                 </Modal>
             ) : (
-                <Card.Header>No reviews yet.</Card.Header>
+                <Card.Header style={{ color: 'silver' }}>No reviews yet.</Card.Header>
             )
             }
           </Card.Content>
