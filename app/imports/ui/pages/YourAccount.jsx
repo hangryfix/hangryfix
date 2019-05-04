@@ -113,7 +113,7 @@ class YourAccount extends React.Component {
       return stars;
     };
     const priceFiltered = [];
-    let ratingFiltered = '';
+    const ratingFiltered = [];
     const restaurantFiltered = [];
     const consolidated = [];
     let filtersUsed = 0;
@@ -129,11 +129,11 @@ class YourAccount extends React.Component {
     }
 
     if (this.filters.rating !== '') {
-      ratingFiltered = this.props.foods
-          .filter(food => (food.averageRating ? (food.averageRating >= this.filters.rating) : ''));
+      this.props.foods
+          .filter(food => (food.averageRating && food.averageRating >= this.filters.rating ?
+              (ratingFiltered.push(food)) : ''));
       if (this.filters.noRatings === false) {
-        this.props.foods
-            .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
+        this.props.foods.filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
       }
       if (ratingFiltered !== '') {
         ratingFiltered.map(food => (consolidated.push(food)));
@@ -142,8 +142,7 @@ class YourAccount extends React.Component {
     }
 
     if (this.filters.noRatings === false && this.filters.rating === '') {
-      this.props.foods
-          .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
+      this.props.foods.filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
       if (ratingFiltered) {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
@@ -227,8 +226,19 @@ class YourAccount extends React.Component {
       }
     }
 
+    console.log(this.props.foods);
+    console.log(filtered);
+
     if (filtered.length > 0) {
+      this.filters = {
+        rating: '',
+        price: '',
+        openRestaurants: '',
+        noRatings: '',
+      };
       this.setState({
+        restaurantChecked: false,
+        ratingChecked: false,
         panes: [
           { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
               <Card.Group itemsPerRow={3}>
@@ -251,7 +261,15 @@ class YourAccount extends React.Component {
         && (this.filters.price === '' || this.filters.price === 0)
         && (this.filters.openRestaurants === '' || this.filters.openRestaurants)
         && (this.filters.noRatings === '' || this.filters.noRatings)) {
+      this.filters = {
+        rating: '',
+        price: '',
+        openRestaurants: '',
+        noRatings: '',
+      };
       this.setState({
+        restaurantChecked: false,
+        ratingChecked: false,
         panes: [
               { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
                   <Card.Group itemsPerRow={3}>
@@ -268,9 +286,17 @@ class YourAccount extends React.Component {
                 </Card.Group>
               </Tab.Pane> }] });
     } else {
+      this.filters = {
+        rating: '',
+        price: '',
+        openRestaurants: '',
+        noRatings: '',
+      };
       this.setState({
+        restaurantChecked: false,
+        ratingChecked: false,
         panes: [
-          { menuItem: 'Favorite Tags', render: () => <Tab.pane fluid /> },
+          { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid /> },
           { menuItem: 'New Foods', render: () => <Tab.Pane fluid /> },
         ],
       });
