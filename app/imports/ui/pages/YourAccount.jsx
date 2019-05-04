@@ -26,15 +26,10 @@ class YourAccount extends React.Component {
             false,
         ratingChecked:
             false,
-        panes: [
-            { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+        panes:
+            [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {this.taggedFoods(this.props.foods)}
-                </Card.Group>
-              </Tab.Pane> },
-            { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
-                <Card.Group itemsPerRow={3}>
-                  {_.last(_.sortBy(this.props.foods, this.props.foods.key), 9)
+                  {_.last(_.sortBy(this.props.foods, this.props.foods.key), 12)
                       .map((food, index) => <Food
                       key={index}
                       food={food}
@@ -42,7 +37,11 @@ class YourAccount extends React.Component {
                   />)}
                 </Card.Group>
               </Tab.Pane> },
-        ],
+              { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+                <Card.Group itemsPerRow={3}>
+                  {this.taggedFoods(this.props.foods)}
+                </Card.Group>
+              </Tab.Pane> }],
     };
 
 
@@ -58,10 +57,12 @@ class YourAccount extends React.Component {
             }
           });
         });
-        _.map(currentUserInfo.tags, function (userTag) {
-          if (food.category === userTag && !_.contains(taggedFoodsArray, food)) {
-            taggedFoodsArray.push(food);
-          }
+        _.map(food.category, function (foodCategory) {
+          _.map(currentUserInfo.tags, function (userTag) {
+            if (foodCategory === userTag && !_.contains(taggedFoodsArray, food)) {
+              taggedFoodsArray.push(food);
+            }
+          });
         });
       });
     }
@@ -113,7 +114,7 @@ class YourAccount extends React.Component {
       return stars;
     };
     const priceFiltered = [];
-    const ratingFiltered = [];
+    let ratingFiltered = '';
     const restaurantFiltered = [];
     const consolidated = [];
     let filtersUsed = 0;
@@ -129,20 +130,21 @@ class YourAccount extends React.Component {
     }
 
     if (this.filters.rating !== '') {
-      this.props.foods
-          .filter(food => (food.averageRating && food.averageRating >= this.filters.rating ?
-              (ratingFiltered.push(food)) : ''));
+      ratingFiltered = this.props.foods
+          .filter(food => (food.averageRating ? (food.averageRating >= this.filters.rating) : ''));
       if (this.filters.noRatings === false) {
-        this.props.foods.filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
+        this.props.foods
+            .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
       }
-      if (ratingFiltered !== '') {
+      if (ratingFiltered) {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
       }
     }
 
-    if (this.filters.noRatings === false && this.filters.rating === '') {
-      this.props.foods.filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
+    if (this.filters.noRatings === false) {
+      this.props.foods
+          .filter(food => (!food.averageRating ? (ratingFiltered.push(food)) : ''));
       if (ratingFiltered) {
         ratingFiltered.map(food => (consolidated.push(food)));
         filtersUsed++;
@@ -226,26 +228,10 @@ class YourAccount extends React.Component {
       }
     }
 
-    console.log(this.props.foods);
-    console.log(filtered);
-
     if (filtered.length > 0) {
-      this.filters = {
-        rating: '',
-        price: '',
-        openRestaurants: '',
-        noRatings: '',
-      };
       this.setState({
-        restaurantChecked: false,
-        ratingChecked: false,
-        panes: [
-          { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
-              <Card.Group itemsPerRow={3}>
-                {this.taggedFoods(filtered)}
-              </Card.Group>
-            </Tab.Pane> },
-            { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
+        panes:
+            [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
                   {filtered.map((food, index) => <Food
                       key={index}
@@ -254,29 +240,16 @@ class YourAccount extends React.Component {
                   />)}
                 </Card.Group>
               </Tab.Pane> },
-            ] });
-    } else if (
-        filtered.length === 0
-        && (this.filters.rating === '' || this.filters.rating === 0)
-        && (this.filters.price === '' || this.filters.price === 0)
-        && (this.filters.openRestaurants === '' || this.filters.openRestaurants)
-        && (this.filters.noRatings === '' || this.filters.noRatings)) {
-      this.filters = {
-        rating: '',
-        price: '',
-        openRestaurants: '',
-        noRatings: '',
-      };
-      this.setState({
-        restaurantChecked: false,
-        ratingChecked: false,
-        panes: [
               { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
                   <Card.Group itemsPerRow={3}>
-                    {this.taggedFoods(this.props.foods)}
+                    {this.taggedFoods(filtered)}
                   </Card.Group>
-                </Tab.Pane> },
-                { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
+                </Tab.Pane> }] });
+      this.render();
+    } else {
+      this.setState({
+        panes:
+            [{ menuItem: 'Newest Foods', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
                   {this.props.foods.map((food, index) => <Food
                       key={index}
@@ -284,21 +257,12 @@ class YourAccount extends React.Component {
                       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                   />)}
                 </Card.Group>
-              </Tab.Pane> }] });
-    } else {
-      this.filters = {
-        rating: '',
-        price: '',
-        openRestaurants: '',
-        noRatings: '',
-      };
-      this.setState({
-        restaurantChecked: false,
-        ratingChecked: false,
-        panes: [
-          { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid /> },
-          { menuItem: 'New Foods', render: () => <Tab.Pane fluid /> },
-        ],
+              </Tab.Pane> },
+              { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+                  <Card.Group itemsPerRow={3}>
+                    {this.taggedFoods(this.props.foods)}
+                  </Card.Group>
+                </Tab.Pane> }],
       });
     }
 

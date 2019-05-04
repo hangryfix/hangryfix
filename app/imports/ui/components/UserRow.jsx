@@ -8,7 +8,6 @@ import { _ } from 'underscore';
 import Review from './Review';
 import UserCell from './UserCell';4
 import { Foods } from '/imports/api/food/food';
-import FoodRow from '../components/FoodRowAdminPage';
 
 
 class UserRow extends React.Component {
@@ -42,7 +41,7 @@ class UserRow extends React.Component {
     return (
         <Table.Row>
           {/*Col 1: User*/}
-          <Table.Cell style={{ width: '20%' }}>
+          <Table.Cell style={{ width: '25%' }}>
             <Header as='h3' textAlign='left'>
               {this.props.userInfo.firstName} {this.props.userInfo.lastName}
             </Header>
@@ -86,34 +85,7 @@ class UserRow extends React.Component {
               }
             </Table.Cell>
 
-          {/*Col 3: Foods*/}
-          <Table.Cell style={{ paddingBottom: '30px', width: '30%' }}>
-
-            {this.props.userFoods.length > 0 ? (
-                <Modal size='small' trigger={<Button fluid>Show {this.props.userFoods.length} foods </Button>}>
-                  <Modal.Header>
-                    <Header as='h1'>
-                      {this.props.userInfo.username} added these foods...
-                    </Header>
-                  </Modal.Header>
-                  <Modal.Content scrolling>
-                    <Table>
-                    {this.props.userFoods.map((food, index) => <FoodRow
-                      key={index}
-                      food={food}
-                      reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
-                  />)}
-                    </Table>
-                  </Modal.Content>
-                </Modal>
-
-            ) : (
-                <Card.Header style={{ fontSize: '18px' }}>No foods added yet.</Card.Header>
-            )
-            }
-          </Table.Cell>
-
-          {/*Col 4: tags*/}
+          {/*Col 3: tags*/}
           <Table.Cell style={{ width: '30%' }}>
             {this.props.userInfo.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
@@ -132,7 +104,6 @@ UserRow.propTypes = {
   currentUser: PropTypes.string,
   userInfo: PropTypes.object.isRequired,
   reviews: PropTypes.array.isRequired,
-  userFoods: PropTypes.array.isRequired,
 };
 
 const UserRows = withTracker(() => ({

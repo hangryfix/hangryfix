@@ -22,9 +22,10 @@ class ListFoodAdmin extends React.Component {
   renderPage() {
     return (
         <div style={{padding: '20px'}} className="backgroundDef">
+          {/*<Header textAlign='center' inverted as='h1'>Admin Food List</Header>*/}
+          <Divider/>
           <Grid style={{marginBottom: '50px'}}>
             <Grid.Column width={3}>
-              <Grid.Row/>
               <Segment>
               <Header h2>View Table by</Header>
                 <List>

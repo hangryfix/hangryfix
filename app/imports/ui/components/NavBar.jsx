@@ -81,12 +81,7 @@ class NavBar extends React.Component {
                   ]
               ) : (
                   <Menu.Item>
-                    <Dropdown
-                        className={rightStyle}
-                        pointing="top right"
-                        direction="left"
-                        text={this.props.currentUser}
-                        icon="user">
+                    <Dropdown className="rightNormal" pointing="top right" direction="left" text={this.props.currentUser} icon="user">
                       <Dropdown.Menu>
                         <Dropdown.Item icon="user" text="Your Account" as={NavLink} exact to="/youraccount"/>
                         <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>

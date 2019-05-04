@@ -201,10 +201,4 @@ html, body {
 .restaurantAddress .icon {
   font-size: 9px !important;
   padding-left: 8px !important;
-  color: black !important;
-}
-
-
-.restaurantHours .icon {
-  color: black !important;
 }
