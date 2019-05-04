@@ -169,11 +169,6 @@ class Food extends React.Component {
             <Card.Description>
               {this.props.food.description}
             </Card.Description>
-            <div>
-            <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
-              Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
-            </Card.Meta>
-            </div>
           </Card.Content>
       );
     };
@@ -189,92 +184,106 @@ class Food extends React.Component {
             Write a Review
           </Button>
           {foodCard(imageStyleNotReviews, nameSizeNotReviews)}
-          <Card.Content>
-            {this.props.food.tags.map((tag, index) => {
-              let returnThis = '';
-              if ((typeof tag) === 'object') {
-                returnThis =
-                    <Label.Group tag>
-                      <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
-                        {tag.name}
-                      </Label>
-                      <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
-                        {tag.type}
-                      </Label>
-                    </Label.Group>;
-              } else {
-                returnThis =
-                    <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
-                      {tag}
-                    </Label>;
-              }
-              return returnThis;
-            })}
-            {<Label tag style={{ backgroundColor: '#338D33', color: 'white' }}>
-              {this.props.food.category}
-            </Label>}
-          </Card.Content>
-          <Card.Content>
-            {this.props.reviews.length > 0 ? (
-                <Modal
-                    dimmer="blurring"
-                    size='tiny'
-                    trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
-                  <Modal.Content
-                  >
-                    <Card fluid>
-                      {foodCard(imageStyleReviews, nameSizeReviews)}
-                      <Card.Content>
-                        {this.props.food.tags.map((tag, index) => {
-                          let returnThis = '';
-                          if ((typeof tag) === 'object') {
-                            returnThis =
-                                <Label.Group tag>
-                                  <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
-                                    {tag.name}
-                                  </Label>
+          <div style={{ paddingRight: '13px' }}>
+            <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
+              Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
+            </Card.Meta>
+          </div>
+          <Divider />
+          <div style={{ padding: '0 10px 0 10px' }}>
+            <Card.Content>
+              {this.props.food.tags.map((tag, index) => {
+                let returnThis = '';
+                if ((typeof tag) === 'object') {
+                  returnThis =
+                      <Label.Group tag>
+                        <Label style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                          {tag.name}
+                        </Label>
+                        <Label tag style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                          {tag.type}
+                        </Label>
+                      </Label.Group>;
+                } else {
+                  returnThis =
+                      <Label tag style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                        {tag}
+                      </Label>;
+                }
+                return returnThis;
+              })}
+              {<Label tag style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }}>
+                {this.props.food.category}
+              </Label>}
+            </Card.Content>
+          </div>
+          <Divider />
+          <div style={{ padding: '0 15px 15px 15px' }}>
+            <Card.Content>
+              {this.props.reviews.length > 0 ? (
+                  <Modal
+                      dimmer="blurring"
+                      size='tiny'
+                      trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
+                    <Modal.Content
+                    >
+                      <Card fluid>
+                        {foodCard(imageStyleReviews, nameSizeReviews)}
+                        <Card.Meta textAlign="right" style={{ padding: '40px 13px 15px 0px' }}>
+                          Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
+                        </Card.Meta>
+                        <Card.Content>
+                          {this.props.food.tags.map((tag, index) => {
+                            let returnThis = '';
+                            if ((typeof tag) === 'object') {
+                              returnThis =
+                                  <Label.Group tag>
+                                    <Label style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                      {tag.name}
+                                    </Label>
+                                    <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
+                                      {tag.type}
+                                    </Label>
+                                  </Label.Group>;
+                            } else {
+                              returnThis =
                                   <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
-                                    {tag.type}
-                                  </Label>
-                                </Label.Group>;
-                          } else {
-                            returnThis =
-                                <Label tag style={{ backgroundColor: '#338D33', color: 'white' }} key={index}>
-                                  {tag}
-                                </Label>;
-                          }
-                          return returnThis;
-                        })}
-                        {<Label tag style={{ backgroundColor: '#338D33', color: 'white' }}>
-                          {this.props.food.category}
-                        </Label>}
-                      </Card.Content>
-                    </Card>
-                  </Modal.Content>
-                  <Modal.Content scrolling
-                  >
-                    {this.props.reviews.map((review, index) => <Review
-                        key={index}
-                        review={review}
-                    />)}
-                  </Modal.Content>
-                  <Modal.Actions>
-                    <Button
-                        style={{ backgroundColor: '#338D33', color: 'white' }}
-                        as={ NavLink }
-                        activeClassName="active"
-                        exact to={path}
-                        key="addReview">
-                      Write a Review
-                      <Icon inverted name="right chevron" />
-                    </Button>
-                  </Modal.Actions>
-                </Modal>
-            ) : (
-                <Card.Header style={{ color: 'silver' }}>No reviews yet.</Card.Header>
-            )
-            }
-          </Card.Content>
+                                    {tag}
+                                  </Label>;
+                            }
+                            return returnThis;
+                          })}
+                          {<Label tag style={{ backgroundColor: '#338D33', color: 'white' }}>
+                            {this.props.food.category}
+                          </Label>}
+                        </Card.Content>
+                      </Card>
+                    </Modal.Content>
+                    <Modal.Content scrolling
+                    >
+                      {this.props.reviews.map((review, index) => <Review
+                          key={index}
+                          review={review}
+                      />)}
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button
+                          style={{ backgroundColor: '#338D33', color: 'white' }}
+                          as={ NavLink }
+                          activeClassName="active"
+                          exact to={path}
+                          key="addReview">
+                        Write a Review
+                        <Icon inverted name="right chevron" />
+                      </Button>
+                    </Modal.Actions>
+                  </Modal>
+              ) : (
+                  <Card.Header style={{ color: 'silver' }}>No reviews yet.</Card.Header>
+              )
+              }
+            </Card.Content>
+          </div>
         </Card>
     );
   }
