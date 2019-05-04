@@ -305,7 +305,7 @@ Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
   reviews: PropTypes.array.isRequired,
-  restaurants: PropTypes.array,
+  restaurants: PropTypes.array.isRequired,
 };
 
 export default withTracker(() => {

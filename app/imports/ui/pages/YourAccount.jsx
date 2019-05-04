@@ -21,6 +21,14 @@ class YourAccount extends React.Component {
     noRatings: '',
   }
 
+  function(review) {
+    let returnThis = '';
+    if (review) {
+      returnThis = this.props.foods.filter(food => (food.key == review.foodId));
+      console.log(returnThis);
+    }
+    return returnThis;
+  }
 
   state =
       { restaurantChecked:
@@ -35,8 +43,21 @@ class YourAccount extends React.Component {
               </Tab.Pane> },
             { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
-                  {this.props.reviews.filter(review => (this.props.currentUser === review.user))
-                      .map((review, index) => <Review key={index} review={review} />)}
+                  {this.props.reviews.filter(review => (review.user === this.props.currentUser))
+                      .map((currentReview, index) => (
+                            <Card key={index}>
+                              <Card.Content>
+                                <Card>
+                                  <Card.Content>
+                                    {this.props.foods.filter(food => (food.key == currentReview.foodId))[0].name}
+                                  </Card.Content>
+                                </Card>
+                              </Card.Content>
+                              <Card.Content>
+                                <Review key={index} review={currentReview}/>
+                              </Card.Content>
+                            </Card>
+                      ))}
                 </Card.Group>
               </Tab.Pane> },
             { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
@@ -311,13 +332,13 @@ class YourAccount extends React.Component {
 
   }
 
-
   render() {
     return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
   }
 
 
   renderPage() {
+    console.log(this.function(this.props.reviews.filter(review => (review.user === this.props.currentUser))[0])[0].name);
     return (
         <div
             className='search-sidebar'
