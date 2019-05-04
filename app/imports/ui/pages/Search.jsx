@@ -137,7 +137,7 @@ class Search extends React.Component {
   }
 
   getSearchResults(cuisine) {
-    console.log(this.state.rating);
+
     let results = [];
     if (cuisine === 'All') {
       this.props.foods.map(food => {
@@ -169,7 +169,6 @@ class Search extends React.Component {
       });
     }
 
-    console.log(results);
     return results;
   }
 
@@ -328,9 +327,7 @@ class Search extends React.Component {
                   <Grid.Column width={8}>
                     <Header as='h2' textAlign='center'>Search Results for {cuisineName}</Header>
                   </Grid.Column>
-                  <Grid.Column width={4}>
-                    <Dropdown placeholder='Sort' search selection/>
-                  </Grid.Column>
+                  <Grid.Column width={4} />
                 </Grid.Row>
               </Grid>
               <Table style={{ width: '100%' }}>

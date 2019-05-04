@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header, Loader } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header, Loader, Item } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -218,11 +218,6 @@ class FoodRowSearchPage extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
-  }
-
-  /** Render the page once subscriptions have been received. */
-  renderPage() {
     const path = `/addReview/:${this.props.food.key}`;
     const openString = this.isOpen(this.props.food);
 
@@ -238,17 +233,17 @@ class FoodRowSearchPage extends React.Component {
 
           {/*Col 2: Info*/}
           <Table.Cell style={{ width: '20%' }}>
-            <div style={{ width: '100%' }}>
+            <Item style={{ width: '100%' }}>
               <Icon name="map marker alternate" style={{ marginRight: '5px' }}/>
               {this.props.food.restaurant}
-            </div>
-            <div style={{ width: '100%' }}>
+            </Item>
+            <Item style={{ width: '100%' }}>
               <Icon name="clock" style={{ marginRight: '5px' }}/>
               {openString}
-            </div>
+            </Item>
             <Icon name="dollar sign"/>
             {this.props.food.price}
-            <div>
+            <Item>
               <p style={{ margin: '3px 0 0 0'}}>Price Range</p>
             {this.getStars(this.getDefaultRating(this.props.food.price)).map(num => {
               if (num === 1) {
@@ -258,7 +253,7 @@ class FoodRowSearchPage extends React.Component {
               }
             })
             }
-            </div>
+            </Item>
           </Table.Cell>
 
           {/*Col 3: Reviews*/}

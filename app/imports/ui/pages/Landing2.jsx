@@ -110,7 +110,7 @@ class Landing2 extends React.Component {
 
           {/*Recent Foods*/}
           <Container style={{ paddingTop: '20px' }}>
-            <Header as='h2' class='color-primary-3'>Recently Added Foods</Header>
+            <Header as='h2' className='color-primary-3'>Recently Added Foods</Header>
             <Card.Group itemsPerRow={3}>
               {recentFoods()}
             </Card.Group>
