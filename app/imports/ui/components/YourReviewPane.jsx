@@ -4,6 +4,8 @@ import { Card, Divider, Icon, Image, Dropdown, Segment, Grid } from 'semantic-ui
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
+import { Reviews } from '/imports/api/review/review';
+import { _ } from 'underscore';
 import Review from './Review';
 
 
@@ -68,13 +70,18 @@ class YourReviewPane extends React.Component {
           .map(restaurant => (address.push(restaurant.address)));
     }
 
+    this.props.food.averageRating =
+        Math.round((this.props.reviews.filter(review => (review.foodId == this.props.food.key))
+            .reduce((memo, reviewForAverage) => memo + reviewForAverage.rating, 0))
+            / (this.props.reviews.filter(review => (review.foodId == this.props.food.key)).length));
+    
     return (
           <Card>
             <Card.Content>
               <Review review={this.props.review}/>
             </Card.Content>
             <Card.Content>
-              <Card.Header style={{ fontSize: '25px' }}>{this.props.food.name}</Card.Header>
+              <Card.Header style={{ fontSize: '20px' }}>{this.props.food.name}</Card.Header>
               <Image
                   style={{
                     maxWidth: '100%',
@@ -162,13 +169,16 @@ YourReviewPane.propTypes = {
   currentUser: PropTypes.string.isRequired,
   restaurants: PropTypes.array.isRequired,
   review: PropTypes.object.isRequired,
+  reviews: PropTypes.object.isRequired,
 };
 
 export default withTracker(() => {
   const subscription = Meteor.subscribe('Restaurants');
+  const subscription2 = Meteor.subscribe('Reviews');
   return {
     currentUser: Meteor.user() ? Meteor.user().username : '',
     restaurants: Restaurants.find({}).fetch(),
-    ready: subscription.ready(),
+    reviews: Reviews.find({}).fetch(),
+    ready: subscription.ready() && subscription2.ready(),
   };
 })(YourReviewPane);
