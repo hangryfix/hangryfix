@@ -16,12 +16,17 @@ if (Tags.find().count() === 0) {
   }
 }
 
-/** This subscription publishes only the documents associated with the logged in user */
+/** This subscription publishes only the ingredient tags */
 Meteor.publish('Tag', function publish() {
     return Tags.find({ type: 'ingredient' });
 });
 
-/** This subscription publishes only the documents associated with the logged in user */
+/** This subscription publishes only the cuisine/category tags */
 Meteor.publish('Category', function publish() {
   return Tags.find({ type: 'cuisine' });
+});
+
+/** This subscription publishes all tags */
+Meteor.publish('AllTags', function publish() {
+  return Tags.find();
 });
