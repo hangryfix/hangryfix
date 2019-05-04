@@ -85,7 +85,6 @@ class Food extends React.Component {
     const nameSizeNotReviews = { fontSize: '25px' };
 
     const foodCard = (imageStyle, nameSize) => {
-      const viewHere = <a>Show hours</a>;
       const hours = [];
       const address = [];
 
@@ -134,7 +133,7 @@ class Food extends React.Component {
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
                 <Icon name="clock" style={{ marginRight: '5px' }} color="black"/>
-                <Dropdown text={viewHere} pointing="left" className="restaurantHours">
+                <Dropdown text='Show hours' pointing="left" className="restaurantHours">
                   {this.props.restaurants ?
                       (
                           <Dropdown.Menu>

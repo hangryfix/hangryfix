@@ -27,12 +27,12 @@ class YourAccount extends React.Component {
         ratingChecked:
             false,
         panes: [
-            { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+            { menuItem: 'Favorite Tags', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={3}>
                   {this.taggedFoods(this.props.foods)}
                 </Card.Group>
               </Tab.Pane> },
-            { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
+            { menuItem: 'Your Reviews', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={2}>
                   {this.props.reviews.filter(review => (review.user === this.props.currentUser))
                       .map((currentReview, index) => (
@@ -44,7 +44,7 @@ class YourAccount extends React.Component {
                       ))}
                 </Card.Group>
               </Tab.Pane> },
-            { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
+            { menuItem: 'New Foods', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={3}>
                   {_.last(_.sortBy(this.props.foods, this.props.foods.key), 9)
                       .map((food, index) => <Food
@@ -252,12 +252,12 @@ class YourAccount extends React.Component {
         restaurantChecked: false,
         ratingChecked: false,
         panes: [
-          { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+          { menuItem: 'Favorite Tags', render: () => <Tab.Pane>
               <Card.Group itemsPerRow={3}>
                 {this.taggedFoods(filtered)}
               </Card.Group>
             </Tab.Pane> },
-            { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
+            { menuItem: 'New Foods', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={3}>
                   {filtered.map((food, index) => <Food
                       key={index}
@@ -283,12 +283,12 @@ class YourAccount extends React.Component {
         restaurantChecked: false,
         ratingChecked: false,
         panes: [
-              { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
+              { menuItem: 'Favorite Tags', render: () => <Tab.Pane>
                   <Card.Group itemsPerRow={3}>
                     {this.taggedFoods(this.props.foods)}
                   </Card.Group>
                 </Tab.Pane> },
-                { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
+                { menuItem: 'New Foods', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={3}>
                   {this.props.foods.map((food, index) => <Food
                       key={index}
@@ -308,8 +308,8 @@ class YourAccount extends React.Component {
         restaurantChecked: false,
         ratingChecked: false,
         panes: [
-          { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid /> },
-          { menuItem: 'New Foods', render: () => <Tab.Pane fluid /> },
+          { menuItem: 'Favorite Tags', render: () => <Tab.Pane /> },
+          { menuItem: 'New Foods', render: () => <Tab.Pane /> },
         ],
       });
     }
@@ -364,7 +364,7 @@ class YourAccount extends React.Component {
                   />
                   <Button
                       onClick={this.handleClick}
-                      fluid style={{ backgroundColor: '#21BA45', color: 'white', marginTop: '60px' }}>
+                      style={{ backgroundColor: '#21BA45', color: 'white', marginTop: '60px' }}>
                     Go
                   </Button>
                 </Container>

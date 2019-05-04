@@ -56,7 +56,6 @@ class YourReviewPane extends React.Component {
   }
 
   render() {
-    const viewHere = <a>Show hours</a>;
     const hours = [];
     const address = [];
 
@@ -121,7 +120,7 @@ class YourReviewPane extends React.Component {
                 </Card.Description>
                 <Card.Description style={{ padding: '2px' }}>
                   <Icon name="clock" style={{ marginRight: '5px' }} color="black"/>
-                  <Dropdown text={viewHere} pointing="left" className="restaurantHours">
+                  <Dropdown text='Show hours' pointing="left" className="restaurantHours">
                     {this.props.restaurants ?
                         (
                             <Dropdown.Menu>
@@ -176,7 +175,7 @@ YourReviewPane.propTypes = {
   currentUser: PropTypes.string.isRequired,
   restaurants: PropTypes.array.isRequired,
   review: PropTypes.object.isRequired,
-  reviews: PropTypes.object.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default withTracker(() => {
