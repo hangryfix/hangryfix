@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Divider, Icon, Image, Dropdown, Segment, Grid } from 'semantic-ui-react';
+import { Card, Icon, Image, Dropdown, Segment, Grid } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { Reviews } from '/imports/api/review/review';
-import { _ } from 'underscore';
 import Review from './Review';
 
 
@@ -74,13 +73,16 @@ class YourReviewPane extends React.Component {
         Math.round((this.props.reviews.filter(review => (review.foodId == this.props.food.key))
             .reduce((memo, reviewForAverage) => memo + reviewForAverage.rating, 0))
             / (this.props.reviews.filter(review => (review.foodId == this.props.food.key)).length));
-    
+
     return (
-          <Card>
+          <Card style={{ backgroundColor: '#f4f4f4' }}>
             <Card.Content>
               <Review review={this.props.review}/>
             </Card.Content>
-            <Card.Content>
+            <Card.Description>
+              <Segment basic>
+                <Grid columns={2} divided>
+                  <Grid.Column style={{ paddingLeft: '30px' }} width={6}>
               <Card.Header style={{ fontSize: '20px' }}>{this.props.food.name}</Card.Header>
               <Image
                   style={{
@@ -91,6 +93,8 @@ class YourReviewPane extends React.Component {
                     padding: '10px 0 10px 0' }}
                   src={this.props.food.image}
               />
+                  </Grid.Column>
+                  <Grid.Column style={{ paddingRight: '15px' }} width={10} verticalAlign='middle' textAlign='center'>
               <Card.Description>
                 <Card.Description style={{ paddingBottom: '10px', paddingTop: '5px' }}>
                   {this.getHearts(this.props.food.averageRating).map(num => {
@@ -158,7 +162,10 @@ class YourReviewPane extends React.Component {
                   })}
                 </Card.Description>
               </Card.Description>
-            </Card.Content>
+                  </Grid.Column>
+                </Grid>
+              </Segment>
+            </Card.Description>
           </Card>
     );
   }

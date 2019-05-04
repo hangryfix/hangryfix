@@ -33,7 +33,7 @@ class YourAccount extends React.Component {
                 </Card.Group>
               </Tab.Pane> },
             { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
-                <Card.Group itemsPerRow={3}>
+                <Card.Group itemsPerRow={2}>
                   {this.props.reviews.filter(review => (review.user === this.props.currentUser))
                       .map((currentReview, index) => (
                           <YourReviewPane
