@@ -137,6 +137,7 @@ class Search extends React.Component {
   }
 
   getSearchResults(cuisine) {
+    console.log(this.state.rating);
     let results = [];
     if (cuisine === 'All') {
       this.props.foods.map(food => {
@@ -167,6 +168,8 @@ class Search extends React.Component {
         }
       });
     }
+
+    console.log(results);
     return results;
   }
 

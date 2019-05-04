@@ -284,6 +284,14 @@ class YourAccount extends React.Component {
               <div className='search-sidebar'>
                 <Header as='h2' content='Filters'/>
                 <Container>
+                  <Header as='h3' content='Restaurant'/>
+                  <Radio
+                      toggle
+                      label='Search Open Restaurants Only'
+                      style={{ paddingTop: '10px' }}
+                      onChange={this.toggleRestaurant}
+                      checked={this.state.restaurantChecked}
+                  />
                   <Header as='h3' content='Rating'/>
                   <Rating
                       icon='heart'
