@@ -201,16 +201,19 @@ class Food extends React.Component {
                 if ((typeof tag) === 'object') {
                   returnThis =
                       <Label.Group tag>
-                        <Label style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                        <Label style={{ backgroundColor: '#338D33', color: 'white',
+                          marginTop: '2px', marginBottom: '2px' }} key={index}>
                           {tag.name}
                         </Label>
-                        <Label tag style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                        <Label tag style={{ backgroundColor: '#338D33',
+                          color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
                           {tag.type}
                         </Label>
                       </Label.Group>;
                 } else {
                   returnThis =
-                      <Label tag style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                      <Label tag style={{ backgroundColor: '#338D33',
+                        color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
                         {tag}
                       </Label>;
                 }
