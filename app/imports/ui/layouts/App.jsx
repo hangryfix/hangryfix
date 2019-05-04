@@ -8,7 +8,6 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import Landing2 from '../pages/Landing2';
-import ListStuff from '../pages/ListStuff';
 import YourAccount from '../pages/YourAccount';
 import ListFoodAdmin from '../pages/ListFoodAdmin';
 import ListUsersAdmin from '../pages/ListUsersAdmin';
@@ -16,7 +15,6 @@ import Search from '../pages/Search';
 import AddFood from '../pages/AddFood';
 import AddReview from '../pages/AddReview';
 import EditReview from '../pages/EditReview';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -33,12 +31,10 @@ class App extends React.Component {
               <Route exact path="/" component={Landing2}/>
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
-              <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/addFood" component={AddFood}/>
               <ProtectedRoute path="/addReview" component={AddReview}/>
               <ProtectedRoute path="/editReview" component={EditReview}/>
               <Route path="/search" component={Search}/>
-              <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <AdminProtectedRoute path="/adminFood" component={ListFoodAdmin}/>
               <AdminProtectedRoute path="/adminUsers" component={ListUsersAdmin}/>
               <ProtectedRoute path="/signout" component={Signout}/>
