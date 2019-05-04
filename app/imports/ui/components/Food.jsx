@@ -108,10 +108,13 @@ class Food extends React.Component {
               <Card.Description style={{ paddingBottom: '10px', paddingTop: '5px' }}>
                 {this.props.reviews.length > 0 ? (
                     this.getHearts(this.props.food.averageRating).map(num => {
+                      let returnThis = '';
                       if (num === 1) {
-                        return <Icon name='heart' size='large'/>;
+                        returnThis = <Icon name='heart' size='large'/>;
+                      } else {
+                        returnThis = <Icon name='heart outline' size='large'/>;
                       }
-                      return <Icon name='heart outline' size='large'/>;
+                      return returnThis;
                     })
                 ) : (
                     <Card.Description style={{ color: 'darkgray' }}>No ratings yet.</Card.Description>
@@ -162,11 +165,13 @@ class Food extends React.Component {
               <Card.Description style={{ padding: '2px' }}>
                 <Icon name="dollar sign" color="black"/>
                 {this.getStars(this.props.food.price).map(num => {
+                  let returnThis = '';
                   if (num === 1) {
-                    return <Icon name='star'/>;
+                    returnThis = <Icon name='star'/>;
                   } else {
-                    return <Icon name='star outline'/>;
+                    returnThis = <Icon name='star outline'/>;
                   }
+                  return returnThis;
                 })}
               </Card.Description>
             </Card.Description>
