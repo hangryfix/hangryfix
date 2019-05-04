@@ -8,6 +8,7 @@ import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'underscore';
+import Review from '../components/Review';
 import Food from '../components/Food';
 
 
@@ -30,6 +31,12 @@ class YourAccount extends React.Component {
             { menuItem: 'Favorite Tags', render: () => <Tab.Pane fluid>
                 <Card.Group itemsPerRow={3}>
                   {this.taggedFoods(this.props.foods)}
+                </Card.Group>
+              </Tab.Pane> },
+            { menuItem: 'Your Reviews', render: () => <Tab.Pane fluid>
+                <Card.Group itemsPerRow={3}>
+                  {this.props.reviews.filter(review => (this.props.currentUser === review.user))
+                      .map((review, index) => <Review key={index} review={review} />)}
                 </Card.Group>
               </Tab.Pane> },
             { menuItem: 'New Foods', render: () => <Tab.Pane fluid>
