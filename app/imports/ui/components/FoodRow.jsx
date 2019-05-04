@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header, Dropdown } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'underscore';
@@ -18,32 +18,21 @@ class FoodRow extends React.Component {
 
   onClick = () => Foods.remove(this.props.food._id, this.deleteCallback)
 
-  /** Notify the user of the results of the delete. */
-  deleteCallback(error) {
-    if (error) {
-      Bert.alert({ type: 'danger', message: `Delete failed: ${error.message}` });
-    } else {
-      Bert.alert({ type: 'success', message: 'Food Deleted' });
-    }
-  }
-
   getDefaultRating(price) {
-      let stars = 0
-      if (price < 4 ) {
+      let stars = 0;
+      if (price < 4) {
         stars = 1;
-      } else if (price >= 4 && price  < 8 ) {
+      } else if (price >= 4 && price < 8) {
         stars = 2;
-      } else if (price >= 8 && price  < 12 ) {
+      } else if (price >= 8 && price < 12) {
         stars = 3;
-      } else if (price >= 12 && price  < 16 ) {
+      } else if (price >= 12 && price < 16) {
         stars = 4;
-      } else  {
+      } else {
         stars = 5;
       }
       return stars;
   }
-
-
 
   render() {
 
@@ -55,22 +44,9 @@ class FoodRow extends React.Component {
               / (this.props.reviews.length));
     }
 
-    const path = `/addReview/:${this.props.food.key}`;
-
-
-
-    const restHours = () => {
-      let hours = [];
-      this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant))
-        .map(restaurant => (restaurant.hours.map(hour => (hours.push(hour)))
-        ))
-    }
-
-
-
     return (
         <Table.Row>
-          {/*Col 1: Image/Name*/}
+          { /* Col 1: Image/Name */ }
           <Table.Cell style={{ width: '30%' }}>
             <Image floated='left' style={{ width: '40%' }} src={this.props.food.image} />
             <Header as='h3' textAlign='left'>
@@ -78,32 +54,32 @@ class FoodRow extends React.Component {
             </Header>
           </Table.Cell>
 
-            {/*Col 2: Info*/}
+            { /* Col 2: Info */ }
           <Table.Cell style={{ width: '20%' }}>
             <Icon name="map marker alternate" style={{ marginRight: '5px' }}/>
             {this.props.food.restaurant}
-            {/*<div name="hours">*/}
-              {/*<Icon name="clock" style={{ marginRight: '5px' }} />*/}
-              {/*<Dropdown text={<a>Show hours</a>} pointing="left">*/}
-                {/*{restHours()}*/}
-                        {/*<Dropdown.Menu>*/}
-                          {/*<Dropdown.Header>{`Mon: ${hours[0]} - ${hours[1]}`}</Dropdown.Header>*/}
-                          {/*<Dropdown.Divider/>*/}
-                          {/*<Dropdown.Header>{`Tues: ${hours[2]} - ${hours[3]}`}</Dropdown.Header>*/}
-                          {/*<Dropdown.Divider/>*/}
-                          {/*<Dropdown.Header>{`Wed: ${hours[4]} - ${hours[5]}`}</Dropdown.Header>*/}
-                          {/*<Dropdown.Divider/>*/}
-                          {/*<Dropdown.Header>{`Thu: ${hours[6]} - ${hours[7]}`}</Dropdown.Header>*/}
-                          {/*<Dropdown.Divider/>*/}
-                          {/*<Dropdown.Header>{`Fri: ${hours[8]} - ${hours[9]}`}</Dropdown.Header>*/}
-                          {/*<Dropdown.Divider/>*/}
-                          {/*<Dropdown.Header>{`Sat: ${hours[10]} - ${hours[11]}`}</Dropdown.Header>*/}
-                          {/*<Dropdown.Divider/>*/}
-                          {/*<Dropdown.Header>{`Sun: ${hours[12]} - ${hours[13]}`}</Dropdown.Header>*/}
-                        {/*</Dropdown.Menu>*/}
-              {/*</Dropdown>*/}
-            {/*</div>*/}
-            <div name="price"><Icon name="dollar sign" />
+            { /* <div name="hours"> */ }
+              { /* <Icon name="clock" style={{ marginRight: '5px' }} /> */ }
+              { /* <Dropdown text={<a>Show hours</a>} pointing="left"> */ }
+                { /* {restHours()} */ }
+                        { /* <Dropdown.Menu>* / }
+                          { /* <Dropdown.Header>{`Mon: ${hours[0]} - ${hours[1]}`}</Dropdown.Header> */ }
+                          { /* <Dropdown.Divider/> */ }
+                          { /* <Dropdown.Header>{`Tues: ${hours[2]} - ${hours[3]}`}</Dropdown.Header> */ }
+                          { /* <Dropdown.Divider/> */ }
+                          { /* <Dropdown.Header>{`Wed: ${hours[4]} - ${hours[5]}`}</Dropdown.Header> */ }
+                          { /* <Dropdown.Divider/> */ }
+                          { /* <Dropdown.Header>{`Thu: ${hours[6]} - ${hours[7]}`}</Dropdown.Header> */ }
+                          { /* <Dropdown.Divider/> */ }
+                          { /* <Dropdown.Header>{`Fri: ${hours[8]} - ${hours[9]}`}</Dropdown.Header> */ }
+                          { /* <Dropdown.Divider/> */ }
+                          { /* <Dropdown.Header>{`Sat: ${hours[10]} - ${hours[11]}`}</Dropdown.Header> */ }
+                          { /* <Dropdown.Divider/> */ }
+                          { /* <Dropdown.Header>{`Sun: ${hours[12]} - ${hours[13]}`}</Dropdown.Header> */ }
+                        { /* </Dropdown.Menu> */ }
+              { /* </Dropdown> */ }
+            { /* </div> */ }
+            <div><Icon name="dollar sign" />
             <Rating size="large"
                     icon="star"
                     defaultRating={this.getDefaultRating(this.props.food.price)}
@@ -111,8 +87,8 @@ class FoodRow extends React.Component {
                     disabled/></div>
           </Table.Cell>
 
-          {/*Col 3: Reviews*/}
-            <Table.Cell style={{ paddingBottom: '30px', width: '20%'}}>
+          { /* Col 3: Reviews */ }
+            <Table.Cell style={{ paddingBottom: '30px', width: '20%' }}>
               {this.props.reviews.length > 0 ? (
                   <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
               ) : (
@@ -120,7 +96,8 @@ class FoodRow extends React.Component {
               )
               }
               {this.props.reviews.length > 0 ? (
-                  <Modal size='small' trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
+                  <Modal size='small' trigger={
+                    <Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
                     <Modal.Header>
                       <Card fluid>
                         <Card.Content>
@@ -179,7 +156,7 @@ class FoodRow extends React.Component {
               }
             </Table.Cell>
 
-          {/*Col 4: tags*/}
+          { /* Col 4: tags */ }
           <Table.Cell style={{ width: '20%' }}>
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
@@ -188,7 +165,7 @@ class FoodRow extends React.Component {
             </Label>)}
           </Table.Cell>
 
-          {/*Col 5: options*/}
+          { /* Col 5: options */ }
           <Table.Cell>
             <Button.Group>
               <Button content='Delete' onClick={this.onClick}/>

@@ -8,7 +8,6 @@ import { _ } from 'underscore';
 import Review from './Review';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
 
-
 class Food extends React.Component {
 
   constructor(props) {
@@ -18,7 +17,7 @@ class Food extends React.Component {
   }
 
   getHearts(numFilled) {
-    let heartsArray = [];
+    const heartsArray = [];
     for (let i = 0; i < 5; i++) {
       if (i < numFilled) {
         heartsArray.push(1);
@@ -34,15 +33,18 @@ class Food extends React.Component {
     const starsArray = [];
     if (price < 4) {
       stars = 1;
-    } else if (price >= 4 && price < 8) {
-      stars = 2;
-    } else if (price >= 8 && price < 12) {
-      stars = 3;
-    } else if (price >= 12 && price < 16) {
-      stars = 4;
-    } else {
-      stars = 5;
-    }
+    } else
+      if (price >= 4 && price < 8) {
+        stars = 2;
+      } else
+        if (price >= 8 && price < 12) {
+          stars = 3;
+        } else
+          if (price >= 12 && price < 16) {
+            stars = 4;
+          } else {
+            stars = 5;
+          }
     for (let i = 0; i < 5; i++) {
       if (i < stars) {
         starsArray.push(1);
@@ -57,7 +59,9 @@ class Food extends React.Component {
 
     if (this.props.reviews) {
       this.props.food.averageRating =
-          Math.round((_.reduce(this.props.reviews, function (memo, review) { return memo + review.rating; }, 0))
+          Math.round((_.reduce(this.props.reviews, function (memo, review) {
+                return memo + review.rating;
+              }, 0))
               / (this.props.reviews.length));
     }
 
@@ -68,13 +72,15 @@ class Food extends React.Component {
       maxHeight: '100%',
       width: '200px',
       height: '200px',
-      padding: '10px 0 10px 0' };
+      padding: '10px 0 10px 0',
+    };
     const imageStyleNotReviews = {
       maxWidth: '100%',
       maxHeight: '100%',
       width: '160px',
       height: '160px',
-      padding: '10px 0 10px 0' };
+      padding: '10px 0 10px 0',
+    };
     const nameSizeReviews = { fontSize: '35px' };
     const nameSizeNotReviews = { fontSize: '25px' };
 
@@ -86,7 +92,7 @@ class Food extends React.Component {
       if (this.props.restaurants) {
         this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant))
             .map(restaurant => (restaurant.hours
-                .map(hour => (hours.push(hour)))
+                    .map(hour => (hours.push(hour)))
             ));
         this.props.restaurants.filter(restaurant => (restaurant.name === this.props.food.restaurant))
             .map(restaurant => (address.push(restaurant.address)));
@@ -97,22 +103,21 @@ class Food extends React.Component {
             <Card.Header style={nameSize}>
               {this.props.food.name}
             </Card.Header>
-            <Image style={imageStyle} src={this.props.food.image} />
+            <Image style={imageStyle} src={this.props.food.image}/>
             <Card.Description>
               <Card.Description style={{ paddingBottom: '10px', paddingTop: '5px' }}>
-              {this.props.reviews.length > 0 ? (
-                  this.getHearts(this.props.food.averageRating).map(num => {
-                    if (num === 1) {
-                      return <Icon name='heart' size='large'/>;
-                    } else {
+                {this.props.reviews.length > 0 ? (
+                    this.getHearts(this.props.food.averageRating).map(num => {
+                      if (num === 1) {
+                        return <Icon name='heart' size='large'/>;
+                      }
                       return <Icon name='heart outline' size='large'/>;
-                    }
-                  })
-              ) : (
-                  <Card.Description style={{ color: 'darkgray' }}>No ratings yet.</Card.Description>
-              )
-              }
-            </Card.Description>
+                    })
+                ) : (
+                    <Card.Description style={{ color: 'darkgray' }}>No ratings yet.</Card.Description>
+                )
+                }
+              </Card.Description>
               <Card.Description style={{ padding: '2px', paddingRight: '10px' }}>
                 <Icon name="map marker alternate" color="black"/>
                 <Dropdown
@@ -125,25 +130,25 @@ class Food extends React.Component {
                 </Dropdown>
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
-                <Icon name="clock" style={{ marginRight: '5px' }} color="black" />
+                <Icon name="clock" style={{ marginRight: '5px' }} color="black"/>
                 <Dropdown text={viewHere} pointing="left" className="restaurantHours">
                   {this.props.restaurants ?
                       (
-                        <Dropdown.Menu>
-                          <Dropdown.Header>{`Mon: ${hours[0]} - ${hours[1]}`}</Dropdown.Header>
-                          <Dropdown.Divider/>
-                          <Dropdown.Header>{`Tues: ${hours[2]} - ${hours[3]}`}</Dropdown.Header>
-                          <Dropdown.Divider/>
-                          <Dropdown.Header>{`Wed: ${hours[4]} - ${hours[5]}`}</Dropdown.Header>
-                          <Dropdown.Divider/>
-                          <Dropdown.Header>{`Thu: ${hours[6]} - ${hours[7]}`}</Dropdown.Header>
-                          <Dropdown.Divider/>
-                          <Dropdown.Header>{`Fri: ${hours[8]} - ${hours[9]}`}</Dropdown.Header>
-                          <Dropdown.Divider/>
-                          <Dropdown.Header>{`Sat: ${hours[10]} - ${hours[11]}`}</Dropdown.Header>
-                          <Dropdown.Divider/>
-                          <Dropdown.Header>{`Sun: ${hours[12]} - ${hours[13]}`}</Dropdown.Header>
-                        </Dropdown.Menu>
+                          <Dropdown.Menu>
+                            <Dropdown.Header>{`Mon: ${hours[0]} - ${hours[1]}`}</Dropdown.Header>
+                            <Dropdown.Divider/>
+                            <Dropdown.Header>{`Tues: ${hours[2]} - ${hours[3]}`}</Dropdown.Header>
+                            <Dropdown.Divider/>
+                            <Dropdown.Header>{`Wed: ${hours[4]} - ${hours[5]}`}</Dropdown.Header>
+                            <Dropdown.Divider/>
+                            <Dropdown.Header>{`Thu: ${hours[6]} - ${hours[7]}`}</Dropdown.Header>
+                            <Dropdown.Divider/>
+                            <Dropdown.Header>{`Fri: ${hours[8]} - ${hours[9]}`}</Dropdown.Header>
+                            <Dropdown.Divider/>
+                            <Dropdown.Header>{`Sat: ${hours[10]} - ${hours[11]}`}</Dropdown.Header>
+                            <Dropdown.Divider/>
+                            <Dropdown.Header>{`Sun: ${hours[12]} - ${hours[13]}`}</Dropdown.Header>
+                          </Dropdown.Menu>
                       ) : (
                           <Dropdown.Menu>
                             <Dropdown.Item>
@@ -151,38 +156,37 @@ class Food extends React.Component {
                             </Dropdown.Item>
                           </Dropdown.Menu>
                       )
-                    }
+                  }
                 </Dropdown>
               </Card.Description>
               <Card.Description style={{ padding: '2px' }}>
-                <Icon name="dollar sign" color="black" />
+                <Icon name="dollar sign" color="black"/>
                 {this.getStars(this.props.food.price).map(num => {
                   if (num === 1) {
-                    return <Icon name='star' />;
+                    return <Icon name='star'/>;
                   } else {
-                    return <Icon name='star outline' />;
+                    return <Icon name='star outline'/>;
                   }
                 })}
               </Card.Description>
             </Card.Description>
-            <Divider horizontal><Icon name="info circle" /></Divider>
+            <Divider horizontal><Icon name="info circle"/></Divider>
             <Card.Description>
               {this.props.food.description}
             </Card.Description>
             <div>
-            <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
-              Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
-            </Card.Meta>
+              <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
+                Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
+              </Card.Meta>
             </div>
           </Card.Content>
       );
     };
 
-
     return (
         <Card>
           <Button
-              as={ NavLink }
+              as={NavLink}
               activeClassName="active"
               exact to={path}
               key="addReview">
@@ -261,12 +265,12 @@ class Food extends React.Component {
                   <Modal.Actions>
                     <Button
                         style={{ backgroundColor: '#338D33', color: 'white' }}
-                        as={ NavLink }
+                        as={NavLink}
                         activeClassName="active"
                         exact to={path}
                         key="addReview">
                       Write a Review
-                      <Icon inverted name="right chevron" />
+                      <Icon inverted name="right chevron"/>
                     </Button>
                   </Modal.Actions>
                 </Modal>
@@ -279,6 +283,7 @@ class Food extends React.Component {
     );
   }
 }
+
 Food.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,

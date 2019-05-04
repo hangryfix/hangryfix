@@ -68,11 +68,17 @@ class Review extends React.Component {
                 <Modal
                     open={this.state.showModal}
                     size="tiny"
-                    trigger={<Button onClick={() => this.setState({ showModal: true })}><Icon name="trash" /> Delete</Button>}>
+                    trigger={
+                      <Button onClick={() => this.setState({ showModal: true })}><Icon name="trash" />
+                      Delete
+                      </Button>}>
                   <Modal.Header>Delete Review</Modal.Header>
                   <Modal.Content>Are you sure you want to delete this review?</Modal.Content>
                   <Modal.Actions>
-                    <Button compact onClick={() => this.setState({ showModal: false })}><Icon name="remove" /> No</Button>
+                    <Button compact onClick={() => this.setState({ showModal: false })}>
+                      <Icon name="remove" />
+                      No
+                    </Button>
                     <Button compact onClick={this.handleDeleteClick}>
                       <Icon name="checkmark" /> Yes
                     </Button>

@@ -1,13 +1,13 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header, Loader, Item } from 'semantic-ui-react';
+import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header, Item } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
+import { NavLink } from 'react-router-dom';
 import Review from './Review';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
-import { NavLink } from 'react-router-dom';
 
 class FoodRowSearchPage extends React.Component {
   constructor(props) {
@@ -24,39 +24,20 @@ class FoodRowSearchPage extends React.Component {
 
   onClick = () => Foods.remove(this.props.food._id, this.deleteCallback);
 
-
-  getDefaultRating() {
-    let price = this.props.food.price;
-    let stars = 0;
-    if (price < 4 ) {
-      stars = 1;
-    } else if (price >= 4 && price  < 8 ) {
-      stars = 2;
-    } else if (price >= 8 && price  < 12 ) {
-      stars = 3;
-    } else if (price >= 12 && price  < 16 ) {
-      stars = 4;
-    } else  {
-      stars = 5;
-    }
-    return stars;
-  }
-
   getStars(numFilled) {
-    let heartsArray = [];
+    const starsArray = [];
     for (let i = 0; i < 5; i++) {
       if (i < numFilled) {
-        heartsArray.push(1);
+        starsArray.push(1);
       } else {
-        heartsArray.push(0);
+        starsArray.push(0);
       }
     }
-    return heartsArray;
+    return starsArray;
   }
 
-
   getHearts(numFilled) {
-    let heartsArray = [];
+    const heartsArray = [];
     for (let i = 0; i < 5; i++) {
       if (i < numFilled) {
         heartsArray.push(1);
@@ -68,13 +49,14 @@ class FoodRowSearchPage extends React.Component {
   }
 
   isOpen(food) {
-    let d = new Date();
-    let restaurantName = food.restaurant;
+    const d = new Date();
+    const restaurantName = food.restaurant;
     let restaurant = null;
     this.props.restaurants.map(rest => {
       if (rest.name === restaurantName) {
         restaurant = rest;
       }
+      return 0;
     });
 
     let open = 0;
@@ -109,23 +91,27 @@ class FoodRowSearchPage extends React.Component {
         open = 12;
         close = 13;
         break;
+      default:
+        open = 0;
+        close = 0;
+        break;
     }
 
-    let openTimeString = restaurant.hours[open];
-    let closeTimeString = restaurant.hours[close];
-    let nextOpenTimeString = restaurant.hours[(open + 2) % 14];
+    const openTimeString = restaurant.hours[open];
+    const closeTimeString = restaurant.hours[close];
+    const nextOpenTimeString = restaurant.hours[(open + 2) % 14];
 
-    let openTokens = openTimeString.split(':');
-    let openHours = openTokens[0];
-    let openTokens2 = openTokens[1].split(' ');
-    let openMinutes = openTokens2[0];
-    let openAP = openTokens2[1];
+    const openTokens = openTimeString.split(':');
+    const openHours = openTokens[0];
+    const openTokens2 = openTokens[1].split(' ');
+    const openMinutes = openTokens2[0];
+    const openAP = openTokens2[1];
 
-    let closeTokens = closeTimeString.split(':');
-    let closeHours = closeTokens[0];
-    let closeTokens2 = closeTokens[1].split(' ');
-    let closeMinutes = closeTokens2[0];
-    let closeAP = closeTokens2[1];
+    const closeTokens = closeTimeString.split(':');
+    const closeHours = closeTokens[0];
+    const closeTokens2 = closeTokens[1].split(' ');
+    const closeMinutes = closeTokens2[0];
+    const closeAP = closeTokens2[1];
 
     let timeString = '';
 
@@ -135,15 +121,15 @@ class FoodRowSearchPage extends React.Component {
     let openValue = 0;
 
     if (closeAP === 'pm') {
-      closeValue += parseInt(closeHours) + 12;
+      closeValue += parseInt(closeHours, 10) + 12;
     } else {
-      closeValue += parseInt(closeHours);
+      closeValue += parseInt(closeHours, 10);
     }
 
     if (openAP === 'pm') {
-      openValue += parseInt(openHours) + 12;
+      openValue += parseInt(openHours, 10) + 12;
     } else {
-      openValue += parseInt(openHours);
+      openValue += parseInt(openHours, 10);
     }
 
     if (closeValue > d.getHours()) {
@@ -163,42 +149,33 @@ class FoodRowSearchPage extends React.Component {
       }
 
     if (isOpenNow) {
-      return 'Open until ' + closeTimeString;
-    } else {
-      return 'Closed until ' + timeString;
+      return `Open until ${closeTimeString}`;
     }
-
-  }
-
-  /** Notify the user of the results of the delete. */
-  deleteCallback(error) {
-    if (error) {
-      Bert.alert({ type: 'danger', message: `Delete failed: ${error.message}` });
-    } else {
-      Bert.alert({ type: 'success', message: 'Food Deleted' });
-    }
+    return `Closed until ${timeString}`;
   }
 
   getAverageRatingRow(reviews) {
     let total = 0;
-    for (let rev of reviews) {
+    reviews.map(rev => {
       total += rev.rating;
-    }
+      return 0;
+    });
     return Math.round(total / reviews.length);
   }
 
   getReviews() {
-    let reviewArray = [];
+    const reviewArray = [];
     this.props.reviews.map(review => {
-      if (parseInt(review.foodId) === parseInt(this.props.food.key)) {
+      if (parseInt(review.foodId, 10) === parseInt(this.props.food.key, 10)) {
         reviewArray.push(review);
       }
+      return 0;
     });
     return reviewArray;
   }
 
   getDefaultRating(price) {
-    let stars = 0
+    let stars = 0;
     if (price < 4) {
       stars = 1;
     } else
@@ -223,7 +200,6 @@ class FoodRowSearchPage extends React.Component {
 
     return (
         <Table.Row style={{ width: '100%' }}>
-          {/*Col 1: Image/Name*/}
           <Table.Cell style={{ width: '20%' }}>
             <Header as='h3' textAlign='center' style={{ width: '100%' }}>
               {this.props.food.name}
@@ -231,7 +207,6 @@ class FoodRowSearchPage extends React.Component {
             <Image floated='left' style={{ width: '100%' }} src={this.props.food.image}/>
           </Table.Cell>
 
-          {/*Col 2: Info*/}
           <Table.Cell style={{ width: '20%' }}>
             <Item style={{ width: '100%' }}>
               <Icon name="map marker alternate" style={{ marginRight: '5px' }}/>
@@ -244,30 +219,23 @@ class FoodRowSearchPage extends React.Component {
             <Icon name="dollar sign"/>
             {this.props.food.price}
             <Item>
-              <p style={{ margin: '3px 0 0 0'}}>Price Range</p>
-            {this.getStars(this.getDefaultRating(this.props.food.price)).map(num => {
-              if (num === 1) {
-                return <Icon name='star' size='large'/>;
-              } else {
-                return <Icon name='star outline' size='large'/>
+              <p style={{ margin: '3px 0 0 0' }}>Price Range</p>
+              {this.getStars(this.getDefaultRating(this.props.food.price)).map(num => {
+                const icon = (num === 1) ? 'star' : 'star outline';
+                return <Icon name={icon} size='large'/>;
+              })
               }
-            })
-            }
             </Item>
           </Table.Cell>
 
-          {/*Col 3: Reviews*/}
           <Table.Cell style={{ paddingBottom: '20px', width: '20%' }}>
             {this.getReviews().length > 0 ? (
-                    this.getHearts(this.getAverageRatingRow(this.getReviews())).map(num => {
-                      if (num === 1) {
-                        return <Icon name='heart' size='large'/>;
-                      } else {
-                        return <Icon name='heart outline' size='large'/>
-                      }
-                    })
+                this.getHearts(this.getAverageRatingRow(this.getReviews())).map(num => {
+                  const icon = (num === 1) ? 'heart' : 'heart outline';
+                  return <Icon name={icon} size='large'/>;
+                })
             ) : (
-            'No ratings yet.'
+                'No ratings yet.'
             )
             }
             {this.getReviews().length > 0 ? (
@@ -346,7 +314,6 @@ class FoodRowSearchPage extends React.Component {
             }
           </Table.Cell>
 
-          {/*Col 4: tags*/}
           <Table.Cell style={{ width: '18%' }}>
             {this.props.food.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
@@ -373,6 +340,7 @@ FoodRowSearchPage.propTypes = {
   food: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
   reviews: PropTypes.array.isRequired,
+  restaurants: PropTypes.array.isRequired,
 };
 
 export default withTracker(() => {

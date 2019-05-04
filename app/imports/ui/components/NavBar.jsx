@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Container, Input, Image } from 'semantic-ui-react';
+import { Menu, Dropdown, Container, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 class NavBar extends React.Component {

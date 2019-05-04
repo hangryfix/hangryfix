@@ -1,9 +1,10 @@
 import React from 'react';
 import { Form, Select, Header, Button, Loader } from 'semantic-ui-react';
-import { Restaurants, RestaurantSchema } from '/imports/api/restaurant/restaurant';
+import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { Keys } from '/imports/api/keys/keys';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class AddRestaurantForm extends React.Component {
@@ -14,7 +15,7 @@ class AddRestaurantForm extends React.Component {
     this.state = {
       name: '',
       address: 'street, city, zip',
-      hours: ['', '', '', '', '', '', '', '', '', '', '', '', '', '']
+      hours: ['', '', '', '', '', '', '', '', '', '', '', '', '', ''],
     };
     this.handleChangeDropdownRestaurant = this.handleChangeDropdownRestaurant.bind(this);
     this.handleChangeText = this.handleChangeText.bind(this);
@@ -27,51 +28,53 @@ class AddRestaurantForm extends React.Component {
       if (hours === '') {
         hoursComplete = false;
       }
-      let tokenizeHours = hours.split(':');
-      if (!(parseInt(tokenizeHours[0]) > 0 && parseInt(tokenizeHours[0]) < 13)) {
+      const tokenizeHours = hours.split(':');
+      if (!(parseInt(tokenizeHours[0], 10) > 0 && parseInt(tokenizeHours[0], 10) < 13)) {
         hoursComplete = false;
       }
       if (tokenizeHours.length > 1) {
-        let tokenizeMinutes = tokenizeHours[1].split(' ');
-        if (!(parseInt(tokenizeMinutes[0]) === 0 || parseInt(tokenizeMinutes[0]) === 30)) {
+        const tokenizeMinutes = tokenizeHours[1].split(' ');
+        if (!(parseInt(tokenizeMinutes[0], 10) === 0 || parseInt(tokenizeMinutes[0], 10) === 30)) {
           hoursComplete = false;
         }
         if (!(tokenizeMinutes[1] === 'am' || (tokenizeMinutes[1]) === 'pm')) {
           hoursComplete = false;
         }
       }
+      return 0;
     });
 
     let addressComplete = true;
-    let tokenizeAddress = this.state.address.split(',');
+    const tokenizeAddress = this.state.address.split(',');
     tokenizeAddress.map(token => {
       if (token === 'street' || token === 'city' || token === 'zip') {
         addressComplete = false;
       }
+      return 0;
     });
 
-    let nameComplete = this.state.name !== null;
+    const nameComplete = this.state.name !== null;
 
     if (nameComplete && addressComplete && hoursComplete) {
       Restaurants.insert({
         key: this.props.keys[0].restaurants,
         name: this.state.name,
         address: this.state.address,
-        hours: this.state.hours
+        hours: this.state.hours,
       });
-      let restaurantKey = this.props.keys[0].restaurants + 1;
+      const restaurantKey = this.props.keys[0].restaurants + 1;
       Keys.update({ _id: this.props.keys[0]._id }, { $set: { restaurants: restaurantKey } });
-      alert("successfully added a new restaurant");
+      alert('Successfully added a new restaurant');
     } else {
-      alert("Form Not Completed");
+      alert('Form Not Completed');
     }
   }
 
   handleChangeText(event, name) {
-    let s = {};
-    let tokenizedAddress = this.state.address.split(',');
+    const s = {};
+    const tokenizedAddress = this.state.address.split(',');
     if (name === 'name') {
-      this.state.name = event.target.value;
+      s.name = event.target.value;
     } else
       if (name === 'street') {
         tokenizedAddress[0] = event.target.value;
@@ -83,19 +86,15 @@ class AddRestaurantForm extends React.Component {
             tokenizedAddress[2] = ` ${event.target.value}`;
           }
 
-    this.state.address = tokenizedAddress.join(',');
+    s.address = tokenizedAddress.join(',');
     this.setState(s);
   }
 
   handleChangeDropdownRestaurant(e, { value, name }) {
 
-    if (value < 10) {
-      value = '0' + value;
-    }
-    let s = {};
+    const s = {};
     let index = -1;
-    let tokenizedArray = name.split('-');
-    console.log(tokenizedArray);
+    const tokenizedArray = name.split('-');
 
     switch (tokenizedArray[0]) {
       case 'monday':
@@ -119,6 +118,9 @@ class AddRestaurantForm extends React.Component {
       case 'sunday':
         index = 12;
         break;
+      default:
+        index = 0;
+        break;
     }
 
     if (tokenizedArray[1] === 'close') {
@@ -136,7 +138,7 @@ class AddRestaurantForm extends React.Component {
         if (emptyString) {
           currentString = `${value}:00 nn`;
         } else {
-          let splitString = currentString.split(':');
+          const splitString = currentString.split(':');
           splitString[0] = value;
           currentString = splitString.join(':');
         }
@@ -146,7 +148,7 @@ class AddRestaurantForm extends React.Component {
           currentString = `00:${value} nn`;
 
         } else {
-          let splitString = currentString.split(':');
+          const splitString = currentString.split(':');
           splitString[1] = value;
           currentString = splitString.join(':');
         }
@@ -155,15 +157,16 @@ class AddRestaurantForm extends React.Component {
         if (emptyString) {
           currentString = `00:00 ${value}`;
         } else {
-          let splitString = currentString.split(' ');
+          const splitString = currentString.split(' ');
           splitString[1] = value;
           currentString = splitString.join(' ');
         }
         break;
+      default:
+        break;
     }
 
-    this.state.hours[index] = currentString;
-    console.log(currentString);
+    s.hours[index] = currentString;
     this.setState(s);
   }
 
@@ -174,27 +177,22 @@ class AddRestaurantForm extends React.Component {
 
   /** Render the form. Use Uniforms: https://github.com/vazco/uniforms */
   renderPage() {
-    let hours = [];
+    const hours = [];
     for (let i = 1; i <= 12; i++) {
       hours.push(i);
     }
 
-    let hourOptions = hours.map((hour) => {
-      return { key: hour, text: hour, value: hour };
-    });
-
-    let minutes = [];
+    const hourOptions = hours.map((hour) => ({ key: hour, text: hour, value: hour }));
+    const minutes = [];
     for (let i = 0; i <= 30; i += 30) {
       minutes.push(i);
     }
 
-    let minuteOptions = minutes.map((min) => {
-      return { key: min, text: min, value: min };
-    });
+    const minuteOptions = minutes.map(min => ({ key: min, text: min, value: min }));
 
     const ampmOptions = [
       { key: 0, text: 'am', value: 'am' },
-      { key: 1, text: 'pm', value: 'pm' }
+      { key: 1, text: 'pm', value: 'pm' },
     ];
 
     return (
@@ -207,7 +205,7 @@ class AddRestaurantForm extends React.Component {
                   placeholder='name...'
                   name='name'
                   onChange={(event) => {
-                    this.handleChangeText(event, 'name')
+                    this.handleChangeText(event, 'name');
                   }}
               />
               <Form.Group>
@@ -217,7 +215,7 @@ class AddRestaurantForm extends React.Component {
                     name='street'
                     width={8}
                     onChange={(event) => {
-                      this.handleChangeText(event, 'street')
+                      this.handleChangeText(event, 'street');
                     }}
                 />
                 <Form.Input
@@ -226,7 +224,7 @@ class AddRestaurantForm extends React.Component {
                     name='city'
                     width={4}
                     onChange={(event) => {
-                      this.handleChangeText(event, 'city')
+                      this.handleChangeText(event, 'city');
                     }}
                 />
                 <Form.Input
@@ -235,7 +233,7 @@ class AddRestaurantForm extends React.Component {
                     name='zip'
                     width={3}
                     onChange={(event) => {
-                      this.handleChangeText(event, 'zip')
+                      this.handleChangeText(event, 'zip');
                     }}
                 />
               </Form.Group>
@@ -826,4 +824,3 @@ export default withTracker(() => {
     ready: keySubscription.ready(),
   };
 })(AddRestaurantForm);
-
