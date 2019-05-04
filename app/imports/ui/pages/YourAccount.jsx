@@ -8,8 +8,8 @@ import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { _ } from 'underscore';
-import Review from '../components/Review';
 import Food from '../components/Food';
+import YourReviewPane from '../components/YourReviewPane';
 
 
 class YourAccount extends React.Component {
@@ -19,15 +19,6 @@ class YourAccount extends React.Component {
     price: '',
     openRestaurants: '',
     noRatings: '',
-  }
-
-  function(review) {
-    let returnThis = '';
-    if (review) {
-      returnThis = this.props.foods.filter(food => (food.key == review.foodId));
-      console.log(returnThis);
-    }
-    return returnThis;
   }
 
   state =
@@ -45,18 +36,11 @@ class YourAccount extends React.Component {
                 <Card.Group itemsPerRow={3}>
                   {this.props.reviews.filter(review => (review.user === this.props.currentUser))
                       .map((currentReview, index) => (
-                            <Card key={index}>
-                              <Card.Content>
-                                <Card>
-                                  <Card.Content>
-                                    {this.props.foods.filter(food => (food.key == currentReview.foodId))[0].name}
-                                  </Card.Content>
-                                </Card>
-                              </Card.Content>
-                              <Card.Content>
-                                <Review key={index} review={currentReview}/>
-                              </Card.Content>
-                            </Card>
+                          <YourReviewPane
+                              key={index}
+                              review={currentReview}
+                              food={this.props.foods.filter(food => (food.key == currentReview.foodId))[0]}
+                          />
                       ))}
                 </Card.Group>
               </Tab.Pane> },
@@ -338,7 +322,6 @@ class YourAccount extends React.Component {
 
 
   renderPage() {
-    console.log(this.function(this.props.reviews.filter(review => (review.user === this.props.currentUser))[0])[0].name);
     return (
         <div
             className='search-sidebar'

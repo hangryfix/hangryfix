@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Divider, Icon, Image } from 'semantic-ui-react';
+import { Card, Divider, Icon, Image, Dropdown, Segment, Grid } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Dropdown } from 'semantic-ui-react/dist/commonjs/modules/Dropdown';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
+import Review from './Review';
 
 
 class YourReviewPane extends React.Component {
@@ -69,16 +69,18 @@ class YourReviewPane extends React.Component {
     }
 
     return (
-        <Card.Content>
           <Card>
+            <Card.Content>
+              <Review review={this.props.review}/>
+            </Card.Content>
             <Card.Content>
               <Card.Header style={{ fontSize: '25px' }}>{this.props.food.name}</Card.Header>
               <Image
                   style={{
                     maxWidth: '100%',
                     maxHeight: '100%',
-                    width: '160px',
-                    height: '160px',
+                    width: '120px',
+                    height: '120px',
                     padding: '10px 0 10px 0' }}
                   src={this.props.food.image}
               />
@@ -95,13 +97,14 @@ class YourReviewPane extends React.Component {
                   })}
                 </Card.Description>
                 <Card.Description>
-                  <Icon name="map marker alternate" color="black"/>
+                  <Icon name="map marker alternate" color="black" style={{ paddingLeft: '3px' }}/>
                   <Dropdown
                       compact
                       pointing="left"
                       className="restaurantAddress"
                       text={this.props.food.restaurant}
-                      icon="question">
+                      icon="question"
+                  >
                     <Dropdown.Menu><Dropdown.Header>{address[0]}</Dropdown.Header></Dropdown.Menu>
                   </Dropdown>
                 </Card.Description>
@@ -148,19 +151,17 @@ class YourReviewPane extends React.Component {
                   })}
                 </Card.Description>
               </Card.Description>
-              <Divider horizontal><Icon name="info circle"/></Divider>
             </Card.Content>
           </Card>
-        </Card.Content>
     );
   }
 }
 
 YourReviewPane.propTypes = {
   food: PropTypes.object.isRequired,
-  review: PropTypes.array.isRequired,
-  currentUser: PropTypes.string,
+  currentUser: PropTypes.string.isRequired,
   restaurants: PropTypes.array.isRequired,
+  review: PropTypes.object.isRequired,
 };
 
 export default withTracker(() => {
