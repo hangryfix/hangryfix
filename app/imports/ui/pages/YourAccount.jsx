@@ -27,6 +27,16 @@ class YourAccount extends React.Component {
         ratingChecked:
             false,
         panes: [
+            { menuItem: 'New Foods', render: () => <Tab.Pane>
+              <Card.Group itemsPerRow={3}>
+                {_.last(_.sortBy(this.props.foods, this.props.foods.key), 9)
+                    .map((food, index) => <Food
+                        key={index}
+                        food={food}
+                        reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+                    />)}
+              </Card.Group>
+            </Tab.Pane> },
             { menuItem: 'Favorite Tags', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={3}>
                   {this.taggedFoods(this.props.foods)}
@@ -42,16 +52,6 @@ class YourAccount extends React.Component {
                               food={this.props.foods.filter(food => (food.key == currentReview.foodId))[0]}
                           />
                       ))}
-                </Card.Group>
-              </Tab.Pane> },
-            { menuItem: 'New Foods', render: () => <Tab.Pane>
-                <Card.Group itemsPerRow={3}>
-                  {_.last(_.sortBy(this.props.foods, this.props.foods.key), 9)
-                      .map((food, index) => <Food
-                      key={index}
-                      food={food}
-                      reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
-                  />)}
                 </Card.Group>
               </Tab.Pane> },
         ],
