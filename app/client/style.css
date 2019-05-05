@@ -6,7 +6,8 @@
 
 .wrapText {
   white-space: wrap;
-  height: 80px;
+  max-height: 80px;
+  /*height: 80px;*/
   width: 100%;
   overflow: auto;
   /*text-overflow: scroll;*/

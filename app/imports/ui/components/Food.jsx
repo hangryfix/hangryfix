@@ -193,7 +193,7 @@ class Food extends React.Component {
           </Button>
           {foodCard(imageStyleNotReviews, nameSizeNotReviews)}
           <div style={{ paddingRight: '13px' }}>
-            <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
+            <Card.Meta textAlign="right">
               Added: {this.props.food.timestamp.toLocaleDateString('en-US')}
             </Card.Meta>
           </div>
@@ -290,7 +290,7 @@ class Food extends React.Component {
                     </Modal.Actions>
                   </Modal>
               ) : (
-                  <Card.Header style={{ color: 'silver' }}>No reviews yet.</Card.Header>
+                  <Button fluid basic disabled style={{ color: 'silver' }}>No reviews yet.</Button>
               )
               }
             </Card.Content>
