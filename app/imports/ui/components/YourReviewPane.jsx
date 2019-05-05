@@ -75,14 +75,11 @@ class YourReviewPane extends React.Component {
 
     return (
           <Card style={{ backgroundColor: '#f4f4f4' }}>
-            <Card.Content>
-              <Review review={this.props.review}/>
-            </Card.Content>
-            <Card.Description>
+            <Card.Description style={{ paddingTop: '10px' }}>
               <Segment basic>
                 <Grid columns={2} divided>
                   <Grid.Column style={{ paddingLeft: '30px' }} width={6}>
-              <Card.Header style={{ fontSize: '20px' }}>{this.props.food.name}</Card.Header>
+              <Card.Header style={{ fontSize: '20px', fontWeight: 'bold' }}>{this.props.food.name}</Card.Header>
               <Image
                   style={{
                     maxWidth: '100%',
@@ -165,6 +162,9 @@ class YourReviewPane extends React.Component {
                 </Grid>
               </Segment>
             </Card.Description>
+            <Card.Content>
+              <Review review={this.props.review}/>
+            </Card.Content>
           </Card>
     );
   }
