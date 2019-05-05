@@ -2,9 +2,10 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
-import { Tags } from '../../api/tag/tag';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
+import { Tags } from '../../api/tag/tag';
 
 /**
  * Signup component is similar to signin component, but we attempt to create a new user instead.
@@ -13,7 +14,8 @@ class Signup extends React.Component {
   /** Initialize state fields. */
   constructor(props) {
     super(props);
-    this.state = { firstName: '', lastName: '', username: '', email: '', password: '', tags: '', error: '', redirectToHome: false };
+    this.state = { firstName: '', lastName: '', username: '', email: '',
+      password: '', tags: '', error: '', redirectToHome: false };
     // Ensure that 'this' is bound to this component in these two functions.
     // https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,9 +48,7 @@ class Signup extends React.Component {
     if (this.state.redirectToHome) {
       return <Redirect to={from}/>;
     }
-    let tagOptions = this.props.tags.map((tag) => {
-      return {key: tag.id, text: tag.name, value: tag.name};
-    });
+    const tagOptions = this.props.tags.map(tag => ({key: tag.id, text: tag.name, value: tag.name }));
 
     return (
         <div className='backgroundDef'>
@@ -136,11 +136,12 @@ class Signup extends React.Component {
 Signup.propTypes = {
   tags: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  location: PropTypes.object,
 };
 
 export default withTracker(() => {
   // Get access to Tags documents.
-  const subscription = Meteor.subscribe('Tag');
+  const subscription = Meteor.subscribe('AllTags');
   return {
     tags: Tags.find({}).fetch(),
     ready: subscription.ready(),

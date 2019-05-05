@@ -37,9 +37,9 @@ class Review extends React.Component {
                   icon='heart'
                   defaultRating={this.props.review.rating}
                   maxRating={5}
-                  size='large'
+                  size='huge'
                   disabled
-                  style={{ marginRight: '5px' }}/>
+                  style={{ marginRight: '5px', paddingTop: '5px' }}/>
               {this.props.review.title}
             </Card.Header>
             <Card.Meta>
@@ -50,11 +50,11 @@ class Review extends React.Component {
             <Card.Description style={{ marginTop: '12px' }}>{this.props.review.review}</Card.Description>
             <Image
                 floated="right"
-                style={{ maxWidth: '100%', maxHeight: '100%', width: '120px', height: '120px', paddingTop: '15px' }}
+                style={{ maxWidth: '100%', maxHeight: '100%', width: '120px', height: '120px', paddingTop: '25px' }}
                 src={this.props.review.image} />
           </Card.Content>
           <Card.Content extra textAlign="right">
-            Last updated: {this.props.review.createdAt.toLocaleDateString('en-US')}
+            Last edited: {this.props.review.createdAt.toLocaleDateString('en-US')}
           </Card.Content>
           { Meteor.user() && this.props.review.user === Meteor.user().username ? (
               <Button.Group>
@@ -68,11 +68,17 @@ class Review extends React.Component {
                 <Modal
                     open={this.state.showModal}
                     size="tiny"
-                    trigger={<Button onClick={() => this.setState({ showModal: true })}><Icon name="trash" /> Delete</Button>}>
+                    trigger={
+                      <Button onClick={() => this.setState({ showModal: true })}><Icon name="trash" />
+                      Delete
+                      </Button>}>
                   <Modal.Header>Delete Review</Modal.Header>
                   <Modal.Content>Are you sure you want to delete this review?</Modal.Content>
                   <Modal.Actions>
-                    <Button compact onClick={() => this.setState({ showModal: false })}><Icon name="remove" /> No</Button>
+                    <Button compact onClick={() => this.setState({ showModal: false })}>
+                      <Icon name="remove" />
+                      No
+                    </Button>
                     <Button compact onClick={this.handleDeleteClick}>
                       <Icon name="checkmark" /> Yes
                     </Button>

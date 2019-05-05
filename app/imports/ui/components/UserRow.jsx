@@ -1,13 +1,11 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header, Grid } from 'semantic-ui-react';
+import { Card, Rating, Button, Modal, Label, Table, Header, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'underscore';
 import Review from './Review';
-import UserCell from './UserCell';4
-import { Foods } from '/imports/api/food/food';
 import FoodRow from '../components/FoodRowAdminPage';
 
 

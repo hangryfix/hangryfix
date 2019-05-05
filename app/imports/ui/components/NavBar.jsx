@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Container, Input, Image } from 'semantic-ui-react';
+import { Menu, Dropdown, Container, Image } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 
 class NavBar extends React.Component {
@@ -53,7 +53,13 @@ class NavBar extends React.Component {
               }
               {
                 Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                    <Menu.Item as={ NavLink } activeClassName="active" exact to="/adminFood" key="admin">Admin</Menu.Item>
+                    <Menu.Item
+                        as={ NavLink }
+                        activeClassName="active"
+                        exact to="/adminFood"
+                        key="admin">
+                      Admin
+                    </Menu.Item>
                 ) : ''
               }
               { this.props.currentUser === '' ? (
@@ -81,7 +87,12 @@ class NavBar extends React.Component {
                   ]
               ) : (
                   <Menu.Item>
-                    <Dropdown className="rightNormal" pointing="top right" direction="left" text={this.props.currentUser} icon="user">
+                    <Dropdown
+                        className={rightStyle}
+                        pointing="top right"
+                        direction="left"
+                        text={this.props.currentUser}
+                        icon="user">
                       <Dropdown.Menu>
                         <Dropdown.Item icon="user" text="Your Account" as={NavLink} exact to="/youraccount"/>
                         <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>

@@ -234,6 +234,30 @@
       "timestamp": "Mon Apr 22 2019 10:36:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
       "description": "This classic L&L plate lunch will hit the spot every time.  Who doesn't want this glorious combination of chicken katsu slathered in curry, rice and mac salad?  You also get a lot of food for your money. The mini is definitely a full meal and a regular is practically 2 meals.",
       "tags": ["Chicken", "Rice"]
+    },
+    {
+      "key": "12",
+      "name": "Miso Ramen",
+      "restaurant": "Sumo Ramen & Curry",
+      "category": "Japanese",
+      "price": "6.50",
+      "image": "https://www.seriouseats.com/recipes/images/2013/09/20130910-crispy-pork-miso-ramen-03-2.jpg",
+      "owner": "JohnDoe",
+      "timestamp": "Sat May 04 2019 17:30:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "Comes with some slices of pink fishcake, a bit of choy sum, and a few slices of pork.",
+      "tags": ["Ramen", "Pork"]
+    },
+    {
+      "key": "13",
+      "name": "Poke Bowl",
+      "restaurant": "Foodland",
+      "category": "Local",
+      "price": "7",
+      "image": "https://www.foodland.com/files/PokeBowl_1_resized.jpg",
+      "owner": "SallyMae",
+      "timestamp": "Sat May 04 2019 15:54:24 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "description": "Choice of poke with either brown or white rice and options of furikake and eel sauce.",
+      "tags": ["Poke"]
     }
   ],
 
@@ -357,12 +381,48 @@
     },
     {
       "image": "https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png",
-      "key": "13",
+      "key": "14",
       "review": "So much food!  I got a regular and it was enough food for me for a whole day!",
       "rating": "5",
       "user": "ChristinaChen",
       "foodId": "11",
       "createdAt": "Thurs May 02 2019 10:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://www.hawaiilife.com/blog_images/2014/11/foodland-poke.jpg",
+      "key": "15",
+      "review": "Tastes awesome, but more fish with the rice please",
+      "rating": "4",
+      "user": "ChristinaChen",
+      "foodId": "13",
+      "createdAt": "Sat May 04 2019 17:45:28 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://www.tasteofhome.com/wp-content/uploads/2018/11/PX_OrangeChicken_FriedRice_Bowl-800x450.jpg",
+      "key": "14",
+      "review": "I like the sauce",
+      "rating": "5",
+      "user": "ChristinaChen",
+      "foodId": "5",
+      "createdAt": "Sat May 04 2019 17:45:28 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://img.sndimg.com/food/image/upload/fl_progressive,c_fill,q_80,w_412,h_232/v1/img/recipes/59/86/3/Ye35HYGSEGgc0oGCIUag_Baklava-2.jpg",
+      "key": "15",
+      "review": "ehh...not as flakey as i would've liked",
+      "rating": "1",
+      "user": "SallyMae",
+      "foodId": "10",
+      "createdAt": "Sat May 04 2019 17:15:28 GMT-1000 (Hawaii-Aleutian Standard Time)"
+    },
+    {
+      "image": "https://s3-media2.fl.yelpcdn.com/bphoto/SX0SmjykLhZjOj68JpiqAQ/ls.jpg",
+      "key": "16",
+      "review": "tons of flavors but idk about the topping variety",
+      "rating": "3",
+      "user": "SallyMae",
+      "foodId": "2",
+      "createdAt": "Sat May 04 2019 17:15:28 GMT-1000 (Hawaii-Aleutian Standard Time)"
     }
   ],
 

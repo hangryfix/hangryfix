@@ -6,7 +6,6 @@ import { Roles } from 'meteor/alanning:roles';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import Landing from '../pages/Landing';
 import Landing2 from '../pages/Landing2';
 import YourAccount from '../pages/YourAccount';
 import ListFoodAdmin from '../pages/ListFoodAdmin';

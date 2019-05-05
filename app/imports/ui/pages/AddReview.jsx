@@ -1,22 +1,27 @@
 import React from 'react';
-import { Container, Form, Button, TextArea, Header, Grid, Rating, Loader, Popup, Input, Image } from 'semantic-ui-react';
-import { Reviews, ReviewSchema } from '/imports/api/review/review';
+import {
+  Container, Form, Button, TextArea, Header, Grid, Rating,
+  Loader, Popup, Input, Image,
+} from 'semantic-ui-react';
+import { Reviews } from '/imports/api/review/review';
 import { Foods } from '/imports/api/food/food';
 import { Keys } from '/imports/api/keys/keys';
 import { Bert } from 'meteor/themeteorchef:bert';
 import PropTypes from 'prop-types';
-import { withTracker, NavLink } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Redirect } from 'react-router-dom';
 
 /** Renders the Page for adding a document. */
 class AddReview extends React.Component {
 
-
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png', review: '', rating: -1, redirectToHome: false };
+    this.state = {
+      image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png',
+      review: '', rating: -1, redirectToHome: false,
+    };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeRating = this.handleChangeRating.bind(this);
@@ -24,14 +29,14 @@ class AddReview extends React.Component {
   }
 
   handleChange(event, type) {
-    let s = {};
+    const s = {};
     s[type] = event.target.value;
     this.setState(s);
   }
 
   handleChangeRating(e, { rating }) {
-    let s = {};
-    s['rating'] = rating;
+    const s = {};
+    s.rating = rating;
     this.setState(s);
   }
 
@@ -53,8 +58,8 @@ class AddReview extends React.Component {
       Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
     } else {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
-      let reviewKey = this.props.keys[0].reviews + 1;
-      Keys.update({ _id: this.props.keys[0]._id }, {$set:{reviews:reviewKey}});
+      const reviewKey = this.props.keys[0].reviews + 1;
+      Keys.update({ _id: this.props.keys[0]._id }, { $set: { reviews: reviewKey } });
       setTimeout(() => {
         this.setState({ error: '', redirectToHome: true });
       }, 100);
@@ -63,7 +68,7 @@ class AddReview extends React.Component {
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
   render() {
-    return (this.props.foodsReady && this.props.keysReady) ? this.renderPage() :
+    return (this.props.ready) ? this.renderPage() :
         <Loader active>Getting data</Loader>;
   }
 
@@ -74,12 +79,11 @@ class AddReview extends React.Component {
     if (this.state.redirectToHome) {
       return <Redirect to={from}/>;
     }
-    let stringURL = this.props.location.pathname;
-    let URLarray = stringURL.split('/:');
+    const stringURL = this.props.location.pathname;
+    const URLarray = stringURL.split('/:');
     let id = URLarray[1];
-    id = parseInt(id);
+    id = parseInt(id, 10);
     let foodObj = this.props.foods.filter(food => (food.key === id));
-    console.log(foodObj);
     foodObj = foodObj[0];
 
     return (
@@ -97,7 +101,7 @@ class AddReview extends React.Component {
                           icon="upload"
                           label={{
                             basic: true,
-                            content: 'Upload Image'
+                            content: 'Upload Image',
                           }}
                           labelPosition="right"
                       />
@@ -107,7 +111,7 @@ class AddReview extends React.Component {
                         <Input
                             placeholder='Enter Url...'
                             onChange={(event) => {
-                              this.handleChange(event, "image")
+                              this.handleChange(event, 'image');
                             }}
                         />
                       </div>
@@ -122,11 +126,11 @@ class AddReview extends React.Component {
                     <Grid.Row>
                       <Grid.Column width={5}>
                         <Header as='h3' content='Item Name'/>
-                        <p>{ foodObj.name }</p>
+                        <p>{foodObj.name}</p>
                       </Grid.Column>
                       <Grid.Column width={5}>
                         <Header as='h3' content='Restaurant Name'/>
-                        <p>{ foodObj.restaurant }</p>
+                        <p>{foodObj.restaurant}</p>
                       </Grid.Column>
                       <Grid.Column width={6} textAlign='center'>
                         <Header as='h3' content='Add A Rating' textAlign='center'/>
@@ -146,7 +150,7 @@ class AddReview extends React.Component {
                       label='Review'
                       placeholder='Type your review...'
                       onChange={(event) => {
-                        this.handleChange(event, "review")
+                        this.handleChange(event, 'review');
                       }}
                   />
                   <Form.Group>
@@ -154,9 +158,9 @@ class AddReview extends React.Component {
                         id='form-button-control-public'
                         control={Button}
                         content='Submit'
-                        onClick={ () => {
-                          this.submit(this.props.currentUser, id, this.props.keys[0].reviews)
-                        } }
+                        onClick={() => {
+                          this.submit(this.props.currentUser, id, this.props.keys[0].reviews);
+                        }}
                     />
                     <Form.Field
                         id='form-button-control-public'
@@ -175,11 +179,12 @@ class AddReview extends React.Component {
 
 AddReview.propTypes = {
   foods: PropTypes.array.isRequired,
-  foodsReady: PropTypes.bool.isRequired,
+  ready: PropTypes.bool.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   currentUser: PropTypes.string,
+  keys: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -192,8 +197,7 @@ export default withTracker(() => {
   return {
     foods: Foods.find({}).fetch(),
     keys: Keys.find({}).fetch(),
-    foodsReady: foodSubscription.ready(),
-    keysReady: keySubscription.ready(),
+    ready: foodSubscription.ready() && keySubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(AddReview);

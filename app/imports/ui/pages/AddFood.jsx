@@ -1,15 +1,17 @@
 import React from 'react';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
 import { Keys } from '/imports/api/keys/keys';
-import { Foods, FoodSchema } from '/imports/api/food/food';
+import { Foods } from '/imports/api/food/food';
 import { Tags } from '/imports/api/tag/tag';
-import { Container, Form, Button, TextArea, Header, Grid, Select, Loader, Popup, Input, Image } from 'semantic-ui-react';
+import { Container, Form, Button, TextArea,
+  Header, Grid, Select, Loader, Popup, Input, Image } from 'semantic-ui-react';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
-import AddRestaurantForm from '../components/AddRestaurantForm';
 import { Redirect } from 'react-router-dom';
+import { _ } from 'underscore';
+import AddRestaurantForm from '../components/AddRestaurantForm';
 
 /** Renders the Page for adding a document. */
 class AddFood extends React.Component {
@@ -17,7 +19,9 @@ class AddFood extends React.Component {
   /** Bind 'this' so that a ref to the Form can be saved in formRef and communicated between render() and submit(). */
   constructor(props) {
     super(props);
-    this.state = { key: '', image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png', name: '', restaurant: '', category: '', tags: [], price: 0, description: '', redirectToHome: false };
+    this.state = { key: '',
+      image: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fi.ibb.co%2FNZsznSL%2Fhangryfix-logo-green.png',
+      name: '', restaurant: '', category: '', tags: [], price: 0, description: '', redirectToHome: false };
     this.submit = this.submit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeDropdown = this.handleChangeDropdown.bind(this);
@@ -30,7 +34,7 @@ class AddFood extends React.Component {
       Bert.alert({ type: 'danger', message: `Add failed: ${error.message}` });
     } else {
       Bert.alert({ type: 'success', message: 'Add succeeded' });
-      let foodKey = this.props.keys[0].foods + 1;
+      const foodKey = this.props.keys[0].foods + 1;
       Keys.update({ _id: this.props.keys[0]._id }, { $set: { foods: foodKey } });
       setTimeout(() => {
         this.setState({ error: '', redirectToHome: true });
@@ -39,19 +43,15 @@ class AddFood extends React.Component {
   }
 
   handleChange(event, type) {
-    let s = {};
+    const s = {};
     s[type] = event.target.value;
     this.setState(s);
   }
 
   handleChangeDropdown(e, { value, name }) {
-    let s = {};
+    const s = {};
     s[name] = value;
     this.setState(s);
-  }
-
-  handleClick() {
-    alert('File Upload not currently supported.');
   }
 
   /** On submit, insert the data. */
@@ -83,19 +83,15 @@ class AddFood extends React.Component {
       return <Redirect to={from}/>;
     }
 
-    let restaurantOptions = this.props.restaurants.map((restaurant) => {
-      return { key: restaurant.id, text: restaurant.name, value: restaurant.name };
-    });
+    const restaurantOptions = this.props.restaurants.map((restaurant) => ({ key: restaurant.id,
+      text: restaurant.name, value: restaurant.name }));
 
-    let tags = _.where(this.props.tags, { type: 'ingredient' });
-    let tagOptions = tags.map((tag) => {
-      return { key: tag.id, text: tag.name, value: tag.name };
-    });
+    const tags = _.where(this.props.tags, { type: 'ingredient' });
+    const tagOptions = tags.map((tag) => ({ key: tag.id, text: tag.name, value: tag.name }));
 
-    let categories = _.where(this.props.tags, { type: 'cuisine' });
-    let categoryOptions = categories.map((category) => {
-      return { key: category.id, text: category.name, value: category.name };
-    });
+    const categories = _.where(this.props.tags, { type: 'cuisine' });
+    const categoryOptions = categories.map((category) => ({ key: category.id,
+      text: category.name, value: category.name }));
 
     return (
         <Container className='add-food'>
@@ -112,7 +108,7 @@ class AddFood extends React.Component {
                           icon="upload"
                           label={{
                             basic: true,
-                            content: 'Upload Image'
+                            content: 'Upload Image',
                           }}
                           labelPosition="right"
                       />
@@ -122,7 +118,7 @@ class AddFood extends React.Component {
                         <Input
                             placeholder='Enter Url...'
                             onChange={(event) => {
-                              this.handleChange(event, "image")
+                              this.handleChange(event, 'image');
                             }}
                         />
                       </div>
@@ -140,7 +136,7 @@ class AddFood extends React.Component {
                         placeholder='Food Name'
                         name='name'
                         onChange={(event) => {
-                          this.handleChange(event, "name")
+                          this.handleChange(event, 'name');
                         }}
                     />
                     <Form.Field
@@ -153,7 +149,11 @@ class AddFood extends React.Component {
                     />
                     <Form.Field>
                       <Popup
-                          trigger={<Button fluid color='black' icon='food' style={{ marginTop: '24px'}} content='Add A Restaurant'/>}
+                          trigger={
+                            <Button
+                                fluid color='black'
+                                icon='food'
+                                style={{ marginTop: '24px' }} content='Add A Restaurant'/>}
                           content={<AddRestaurantForm/>}
                           position='bottom right'
                           label='Your Restaurant Missing'
@@ -191,7 +191,7 @@ class AddFood extends React.Component {
                         placeholder='Price'
                         name='price'
                         onChange={(event) => {
-                          this.handleChange(event, "price")
+                          this.handleChange(event, 'price');
                         }}
                     />
                   </Form.Group>
@@ -202,7 +202,7 @@ class AddFood extends React.Component {
                       placeholder='Description'
                       name='description'
                       onChange={(event) => {
-                        this.handleChange(event, "description")
+                        this.handleChange(event, 'description');
                       }}
                   />
                   <Form.Group>
@@ -211,7 +211,7 @@ class AddFood extends React.Component {
                         control={Button}
                         content='Submit'
                         onClick={() => {
-                          this.submit(this.props.currentUser, this.props.keys[0].foods)
+                          this.submit(this.props.currentUser, this.props.keys[0].foods);
                         }}
                     />
                     <Form.Field
@@ -242,6 +242,7 @@ AddFood.propTypes = {
   keys: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
   currentUser: PropTypes.string,
+  location: PropTypes.object,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -258,7 +259,8 @@ export default withTracker(() => {
     tags: Tags.find({}).fetch(),
     categories: Tags.find({}).fetch(),
     keys: Keys.find({}).fetch(),
-    ready: tagSubscription.ready() && categorySubscription.ready() && keySubscription.ready() && restaurantSubscription.ready(),
+    ready: tagSubscription.ready() && categorySubscription.ready() &&
+        keySubscription.ready() && restaurantSubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
 })(AddFood);

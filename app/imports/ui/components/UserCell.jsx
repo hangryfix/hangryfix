@@ -1,13 +1,7 @@
 import React from 'react';
-import { Card, Rating, Image, Button, Icon, Modal, Label, Table, Header } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor';
-import { withTracker } from 'meteor/react-meteor-data';
-import { _ } from 'underscore';
-import Review from './Review';
-import { Foods } from '/imports/api/food/food';
-
+import { withRouter } from 'react-router-dom';
 
 class UserCell extends React.Component {
 
