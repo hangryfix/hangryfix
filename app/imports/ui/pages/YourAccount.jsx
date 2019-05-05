@@ -249,8 +249,6 @@ class YourAccount extends React.Component {
         noRatings: '',
       };
       this.setState({
-        restaurantChecked: false,
-        ratingChecked: false,
         panes: [
           { menuItem: 'New Foods', render: () => <Tab.Pane>
               <Card.Group itemsPerRow={3}>
@@ -273,15 +271,9 @@ class YourAccount extends React.Component {
         && (this.filters.price === '' || this.filters.price === 0)
         && (this.filters.openRestaurants === '' || this.filters.openRestaurants)
         && (this.filters.noRatings === '' || this.filters.noRatings)) {
-      this.filters = {
-        rating: '',
-        price: '',
-        openRestaurants: '',
-        noRatings: '',
-      };
+      this.filters.rating = '';
+      this.filters.price = '';
       this.setState({
-        restaurantChecked: false,
-        ratingChecked: false,
         panes: [
             { menuItem: 'New Foods', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={3}>
