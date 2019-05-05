@@ -24,6 +24,7 @@ class AddRestaurantForm extends React.Component {
 
   submitNewRestaurant() {
     let hoursComplete = true;
+    console.log(this.state.hours);
     this.state.hours.map(hours => {
       if (hours === '') {
         hoursComplete = false;
@@ -92,7 +93,6 @@ class AddRestaurantForm extends React.Component {
 
   handleChangeDropdownRestaurant(e, { value, name }) {
 
-    const s = {};
     let index = -1;
     const tokenizedArray = name.split('-');
 
@@ -166,8 +166,7 @@ class AddRestaurantForm extends React.Component {
         break;
     }
 
-    s.hours[index] = currentString;
-    this.setState(s);
+    this.state.hours[index] = currentString;
   }
 
   /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
