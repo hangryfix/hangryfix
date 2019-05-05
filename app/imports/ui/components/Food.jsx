@@ -146,7 +146,7 @@ class Food extends React.Component {
               </Card.Description>
             </Card.Description>
             <Divider horizontal><Icon name="info circle" /></Divider>
-            <Card.Description>
+            <Card.Description className='wrapText'>
               {this.props.food.description}
             </Card.Description>
             <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>

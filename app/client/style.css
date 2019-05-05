@@ -4,6 +4,14 @@
 .color-primary-3 { color: #045604 }
 .color-primary-4 { color: #091D09 }
 
+.wrapText {
+  white-space: wrap;
+  height: 80px;
+  width: 100%;
+  overflow: auto;
+  /*text-overflow: scroll;*/
+}
+
 
 .tagDropdown {
   color: #091D09 !important;
