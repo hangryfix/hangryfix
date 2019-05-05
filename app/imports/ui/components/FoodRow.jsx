@@ -175,11 +175,32 @@ class FoodRow extends React.Component {
 
           { /* Col 4: tags */ }
           <Table.Cell style={{ width: '20%' }}>
-            {this.props.food.tags.map((tag, index) => <Label tag
-                                                             style={{ backgroundColor: '#338D33', color: 'white' }}
-                                                             key={index}>
-              {tag}
-            </Label>)}
+            {this.props.food.tags.map((tag, index) => {
+              let returnThis = '';
+              if ((typeof tag) === 'object') {
+                returnThis =
+                    <Label.Group tag>
+                      <Label style={{ backgroundColor: '#338D33', color: 'white',
+                        marginTop: '2px', marginBottom: '2px' }} key={index}>
+                        {tag.name}
+                      </Label>
+                      <Label tag style={{ backgroundColor: '#338D33',
+                        color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                        {tag.type}
+                      </Label>
+                    </Label.Group>;
+              } else {
+                returnThis =
+                    <Label tag style={{ backgroundColor: '#338D33',
+                      color: 'white', marginTop: '2px', marginBottom: '2px' }} key={index}>
+                      {tag}
+                    </Label>;
+              }
+              return returnThis;
+            })}
+            {<Label tag style={{ backgroundColor: '#338D33', color: 'white', marginTop: '2px', marginBottom: '2px' }}>
+              {this.props.food.category}
+            </Label>}
           </Table.Cell>
 
           { /* Col 5: options */ }
