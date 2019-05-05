@@ -288,6 +288,18 @@ class YourAccount extends React.Component {
                     {this.taggedFoods(this.props.foods)}
                   </Card.Group>
                 </Tab.Pane> },
+              { menuItem: 'Your Reviews', render: () => <Tab.Pane>
+                  <Card.Group itemsPerRow={2}>
+                    {this.props.reviews.filter(review => (review.user === this.props.currentUser))
+                        .map((currentReview, index) => (
+                            <YourReviewPane
+                                key={index}
+                                review={currentReview}
+                                food={this.props.foods.filter(food => (food.key == currentReview.foodId))[0]}
+                            />
+                        ))}
+                  </Card.Group>
+                </Tab.Pane> },
                 { menuItem: 'New Foods', render: () => <Tab.Pane>
                 <Card.Group itemsPerRow={3}>
                   {this.props.foods.map((food, index) => <Food
@@ -363,6 +375,7 @@ class YourAccount extends React.Component {
                       clearable
                   />
                   <Button
+                      fluid
                       onClick={this.handleClick}
                       style={{ backgroundColor: '#21BA45', color: 'white', marginTop: '60px' }}>
                     Go

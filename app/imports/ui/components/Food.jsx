@@ -194,7 +194,7 @@ class Food extends React.Component {
           {foodCard(imageStyleNotReviews, nameSizeNotReviews)}
           <div style={{ paddingRight: '13px' }}>
             <Card.Meta textAlign="right" style={{ paddingTop: '30px' }}>
-              Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
+              Added: {this.props.food.timestamp.toLocaleDateString('en-US')}
             </Card.Meta>
           </div>
           <Divider />
@@ -241,7 +241,7 @@ class Food extends React.Component {
                       <Card fluid>
                         {foodCard(imageStyleReviews, nameSizeReviews)}
                         <Card.Meta textAlign="right" style={{ padding: '40px 13px 15px 0px' }}>
-                          Last updated: {this.props.food.timestamp.toLocaleDateString('en-US')}
+                          Added: {this.props.food.timestamp.toLocaleDateString('en-US')}
                         </Card.Meta>
                         <Card.Content>
                           {this.props.food.tags.map((tag, index) => {
