@@ -6,6 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 import { Tags } from '../../api/tag/tag';
+import UserInfo from '../../api/user-info/user-info';
 
 /**
  * Signup component is similar to signin component, but we attempt to create a new user instead.
@@ -29,7 +30,7 @@ class Signup extends React.Component {
 
   /** Handle Signup submission using Meteor's account mechanism. */
   handleSubmit() {
-    const { firstName, lastName, username, email, password } = this.state;
+    const { firstName, lastName, username, email, password, tags } = this.state;
     Accounts.createUser({ username, email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
@@ -48,7 +49,7 @@ class Signup extends React.Component {
     if (this.state.redirectToHome) {
       return <Redirect to={from}/>;
     }
-    const tagOptions = this.props.tags.map(tag => ({key: tag.id, text: tag.name, value: tag.name }));
+    const tagOptions = this.props.tags.map(tag => ({ key: tag.id, text: tag.name, value: tag.name }));
 
     return (
         <div className='backgroundDef'>
