@@ -1,15 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Table, Header, Loader, Search, Dropdown, Grid, Segment, List, Divider, Button } from 'semantic-ui-react';
+import { Table, Header, Loader, Grid, Segment, List } from 'semantic-ui-react';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { UserInfo } from '../../api/user-info/user-info';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import Food from '../components/Food';
 import UserRow from '../components/UserRow';
-import Review from '../components/Review';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListUsersAdmin extends React.Component {
@@ -22,8 +20,8 @@ class ListUsersAdmin extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <div style={{padding: '20px'}} className="backgroundDef">
-          <Grid style={{marginBottom: '50px'}}>
+        <div style={{ padding: '20px' }} className="backgroundDef">
+          <Grid style={{ marginBottom: '50px' }}>
             <Grid.Column width={3}>
               <Grid.Row/>
               <Segment fluid>
@@ -51,13 +49,13 @@ class ListUsersAdmin extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-                  {/*Sample User*/}
+                  {/* Sample User */}
                   {this.props.userInfo.map((userInfo, index) => <UserRow
                       key={index}
                       userInfo={userInfo}
-                      reviews={this.props.reviews.filter(review => (review.user == userInfo.username))}
+                      reviews={this.props.reviews.filter(review => (review.user === userInfo.username))}
                       foods={this.props.foods}
-                      userFoods={this.props.foods.filter(food => (food.owner == userInfo.username))}
+                      userFoods={this.props.foods.filter(food => (food.owner === userInfo.username))}
                   />)}
                 </Table.Body>
               </Table>
