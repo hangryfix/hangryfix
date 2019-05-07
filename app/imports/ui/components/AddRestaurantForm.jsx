@@ -24,7 +24,6 @@ class AddRestaurantForm extends React.Component {
 
   submitNewRestaurant() {
     let hoursComplete = true;
-    console.log(this.state.hours);
     this.state.hours.map(hours => {
       if (hours === '') {
         hoursComplete = false;
@@ -65,8 +64,10 @@ class AddRestaurantForm extends React.Component {
       });
       const restaurantKey = this.props.keys[0].restaurants + 1;
       Keys.update({ _id: this.props.keys[0]._id }, { $set: { restaurants: restaurantKey } });
+      // eslint-disable-next-line
       alert('Successfully added a new restaurant');
     } else {
+      // eslint-disable-next-line
       alert('Form Not Completed');
     }
   }
@@ -165,7 +166,7 @@ class AddRestaurantForm extends React.Component {
       default:
         break;
     }
-
+    // eslint-disable-next-line
     this.state.hours[index] = currentString;
   }
 
