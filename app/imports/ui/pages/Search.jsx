@@ -256,6 +256,7 @@ class Search extends React.Component {
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Dessert" key="search2">
                       <Image rounded style={{ width: '120px' }}
+                          // eslint-disable-next-line
                              src='https://www.tasteofhome.com/wp-content/uploads/2017/10/Double-Chocolate-Espresso-Cheesecake_exps49582_THCA1917912A03_24_2bC_RMS-696x696.jpg'/>
                       <Header as='h4' style={iconMenu} content='Dessert'/>
                     </Item>
@@ -299,6 +300,7 @@ class Search extends React.Component {
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Mexican" key="search8">
                       <Image rounded style={{ width: '120px' }}
+                          // eslint-disable-next-line
                              src='https://www.tasteofhome.com/wp-content/uploads/2018/01/Chicken-Tamales_EXPS_HC17_50905_C12_16_2b-1-696x696.jpg'/>
                       <Header as='h4' style={iconMenu} content='Mexican'/>
                     </Item>
