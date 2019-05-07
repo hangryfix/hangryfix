@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Container,
@@ -204,7 +205,7 @@ class EditReview extends React.Component {
     );
   }
 }
-
+/* eslint-enable */
 EditReview.propTypes = {
   foods: PropTypes.array.isRequired,
   foodsReady: PropTypes.bool.isRequired,
