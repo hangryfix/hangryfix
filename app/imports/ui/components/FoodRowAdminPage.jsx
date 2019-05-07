@@ -221,12 +221,10 @@ class FoodRowAdminPage extends React.Component {
             {this.props.food.price}
             <div>
               <p style={{ margin: '3px 0 0 0' }}>Price Range</p>
-            {this.getStars(this.getDefaultRating(this.props.food.price)).map(num => {
-              if (num === 1) {
-                return <Icon name='star' size='large'/>;
-              }
-                return <Icon name='star outline' size='large'/>;
-            })
+              {this.getStars(this.getDefaultRating(this.props.food.price)).map((num, index) => {
+                const icon = (num === 1) ? 'star' : 'star outline';
+                return <Icon key={index} name={icon} size='large'/>;
+              })
             }
             </div>
           </Table.Cell>
@@ -234,12 +232,10 @@ class FoodRowAdminPage extends React.Component {
           { /* Col 3: Reviews */ }
           <Table.Cell style={{ paddingBottom: '20px', width: '20%' }}>
             {this.getReviews().length > 0 ? (
-                    this.getHearts(this.getAverageRatingRow(this.getReviews())).map(num => {
-                      if (num === 1) {
-                        return <Icon name='heart' size='large'/>;
-                      }
-                        return <Icon name='heart outline' size='large'/>;
-                    })
+                this.getHearts(this.getAverageRatingRow(this.getReviews())).map((num, index) => {
+                  const icon = (num === 1) ? 'heart' : 'heart outline';
+                  return <Icon key={index} name={icon} size='large'/>;
+                })
             ) : (
             'No ratings yet.'
             )
