@@ -151,7 +151,7 @@ class Search extends React.Component {
             }
           }
         }
-        return 0;
+        // return 0;
       });
     } else {
       this.props.foods.map(food => {
@@ -338,13 +338,13 @@ class Search extends React.Component {
                           this.getSearchResults(cuisineName).map((food, index) => <FoodRowSearchPage
                               key={index}
                               food={food}
-                              reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
+                              reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                           />))
                       :
                       this.getSearchResults(cuisineName).map((food, index) => <FoodRowSearchPage
                           key={index}
                           food={food}
-                          reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
+                          reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                       />)}
                 </Table.Body>
               </Table>
