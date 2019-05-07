@@ -9,6 +9,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import FoodRowSearchPage from '../components/FoodRowSearchPage';
 
+
 /** A simple static component to render some text for the landing page. */
 class Search extends React.Component {
 
