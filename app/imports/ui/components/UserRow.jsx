@@ -10,12 +10,6 @@ import FoodRow from '../components/FoodRowAdminPage';
 
 
 class UserRow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
-
-
   render() {
 
     let averageRating = '';
@@ -28,7 +22,7 @@ class UserRow extends React.Component {
 
     return (
         <Table.Row>
-          {/ *Col 1: User */}
+          {/* Col 1: User */}
           <Table.Cell style={{ width: '20%' }}>
             <Header as='h3' textAlign='left'>
               {this.props.userInfo.firstName} {this.props.userInfo.lastName}
