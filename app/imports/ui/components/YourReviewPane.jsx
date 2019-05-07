@@ -69,9 +69,9 @@ class YourReviewPane extends React.Component {
     }
 
     this.props.food.averageRating =
-        Math.round((this.props.reviews.filter(review => (review.foodId == this.props.food.key))
+        Math.round((this.props.reviews.filter(review => (review.foodId === parseInt(this.props.food.key, 10)))
             .reduce((memo, reviewForAverage) => memo + reviewForAverage.rating, 0))
-            / (this.props.reviews.filter(review => (review.foodId == this.props.food.key)).length));
+            / (this.props.reviews.filter(review => (review.foodId === parseInt(this.props.food.key, 10))).length));
 
     return (
           <Card style={{ backgroundColor: '#f4f4f4' }}>

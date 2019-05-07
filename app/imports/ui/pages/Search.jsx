@@ -254,14 +254,17 @@ class Search extends React.Component {
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Dessert" key="search2">
                       <Image rounded style={{ width: '120px' }}
-                             src='https://www.tasteofhome.com/wp-content/uploads/2017/10/Double-Chocolate-Espresso-Cheesecake_exps49582_THCA1917912A03_24_2bC_RMS-696x696.jpg'/>
+                             src='https://www.tasteofhome.com/wp-content/uploads/2017/10
+                             /Double-Chocolate-Espresso-Cheesecake_
+                             exps49582_THCA1917912A03_24_2bC_RMS-696x696.jpg'/>
                       <Header as='h4' style={iconMenu} content='Dessert'/>
                     </Item>
                   </Grid.Column>
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Fast Food" key="search3">
                       <Image rounded style={{ width: '120px' }}
-                             src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJtdxBqNBichv5Kbg6tWmHZn9bSUGKoZw6iKk_mSWyS9sgu92O'/>
+                             src='https://encrypted-tbn0.gstatic.com/
+                             images?q=tbn:ANd9GcSJtdxBqNBichv5Kbg6tWmHZn9bSUGKoZw6iKk_mSWyS9sgu92O'/>
                       <Header as='h4' style={iconMenu} content='Fast Food'/>
                     </Item>
                   </Grid.Column>
@@ -296,7 +299,8 @@ class Search extends React.Component {
                   <Grid.Column>
                     <Item as={NavLink} activeClassName="active" exact to="/search/:Mexican" key="search8">
                       <Image rounded style={{ width: '120px' }}
-                             src='https://www.tasteofhome.com/wp-content/uploads/2018/01/Chicken-Tamales_EXPS_HC17_50905_C12_16_2b-1-696x696.jpg'/>
+                             src='https://www.tasteofhome.com/wp-content/uploads/2018/01/
+                             Chicken-Tamales_EXPS_HC17_50905_C12_16_2b-1-696x696.jpg'/>
                       <Header as='h4' style={iconMenu} content='Mexican'/>
                     </Item>
                   </Grid.Column>
@@ -333,13 +337,13 @@ class Search extends React.Component {
                           this.getSearchResults(cuisineName).map((food, index) => <FoodRowSearchPage
                               key={index}
                               food={food}
-                              reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+                              reviews={this.props.reviews.filter(review => (review.foodId === parseInt(food.key, 10)))}
                           />))
                       :
                       this.getSearchResults(cuisineName).map((food, index) => <FoodRowSearchPage
                           key={index}
                           food={food}
-                          reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+                          reviews={this.props.reviews.filter(review => (review.foodId === parseInt(food.key, 10)))}
                       />)}
                 </Table.Body>
               </Table>
