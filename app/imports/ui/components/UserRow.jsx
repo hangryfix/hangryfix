@@ -15,17 +15,6 @@ class UserRow extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick = () => User.remove(this.props.user._id, this.deleteCallback)
-
-  /** Notify the user of the results of the delete. */
-  deleteCallback(error) {
-    if (error) {
-      Bert.alert({ type: 'danger', message: `Delete failed: ${error.message}` });
-    } else {
-      Bert.alert({ type: 'success', message: 'User Deleted' });
-    }
-  }
-
 
   render() {
 
@@ -39,7 +28,7 @@ class UserRow extends React.Component {
 
     return (
         <Table.Row>
-          {/*Col 1: User*/}
+          {/ *Col 1: User */}
           <Table.Cell style={{ width: '20%' }}>
             <Header as='h3' textAlign='left'>
               {this.props.userInfo.firstName} {this.props.userInfo.lastName}
@@ -52,7 +41,7 @@ class UserRow extends React.Component {
             </Header>
           </Table.Cell>
 
-          {/*Col 2: Reviews*/}
+          {/* Col 2: Reviews */}
             <Table.Cell style={{ paddingBottom: '30px', width: '30%' }}>
               {this.props.reviews.length > 0 ? (
                   <Rating size="huge" icon="heart" defaultRating={averageRating} maxRating={5} disabled/>
@@ -61,6 +50,7 @@ class UserRow extends React.Component {
               )
               }
               {this.props.reviews.length > 0 ? (
+                  /* eslint-disable-next-line */
                   <Modal size='small' trigger={<Button fluid>Show {this.props.reviews.length} ratings and reviews</Button>}>
                     <Modal.Header>
                       <Header as='h1'>
@@ -84,7 +74,7 @@ class UserRow extends React.Component {
               }
             </Table.Cell>
 
-          {/*Col 3: Foods*/}
+          {/* Col 3: Foods */}
           <Table.Cell style={{ paddingBottom: '30px', width: '30%' }}>
 
             {this.props.userFoods.length > 0 ? (
@@ -96,11 +86,13 @@ class UserRow extends React.Component {
                   </Modal.Header>
                   <Modal.Content scrolling>
                     <Table>
+                      {/* eslint-disable */}
                     {this.props.userFoods.map((food, index) => <FoodRow
                       key={index}
                       food={food}
                       reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                   />)}
+                      {/* eslint-enable */}
                     </Table>
                   </Modal.Content>
                 </Modal>
@@ -111,7 +103,7 @@ class UserRow extends React.Component {
             }
           </Table.Cell>
 
-          {/*Col 4: tags*/}
+          {/* Col 4: tags */}
           <Table.Cell style={{ width: '30%' }}>
             {this.props.userInfo.tags.map((tag, index) => <Label tag
                                                              style={{ backgroundColor: '#338D33', color: 'white' }}
