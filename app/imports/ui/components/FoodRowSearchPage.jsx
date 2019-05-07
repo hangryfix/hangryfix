@@ -220,9 +220,9 @@ class FoodRowSearchPage extends React.Component {
             {this.props.food.price}
             <Item>
               <p style={{ margin: '3px 0 0 0' }}>Price Range</p>
-              {this.getStars(this.getDefaultRating(this.props.food.price)).map(num => {
+              {this.getStars(this.getDefaultRating(this.props.food.price)).map((num, index) => {
                 const icon = (num === 1) ? 'star' : 'star outline';
-                return <Icon name={icon} size='large'/>;
+                return <Icon key={index} name={icon} size='large'/>;
               })
               }
             </Item>
@@ -230,9 +230,9 @@ class FoodRowSearchPage extends React.Component {
 
           <Table.Cell style={{ paddingBottom: '20px', width: '20%' }}>
             {this.getReviews().length > 0 ? (
-                this.getHearts(this.getAverageRatingRow(this.getReviews())).map(num => {
+                this.getHearts(this.getAverageRatingRow(this.getReviews())).map((num, index) => {
                   const icon = (num === 1) ? 'heart' : 'heart outline';
-                  return <Icon name={icon} size='large'/>;
+                  return <Icon key={index} name={icon} size='large'/>;
                 })
             ) : (
                 'No ratings yet.'
