@@ -9,6 +9,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import FoodRowSearchPage from '../components/FoodRowSearchPage';
 
+/* eslint-disable */
 
 /** A simple static component to render some text for the landing page. */
 class Search2 extends React.Component {
@@ -356,6 +357,7 @@ class Search2 extends React.Component {
     );
   }
 }
+/* eslint-enable */
 
 Search2.propTypes = {
   foods: PropTypes.array.isRequired,

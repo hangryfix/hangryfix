@@ -1,14 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Table, Header, Loader, Image, Search, Dropdown, Rating, Grid, Segment, List, Divider, Button, Menu } from 'semantic-ui-react';
+import { Table, Header, Loader, Grid, Segment, List } from 'semantic-ui-react';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import Food from '../components/Food';
 import FoodRow from '../components/FoodRow';
-import Review from '../components/Review';
+
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 class ListFoodAdmin extends React.Component {
@@ -21,8 +20,8 @@ class ListFoodAdmin extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
     return (
-        <div style={{padding: '20px'}} className="backgroundDef">
-          <Grid style={{marginBottom: '50px'}}>
+        <div style={{ padding: '20px' }} className="backgroundDef">
+          <Grid style={{ marginBottom: '50px' }}>
             <Grid.Column width={3}>
               <Grid.Row/>
               <Segment>
@@ -40,7 +39,7 @@ class ListFoodAdmin extends React.Component {
                 <Header textAlign='center' inverted as='h1' content='Food'/>
               </Grid.Row>
 
-              {/*Food Table*/}
+              {/* Food Table */}
               <Table celled>
                 <Table.Header>
                   <Table.Row>
@@ -52,11 +51,13 @@ class ListFoodAdmin extends React.Component {
                   </Table.Row>
                 </Table.Header>
                 <Table.Body>
+                  {/* eslint-disable */}
                     {this.props.foods.map((food, index) => <FoodRow
                         key={index}
                         food={food}
                         reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                     />)}
+                  {/* eslint-enable */}
                 </Table.Body>
               </Table>
             </Grid.Column>

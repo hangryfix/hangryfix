@@ -1,12 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Table, Header, Loader, Grid, Segment, List } from 'semantic-ui-react';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
 import { UserInfo } from '../../api/user-info/user-info';
-import { withTracker } from 'meteor/react-meteor-data';
-import PropTypes from 'prop-types';
+
+
 import UserRow from '../components/UserRow';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */

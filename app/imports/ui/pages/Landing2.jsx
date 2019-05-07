@@ -1,13 +1,13 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Header, Container, Grid, Image, Input, Card, Feed, Loader, Menu, List } from 'semantic-ui-react';
-import Food from '../components/Food';
-import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter, Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Header, Container, Grid, Image, Card, Loader, Menu } from 'semantic-ui-react';
+import { _ } from 'underscore';
+import Food from '../components/Food';
 import { Foods } from '/imports/api/food/food';
 import { Reviews } from '/imports/api/review/review';
-import { _ } from 'underscore';
 
 /** A component to render the landing page. */
 class Landing2 extends React.Component {
@@ -20,7 +20,7 @@ class Landing2 extends React.Component {
     const iconMenu = {
       color: '#045604',
     };
-
+    /* eslint-disable */
     const recentFoods = () => {
       let sorted = _.sortBy(this.props.foods, this.props.foods.key);
       let last3 = _.last(sorted, 3);
@@ -28,14 +28,12 @@ class Landing2 extends React.Component {
       return (last3.map((food, index) => <Food
       key={index}
       food={food}
-      reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
-    />))}
-
-
+      reviews={this.props.reviews.filter(review => (review.foodId == food.key))}/>))};
+    /* eslint-enable */
 
     return (
         <div className="landingMid" id='landing-page-id'>
-          {/*Main Image/Search Bar  */}
+          {/* Main Image/Search Bar  */}
           <Grid columns={2} verticalAlign='middle'>
             <Grid.Column>
               <Image src='https://i.ibb.co/wQKyMDK/lb-lava-bowl.jpg'/>
@@ -43,7 +41,7 @@ class Landing2 extends React.Component {
             <Grid.Column>
               <Header as='h2' textAlign='center' style={iconMenu} content='What are you hangry for?'/>
               <Grid.Row>
-                <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
+                <Container style={{ paddingLeft: '2%', paddingRight: '10%' }}>
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Chinese" key="search1">
                     <Image rounded style={{ width: '100px' }}
@@ -64,7 +62,7 @@ class Landing2 extends React.Component {
                 </Container>
               </Grid.Row>
               <Grid.Row>
-                <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
+                <Container style={{ paddingLeft: '2%', paddingRight: '10%' }}>
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Italian" key="search4">
                     <Image rounded style={{ width: '100px' }}
@@ -85,7 +83,7 @@ class Landing2 extends React.Component {
                 </Container>
               </Grid.Row>
               <Grid.Row>
-                <Container style={{paddingLeft: '2%', paddingRight: '10%'}}>
+                <Container style={{ paddingLeft: '2%', paddingRight: '10%' }}>
                 <Menu borderless fluid widths={3}>
                   <Menu.Item as={ NavLink } activeClassName="active" exact to="/search/:Pizza" key="search7">
                     <Image rounded style={{ width: '100px' }}
@@ -108,14 +106,14 @@ class Landing2 extends React.Component {
             </Grid.Column>
           </Grid>
 
-          {/*Recent Foods*/}
+          {/* Recent Foods */}
           <Container style={{ paddingTop: '20px' }}>
             <Header as='h2' className='color-primary-3'>Recently Added Foods</Header>
             <Card.Group itemsPerRow={3}>
               {recentFoods()}
             </Card.Group>
 
-            {/*About Us Section*/}
+            {/* About Us Section */}
             <div className='aboutUs'>
               <Grid columns={2} verticalAlign='middle'>
                 <Grid.Row>
@@ -133,8 +131,10 @@ class Landing2 extends React.Component {
                 </Grid.Row>
                 <Grid.Row>
                   <Grid.Column>
+                    {/* eslint-disable */}
                     <Image style={{ width: '70%' }}
                            src="http://www.1worldglobalgifts.com/images/Paperweights/blue_green_crystal_globe_paperweight_sm.jpg"/>
+                    {/* eslint-enable */}
                   </Grid.Column>
                   <Grid.Column>
                     <Header as='h2' style={{ color: '#045604' }}>Member Perks</Header>
