@@ -10,7 +10,7 @@ import Landing2 from '../pages/Landing2';
 import YourAccount from '../pages/YourAccount';
 import ListFoodAdmin from '../pages/ListFoodAdmin';
 import ListUsersAdmin from '../pages/ListUsersAdmin';
-import Search from '../pages/Search2';
+import Search from '../pages/Search';
 import AddFood from '../pages/AddFood';
 import AddReview from '../pages/AddReview';
 import EditReview from '../pages/EditReview';
