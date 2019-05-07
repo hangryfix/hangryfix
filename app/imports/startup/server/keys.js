@@ -1,16 +1,15 @@
 import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import { Keys } from '../../api/keys/keys.js';
 
 /** Initialize the database with a default data document. */
 function addData(data) {
-  console.log(`  Adding Keys `);
+  console.log(' Adding Keys ');
   Keys.insert(data);
 }
 
 /** Initialize the collection if empty. */
 if (Keys.find().count() === 0) {
-  console.log("keys");
+  console.log('keys');
   if (Meteor.settings.defaultKeys) {
     console.log('Creating default food.');
     Meteor.settings.defaultKeys.map(data => addData(data));
@@ -20,4 +19,3 @@ if (Keys.find().count() === 0) {
 Meteor.publish('Keys', function publish() {
     return Keys.find();
 });
-

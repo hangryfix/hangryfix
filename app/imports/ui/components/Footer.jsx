@@ -50,7 +50,9 @@ class Footer extends React.Component {
                           <List.Item><a href="https://www.peacecafehawaii.com/">Peace Cafe</a></List.Item>
                           <List.Item><a href="http://manoa.hawaii.edu/food/punchbowl.php">Punchbowl Cafe</a></List.Item>
                           <List.Item><a href="http://manoa.hawaii.edu/food/sistahTruck.php">Sistah Truck</a></List.Item>
-                          <List.Item><a href="http://manoa.hawaii.edu/food/beanCounter.php">The Bean Counter</a></List.Item>
+                          <List.Item>
+                            <a href="http://manoa.hawaii.edu/food/beanCounter.php">The Bean Counter</a>
+                          </List.Item>
                         </List>
                       </Grid.Column>
                     </Grid.Row>

@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-import { Roles } from 'meteor/alanning:roles';
 import { Tags } from '../../api/tag/tag.js';
 
 /** Initialize the database with a default data document. */
