@@ -28,6 +28,7 @@ class YourAccount extends React.Component {
             false,
         panes: [
             { menuItem: 'New Foods', render: () => <Tab.Pane>
+                {/* eslint-disable */}
               <Card.Group itemsPerRow={3}>
                 {_.last(_.sortBy(this.props.foods, this.props.foods.key), 9)
                     .map((food, index) => <Food
@@ -53,6 +54,7 @@ class YourAccount extends React.Component {
                           />
                       ))}
                 </Card.Group>
+                {/* eslint-enable */}
               </Tab.Pane> },
         ],
     };
@@ -78,11 +80,13 @@ class YourAccount extends React.Component {
       });
     }
     return (
+        /* eslint-disable */
         taggedFoodsArray.map((food, index) => <Food
             key={index}
             food={food}
             reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
         />)
+        /* eslint-enable */
     );
   };
 
@@ -237,10 +241,10 @@ class YourAccount extends React.Component {
         i--;
       }
     }
-
+    /* eslint-disable */
     console.log(this.props.foods);
     console.log(filtered);
-
+    /* eslint-enable */
     if (filtered.length > 0) {
       this.filters = {
         rating: '',
@@ -252,11 +256,13 @@ class YourAccount extends React.Component {
         panes: [
           { menuItem: 'New Foods', render: () => <Tab.Pane>
               <Card.Group itemsPerRow={3}>
+                {/* eslint-disable */}
                 {filtered.map((food, index) => <Food
                     key={index}
                     food={food}
                     reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
                 />)}
+                {/* eslint-disable */}
               </Card.Group>
             </Tab.Pane> },
           { menuItem: 'Favorite Tags', render: () => <Tab.Pane>
