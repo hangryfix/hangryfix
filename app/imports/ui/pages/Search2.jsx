@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Table, Header, Image, Item, Container, Radio, Rating, Loader } from 'semantic-ui-react';
+import { Grid, Table, Header, Image, Dropdown, Item, Container, Radio, Rating, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Reviews } from '/imports/api/review/review';
 import { Restaurants } from '/imports/api/restaurant/restaurant';
@@ -11,7 +11,7 @@ import FoodRowSearchPage from '../components/FoodRowSearchPage';
 
 
 /** A simple static component to render some text for the landing page. */
-class Search extends React.Component {
+class Search2 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -27,14 +27,13 @@ class Search extends React.Component {
 
 
   isOpen(food) {
-    const d = new Date();
-    const restaurantName = food.restaurant;
+    let d = new Date();
+    let restaurantName = food.restaurant;
     let restaurant = null;
     this.props.restaurants.map(rest => {
       if (rest.name === restaurantName) {
         restaurant = rest;
       }
-      return 0;
     });
 
     let open = 0;
@@ -69,24 +68,23 @@ class Search extends React.Component {
         open = 12;
         close = 13;
         break;
-      default:
-        break;
     }
 
-    const openTimeString = restaurant.hours[open];
-    const closeTimeString = restaurant.hours[close];
+    let openTimeString = restaurant.hours[open];
+    let closeTimeString = restaurant.hours[close];
+    let nextOpenTimeString = restaurant.hours[(open + 2) % 14];
 
-    const openTokens = openTimeString.split(':');
-    const openHours = openTokens[0];
-    const openTokens2 = openTokens[1].split(' ');
-    const openMinutes = openTokens2[0];
-    const openAP = openTokens2[1];
+    let openTokens = openTimeString.split(':');
+    let openHours = openTokens[0];
+    let openTokens2 = openTokens[1].split(' ');
+    let openMinutes = openTokens2[0];
+    let openAP = openTokens2[1];
 
-    const closeTokens = closeTimeString.split(':');
-    const closeHours = closeTokens[0];
-    const closeTokens2 = closeTokens[1].split(' ');
-    const closeMinutes = closeTokens2[0];
-    const closeAP = closeTokens2[1];
+    let closeTokens = closeTimeString.split(':');
+    let closeHours = closeTokens[0];
+    let closeTokens2 = closeTokens[1].split(' ');
+    let closeMinutes = closeTokens2[0];
+    let closeAP = closeTokens2[1];
 
     let isOpenNow = false;
 
@@ -94,22 +92,22 @@ class Search extends React.Component {
     let openValue = 0;
 
     if (closeAP === 'pm') {
-      closeValue += parseInt(closeHours, 10) + 12;
+      closeValue += parseInt(closeHours) + 12;
     } else {
-      closeValue += parseInt(closeHours, 10);
+      closeValue += parseInt(closeHours);
     }
 
     if (openAP === 'pm') {
-      openValue += parseInt(openHours, 10) + 12;
+      openValue += parseInt(openHours) + 12;
     } else {
-      openValue += parseInt(openHours, 10);
+      openValue += parseInt(openHours);
     }
 
 
     if (closeValue > d.getHours()) {
       if (openValue < d.getHours()) {
         isOpenNow = true;
-      } else if (openValue === d.getHours() && openMinutes > d.getMinutes) {
+      } else if (openValue === d.getHours() && openMinutes > d.getMinutes ) {
         isOpenNow = true;
       }
     } else if (closeValue === d.getHours() && closeMinutes < d.getMinutes()) {
@@ -122,27 +120,29 @@ class Search extends React.Component {
 
   getAverageRating(reviews) {
     let total = 0;
-    total += reviews.map(rev => rev.rating);
+    for (let rev of reviews) {
+      total += rev.rating;
+    }
     return reviews.length > 0 ? Math.round(total / reviews.length) : 1;
+
   }
 
   getReviews(food) {
-    const reviewArray = [];
+    let reviewArray = [];
     this.props.reviews.map(review => {
-      if (parseInt(review.foodId, 10) === parseInt(food.key, 10)) {
+      if (parseInt(review.foodId) === parseInt(food.key)) {
         reviewArray.push(review);
       }
-      return 0;
     });
     return reviewArray;
   }
 
   getSearchResults(cuisine) {
-
-    const results = [];
+    console.log(this.state.rating);
+    let results = [];
     if (cuisine === 'All') {
       this.props.foods.map(food => {
-        const avgRating = this.getAverageRating(this.getReviews(food));
+        let avgRating = this.getAverageRating(this.getReviews(food));
         if (avgRating >= this.state.rating && food.price <= this.state.price) {
           if (!this.state.onlyOpen) {
             results.push(food);
@@ -152,12 +152,11 @@ class Search extends React.Component {
             }
           }
         }
-        // return 0;
       });
     } else {
       this.props.foods.map(food => {
         if (food.category === cuisine) {
-          const avgRating = this.getAverageRating(this.getReviews(food));
+          let avgRating = this.getAverageRating(this.getReviews(food));
           if (avgRating >= this.state.rating && food.price <= this.state.price) {
             if (!this.state.onlyOpen) {
               results.push(food);
@@ -168,31 +167,31 @@ class Search extends React.Component {
             }
           }
         }
-        return 0;
       });
     }
 
+    console.log(results);
     return results;
   }
 
   handleChangeRating(e, { rating }) {
-    const s = {};
-    s.rating = rating;
-    s.refreshPage = !this.state.refreshPage;
+    let s = {};
+    s['rating'] = rating;
+    s['refreshPage'] = !this.state.refreshPage;
     this.setState(s);
   }
 
   handleChangeRatingPrice(e, { rating }) {
-    const s = {};
-    s.price = rating * 4;
-    s.refreshPage = !this.state.refreshPage;
+    let s = {};
+    s['price'] = rating * 4;
+    s['refreshPage'] = !this.state.refreshPage;
     this.setState(s);
   }
 
   handleRadioChange(e, data) {
-    const s = {};
-    s.onlyOpen = data.checked;
-    s.refreshPage = !this.state.refreshPage;
+    let s = {};
+    s['onlyOpen'] = data.checked;
+    s['refreshPage'] = !this.state.refreshPage;
     this.setState(s);
   }
 
@@ -204,9 +203,9 @@ class Search extends React.Component {
   /** Render the page once subscriptions have been received. */
   renderPage() {
 
-    const stringURL = this.props.location.pathname;
-    const URLarray = stringURL.split(':');
-    const cuisineName = URLarray[1];
+    let stringURL = this.props.location.pathname;
+    let URLarray = stringURL.split(':');
+    let cuisineName = URLarray[1];
 
     const spacing = { paddingTop: '10px' };
 
@@ -330,7 +329,9 @@ class Search extends React.Component {
                   <Grid.Column width={8}>
                     <Header as='h2' textAlign='center'>Search Results for {cuisineName}</Header>
                   </Grid.Column>
-                  <Grid.Column width={4} />
+                  <Grid.Column width={4}>
+                    <Dropdown placeholder='Sort' search selection/>
+                  </Grid.Column>
                 </Grid.Row>
               </Grid>
               <Table style={{ width: '100%' }}>
@@ -339,13 +340,13 @@ class Search extends React.Component {
                           this.getSearchResults(cuisineName).map((food, index) => <FoodRowSearchPage
                               key={index}
                               food={food}
-                              reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+                              reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
                           />))
                       :
                       this.getSearchResults(cuisineName).map((food, index) => <FoodRowSearchPage
                           key={index}
                           food={food}
-                          reviews={this.props.reviews.filter(review => (review.foodId == food.key))}
+                          reviews={this.props.reviews.filter(review => (review.foodId === food.key))}
                       />)}
                 </Table.Body>
               </Table>
@@ -356,14 +357,13 @@ class Search extends React.Component {
   }
 }
 
-Search.propTypes = {
+Search2.propTypes = {
   foods: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  restaurants: PropTypes.array.isRequired,
   currentUser: PropTypes.string,
 };
 
@@ -382,4 +382,4 @@ export default withTracker(() => {
     ready: foodSubscription.ready() && reviewSubscription.ready() && restaurantSubscription.ready(),
     currentUser: Meteor.user() ? Meteor.user().username : '',
   };
-})(Search);
+})(Search2);
