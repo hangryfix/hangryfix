@@ -138,7 +138,6 @@ class Search extends React.Component {
   }
 
   getSearchResults(cuisine) {
-
     const results = [];
     if (cuisine === 'All') {
       this.props.foods.map(food => {
@@ -146,13 +145,11 @@ class Search extends React.Component {
         if (avgRating >= this.state.rating && food.price <= this.state.price) {
           if (!this.state.onlyOpen) {
             results.push(food);
-          } else {
-            if (this.isOpen(food)) {
+          } else if (this.state.onlyOpen && this.isOpen(food)) {
               results.push(food);
-            }
           }
         }
-        // return 0;
+        return 0;
       });
     } else {
       this.props.foods.map(food => {
@@ -161,17 +158,14 @@ class Search extends React.Component {
           if (avgRating >= this.state.rating && food.price <= this.state.price) {
             if (!this.state.onlyOpen) {
               results.push(food);
-            } else {
-              if (this.isOpen(food)) {
-                results.push(food);
-              }
+            } else if (this.state.onlyOpen && this.isOpen(food)) {
+              results.push(food);
             }
           }
         }
         return 0;
       });
     }
-
     return results;
   }
 

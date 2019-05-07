@@ -224,9 +224,8 @@ class FoodRowAdminPage extends React.Component {
             {this.getStars(this.getDefaultRating(this.props.food.price)).map(num => {
               if (num === 1) {
                 return <Icon name='star' size='large'/>;
-              } else {
-                return <Icon name='star outline' size='large'/>;
               }
+                return <Icon name='star outline' size='large'/>;
             })
             }
             </div>
@@ -238,9 +237,8 @@ class FoodRowAdminPage extends React.Component {
                     this.getHearts(this.getAverageRatingRow(this.getReviews())).map(num => {
                       if (num === 1) {
                         return <Icon name='heart' size='large'/>;
-                      } else {
-                        return <Icon name='heart outline' size='large'/>;
                       }
+                        return <Icon name='heart outline' size='large'/>;
                     })
             ) : (
             'No ratings yet.'
